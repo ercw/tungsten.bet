@@ -5,6 +5,9 @@
 *.pem
 *.key
 
+# Private notes: never published
+private/
+
 # Vercel project link (local only)
 .vercel/
 deploy/.vercel/
