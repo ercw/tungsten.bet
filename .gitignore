@@ -1,3 +1,10 @@
+# Secrets and environment files: never committed (an example file is fine)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
 # Vercel project link (local only)
 .vercel/
 deploy/.vercel/
