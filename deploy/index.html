@@ -150,8 +150,10 @@ h1 {
 .status b { font-weight: 700; }
 
 /* James's sentences */
-.claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 2ch; }
-.claim { display: grid; grid-template-rows: auto auto 1fr; gap: 12px; align-content: start; }
+.claims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 2ch; }
+.claim { display: grid; gap: 12px; align-content: start; }
+.claim .reply { color: var(--ink-2); }
+.claim .reply q { font-style: italic; }
 .claim blockquote { margin: 0; font-style: italic; font-size: 16px; line-height: 1.5; color: var(--ink); }
 .claim blockquote a { font-style: normal; font-size: 12px; }
 .verdict { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1ch; border-top: 1px dashed var(--rule); padding-top: 10px; font-family: var(--pixel); font-size: 30px; line-height: 1; text-transform: uppercase; text-shadow: var(--glow); }

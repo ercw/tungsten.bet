@@ -65,7 +65,8 @@ check("no stray index.html at the repository root", not (ROOT / "index.html").ex
 for name, html in (("jamesob", jamesob), ("front", front)):
     check(f"{name}: no external <script src>", not re.search(r"<script[^>]+src=", html, re.I))
     check(f"{name}: only Google Fonts loaded externally", all("fonts.googleapis.com" in u for u in re.findall(r'<link[^>]+href="(https?://[^"]+)"', html)))
-check("jamesob: three verdict words hard-coded, none computed", len(re.findall(r"verdict: '[^']+'", jamesob)) == 3)
+check("jamesob: one hard-coded verdict word per side, none computed", len(re.findall(r"verdict: '[^']+'", jamesob)) == 2)
+check("jamesob: Eric's side is quoted from his own post", "ercwl/status/1928882831175876997" in jamesob and "AI cannot invent solutions/workarounds" in jamesob)
 james_bet = next(b for b in bets if b["id"] == "jamesob")
 check("jamesob: the before/after split is the month James posted his test", f"const BET = '{james_bet['opened'][:7]}';" in jamesob)
 check("jamesob: no filter of Eric's own (the steps are James's test only)", "strict test" not in jamesob.lower())

@@ -150,8 +150,10 @@ h1 {
 .status b { font-weight: 700; }
 
 /* James's sentences */
-.claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 2ch; }
-.claim { display: grid; grid-template-rows: auto auto 1fr; gap: 12px; align-content: start; }
+.claims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 2ch; }
+.claim { display: grid; gap: 12px; align-content: start; }
+.claim .reply { color: var(--ink-2); }
+.claim .reply q { font-style: italic; }
 .claim blockquote { margin: 0; font-style: italic; font-size: 16px; line-height: 1.5; color: var(--ink); }
 .claim blockquote a { font-style: normal; font-size: 12px; }
 .verdict { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1ch; border-top: 1px dashed var(--rule); padding-top: 10px; font-family: var(--pixel); font-size: 30px; line-height: 1; text-transform: uppercase; text-shadow: var(--glow); }
@@ -312,7 +314,7 @@ h1 {
       <p class="kicker">AI in physics, materials and quantum engineering</p>
       <h1 id="title">Does this update your priors?</h1>
       <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit. He said he would reconsider if he saw a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page lists the AI results since then, each with its source, its caveat and Eric's rating against that test. Eric wins the cube if James changes his mind.</p>
-      <p class="hero-meta">Below: the bet as it was made, three of James's sentences, then <b id="meta-n">17</b> results since the bet and <b id="meta-before">6</b> from before it.</p>
+      <p class="hero-meta">Below: the bet as it was made, where each side stands, then <b id="meta-n">17</b> results since the bet and <b id="meta-before">6</b> from before it.</p>
     </div>
   </section>
 
@@ -347,8 +349,8 @@ h1 {
   </section>
 
   <section aria-labelledby="claims-h">
-    <h2 class="rule-h" id="claims-h"><span>Three of James's sentences</span><span class="fill" aria-hidden="true"></span></h2>
-    <p class="sub">All from 31 May 2025. Under each: Eric's verdict so far, and the results since the bet that it rests on. The names link to those results further down.</p>
+    <h2 class="rule-h" id="claims-h"><span>Where each side stands</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">What each of them said on 31 May 2025, with Eric's verdict so far and the results since the bet that it rests on. The names link to those results further down.</p>
     <div class="claims" id="claims"></div>
   </section>
 
@@ -503,27 +505,27 @@ const STEPS = [
   { k: 'leap', name: 'a huge leap', note: "<- James's bar", def: 'James: “a single huge leap in metallurgy or some other kind of physical engineering”.', test: e => L(e).leap === 'leap' }
 ];
 
-// Verdict words are the author's reading of where each of James's statements stands. They are not computed.
+// Verdict words are the author's reading of where each side's statement stands. They are not computed.
 // The notes are computed from the results since the bet, so they stay true when an item is added or re-rated.
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 const CLAIMS = [
-  { k: '1', url: 'https://x.com/jamesob/status/1928861979839455371', quote: "But it's virtual, and the limitations in QC are (at least in part) physical, and we've basically forgotten how to do things in the physical world.", verdict: 'Early signs', mark: '◐',
+  { k: 'virtual', who: 'James', url: 'https://x.com/jamesob/status/1928861979839455371',
+    quote: "But it's virtual, and the limitations in QC are (at least in part) physical, and we've basically forgotten how to do things in the physical world.",
+    verdict: 'Early signs', mark: '◐',
     note: () => {
       const m = AFTER.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap');
       if (!m.length) return 'Since the bet, no result has used AI as an input to something that was made or physically controlled.';
-      return `Since the bet, ${plural(m.length, 'result', 'results')} used AI as an input to something that was made or physically controlled: ${m.map(link).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(link).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
+      return `Since the bet, ${plural(m.length, 'result', 'results')} used AI as an input to something that was made or physically controlled: ${m.map(link).join(', ')}. James expected this much: “I think we'll see early signs well ahead in more primitive forms of engineering”. ${leaps.length ? `Eric rates ${leaps.map(link).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
     } },
-  { k: '2', url: 'https://x.com/jamesob/status/1928911469342806444', quote: "I very much doubt we'll see that come out of autocorrect++.", verdict: 'Holds', mark: '●',
+  { k: 'quantum', who: 'Eric', url: 'https://x.com/ercwl/status/1928882831175876997',
+    quote: 'They’re interlinked. Are you suggesting you would bet me copious amounts of money that AI cannot invent solutions/workarounds to the physical limitations within 5 years?',
+    reply: { who: 'James', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.' },
+    verdict: 'Not yet', mark: '○',
     note: () => {
-      const lm = AFTER.filter(e => L(e).matter && e.llm), leaps = lm.filter(e => L(e).leap === 'leap');
-      if (!lm.length) return 'Since the bet, no result driven by a language model has touched matter.';
-      return `Since the bet, ${plural(lm.length, 'result', 'results')} driven by a language model touched matter: ${lm.map(e => `${link(e)} (${esc(e.verification)})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(link).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
-    } },
-  { k: '3', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.', verdict: 'Not yet', mark: '○',
-    note: () => {
-      const b = AFTER.filter(e => L(e).matter && L(e).qubits), q = AFTER.filter(e => L(e).qubits);
-      if (b.length) return `Since the bet, ${plural(b.length, 'result', 'results')} touched matter and bear on qubits: ${b.map(link).join(', ')}.`;
-      return `No result since the bet involves qubit materials, fabrication or cryogenics.${q.length ? ` The ones that bear on qubits (${q.map(link).join(', ')}) are software.` : ''}`;
+      const qa = AFTER.filter(e => e.domain === 'quantum').sort((a, b) => a.date.localeCompare(b.date));
+      const b = AFTER.filter(e => L(e).matter && L(e).qubits);
+      if (!qa.length) return 'No AI result on quantum computing since the bet is listed here yet.';
+      return `Since the bet there have been ${plural(qa.length, 'AI result', 'AI results')} on quantum computing: ${qa.map(link).join(', ')}. ${b.length ? `${plural(b.length, 'result', 'results')} touched matter and bear on qubits: ${b.map(link).join(', ')}.` : 'All of them are software or theory. None involves qubit materials, fabrication or cryogenics, which is what James asked for.'}`;
     } }
 ];
 
@@ -554,8 +556,9 @@ function levelFromHash(h) {
 // ---------- Static build ----------// ---------- Static build ----------
 function buildClaims() {
   $('#claims').innerHTML = CLAIMS.map(c => `<article class="box claim" id="claim-${c.k}">
-      <span class="box-t">James, 31 May 2025</span>
+      <span class="box-t">${c.who}, 31 May 2025</span>
       <blockquote>“${esc(c.quote)}” <a href="${esc(c.url)}" target="_blank" rel="noopener">[x.com]</a></blockquote>
+      ${c.reply ? `<p class="reply">${c.reply.who} answered: <q>${esc(c.reply.quote)}</q> <a href="${esc(c.reply.url)}" target="_blank" rel="noopener">[x.com]</a></p>` : ''}
       <p class="verdict"><span class="vlbl">Eric's verdict:</span> <span><span class="vm" aria-hidden="true">${c.mark}</span> ${esc(c.verdict)}</span></p>
       <p class="note">${c.note()}</p>
     </article>`).join('');
