@@ -66,6 +66,9 @@ for name, html in (("jamesob", jamesob), ("front", front)):
     check(f"{name}: no external <script src>", not re.search(r"<script[^>]+src=", html, re.I))
     check(f"{name}: only Google Fonts loaded externally", all("fonts.googleapis.com" in u for u in re.findall(r'<link[^>]+href="(https?://[^"]+)"', html)))
 check("jamesob: three verdict words hard-coded, none computed", len(re.findall(r"verdict: '[^']+'", jamesob)) == 3)
+james_bet = next(b for b in bets if b["id"] == "jamesob")
+check("jamesob: the before/after split is the month James posted his test", f"const BET = '{james_bet['opened'][:7]}';" in jamesob)
+check("jamesob: no filter of Eric's own (the steps are James's test only)", "strict test" not in jamesob.lower())
 check("jamesob: bet record links all four stages", all(u in jamesob for u in [
     "jamesob/status/1928911469342806444", "ercwl/status/1928915231344091358", "ercwl/status/1941525148722659776", "jamesob/status/2022527098670526479"]))
 check("jamesob: address line points at /jamesob and links home", 'href="/"' in jamesob and "</a>/jamesob" in jamesob)
@@ -83,9 +86,12 @@ nec = [i for i in matter if ladder[i]["necessary"] is True]
 leap = [i for i in ids if ladder[i]["leap"] == "leap"]
 bridge = [i for i in matter if ladder[i]["qubits"]]
 print(f"items {len(items)} · contested {[e['id'] for e in items if e.get('contested')]}")
-print(f"Eric's strict test (llm+physical) {sel(llm, phys)} · + peer-reviewed {sel(llm, phys, peer)}")
+after = lambda e: e["date"] > james_bet["opened"][:7]
+print(f"since the bet {sel(after)} · before {[i for i in ids if i not in sel(after)]}")
+print(f"LLM-driven and ran on hardware {sel(llm, phys)} · + peer-reviewed {sel(llm, phys, peer)}")
 print(f"any AI, physical, peer-reviewed {sel(phys, peer)}")
-print(f"rung 1 touched matter {matter} · rung 2 necessary {nec} · rung 3 leap {leap} · bridge {bridge}")
+print(f"step 1 touched matter {matter} · step 2 necessary {nec} · step 3 leap {leap} · matter and qubits {bridge}")
+print(f"since the bet: step 1 {[i for i in matter if after(by_id[i])]} · step 2 {[i for i in nec if after(by_id[i])]} · step 3 {[i for i in leap if after(by_id[i])]}")
 print(f"LLM-driven that touched matter {[i for i in matter if by_id[i]['llm']]}")
 print()
 

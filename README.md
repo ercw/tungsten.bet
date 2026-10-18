@@ -3,7 +3,7 @@
 Eric Wall bets a tungsten cube against people who are sure. The claim is public, the test for changing their mind is their own, the deadline is fixed, and the loser pays in metal.
 
 - **tungsten.bet** — what this is, how it works, and the record.
-- **tungsten.bet/jamesob** — the open bet with James O'Beirne (31 May 2025 → 31 May 2028): the AI results of 2022–2026 laid on the ladder James named, rung by rung, with a source and a caveat on every item.
+- **tungsten.bet/jamesob** — the open bet with James O'Beirne (31 May 2025 → 31 May 2028): the AI results since the bet, rated step by step against the test James named, with the results from before the bet in a section of their own and a source and a caveat on every item.
 
 Corrections are welcome as pull requests. Read [CONTRIBUTING.md](CONTRIBUTING.md) first: primary sources only, caveats are append-only, nothing gets stronger than its source.
 

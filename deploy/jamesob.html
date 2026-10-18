@@ -31,6 +31,7 @@
   --holes: block;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
+  --betline: #1b1d1a;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -44,6 +45,7 @@
     --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
     --sheet-radius: 18px;
     --holes: none;
+    --betline: #ffffff;
     color-scheme: dark;
   }
 }
@@ -58,6 +60,7 @@
   --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
   --sheet-radius: 18px;
   --holes: none;
+  --betline: #ffffff;
   color-scheme: dark;
 }
 
@@ -148,42 +151,28 @@ h1 {
 
 /* James's sentences */
 .claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 2ch; }
-.claim { display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
-.verdict { font-family: var(--pixel); font-size: 34px; line-height: 1; text-transform: uppercase; text-shadow: var(--glow); }
-.verdict .vm { color: var(--hot); }
-.claim blockquote { margin: 0; font-style: italic; }
+.claim { display: grid; grid-template-rows: auto auto 1fr; gap: 12px; align-content: start; }
+.claim blockquote { margin: 0; font-style: italic; font-size: 16px; line-height: 1.5; color: var(--ink); }
 .claim blockquote a { font-style: normal; font-size: 12px; }
+.verdict { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1ch; border-top: 1px dashed var(--rule); padding-top: 10px; font-family: var(--pixel); font-size: 30px; line-height: 1; text-transform: uppercase; text-shadow: var(--glow); }
+.verdict .vlbl { font-family: var(--mono); font-size: 13px; color: var(--dim); text-transform: none; text-shadow: none; }
+.verdict .vm { color: var(--hot); }
 .claim .note { color: var(--ink-2); font-size: 14px; }
-.claim .cnt { border-top: 1px dashed var(--rule); padding-top: 8px; font-size: 14px; }
-.claim .cnt .n { font-family: var(--pixel); font-size: 28px; line-height: 1; }
-.claim .cnt .bar { letter-spacing: 0; }
-.claim .reading { color: var(--dim); font-size: 12px; }
 
 /* The ladder */
-.prompt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1.2ch; font-family: var(--pixel); font-size: 54px; line-height: 1; text-shadow: var(--glow); }
+.prompt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1.2ch; font-family: var(--pixel); font-size: 54px; line-height: 1; text-shadow: var(--glow); margin-bottom: 14px; }
 .prompt .ps { color: var(--dim); }
 .prompt #count.zero { color: var(--hot); }
 .prompt .of { color: var(--dim); font-size: 34px; }
 .prompt #slice-name { font-size: 34px; }
-.slice-def { color: var(--dim); margin: 6px 0 14px; }
 .ladder { display: grid; gap: 1px; margin: 4px 0 14px; }
 .lrow { display: grid; grid-template-columns: 4ch minmax(0, 1fr) auto 3ch; gap: 0 1.2ch; align-items: baseline; width: 100%; padding: 2px 0.6ch; }
 .lrow .lr-bar { white-space: nowrap; }
 .lrow .lr-n { text-align: right; font-weight: 700; }
+.lrow .lr-def { grid-column: 2 / 4; color: var(--dim); font-size: 13px; padding-bottom: 4px; }
+.lrow:hover .lr-def, .lrow[aria-pressed="true"] .lr-def { color: inherit; }
 .lrow .lr-note { color: var(--hot); }
 .lrow:hover .lr-note, .lrow[aria-pressed="true"] .lr-note { color: inherit; }
-.lrow.sep { margin-top: 10px; }
-.ladder .between { border-top: 1px dashed var(--rule); margin-top: 8px; }
-.cuts { display: grid; grid-template-columns: 8ch minmax(0, 1fr); gap: 4px 1.2ch; border-top: 1px dashed var(--rule); padding-top: 12px; }
-.cuts .lbl { color: var(--dim); }
-.cuts .row { display: flex; flex-wrap: wrap; gap: 2px 2.4ch; }
-.ladder-note { color: var(--dim); margin-top: 14px; max-width: 86ch; }
-.rungs-def { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 6px; max-width: 86ch; }
-.rungs-def li { padding-left: 2ch; text-indent: -2ch; }
-.rungs-def li::before { content: "> "; color: var(--dim); }
-.rungs-def b { font-weight: 700; }
-.rungs-def q { font-style: italic; color: var(--ink-2); }
-.eric-note { color: var(--dim); margin: 6px 0 12px; max-width: 86ch; }
 /* One block per item: real blocks with gaps, so the count can be read off the bar */
 .blocks { display: inline-flex; gap: 2px; vertical-align: -0.12em; }
 .blocks i { width: 0.6em; height: 0.95em; background: currentColor; opacity: 0.2; }
@@ -200,6 +189,7 @@ h1 {
 .achart .mk-q { color: var(--q); } .achart .mk-m { color: var(--m); } .achart .mk-p { color: var(--p); } .achart .mk-x { color: var(--x); }
 .achart .hl { background: var(--wash); }
 .achart .yr { color: var(--dim); }
+.achart .bet { color: var(--betline); font-weight: 700; }
 .chart-info { min-height: 3.2em; margin-top: 8px; border-top: 1px dashed var(--rule); padding-top: 8px; }
 .chart-info .when { font-weight: 700; }
 .legend { color: var(--dim); display: flex; flex-wrap: wrap; gap: 2px 2.4ch; margin-bottom: 10px; }
@@ -284,7 +274,7 @@ h1 {
   .lrow { grid-template-columns: 4ch minmax(0, 1fr) 3ch; }
   .lrow .lr-bar { grid-column: 2; grid-row: 2; }
   .lrow .lr-n { grid-column: 3; grid-row: 1 / 3; align-self: center; }
-  .cuts { grid-template-columns: minmax(0, 1fr); }
+  .lrow .lr-def { grid-column: 2 / 4; grid-row: 3; }
   .kv { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .kv dt { margin-top: 6px; }
   .rec { padding: 22px 1.4ch 12px; }
@@ -315,14 +305,14 @@ h1 {
 
   <section class="hero" aria-labelledby="title">
     <figure class="cube-fig">
-      <canvas id="cube" width="300" height="300" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters. Once you pick a filter below, its edges glow in proportion to how many results pass."></canvas>
+      <canvas id="cube" width="300" height="300" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters. When you pick a step of James's test below, its edges glow in proportion to how many results since the bet reach it."></canvas>
       <figcaption class="cube-cap dim" id="cube-cap"></figcaption>
     </figure>
     <div class="hero-text">
-      <p class="kicker">AI in physics, materials and quantum engineering, <span style="white-space:nowrap">2022–2026</span></p>
+      <p class="kicker">AI in physics, materials and quantum engineering</p>
       <h1 id="title">Does this update your priors?</h1>
-      <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit. He said he would reconsider if he saw a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page sorts AI results from 2022–2026 by how far each one gets on that test. The ratings are Eric's. Eric wins the cube if James changes his mind.</p>
-      <p class="hero-meta">Below: the bet as it was made, then <b id="meta-n">23</b> AI results from 2022–2026, each with its source and its caveat.</p>
+      <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit. He said he would reconsider if he saw a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page lists the AI results since then, each with its source, its caveat and Eric's rating against that test. Eric wins the cube if James changes his mind.</p>
+      <p class="hero-meta">Below: the bet as it was made, three of James's sentences, then <b id="meta-n">17</b> results since the bet and <b id="meta-before">6</b> from before it.</p>
     </div>
   </section>
 
@@ -358,31 +348,18 @@ h1 {
 
   <section aria-labelledby="claims-h">
     <h2 class="rule-h" id="claims-h"><span>Three of James's sentences</span><span class="fill" aria-hidden="true"></span></h2>
-    <p class="sub">Written on 31 May 2025, each with Eric's verdict. The counts change with the filter below.</p>
+    <p class="sub">All from 31 May 2025. Under each: Eric's verdict so far, and the results since the bet that it rests on. The names link to those results further down.</p>
     <div class="claims" id="claims"></div>
   </section>
 
   <section aria-labelledby="ladder-h" id="filters">
-    <h2 class="rule-h" id="ladder-h"><span>James's test as a ladder</span><span class="fill" aria-hidden="true"></span></h2>
-    <p class="sub">His test, split into steps. A result reaches a rung only if it also reached every rung below it. Pick a row to keep only the results that reach it; the others are dimmed in the list further down.</p>
-    <ol class="rungs-def">
-      <li><b>rung 1, AI touched matter.</b> AI was an input to something that was synthesized, fabricated or physically controlled. James expected these first: <q>I think we'll see early signs well ahead in more primitive forms of engineering</q>.</li>
-      <li><b>rung 2, AI was necessary.</b> The result could not have been reached the same way without the AI. James: <q>for which AI was a necessary input</q>.</li>
-      <li><b>rung 3, a huge leap.</b> James's bar: <q>a single huge leap in metallurgy or some other kind of physical engineering</q>.</li>
-      <li><b>qubits.</b> Separate from the rungs: does it bear on building many physical qubits? James: <q>buildable and operatable by human construction for some huge number of physical qbits</q>.</li>
-    </ol>
+    <h2 class="rule-h" id="ladder-h"><span>James's test, step by step</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">Each step includes the ones above it. Pick a step to keep only the results that reach it; the rest are dimmed further down. Counts are for results since the bet, and the ratings are Eric's.</p>
     <div class="box dbl">
-      <span class="box-t">LADDER.EXE</span><span class="box-t r" id="bar-count">no filter</span>
-      <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">23</span><span class="of" id="count-of"> results</span></span><span id="slice-name">no filter</span><span class="cursor"></span></p>
-      <p class="slice-def" id="slice-def">no filter</p>
+      <span class="box-t">TEST.EXE</span><span class="box-t r" id="bar-count">since 31 May 2025</span>
+      <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">17</span><span class="of" id="count-of"> results</span></span><span id="slice-name">since the bet</span><span class="cursor"></span></p>
       <p class="sr" id="live" aria-live="polite"></p>
-      <div class="ladder" id="ladder" role="group" aria-label="Rungs and tests"></div>
-      <div class="cuts">
-        <span class="lbl" id="rungs-l">rungs</span><div class="row" id="toggles-ladder" role="group" aria-labelledby="rungs-l"></div>
-        <span class="lbl" id="cuts-l">other</span><div class="row" id="toggles-cuts" role="group" aria-labelledby="cuts-l"></div>
-      </div>
-      <p class="eric-note">"Eric's strict test" is Eric's own filter: LLM-driven and ran on real hardware. It is not part of the bet, and neither are the "other" filters.</p>
-      <p class="ladder-note" id="funnel-note"></p>
+      <div class="ladder" id="ladder" role="group" aria-label="Steps of James's test"></div>
     </div>
   </section>
 
@@ -395,7 +372,7 @@ h1 {
     </div>
     <p class="chart-info" id="chart-info" aria-live="polite"></p>
     <ol class="callouts" id="callouts"></ol>
-    <p class="method">The index uses the formula from the earlier AI-math seismograph page: 2.5 × P × H × W × C × (1 + log₁₀ n), where P is physicality 0–10, H the horizon (now 1.0, years 0.7, decades 0.4, someday 0.15), W the weight 1–4, C confidence 0–1, and n = 1 for every item here. Only items that pass the filter are plotted, and months with none sit at zero. The y-axis keeps the same maximum whatever the filter.</p>
+    <p class="method">The index uses the formula from the earlier AI-math seismograph page: 2.5 × P × H × W × C × (1 + log₁₀ n), where P is physicality 0–10, H the horizon (now 1.0, years 0.7, decades 0.4, someday 0.15), W the weight 1–4, C confidence 0–1, and n = 1 for every item here. When a step is picked, only the results that reach it are plotted, and months with none sit at zero. The y-axis keeps the same maximum whatever the filter.</p>
   </section>
 
   <div class="items" id="items">
@@ -415,7 +392,7 @@ h1 {
     <div class="foot">
       <div class="foot-notes">
         <p>All ratings are judgment calls. Changing one in the data changes every count on the page. Dates are the month of announcement.</p>
-        <p>The results come from research notes. Eleven were corrected against primary sources on 18 October 2026 (AUDIT-2026-10-18.md in the repository); the rest have not been rechecked. The four ladder ratings on each result (touched matter, AI necessary, huge leap, bears on qubits) are Eric's. "Eric's strict test" (LLM-driven and ran on hardware) is Eric's own filter. James did not agree to it.</p>
+        <p>The results come from research notes. Eleven were corrected against primary sources on 18 October 2026 (AUDIT-2026-10-18.md in the repository); the rest have not been rechecked. The ratings on each result (touched matter, AI necessary, huge leap, bears on qubits) are Eric's. A result dated May 2025 or earlier counts as before the bet, which James posted on 31 May 2025.</p>
         <ol class="sources" id="sources" aria-label="Sources"></ol>
         <p><a href="#top">[ back to top ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
       </div>
@@ -505,62 +482,49 @@ const MK = { q: '●', m: '■', p: '◆', x: '▲' };
 // Short labels (presentation only; not part of the dataset)
 const SHORT = { Q1: 'AlphaQubit', Q2: 'AlphaQubit 2', Q3: 'AlphaEvolve on Willow', Q4: 'qBraid encodings', Q5: 'Optics blueprints', Q6: 'QMA bound', Q7: 'Astra games', X1: 'HAWK withdrawn', M1: 'GNoME', M2: 'Na–Li electrolyte', M3: 'MatterGen', M4: 'AlphaEvolve TPU circuit', M5: "Lila's catalysts", M6: 'LLM synthesis planning', P1: 'Tokamak control', P2: 'GraphCast', P3: 'Dusty plasma', P4: 'Fluid singularities', P5: 'GPT-5 science', P6: 'Gluon amplitude', P7: 'Nine-loop amplitude', P8: 'Navier–Stokes', P9: '372-family release' };
 
-// Groups follow James's own distinction (virtual vs physical). The dataset's `tier` field is kept but does not drive layout.
+// James posted his test on 31 May 2025. Results dated May 2025 or earlier came before it.
+const BET = '2025-05';
+const after = e => e.date > BET;
+const AFTER = ITEMS.filter(after), BEFORE = ITEMS.filter(e => !after(e));
+
+// Results since the bet follow James's own distinction (virtual vs physical); the earlier ones get a section of their own.
+// The dataset's `tier` field is kept but does not drive layout.
 const GROUPS = [
-  { k: 'matter', name: 'Reached rung 1: AI touched matter', desc: 'AI was an input to something that was synthesized, fabricated or physically controlled. James said he expected "early signs well ahead in more primitive forms of engineering".', test: e => L(e).matter },
-  { k: 'virtual', name: 'Below rung 1: software on real hardware', desc: "These ran on real hardware or real data, but the AI's output was software or a prediction: decoders, circuit designs, forecasts, a fitted force model. James called AI results of this kind virtual.", test: e => e.physical && !L(e).matter },
-  { k: 'theory', name: 'Below rung 1: theory and simulation', desc: 'Results with no physical artifact. In February 2026 James answered one of them (P6) with "I rest my case!"', test: e => !e.physical }
+  { k: 'matter', name: 'Since the bet: AI touched matter', desc: 'AI was an input to something that was synthesized, fabricated or physically controlled. James said he expected "early signs well ahead in more primitive forms of engineering".', test: e => after(e) && L(e).matter },
+  { k: 'virtual', name: 'Since the bet: software on real hardware', desc: "These ran on real hardware or real data, but the AI's output was software or a prediction. James called AI results of this kind virtual.", test: e => after(e) && e.physical && !L(e).matter },
+  { k: 'theory', name: 'Since the bet: theory and simulation', desc: 'Results with no physical artifact. In February 2026 James answered one of them (P6) with "I rest my case!"', test: e => after(e) && !e.physical },
+  { k: 'before', name: 'Before the bet', desc: 'Results from 2022 to May 2025, before James posted his test. He may not have known about them. They are rated on the same test, and they are not counted in the sections above.', test: e => !after(e) }
 ];
 
-const TOGGLES = [
-  { k: 'matter', group: 'ladder', label: 'rung 1: touched matter', short: 'touched matter', test: e => L(e).matter },
-  { k: 'necessary', group: 'ladder', label: 'rung 2: AI necessary', short: 'AI necessary', test: e => L(e).necessary === true },
-  { k: 'leap', group: 'ladder', label: 'rung 3: huge leap', short: 'huge leap', test: e => L(e).leap === 'leap' },
-  { k: 'qubits', group: 'ladder', label: 'bears on qubits', short: 'bears on qubits', test: e => L(e).qubits },
-  { k: 'llm', group: 'cuts', label: 'LLM-driven (autocorrect++)', short: 'LLM-driven', test: e => e.llm },
-  { k: 'physical', group: 'cuts', label: 'ran on real hardware', short: 'ran on hardware', test: e => e.physical },
-  { k: 'peer', group: 'cuts', label: 'peer-reviewed', short: 'peer-reviewed', test: e => e.verification === 'peer-reviewed' }
-];
-// The ladder rows. `name` is used in the status line; `row` is the text on the row.
-const PRESETS = [
-  { k: 'all', name: 'all results', row: 'all results', on: [] },
-  { k: 'signs', name: 'rung 1: AI touched matter', row: 'rung 1  AI touched matter', on: ['matter'] },
-  { k: 'necessary', name: 'rung 2: AI was necessary', row: 'rung 2  + AI was necessary', on: ['matter', 'necessary'] },
-  { k: 'leap', name: 'rung 3: a huge leap', row: 'rung 3  + a huge leap', note: "<- James's bar", on: ['matter', 'necessary', 'leap'] },
-  { k: 'bridge', name: 'rung 1 and bears on qubits', row: 'rung 1  + bears on qubits', on: ['matter', 'qubits'], sep: true },
-  { k: 'eric', name: "Eric's strict test (LLM-driven, ran on hardware)", on: ['llm', 'physical'], row: "Eric's strict test" }
-];
-const FUNNEL = [
-  { on: [] }, { on: ['matter'] }, { on: ['matter', 'necessary'] }, { on: ['matter', 'necessary', 'leap'] }
+// James's test as three steps. A result reaches a step only if it also reaches every step above it.
+const STEPS = [
+  { k: 'matter', name: 'AI touched matter', def: 'AI was an input to something that was synthesized, fabricated or physically controlled.', test: e => L(e).matter },
+  { k: 'necessary', name: 'AI was necessary', def: 'It could not have been done the same way without the AI. Where Eric rates that as arguable, the result stops at step 1.', test: e => L(e).necessary === true },
+  { k: 'leap', name: 'a huge leap', note: "<- James's bar", def: 'James: “a single huge leap in metallurgy or some other kind of physical engineering”.', test: e => L(e).leap === 'leap' }
 ];
 
 // Verdict words are the author's reading of where each of James's statements stands. They are not computed.
-// The notes are computed from the data so they stay true when an item is added or re-rated.
+// The notes are computed from the results since the bet, so they stay true when an item is added or re-rated.
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 const CLAIMS = [
   { k: '1', url: 'https://x.com/jamesob/status/1928861979839455371', quote: "But it's virtual, and the limitations in QC are (at least in part) physical, and we've basically forgotten how to do things in the physical world.", verdict: 'Early signs', mark: '◐',
     note: () => {
-      const m = ITEMS.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap').length;
-      const signs = m.filter(e => L(e).leap === 'early sign').length;
-      return `${plural(m.length, 'result', 'results')} changed or controlled matter with AI as an input. ${leaps ? `Eric rates ${plural(leaps, 'of them', 'of them')} as a huge leap.` : signs === m.length ? 'Eric rates all of them as early signs and none as a huge leap.' : 'Eric rates none of them as a huge leap.'}`;
-    },
-    counts: 'touched matter', test: e => L(e).matter },
+      const m = AFTER.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap');
+      if (!m.length) return 'Since the bet, no result has used AI as an input to something that was made or physically controlled.';
+      return `Since the bet, ${plural(m.length, 'result', 'results')} used AI as an input to something that was made or physically controlled: ${m.map(link).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(link).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
+    } },
   { k: '2', url: 'https://x.com/jamesob/status/1928911469342806444', quote: "I very much doubt we'll see that come out of autocorrect++.", verdict: 'Holds', mark: '●',
     note: () => {
-      const lm = ITEMS.filter(e => L(e).matter && e.llm);
-      const leaps = lm.filter(e => L(e).leap === 'leap');
-      if (!lm.length) return 'No LLM-driven result touched matter. The results that did used specialized models.';
-      return `${plural(lm.length, 'LLM-driven result', 'LLM-driven results')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(e => e.id).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
-    },
-    counts: 'LLM-driven and touched matter', test: e => L(e).matter && e.llm },
+      const lm = AFTER.filter(e => L(e).matter && e.llm), leaps = lm.filter(e => L(e).leap === 'leap');
+      if (!lm.length) return 'Since the bet, no result driven by a language model has touched matter.';
+      return `Since the bet, ${plural(lm.length, 'result', 'results')} driven by a language model touched matter: ${lm.map(e => `${link(e)} (${esc(e.verification)})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(link).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
+    } },
   { k: '3', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.', verdict: 'Not yet', mark: '○',
     note: () => {
-      const b = ITEMS.filter(e => L(e).matter && L(e).qubits);
-      return b.length
-        ? `${plural(b.length, 'result', 'results')} touched matter and bear on qubits: ${b.map(e => SHORT[e.id] || e.id).join(', ')}.`
-        : 'No result here involves qubit materials, fabrication or cryogenics. The quantum results are decoders and circuit designs, which are software.';
-    },
-    counts: 'touched matter and bear on qubits', test: e => L(e).matter && L(e).qubits }
+      const b = AFTER.filter(e => L(e).matter && L(e).qubits), q = AFTER.filter(e => L(e).qubits);
+      if (b.length) return `Since the bet, ${plural(b.length, 'result', 'results')} touched matter and bear on qubits: ${b.map(link).join(', ')}.`;
+      return `No result since the bet involves qubit materials, fabrication or cryogenics.${q.length ? ` The ones that bear on qubits (${q.map(link).join(', ')}) are software.` : ''}`;
+    } }
 ];
 
 // ---------- Helpers ----------
@@ -573,64 +537,44 @@ const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } ca
 const blocks = (n, total) => '<span class="blocks" aria-hidden="true">' + '<i class="on"></i>'.repeat(n) + '<i></i>'.repeat(Math.max(0, total - n)) + '</span>';
 const BADGE = { 'peer-reviewed': '●', 'preprint': '◐', 'company-reported': '□' };
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function link(e) { return `<a href="#item-${esc(e.id)}">${esc(SHORT[e.id] || e.id)}</a>`; }
 
 // ---------- Filter state ----------
-const state = new Set();
-const passesWith = (e, set) => TOGGLES.every(t => !set.has(t.k) || t.test(e));
-const passes = e => passesWith(e, state);
-const sameSet = (arr) => arr.length === state.size && arr.every(k => state.has(k));
-const countWith = on => ITEMS.filter(e => passesWith(e, new Set(on))).length;
-
-function sliceName() {
-  const exact = PRESETS.find(p => sameSet(p.on));
-  if (exact) return exact.name;
-  const base = PRESETS.filter(p => p.on.length && p.on.every(k => state.has(k))).sort((a, b) => b.on.length - a.on.length)[0];
-  const extra = TOGGLES.filter(t => state.has(t.k) && !(base && base.on.includes(t.k))).map(t => t.short);
-  return base ? `${base.name} + ${extra.join(' + ')}` : 'your test: ' + TOGGLES.filter(t => state.has(t.k)).map(t => t.short).join(' + ');
-}
-function sliceDef() {
-  return state.size ? TOGGLES.filter(t => state.has(t.k)).map(t => t.short).join(' ∧ ') : 'no filter';
+// level 0 shows everything; level k keeps the results that reach step k.
+let level = 0;
+const reaches = (e, k) => STEPS.slice(0, k).every(s => s.test(e));
+const passes = e => reaches(e, level);
+function levelFromHash(h) {
+  const m = /[#&]f=([a-z,]*)/.exec(h);
+  if (!m) return 0;
+  const ks = m[1].split(',');
+  return Math.max(0, ...STEPS.map((s, i) => ks.includes(s.k) ? i + 1 : 0));
 }
 
-// ---------- Static build ----------
+// ---------- Static build ----------// ---------- Static build ----------
 function buildClaims() {
-  $('#claims').innerHTML = CLAIMS.map(c => {
-    const total = ITEMS.filter(c.test).length;
-    return `<article class="box claim" id="claim-${c.k}">
-      <span class="box-t">james_${c.k}.txt</span>
-      <p class="verdict"><span class="vm" aria-hidden="true">${c.mark}</span> ${esc(c.verdict)}</p>
-      <div><blockquote>“${esc(c.quote)}” <a href="${esc(c.url)}" target="_blank" rel="noopener">[31 May 2025]</a></blockquote></div>
-      <div>
-        <p class="note">${esc(c.note())}</p>
-        <p class="cnt"><span class="n" data-claim="${c.k}">${total}</span><span class="dim" data-claim-of="${c.k}"></span> <span class="bar" data-bar="${c.k}" aria-hidden="true"></span> <span class="dim" data-claim-txt="${c.k}">${esc(c.counts)}</span></p>
-        <p class="reading">verdict: Eric's judgment</p>
-      </div>
-    </article>`;
-  }).join('');
-  $('#meta-n').textContent = ITEMS.length;
+  $('#claims').innerHTML = CLAIMS.map(c => `<article class="box claim" id="claim-${c.k}">
+      <span class="box-t">James, 31 May 2025</span>
+      <blockquote>“${esc(c.quote)}” <a href="${esc(c.url)}" target="_blank" rel="noopener">[x.com]</a></blockquote>
+      <p class="verdict"><span class="vlbl">Eric's verdict:</span> <span><span class="vm" aria-hidden="true">${c.mark}</span> ${esc(c.verdict)}</span></p>
+      <p class="note">${c.note()}</p>
+    </article>`).join('');
+  $('#meta-n').textContent = AFTER.length;
+  $('#meta-before').textContent = BEFORE.length;
 }
 function buildControls() {
-  const N = ITEMS.length, lad = $('#ladder');
-  PRESETS.forEach(p => {
-    if (p.sep) { const d = document.createElement('div'); d.className = 'between'; d.setAttribute('aria-hidden', 'true'); lad.appendChild(d); }
+  const A = AFTER.length, lad = $('#ladder');
+  const rows = [{ level: 0, row: 'all results since the bet', name: 'all results since the bet' }]
+    .concat(STEPS.map((s, i) => ({ level: i + 1, row: `${i + 1}  ${i ? '+ ' : ''}${s.name}`, name: `step ${i + 1}, ${s.name}`, note: s.note, def: s.def })));
+  rows.forEach(p => {
+    const n = AFTER.filter(e => reaches(e, p.level)).length;
     const b = document.createElement('button');
-    const n = countWith(p.on);
-    b.type = 'button'; b.className = 'btn lrow'; b.dataset.k = p.k;
-    b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${blocks(n, N)}</span><span class="lr-n">${n}</span>`;
-    b.setAttribute('aria-label', `${p.name}: ${n} of ${N} results`);
-    b.addEventListener('click', () => setFilter(p.on));
+    b.type = 'button'; b.className = 'btn lrow'; b.dataset.level = p.level;
+    b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${blocks(n, A)}</span><span class="lr-n">${n}</span>${p.def ? `<span class="lr-def">${esc(p.def)}</span>` : ''}`;
+    b.setAttribute('aria-label', `${p.name}: ${n} of ${A} results since the bet`);
+    b.addEventListener('click', () => { level = p.level; update(); });
     lad.appendChild(b);
   });
-  TOGGLES.forEach(t => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'btn toggle'; b.dataset.k = t.k;
-    b.innerHTML = `<span class="box-mark" aria-hidden="true">[ ]</span> ${esc(t.label)}`;
-    b.addEventListener('click', () => { state.has(t.k) ? state.delete(t.k) : state.add(t.k); update(); });
-    $(t.group === 'ladder' ? '#toggles-ladder' : '#toggles-cuts').appendChild(b);
-  });
-  const m1 = ITEMS.filter(e => L(e).matter), m2 = m1.filter(e => L(e).necessary === true), m3 = m2.filter(e => L(e).leap === 'leap');
-  const arguable = m1.filter(e => L(e).necessary === 'arguable').map(e => e.id);
-  $('#funnel-note').textContent = `Each block is one result. ${m1.length} reach rung 1 (${m1.map(e => e.id).join(', ')}). ${m2.length} reach rung 2${arguable.length ? `; for ${arguable.join(', ')} the AI's necessity is arguable, so they stop at rung 1` : ''}. ${m3.length} reach rung 3. Ratings are Eric's.`;
 }
 const CARD = {};
 function buildItems() {
@@ -649,17 +593,17 @@ function buildItems() {
       a.className = 'rec' + (art ? ' has-art' : ''); a.id = 'item-' + e.id; a.dataset.month = e.date;
       const g = GROUP(e.domain), lad = L(e);
       const badges = `[${BADGE[e.verification] || ''} ${esc(e.verification)}]${e.contested ? ' <span class="contested">[× contested]</span>' : ''}`;
+      const llm = e.llm ? ' · driven by a language model' : '';
       const rungs = [
         flag(lad.matter, '1 touched matter'),
         flag(lad.necessary === true, lad.necessary === 'arguable' ? '2 AI necessary (arguable)' : '2 AI necessary'),
         flag(lad.leap === 'leap', lad.leap === 'early sign' ? '3 huge leap (early sign)' : '3 huge leap'),
         flag(lad.qubits, 'bears on qubits')
       ].join('');
-      const other = TOGGLES.filter(t => t.group === 'cuts').map(t => flag(t.test(e), t.short)).join('');
       a.innerHTML = `<span class="box-t">${esc(e.id)} · ${label(e.date)}</span><span class="box-t r">${badges}</span>
         <div class="rec-top">
           <div>
-            <p class="dom"><span class="g-${g}" aria-hidden="true">${MK[g]}</span> ${esc(e.domain)}<span class="badges-m"> · ${badges}</span></p>
+            <p class="dom"><span class="g-${g}" aria-hidden="true">${MK[g]}</span> ${esc(e.domain)}${llm}<span class="badges-m"> · ${badges}</span></p>
             <h3>${esc(e.title)}</h3>
             <p class="who">${esc(e.who)}</p>
             <p class="what">${esc(e.what)}</p>
@@ -669,9 +613,8 @@ function buildItems() {
         <dl class="kv">
           <dt>artifact</dt><dd>${esc(e.artifact)}</dd>
           <dt>caveat</dt><dd class="cav">${esc(e.caveat)}</dd>
-          <dt>rungs</dt><dd class="flags" aria-label="Rungs of James's test">${rungs}</dd>
-          <dt>rating</dt><dd>${esc(lad.why)}</dd>
-          <dt>other</dt><dd class="flags" aria-label="Other filters">${other}</dd>
+          <dt>test</dt><dd class="flags" aria-label="Steps of James's test">${rungs}</dd>
+          <dt>rating</dt><dd>Eric: ${esc(lad.why)}</dd>
           <dt>source</dt><dd><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(host(e.url))}</a> <span class="score">P${e.P} H:${esc(e.H)} W${e.W} C${e.C} → index ${fmt(e.idx)}</span></dd>
         </dl>
         <span class="sr out-note"></span>`;
@@ -1033,7 +976,7 @@ function renderChart() {
   const fs = Math.max(6, Math.min(21, avail / ((AX + COLS + 1) * 0.6)));
   pre.style.fontSize = fs.toFixed(2) + 'px';
   CH.charW = fs * 0.6;
-  const filtered = state.size > 0;
+  const filtered = level > 0, BC = MONTHS.indexOf(BET);
   const hOf = v => v > 0 ? Math.max(1, Math.round(v / STEP)) : 0;
   const calloutAt = {}; CALLOUTS.forEach(b => { calloutAt[MONTHS.indexOf(b.d)] = b.callout; });
   const span = (cls, ch) => cls ? `<span class="${cls}">${ch}</span>` : ch;
@@ -1050,17 +993,20 @@ function renderChart() {
       else if (filtered && hg && r === hg) { ch = '·'; cls = 'gh'; }
       else if (filtered && hg && r < hg) { ch = ':'; cls = 'gh'; }
       else if (labelled) { ch = '·'; cls = 'grid'; }
+      if (i === BC && (ch === ' ' || cls === 'grid')) { ch = '│'; cls = 'bet'; }
       if (i === hoverCol) cls = (cls + ' hl').trim();
       row += span(cls, ch);
     }
     lines.push(row);
   }
   let base = span('ax', ' 0 ┼');
-  for (let i = 0; i < COLS; i++) base += span('ax' + (i === hoverCol ? ' hl' : ''), MONTHS[i].endsWith('-01') ? '┴' : '─');
+  for (let i = 0; i < COLS; i++) base += i === BC ? span('bet', '┼') : span('ax' + (i === hoverCol ? ' hl' : ''), MONTHS[i].endsWith('-01') ? '┴' : '─');
   lines.push(base);
   const yrs = Array(COLS).fill(' ');
   MONTHS.forEach((d, i) => { if (d.endsWith('-01')) d.slice(0, 4).split('').forEach((c, j) => { if (i + j < COLS) yrs[i + j] = c; }); });
-  lines.push('    ' + span('yr', yrs.join('')));
+  lines.push('    ' + yrs.map((c, i) => i === BC && c === ' ' ? span('bet', '│') : span('yr', c)).join(''));
+  const tag = 'bet made, 31 May 2025 ─┘';
+  lines.push(' '.repeat(Math.max(0, CH.AX + BC - tag.length + 1)) + span('bet', tag));
   pre.innerHTML = lines.join('\n');
 }
 function chartInfo(i) {
@@ -1073,7 +1019,7 @@ function chartInfo(i) {
   let html = `<span class="when">${label(b.d)}</span> <span class="dim">· index ${fmt(b.idx)}</span>`;
   if (!f.items.length) html += ' <span class="dim">· no items this month</span>';
   if (b.items.length) html += '<br>' + b.items.map(e => `${MK[GROUP(e.domain)]} ${esc(e.id)} ${esc(SHORT[e.id] || e.title)} <span class="dim">${fmt(e.idx)}</span>`).join(' &nbsp; ');
-  if (removed) html += `<br><span class="dim">${removed} result${removed > 1 ? 's' : ''} this month removed by the filter (unfiltered ${fmt(f.idx)})</span>`;
+  if (removed) html += `<br><span class="dim">${removed} result${removed > 1 ? 's' : ''} this month do${removed > 1 ? '' : 'es'} not reach the step (all results: ${fmt(f.idx)})</span>`;
   el.innerHTML = html;
 }
 (() => {
@@ -1092,7 +1038,7 @@ function chartInfo(i) {
 function renderCallouts() {
   const ol = $('#callouts');
   ol.innerHTML = '';
-  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">No results pass this filter.</li>'; return; }
+  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">No results reach this step.</li>'; return; }
   CALLOUTS.forEach(b => {
     const li = document.createElement('li');
     li.innerHTML = `<span class="cn">[${b.callout}]</span><span class="when">${label(b.d)}</span><span class="ct">${b.items.map(e => esc(e.title)).join(' · ')} <span class="dim">· ${fmt(b.idx)}</span></span>`;
@@ -1107,68 +1053,52 @@ function highlightMonth(d) {
 }
 
 // ---------- Update ----------
-function setFilter(on) { state.clear(); on.forEach(k => state.add(k)); update(); }
 function update() {
-  const pass = ITEMS.filter(passes), N = ITEMS.length;
-  const name = sliceName();
-  const on = state.size > 0;
-  $('#count').textContent = on ? pass.length : N;
-  $('#count').classList.toggle('zero', on && pass.length === 0);
-  $('#count-of').textContent = on ? `/${N} pass` : ' results';
-  $('#slice-name').textContent = on ? name : 'no filter';
-  $('#slice-def').textContent = on ? sliceDef() : 'Pick a row below to filter by rung.';
-  $('#bar-count').textContent = on ? `${pass.length}/${N} pass` : 'no filter';
-  $('#live').textContent = on ? `${name}: ${pass.length} of ${N} results pass.` : `No filter: all ${N} results shown.`;
-  document.querySelectorAll('.toggle').forEach(b => {
-    const t = state.has(b.dataset.k);
-    b.setAttribute('aria-pressed', t);
-    b.querySelector('.box-mark').textContent = t ? '[x]' : '[ ]';
-  });
+  const pass = ITEMS.filter(passes), passA = AFTER.filter(passes), A = AFTER.length;
+  const on = level > 0, st = STEPS[level - 1];
+  $('#count').textContent = on ? passA.length : A;
+  $('#count').classList.toggle('zero', on && passA.length === 0);
+  $('#count-of').textContent = on ? `/${A}` : ' results';
+  $('#slice-name').textContent = on ? `reach step ${level}: ${st.name}` : 'since the bet';
+  $('#bar-count').textContent = on ? `${passA.length} of ${A} reach step ${level}` : 'since 31 May 2025';
+  $('#live').textContent = on ? `${passA.length} of ${A} results since the bet reach step ${level}, ${st.name}.` : `${A} results since the bet.`;
   document.querySelectorAll('.lrow').forEach(b => {
-    const t = sameSet(PRESETS.find(p => p.k === b.dataset.k).on);
+    const t = +b.dataset.level === level;
     b.setAttribute('aria-pressed', t);
     b.querySelector('.lr-mark').textContent = t ? '(*)' : '( )';
-  });
-  CLAIMS.forEach(c => {
-    const total = ITEMS.filter(c.test).length, n = pass.filter(c.test).length;
-    const f = on && total > 0;
-    $(`[data-claim="${c.k}"]`).textContent = f ? n : total;
-    $(`[data-claim-of="${c.k}"]`).textContent = f ? `/${total}` : '';
-    $(`[data-claim-txt="${c.k}"]`).textContent = f ? `${c.counts}, passing your filter` : c.counts;
-    $(`[data-bar="${c.k}"]`).innerHTML = f ? blocks(n, total) : '';
   });
   ITEMS.forEach(e => {
     const ok = passes(e), card = CARD[e.id];
     card.classList.toggle('out', !ok);
     card.classList.remove('hi');
-    card.querySelector('.out-note').textContent = ok ? '' : 'Excluded by the current filter.';
+    card.querySelector('.out-note').textContent = ok ? '' : 'Does not reach the chosen step.';
   });
   GROUPS.forEach(G => {
     const all = ITEMS.filter(G.test), n = all.filter(passes).length;
-    $(`[data-group="${G.k}"]`).textContent = on ? `${n} of ${all.length} pass` : `${all.length} results`;
+    $(`[data-group="${G.k}"]`).textContent = on ? `${n} of ${all.length} reach step ${level}` : plural(all.length, 'result', 'results');
   });
   $('#statusbar').innerHTML = on
-    ? `<span>-- ${pass.length} of ${N} pass: ${esc(name)} · the rest are dimmed --</span><a href="#filters">[change]</a>`
-    : `<span>-- all ${N} results shown --</span><a href="#filters">[filter by rung]</a>`;
+    ? `<span>-- step ${level}, ${esc(st.name)}: ${passA.length} of ${A} since the bet · the rest are dimmed --</span><a href="#filters">[change]</a>`
+    : `<span>-- ${A} results since the bet, ${BEFORE.length} before --</span><a href="#filters">[filter by step]</a>`;
 
-  cube.setHeat(on ? pass.length / N : 1);
+  cube.setHeat(on ? passA.length / A : 1);
   $('#cube-cap').innerHTML = !on
     ? 'The stake: a tungsten cube.'
-    : pass.length === 0
-      ? 'No results pass this filter, so the edges do not glow.'
-      : `<b>${pass.length} of ${N}</b> results pass your filter. The glow on the edges follows that number.`;
+    : passA.length === 0
+      ? 'No result since the bet reaches this step, so the edges do not glow.'
+      : `<b>${passA.length} of ${A}</b> results since the bet reach this step. The glow on the edges follows that number.`;
 
   SERIES = series(pass);
   CALLOUTS = SERIES.filter(b => b.idx > 0).sort((a, c) => c.idx - a.idx).slice(0, 6).sort((a, c) => a.d.localeCompare(c.d));
   CALLOUTS.forEach((b, i) => b.callout = i + 1);
-  $('#ghost-key').hidden = state.size === 0;
+  $('#ghost-key').hidden = !on;
   const peaks = CALLOUTS.map(b => `${label(b.d)} ${fmt(b.idx)}`).join(', ');
-  $('#chart-desc').textContent = pass.length ? `Monthly index for ${pass.length} results, January 2022 to October 2026. Peaks: ${peaks}.` : 'No results pass the filter, so every month is at zero.';
+  $('#chart-desc').textContent = pass.length ? `Monthly index for ${pass.length} results, January 2022 to October 2026, with the bet marked at May 2025. Peaks: ${peaks}.` : 'No results reach this step, so every month is at zero.';
   renderChart();
   chartInfo(hoverCol);
   renderCallouts();
 
-  const h = state.size ? '#f=' + TOGGLES.filter(t => state.has(t.k)).map(t => t.k).join(',') : ' ';
+  const h = on ? '#f=' + STEPS.slice(0, level).map(s => s.k).join(',') : ' ';
   try { history.replaceState(null, '', h === ' ' ? location.pathname + location.search : h); } catch (_) {}
 }
 
@@ -1195,18 +1125,14 @@ sysDark.addEventListener('change', applyTheme);
 applyTheme();
 
 // ---------- Init ----------
-const m = /[#&]f=([a-z,]*)/.exec(location.hash);
-if (m) m[1].split(',').filter(k => TOGGLES.some(t => t.k === k)).forEach(k => state.add(k));
+level = levelFromHash(location.hash);
 buildClaims();
 buildControls();
 buildItems();
 update();
 Cubes.start();
 startArt();
-addEventListener('hashchange', () => {
-  const f = /[#&]f=([a-z,]*)/.exec(location.hash);
-  setFilter(f ? f[1].split(',').filter(k => TOGGLES.some(t => t.k === k)) : []);
-});
+addEventListener('hashchange', () => { level = levelFromHash(location.hash); update(); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(renderChart, 120); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderChart);
 </script>
