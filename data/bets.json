@@ -1,0 +1,73 @@
+[
+  {
+    "id": "adam3us",
+    "opened": "2021-11",
+    "settled": "2021",
+    "counterparty": {"handle": "adam3us", "name": "Adam Back"},
+    "claim": "PlanB's stock-to-flow \"floor model\" would hold. Eric took the other side.",
+    "stake": "a tungsten cube",
+    "status": "won",
+    "note": "Paid in a cube engraved with Adam's face, by Eric's account.",
+    "sources": [
+      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"},
+      {"label": "The thread where the cube bets began, 3–4 Nov 2021", "url": "https://x.com/ercwl/status/1456221544649211906"}
+    ],
+    "wanted": "the x.com posts where the bet was made and where the cube changed hands"
+  },
+  {
+    "id": "keroles",
+    "opened": "2022",
+    "settled": "2022-09",
+    "counterparty": {"handle": "ck_SNARKs", "name": "Christian Keroles, Bitcoin Magazine"},
+    "claim": "The Ethereum Merge would not happen in 2022. Eric said it would; it did, on 15 September 2022.",
+    "stake": "a tungsten cube",
+    "status": "won",
+    "sources": [
+      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"}
+    ],
+    "wanted": "the x.com posts for the bet and its settlement"
+  },
+  {
+    "id": "piper",
+    "opened": "2022-02",
+    "settled": "2023-02",
+    "counterparty": {"handle": "", "name": "Dixon Piper"},
+    "claim": "HEX, then at $0.18, would not make a new all-time high by February 2023.",
+    "stake": "money, later hedged",
+    "status": "unrecorded",
+    "note": "Cointelegraph reports Eric hedged the position and locked in a $16,000 profit. The settlement itself is not linked here yet.",
+    "sources": [
+      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"},
+      {"label": "BeInCrypto on the HEX position, 2022", "url": "https://beincrypto.com/richard-heart-antagonist-eric-wall-cashes-in-on-falling-hex-price/"}
+    ],
+    "wanted": "the x.com posts for the bet and how it was settled"
+  },
+  {
+    "id": "bitcoinerrrrr",
+    "opened": "2023",
+    "counterparty": {"handle": "bitcoinerrrrr", "name": ""},
+    "claim": "Staked-ETH withdrawals would go live in 2023. They did, with the Shapella upgrade on 12 April 2023.",
+    "stake": "a tungsten cube",
+    "status": "unrecorded",
+    "note": "Known here only from Eric's stated plan to win it; the bet and its settlement are not linked yet.",
+    "sources": [
+      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"}
+    ],
+    "wanted": "the x.com posts for the bet and its settlement"
+  },
+  {
+    "id": "jamesob",
+    "opened": "2025-05-31",
+    "settles": "2028-05-31",
+    "counterparty": {"handle": "jamesob", "name": "James O'Beirne"},
+    "claim": "Quantum computing is \"obvious bullshit\". James's own test for changing his mind: a single huge leap in metallurgy or other physical engineering for which AI was a necessary input, within three years.",
+    "stake": "a tungsten cube",
+    "status": "open",
+    "page": "/jamesob",
+    "note": "Settles 31 May 2028 (5 July 2028 on the July wording). Not conceded as of 14 Feb 2026.",
+    "sources": [
+      {"label": "The thread, 31 May 2025", "url": "https://x.com/jamesob/status/1928857683571937656"},
+      {"label": "\"Done 🤝\", 31 May 2025", "url": "https://x.com/jamesob/status/1928913574241415202"}
+    ]
+  }
+]

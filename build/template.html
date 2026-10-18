@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Does This Update Your Priors?</title>
+<meta name="description" content="A tungsten-cube bet about AI and quantum computing, and the AI results of 2022–2026 laid on the ladder James set for changing his mind.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
+<style>
+/* tungsten.bet, text mode. One monospace for everything you read, a pixel face for display.
+   Light theme: a dot-matrix printout on green-bar paper with tractor-feed holes.
+   Dark theme: an amber phosphor terminal. Same layout, same characters; only the machine changes.
+   Selection is reverse video. Boxes carry their titles in the border. */
+:root {
+  --desk: #c7cbc2;
+  --paper: #fcfcf8;
+  --band: #e2eedb;
+  --ink: #1b1d1a;
+  --ink-2: #41463f;
+  --dim: #6f756c;
+  --rule: #9da397;
+  --wash: rgba(27, 29, 26, 0.08);
+  --hot: #c43d17;
+  --link: #0000ee;
+  --vlink: #551a8b;
+  --q: #1f5fbf; --m: #18784a; --p: #c2511b; --x: #41463f;
+  --glow: none;
+  --sheet-bg: repeating-linear-gradient(to bottom, var(--paper) 0 72px, var(--band) 72px 144px);
+  --sheet-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 14px 34px rgba(0, 0, 0, 0.18);
+  --sheet-radius: 0;
+  --holes: block;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --desk: #080604; --paper: #15100a; --band: #15100a;
+    --ink: #ffc677; --ink-2: #e4a95a; --dim: #9b7544; --rule: #5b4224;
+    --wash: rgba(255, 190, 100, 0.10); --hot: #ff6236;
+    --link: #ffe1a8; --vlink: #d8ad74;
+    --q: #ffdca0; --m: #ffc677; --p: #ff9b4c; --x: #c99856;
+    --glow: 0 0 7px rgba(255, 168, 60, 0.45);
+    --sheet-bg: repeating-linear-gradient(to bottom, rgba(255, 190, 100, 0.035) 0 1px, transparent 1px 3px), radial-gradient(ellipse at 50% 25%, #1e170d 0%, #120d07 70%);
+    --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
+    --sheet-radius: 18px;
+    --holes: none;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --desk: #080604; --paper: #15100a; --band: #15100a;
+  --ink: #ffc677; --ink-2: #e4a95a; --dim: #9b7544; --rule: #5b4224;
+  --wash: rgba(255, 190, 100, 0.10); --hot: #ff6236;
+  --link: #ffe1a8; --vlink: #d8ad74;
+  --q: #ffdca0; --m: #ffc677; --p: #ff9b4c; --x: #c99856;
+  --glow: 0 0 7px rgba(255, 168, 60, 0.45);
+  --sheet-bg: repeating-linear-gradient(to bottom, rgba(255, 190, 100, 0.035) 0 1px, transparent 1px 3px), radial-gradient(ellipse at 50% 25%, #1e170d 0%, #120d07 70%);
+  --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
+  --sheet-radius: 18px;
+  --holes: none;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--desk); }
+body {
+  margin: 0; background: var(--desk); color: var(--ink);
+  font-family: var(--mono); font-size: 15px; line-height: 1.6;
+  padding: 28px 16px 72px; overflow-wrap: break-word;
+}
+::selection { background: var(--ink); color: var(--paper); }
+a { color: var(--link); text-underline-offset: 2px; }
+a:visited { color: var(--vlink); }
+a:hover { background: var(--link); color: var(--paper); text-decoration: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 1px dashed var(--ink); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.dim { color: var(--dim); }
+.hot { color: var(--hot); }
+p { margin: 0; }
+
+/* The sheet: paper with tractor feed, or a screen */
+.sheet {
+  position: relative; max-width: 1000px; margin: 0 auto;
+  background: var(--sheet-bg); box-shadow: var(--sheet-shadow); border-radius: var(--sheet-radius);
+  padding: 20px 68px 56px;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 46px;
+}
+.sheet::before, .sheet::after {
+  content: ""; display: var(--holes); position: absolute; top: 0; bottom: 0; width: 40px;
+  background: radial-gradient(circle, var(--desk) 0 5px, transparent 5.6px) center 12px / 40px 24px repeat-y;
+}
+.sheet::before { left: 0; border-right: 1px dashed var(--rule); }
+.sheet::after { right: 0; border-left: 1px dashed var(--rule); }
+
+/* Top line */
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 2ch; flex-wrap: wrap; border-bottom: 1px solid var(--ink-2); padding-bottom: 6px; margin-bottom: -18px; }
+.top .site b { font-weight: 700; }
+.btn { background: none; border: 0; padding: 0 0.3ch; cursor: pointer; color: var(--ink); text-align: left; }
+.btn:hover, .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 18px 4ch; align-items: center; }
+.cube-fig { margin: 0; display: grid; gap: 4px; justify-items: center; }
+#cube { width: 300px; height: 300px; max-width: 100%; display: block; }
+.cube-cap { font-size: 12px; text-align: center; max-width: 34ch; line-height: 1.45; }
+.hero-text { display: grid; gap: 16px; }
+.kicker { color: var(--dim); }
+h1 {
+  font-family: var(--pixel); font-weight: 400; font-size: clamp(54px, 8vw, 92px); line-height: 0.86;
+  text-transform: uppercase; margin: 0; letter-spacing: 0.01em; text-shadow: var(--glow); text-wrap: balance;
+}
+.cursor { display: inline-block; width: 0.5em; height: 0.82em; background: var(--hot); margin-left: 0.12em; vertical-align: -0.06em; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lede { max-width: 66ch; }
+.hero-meta { color: var(--dim); }
+.hero-meta b { color: var(--ink); font-weight: 700; }
+
+/* Section headings: == Title ===== */
+.rule-h { display: flex; align-items: baseline; gap: 1.2ch; margin: 0 0 18px; font-family: var(--pixel); font-weight: 400; font-size: 36px; line-height: 1; text-shadow: var(--glow); }
+.rule-h::before { content: "=="; color: var(--dim); }
+.fill { flex: 1 1 0; width: 0; min-width: 2ch; overflow: hidden; white-space: nowrap; color: var(--dim); }
+.fill::before { content: "================================================================================================================================================================================"; }
+.fill.dash::before { content: "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"; }
+.sub { color: var(--dim); margin: -8px 0 16px; max-width: 76ch; }
+
+/* Boxes with the title set into the border */
+.box { position: relative; border: 1px solid var(--ink-2); padding: 20px 2ch 14px; }
+.box.dbl { border: 3px double var(--ink-2); }
+.box-t { position: absolute; top: -0.85em; left: 1.4ch; padding: 0 1ch; background: var(--paper); color: var(--ink); white-space: nowrap; max-width: calc(100% - 3ch); overflow: hidden; text-overflow: ellipsis; }
+.box-t.r { left: auto; right: 1.4ch; color: var(--dim); }
+
+/* The bet, as a chat log */
+.log { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.log li { display: grid; grid-template-columns: 17ch 10ch minmax(0, 1fr); gap: 0 1ch; }
+.log .ts { color: var(--dim); white-space: nowrap; }
+.log a.ts:hover { color: var(--paper); }
+.log .nick { white-space: nowrap; text-align: right; }
+.log .nick.j { color: var(--hot); }
+.log .msg { max-width: 72ch; }
+.log .gap { color: var(--dim); }
+.log li.sys { grid-template-columns: 28ch minmax(0, 1fr); }
+.log li.sys .msg { color: var(--dim); grid-column: 2; }
+.log li.sys .msg b { color: var(--ink); font-weight: 400; }
+.log li.sys .msg .hot b { color: var(--hot); }
+.status { margin-top: 16px; border-top: 1px dashed var(--rule); padding-top: 12px; max-width: 86ch; }
+.status b { font-weight: 700; }
+
+/* James's sentences */
+.claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 2ch; }
+.claim { display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.verdict { font-family: var(--pixel); font-size: 34px; line-height: 1; text-transform: uppercase; text-shadow: var(--glow); }
+.verdict .vm { color: var(--hot); }
+.claim blockquote { margin: 0; font-style: italic; }
+.claim blockquote a { font-style: normal; font-size: 12px; }
+.claim .note { color: var(--ink-2); font-size: 14px; }
+.claim .cnt { border-top: 1px dashed var(--rule); padding-top: 8px; font-size: 14px; }
+.claim .cnt .n { font-family: var(--pixel); font-size: 28px; line-height: 1; }
+.claim .cnt .bar { letter-spacing: 0; }
+.claim .reading { color: var(--dim); font-size: 12px; }
+
+/* The ladder */
+.prompt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1.2ch; font-family: var(--pixel); font-size: 54px; line-height: 1; text-shadow: var(--glow); }
+.prompt .ps { color: var(--dim); }
+.prompt #count.zero { color: var(--hot); }
+.prompt .of { color: var(--dim); font-size: 34px; }
+.prompt #slice-name { font-size: 34px; }
+.slice-def { color: var(--dim); margin: 6px 0 14px; }
+.ladder { display: grid; gap: 1px; margin: 4px 0 14px; }
+.lrow { display: grid; grid-template-columns: 4ch minmax(0, 1fr) auto 3ch; gap: 0 1.2ch; align-items: baseline; width: 100%; padding: 2px 0.6ch; }
+.lrow .lr-bar { white-space: pre; letter-spacing: 0; }
+.lrow .lr-n { text-align: right; font-weight: 700; }
+.lrow .lr-note { color: var(--hot); }
+.lrow:hover .lr-note, .lrow[aria-pressed="true"] .lr-note { color: inherit; }
+.lrow.sep { margin-top: 10px; }
+.ladder .between { border-top: 1px dashed var(--rule); margin-top: 8px; }
+.cuts { display: grid; grid-template-columns: 8ch minmax(0, 1fr); gap: 4px 1.2ch; border-top: 1px dashed var(--rule); padding-top: 12px; }
+.cuts .lbl { color: var(--dim); }
+.cuts .row { display: flex; flex-wrap: wrap; gap: 2px 2.4ch; }
+.ladder-note { color: var(--dim); margin-top: 14px; max-width: 86ch; }
+
+/* The chart, in characters */
+.achart-wrap { position: relative; }
+.achart { margin: 0; font-family: var(--mono); line-height: 1.12; white-space: pre; overflow: hidden; color: var(--dim); cursor: crosshair; user-select: none; }
+.achart .ax { color: var(--rule); }
+.achart .grid { color: var(--rule); opacity: 0.6; }
+.achart .t { color: var(--ink); }
+.achart .gh { color: var(--rule); }
+.achart .co { color: var(--hot); font-weight: 700; }
+.achart .mk-q { color: var(--q); } .achart .mk-m { color: var(--m); } .achart .mk-p { color: var(--p); } .achart .mk-x { color: var(--x); }
+.achart .hl { background: var(--wash); }
+.achart .yr { color: var(--dim); }
+.chart-info { min-height: 3.2em; margin-top: 8px; border-top: 1px dashed var(--rule); padding-top: 8px; }
+.chart-info .when { font-weight: 700; }
+.legend { color: var(--dim); display: flex; flex-wrap: wrap; gap: 2px 2.4ch; margin-bottom: 10px; }
+.legend .k-q { color: var(--q); } .legend .k-m { color: var(--m); } .legend .k-p { color: var(--p); } .legend .k-x { color: var(--x); }
+.callouts { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.callouts li { display: grid; grid-template-columns: 4ch 9ch minmax(0, 1fr); gap: 0 1ch; cursor: pointer; }
+.callouts li:hover { background: var(--wash); }
+.callouts li.empty { grid-template-columns: 1fr; cursor: default; color: var(--dim); }
+.callouts .cn { color: var(--hot); font-weight: 700; }
+.callouts .when { color: var(--dim); }
+.method { color: var(--dim); margin-top: 16px; max-width: 86ch; font-size: 13.5px; }
+
+/* Items, as records */
+.items { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.statusbar {
+  position: sticky; top: 0; z-index: 6; background: var(--ink); color: var(--paper);
+  display: flex; justify-content: space-between; gap: 2ch; padding: 1px 1ch; margin: 0 -1ch -22px;
+  white-space: nowrap; overflow: hidden;
+}
+.statusbar span { overflow: hidden; text-overflow: ellipsis; }
+.statusbar a, .statusbar a:visited { color: var(--paper); }
+.statusbar a:hover { background: var(--paper); color: var(--ink); }
+.group-h { scroll-margin-top: 40px; }
+.group-h .count { color: var(--dim); font-family: var(--mono); font-size: 15px; text-shadow: none; white-space: nowrap; }
+.group-desc { max-width: 76ch; margin: -6px 0 6px; color: var(--ink-2); }
+.rec { padding: 18px 0 8px; transition: opacity 0.2s ease; scroll-margin-top: 44px; }
+.rec.out { opacity: 0.3; }
+.rec.hi { background: var(--wash); box-shadow: -1ch 0 0 var(--wash), 1ch 0 0 var(--wash); }
+.rec-h { display: flex; gap: 1ch; align-items: baseline; white-space: nowrap; }
+.rec-h .rid { background: var(--ink); color: var(--paper); padding: 0 0.6ch; font-weight: 700; }
+.rec-h .when { font-weight: 700; }
+.rec-h .dom { color: var(--dim); }
+.rec-h .g-q { color: var(--q); } .rec-h .g-m { color: var(--m); } .rec-h .g-p { color: var(--p); } .rec-h .g-x { color: var(--x); }
+.rec-h .badges { color: var(--ink-2); }
+.rec-h .badges .contested { color: var(--hot); }
+.rec h3 { font-size: 16.5px; font-weight: 700; line-height: 1.4; margin: 8px 0 8px; max-width: 76ch; text-wrap: pretty; }
+.kv { display: grid; grid-template-columns: 9ch minmax(0, 1fr); gap: 3px 1ch; margin: 0; }
+.kv dt { color: var(--dim); }
+.kv dd { margin: 0; max-width: 76ch; text-wrap: pretty; }
+.kv dd.cav { color: var(--ink-2); font-style: italic; }
+.kv .flags { display: flex; flex-wrap: wrap; gap: 0 2.4ch; }
+.kv .flags .on { font-weight: 700; }
+.kv .flags .off { color: var(--dim); }
+.kv .score { color: var(--dim); }
+
+/* Footnote, footer */
+.foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 4ch; }
+.foot-notes { display: grid; gap: 10px; max-width: 76ch; color: var(--ink-2); }
+.tile { margin: 0; font-family: var(--mono); line-height: 1.25; text-shadow: var(--glow); }
+.sources { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: 13.5px; }
+.sources li { display: grid; grid-template-columns: 5ch minmax(0, 1fr); gap: 0 1ch; }
+.sources .sid { color: var(--dim); }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+  .cube-fig { justify-self: center; }
+  .claims { grid-template-columns: minmax(0, 1fr); }
+  #cube { width: 260px; height: 260px; }
+}
+@media (max-width: 720px) {
+  body { padding: 0; font-size: 13.5px; }
+  .sheet { padding: 14px 14px 40px; border-radius: 0; gap: 38px; }
+  .sheet::before, .sheet::after { display: none; }
+  h1 { font-size: 50px; }
+  .rule-h { font-size: 30px; }
+  .rule-h .fill { display: none; }
+  .group-h .count { margin-left: auto; }
+  .log li { grid-template-columns: minmax(0, 1fr); }
+  .log li .nick { text-align: left; }
+  .log li:not(.sys) .ts { font-size: 11.5px; }
+  .log li.sys { grid-template-columns: minmax(0, 1fr); }
+  .log li.sys .msg { grid-column: 1; }
+  .prompt { font-size: 44px; }
+  .prompt .of, .prompt #slice-name { font-size: 28px; }
+  .lrow { grid-template-columns: 4ch minmax(0, 1fr) 3ch; }
+  .lrow .lr-bar { grid-column: 2; grid-row: 2; }
+  .lrow .lr-n { grid-column: 3; grid-row: 1 / 3; align-self: center; }
+  .cuts { grid-template-columns: minmax(0, 1fr); }
+  .kv { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .kv dt { margin-top: 6px; }
+  .rec-h { flex-wrap: wrap; white-space: normal; }
+  .rec-h .fill { display: none; }
+  .foot { grid-template-columns: minmax(0, 1fr); }
+  .callouts li { grid-template-columns: 4ch minmax(0, 1fr); }
+  .callouts .when { grid-column: 2; }
+  .callouts .ct { grid-column: 2; }
+  .group-h { flex-wrap: wrap; }
+  .group-h .fill { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+  .rec { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet" id="top">
+
+  <header class="top">
+    <span class="site"><a href="/"><b>tungsten.bet</b></a>/jamesob</span>
+    <span><span class="dim">last modified 18-Oct-2026</span>&nbsp; <button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+  </header>
+
+  <section class="hero" aria-labelledby="title">
+    <figure class="cube-fig">
+      <canvas id="cube" width="300" height="300" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters. Its edges glow in proportion to how many items pass the current filter."></canvas>
+      <figcaption class="cube-cap dim" id="cube-cap"></figcaption>
+    </figure>
+    <div class="hero-text">
+      <p class="kicker">AI in physics, materials and quantum engineering, <span style="white-space:nowrap">2022–2026</span></p>
+      <h1 id="title">Does this update your priors?</h1>
+      <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit, and named his own test for changing his mind: a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page puts the AI results of 2022–2026 on that ladder, rung by rung, with the author's ratings marked as such. It cannot score the bet. Only James can.</p>
+      <p class="hero-meta"><b id="meta-n">22</b> items &nbsp;·&nbsp; <b>4</b> rungs &nbsp;·&nbsp; <b id="meta-leaps">0</b> huge leaps so far</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="bet-h">
+    <h2 class="rule-h" id="bet-h"><span>The bet</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">#tungsten-bet</span><span class="box-t r">x.com · times UTC</span>
+      <ol class="log">
+        <li><a class="ts" href="https://x.com/jamesob/status/1928857683571937656" target="_blank" rel="noopener">2025-05-31 16:54</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Would bet a lot of money that quantum computing is obvious bullshit.</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928861979839455371" target="_blank" rel="noopener">2025-05-31 17:11</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Except AI, to its credit, has actually delivered interesting results. But it's virtual, and the limitations in QC are (at least in part) physical, and we've basically forgotten how to do things in the physical world.</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1928882831175876997" target="_blank" rel="noopener">2025-05-31 18:34</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">They’re interlinked. Are you suggesting you would bet me copious amounts of money that AI cannot invent solutions/workarounds to the physical limitations within 5 years? <span class="gap">[…]</span></span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928911469342806444" target="_blank" rel="noopener">2025-05-31 20:28</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">This is the most internally consistent and credible objection. But - there is an easy way IMO to early detect if you're actually right: <b>if I see even a single huge leap in metallurgy or some other kind of physical engineering for which AI was a necessary input, I'll refresh my priors.</b> I very much doubt we'll see that come out of autocorrect++. Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits. But I think we'll see early signs well ahead in more primitive forms of engineering</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1928912066263269527" target="_blank" rel="noopener">2025-05-31 20:30</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Let’s do a 3 year bet. Tungsten cube? I hold your morals to such a high standard, I don’t think we need to specify further.</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928913574241415202" target="_blank" rel="noopener">2025-05-31 20:36</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Done 🤝</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928914802358808714" target="_blank" rel="noopener">2025-05-31 20:41</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Eric's track record with tungsten does not bode well for me, but what is life without skin in the game?</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1928915231344091358" target="_blank" rel="noopener">2025-05-31 20:43</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Oh, only one caveat. If you’ve already conceded quantum computing is <em>not</em> bullshit before AI-driven contributions tilt the scale, you still lose, and have to submit the cube at that point. I just don’t want to get into an endless argument about whether human/AI was key.</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928916502855475433" target="_blank" rel="noopener">2025-05-31 20:48</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Of course - bet is locked in as of now, so if tomorrow I change my mind, I can't renege.</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>bet locked.</b> settles on whether James changes his mind; who gets the credit, human or AI, is deliberately not a term</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1928919019651797285" target="_blank" rel="noopener">2025-05-31 20:58</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Yes you're probably right, and I'll defer to Eric on terms here because I don't mind losing, but writing the tweet I sort of had in mind a situation like "we built x new skyscraper that either wasn't possible to build or we did it for half the cost etc. given AI's discovery of a new material" In other words, something that surfaces into the real world in a big way.</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1929654247635013688" target="_blank" rel="noopener">2025-06-02 21:39</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Building a whole new skyscraper with AI-invented materials in 3 years, yeah, not betting my tungsten cube collection on that.</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1929671232015736962" target="_blank" rel="noopener">2025-06-02 22:47</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">We could still try to put terms around "huge leap in physical engineering with AI as a necessary input" if you want! But I was definitely thinking of physical things that are along (or closely related to) the critical path of quantum, not e.g. some ACTG pattern hacking that results in some new pharma research paper.</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1929673839555817811" target="_blank" rel="noopener">2025-06-02 22:57</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Hm, yeah, sounds like a longer convo. AI-driven discoveries inferring huge leaps in metallurgy/other kinds of physical engineering, I’d bet a cube on. Whether those leaps will be along the critical path of quantum within 3 yrs, I don’t rule out, but wouldn’t bet a cube on.</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <span class="hot"><b>not agreed.</b></span> the skyscraper and the critical path are James's picture; Eric declined to stake the cube on them</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1941525148722659776" target="_blank" rel="noopener">2025-07-05 15:50</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Hey James, I’ve come up a way to simplify this bet. &gt; Would bet a lot of money that quantum computing is obvious bullshit. I bet that within 3 years, you’ll change your mind, and you now believe that quantum computing is not obvious bullshit. Works?</span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/1941570265416335402" target="_blank" rel="noopener">2025-07-05 18:49</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Yes, let's do it</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>terms simplified.</b> the cube settles on James's belief about quantum computing</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/2022526356530114961" target="_blank" rel="noopener">2026-02-14 04:20</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">”…if I see even a single huge leap in metallurgy or some other kind of physical engineering for which AI was a necessary input, I'll refresh my priors. I very much doubt we'll see that come out of autocorrect++…” <span class="gap">[quoting a post on a GPT-5.2 result in quantum field theory, item P6 below]</span></span></li>
+        <li><a class="ts" href="https://x.com/jamesob/status/2022527098670526479" target="_blank" rel="noopener">2026-02-14 04:23</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">&gt; string theory &gt; quantum field theory I rest my case!</span></li>
+      </ol>
+      <p class="status"><b>status:</b> not conceded as of 2026-02-14. The cube settles on James's stated belief about quantum computing by <b>2028-05-31</b> (2028-07-05 on the July wording). This page cannot score that. It lays the evidence on the ladder he gave, so the argument is about items rather than vibes.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="claims-h">
+    <h2 class="rule-h" id="claims-h"><span>Where his sentences stand</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">Three of James's own sentences from 31 May 2025. The verdicts are the author's reading; the counts follow the filter below.</p>
+    <div class="claims" id="claims"></div>
+  </section>
+
+  <section aria-labelledby="ladder-h" id="filters">
+    <h2 class="rule-h" id="ladder-h"><span>The ladder</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">LADDER.EXE</span><span class="box-t r" id="bar-count">22/22 pass</span>
+      <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">22</span><span class="of" id="count-of">/22</span></span><span id="slice-name">everything</span><span class="cursor"></span></p>
+      <p class="slice-def" id="slice-def">no filter</p>
+      <p class="sr" id="live" aria-live="polite"></p>
+      <div class="ladder" id="ladder" role="group" aria-label="Rungs and tests"></div>
+      <div class="cuts">
+        <span class="lbl" id="rungs-l">rungs</span><div class="row" id="toggles-ladder" role="group" aria-labelledby="rungs-l"></div>
+        <span class="lbl" id="cuts-l">cuts</span><div class="row" id="toggles-cuts" role="group" aria-labelledby="cuts-l"></div>
+      </div>
+      <p class="ladder-note" id="funnel-note"></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="ct1">
+    <h2 class="rule-h" id="ct1"><span>Physical-relevance index, by month</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="legend" aria-hidden="true"><span class="k-q">● quantum</span><span class="k-m">■ materials &amp; chips</span><span class="k-p">◆ physics</span><span class="k-x">▲ cryptography</span><span id="ghost-key" hidden>: unfiltered</span></div>
+    <div class="achart-wrap">
+      <pre class="achart" id="achart" aria-hidden="true"></pre>
+      <p class="sr" id="chart-desc"></p>
+    </div>
+    <p class="chart-info" id="chart-info" aria-live="polite"></p>
+    <ol class="callouts" id="callouts"></ol>
+    <p class="method">Scored as on the math seismograph, index = 2.5 × P × H × W × C × (1 + log₁₀ n): P physicality 0–10, H horizon (now 1.0, years 0.7, decades 0.4, someday 0.15), W weight 1–4, C confidence 0–1, n = 1 for every item here. Only items passing the filter are plotted; quiet months sit at zero; the scale stays at the unfiltered maximum, so tightening the test flattens the trace instead of rescaling it.</p>
+  </section>
+
+  <div class="items" id="items">
+    <div class="statusbar" id="statusbar" aria-hidden="true"></div>
+  </div>
+
+  <section aria-labelledby="ns-h">
+    <h2 class="rule-h" id="ns-h"><span>Footnote: the Navier–Stokes claim</span><span class="fill" aria-hidden="true"></span></h2>
+    <dl class="kv">
+      <dt>claimed</dt><dd id="ns-what"></dd>
+      <dt>caveat</dt><dd class="cav" id="ns-caveat"></dd>
+    </dl>
+  </section>
+
+  <footer aria-labelledby="foot-h">
+    <h2 class="rule-h" id="foot-h"><span>Sources &amp; notes</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="foot">
+      <div class="foot-notes">
+        <p>All ratings are judgment calls; change one in the data and everything recomputes. Dates are announcement month.</p>
+        <p>Items, ratings and caveats come from the research notes this page was built from and have not been re-verified here. The four ladder ratings on each item (touched matter, AI necessary, huge leap, bears on qubits) are the author's, kept apart from the source dataset. The old "LLM-driven + ran on hardware" filter is kept as Eric's strict test; it was never James's.</p>
+        <ol class="sources" id="sources" aria-label="Sources"></ol>
+        <p><a href="#top">[ back to top ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
+      </div>
+<pre class="tile" aria-label="Tungsten, element 74">+-----------+
+| 74        |
+|           |
+|     W     |
+|           |
+| tungsten  |
+|  183.84   |
++-----------+
+ mp 3422 °C</pre>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ---------- Data ----------
+// verification: peer-reviewed | preprint | company-reported · contested: headline claim publicly challenged
+// llm: a language-model-class system did the proposing or coding · physical: ran on hardware, synthesized, fabricated or deployed
+const ITEMS = /*ITEMS*/;
+
+// Author ratings on James's ladder. Kept apart from ITEMS so the source dataset stays verbatim.
+// matter:    the AI's output was synthesized, fabricated or physically controlled (not predicted, computed or decoded).
+// necessary: AI was a necessary input rather than an accelerant: true, false or "arguable" (only true counts).
+// leap:      "none", "early sign" or "leap", against James's bar of a huge leap in metallurgy or physical engineering.
+// qubits:    bears on building or operating many physical qubits.
+const LADDER = /*LADDER*/;
+const L = e => LADDER[e.id];
+
+// ---------- Scoring ----------
+const HZ = { now: 1.0, years: 0.7, decades: 0.4, someday: 0.15 };
+function scoreOf(e) { return 2.5 * e.P * HZ[e.H] * e.W * e.C * (1 + Math.log10(e.n || 1)); }
+ITEMS.forEach(e => { e.idx = scoreOf(e); });
+
+// Marker groups by domain
+const GROUP = d => d === 'quantum' ? 'q' : d === 'materials' ? 'm' : d === 'cryptography' ? 'x' : 'p';
+const MK = { q: '●', m: '■', p: '◆', x: '▲' };
+// Short labels (presentation only; not part of the dataset)
+const SHORT = { Q1: 'AlphaQubit', Q2: 'AlphaQubit 2', Q3: 'AlphaEvolve on Willow', Q4: 'qBraid encodings', Q5: 'Optics blueprints', Q6: 'QMA bound', Q7: 'Astra games', X1: 'HAWK withdrawn', M1: 'GNoME', M2: 'Na–Li electrolyte', M3: 'MatterGen', M4: 'AlphaEvolve TPU circuit', M5: "Lila's catalysts", M6: 'LLM synthesis planning', P1: 'Tokamak control', P2: 'GraphCast', P3: 'Dusty plasma', P4: 'Fluid singularities', P5: 'GPT-5 science', P6: 'Gluon amplitude', P7: 'Nine-loop amplitude', P8: 'Navier–Stokes', P9: '372-family release' };
+
+// Groups follow James's own distinction (virtual vs physical). The dataset's `tier` field is kept but does not drive layout.
+const GROUPS = [
+  { k: 'matter', name: 'AI touched matter', desc: 'Something was synthesized, fabricated or physically controlled with AI as an input. These are the "early signs in more primitive forms of engineering" James said would come first.', test: e => L(e).matter },
+  { k: 'virtual', name: 'Real hardware, virtual contribution', desc: "The AI's output was software or a prediction: decoders over recorded chip data, circuits for a processor, forecasts, a fitted model of forces. Real machines and real data underneath; by James's own distinction the contribution is virtual.", test: e => e.physical && !L(e).matter },
+  { k: 'theory', name: 'Theory and simulation', desc: 'No physical artifact. Listed so nothing is hidden, and because this is the category James waved off in February 2026 ("string theory, quantum field theory. I rest my case"). More of it does not move the bet.', test: e => !e.physical }
+];
+
+const TOGGLES = [
+  { k: 'matter', group: 'ladder', label: 'touched matter', short: 'touched matter', test: e => L(e).matter },
+  { k: 'necessary', group: 'ladder', label: 'AI necessary', short: 'AI necessary', test: e => L(e).necessary === true },
+  { k: 'leap', group: 'ladder', label: 'huge leap', short: 'huge leap', test: e => L(e).leap === 'leap' },
+  { k: 'qubits', group: 'ladder', label: 'bears on qubits', short: 'bears on qubits', test: e => L(e).qubits },
+  { k: 'llm', group: 'cuts', label: 'autocorrect++ (an LLM)', short: 'autocorrect++', test: e => e.llm },
+  { k: 'physical', group: 'cuts', label: 'ran on real hardware', short: 'real hardware', test: e => e.physical },
+  { k: 'peer', group: 'cuts', label: 'peer-reviewed (not a term)', short: 'peer-reviewed', test: e => e.verification === 'peer-reviewed' }
+];
+// The ladder rows. `name` is used in the status line; `row` is the text on the row.
+const PRESETS = [
+  { k: 'all', name: 'Everything', row: 'everything', on: [] },
+  { k: 'signs', name: 'Early signs: AI touched matter', row: '1  AI touched matter', on: ['matter'] },
+  { k: 'necessary', name: '…and AI was a necessary input', row: '2  + AI was necessary', on: ['matter', 'necessary'] },
+  { k: 'leap', name: 'The bar: a huge leap', row: '3  + a huge leap', note: '<- his bar', on: ['matter', 'necessary', 'leap'] },
+  { k: 'bridge', name: 'The bridge: matter that reaches qubits', row: '   matter that reaches qubits', on: ['matter', 'qubits'], sep: true },
+  { k: 'eric', name: "Eric's strict test (LLM + hardware)", on: ['llm', 'physical'], row: "eric's strict test: LLM + hardware" }
+];
+const FUNNEL = [
+  { on: [] }, { on: ['matter'] }, { on: ['matter', 'necessary'] }, { on: ['matter', 'necessary', 'leap'] }
+];
+
+// Verdict words are the author's reading of where each of James's statements stands. They are not computed.
+// The notes are computed from the data so they stay true when an item is added or re-rated.
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const CLAIMS = [
+  { k: '1', url: 'https://x.com/jamesob/status/1928861979839455371', quote: "But it's virtual, and the limitations in QC are (at least in part) physical, and we've basically forgotten how to do things in the physical world.", verdict: 'Early signs', mark: '◐',
+    note: () => {
+      const m = ITEMS.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap').length;
+      const signs = m.filter(e => L(e).leap === 'early sign').length;
+      return `${plural(m.length, 'item', 'items')} changed or controlled matter with AI as an input. ${leaps ? `The author rates ${plural(leaps, 'of them', 'of them')} a huge leap.` : signs === m.length ? 'All are what he called early signs in more primitive engineering; none is the huge leap he set as the bar.' : 'None is the huge leap he set as the bar.'}`;
+    },
+    counts: 'touched matter', test: e => L(e).matter },
+  { k: '2', url: 'https://x.com/jamesob/status/1928911469342806444', quote: "I very much doubt we'll see that come out of autocorrect++.", verdict: 'Holds', mark: '●',
+    note: () => {
+      const lm = ITEMS.filter(e => L(e).matter && e.llm);
+      const leaps = lm.filter(e => L(e).leap === 'leap');
+      if (!lm.length) return 'No LLM-driven item touched matter. Everything that did came from specialized models, which is not what he doubted.';
+      return `${plural(lm.length, 'LLM-driven item', 'LLM-driven items')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `The author rates ${leaps.map(e => e.id).join(', ')} a huge leap, which is what he doubted.` : 'None is a huge leap, and a huge leap from autocorrect++ is what he doubted.'}`;
+    },
+    counts: 'LLM-driven and touched matter', test: e => L(e).matter && e.llm },
+  { k: '3', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.', verdict: 'Not yet', mark: '○',
+    note: () => {
+      const b = ITEMS.filter(e => L(e).matter && L(e).qubits);
+      return b.length
+        ? `${plural(b.length, 'item', 'items')} touched matter and bear on qubits: ${b.map(e => SHORT[e.id] || e.id).join(', ')}.`
+        : 'Nothing here touches qubit materials, fabrication or cryogenics. The AI inside the quantum stack is decoders and circuits: software over real chips.';
+    },
+    counts: 'touched matter and bear on qubits', test: e => L(e).matter && L(e).qubits }
+];
+
+// ---------- Helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const label = d => MON[+d.slice(5) - 1] + ' ' + d.slice(0, 4);
+const fmt = x => x >= 10 ? Math.round(x) : (Math.round(x * 10) / 10);
+const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return 'source'; } };
+const bar = (n, total, w) => { const k = w ? Math.round(n / total * w) : n; return '█'.repeat(k) + '░'.repeat((w || total) - k); };
+const BADGE = { 'peer-reviewed': '●', 'preprint': '◐', 'company-reported': '□' };
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// ---------- Filter state ----------
+const state = new Set();
+const passesWith = (e, set) => TOGGLES.every(t => !set.has(t.k) || t.test(e));
+const passes = e => passesWith(e, state);
+const sameSet = (arr) => arr.length === state.size && arr.every(k => state.has(k));
+const countWith = on => ITEMS.filter(e => passesWith(e, new Set(on))).length;
+
+function sliceName() {
+  const exact = PRESETS.find(p => sameSet(p.on));
+  if (exact) return exact.name;
+  const base = PRESETS.filter(p => p.on.length && p.on.every(k => state.has(k))).sort((a, b) => b.on.length - a.on.length)[0];
+  const extra = TOGGLES.filter(t => state.has(t.k) && !(base && base.on.includes(t.k))).map(t => t.short);
+  return base ? `${base.name} + ${extra.join(' + ')}` : 'your test: ' + TOGGLES.filter(t => state.has(t.k)).map(t => t.short).join(' + ');
+}
+function sliceDef() {
+  return state.size ? TOGGLES.filter(t => state.has(t.k)).map(t => t.short).join(' ∧ ') : 'no filter';
+}
+
+// ---------- Static build ----------
+function buildClaims() {
+  $('#claims').innerHTML = CLAIMS.map(c => {
+    const total = ITEMS.filter(c.test).length;
+    return `<article class="box claim" id="claim-${c.k}">
+      <span class="box-t">james_${c.k}.txt</span>
+      <p class="verdict"><span class="vm" aria-hidden="true">${c.mark}</span> ${esc(c.verdict)}</p>
+      <div><blockquote>“${esc(c.quote)}” <a href="${esc(c.url)}" target="_blank" rel="noopener">[31 May 2025]</a></blockquote></div>
+      <div>
+        <p class="note">${esc(c.note())}</p>
+        <p class="cnt"><span class="n" data-claim="${c.k}">${total}</span><span class="dim">/${total}</span> <span class="bar" data-bar="${c.k}" aria-hidden="true"></span> <span class="dim">${esc(c.counts)}, passing the filter</span></p>
+        <p class="reading">verdict: the author's reading, not computed</p>
+      </div>
+    </article>`;
+  }).join('');
+  $('#meta-n').textContent = ITEMS.length;
+  $('#meta-leaps').textContent = ITEMS.filter(e => L(e).leap === 'leap').length;
+}
+function buildControls() {
+  const N = ITEMS.length, lad = $('#ladder');
+  PRESETS.forEach(p => {
+    if (p.sep) { const d = document.createElement('div'); d.className = 'between'; d.setAttribute('aria-hidden', 'true'); lad.appendChild(d); }
+    const b = document.createElement('button');
+    const n = countWith(p.on);
+    b.type = 'button'; b.className = 'btn lrow'; b.dataset.k = p.k;
+    b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${bar(n, N)}</span><span class="lr-n">${n}</span>`;
+    b.setAttribute('aria-label', `${p.name}: ${n} of ${N} items`);
+    b.addEventListener('click', () => setFilter(p.on));
+    lad.appendChild(b);
+  });
+  TOGGLES.forEach(t => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn toggle'; b.dataset.k = t.k;
+    b.innerHTML = `<span class="box-mark" aria-hidden="true">[ ]</span> ${esc(t.label)}`;
+    b.addEventListener('click', () => { state.has(t.k) ? state.delete(t.k) : state.add(t.k); update(); });
+    $(t.group === 'ladder' ? '#toggles-ladder' : '#toggles-cuts').appendChild(b);
+  });
+  const m1 = ITEMS.filter(e => L(e).matter), m2 = m1.filter(e => L(e).necessary === true), m3 = m2.filter(e => L(e).leap === 'leap');
+  const arguable = m1.filter(e => L(e).necessary === 'arguable').map(e => e.id);
+  $('#funnel-note').textContent = `One block per item. ${m1.length} touched matter (${m1.map(e => e.id).join(', ')}); ${m2.length} with AI as a clearly necessary input${arguable.length ? ` (${arguable.join(', ')} arguable)` : ''}; ${m3.length} that the author would call a huge leap. Pick a row to apply it, or set rungs and cuts yourself.`;
+}
+const CARD = {};
+function buildItems() {
+  const wrap = $('#items');
+  const flag = (ok, tag) => `<span class="${ok ? 'on' : 'off'}"><span aria-hidden="true">${ok ? '[x]' : '[ ]'}</span><span class="sr">${ok ? 'meets' : 'does not meet'}</span> ${esc(tag)}</span>`;
+  GROUPS.forEach((G, gi) => {
+    const sec = document.createElement('section');
+    sec.id = 'group-' + G.k;
+    sec.setAttribute('aria-labelledby', 'group-h-' + G.k);
+    const all = ITEMS.filter(G.test);
+    sec.innerHTML = `<h2 class="rule-h group-h" id="group-h-${G.k}"><span>${gi + 1}/${GROUPS.length} ${esc(G.name)}</span><span class="fill" aria-hidden="true"></span><span class="count" data-group="${G.k}"></span></h2><p class="group-desc">${esc(G.desc)}</p>`;
+    all.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id)).forEach(e => {
+      const a = document.createElement('article');
+      a.className = 'rec'; a.id = 'item-' + e.id; a.dataset.month = e.date;
+      const g = GROUP(e.domain), lad = L(e);
+      const badges = `[${BADGE[e.verification] || ''} ${esc(e.verification)}]${e.contested ? ' <span class="contested">[× contested]</span>' : ''}`;
+      const ladderFlags = [
+        flag(lad.matter, 'touched matter'),
+        flag(lad.necessary === true, lad.necessary === 'arguable' ? 'AI necessary (arguable)' : 'AI necessary'),
+        flag(lad.leap === 'leap', lad.leap === 'early sign' ? 'huge leap (early sign)' : 'huge leap'),
+        flag(lad.qubits, 'bears on qubits')
+      ].join('');
+      const cutFlags = TOGGLES.filter(t => t.group === 'cuts').map(t => flag(t.test(e), t.short)).join('');
+      a.innerHTML = `<div class="rec-h"><span class="rid">${esc(e.id)}</span><span class="when">${label(e.date)}</span><span class="dom"><span class="g-${g}" aria-hidden="true">${MK[g]}</span> ${esc(e.domain)}</span><span class="fill dash" aria-hidden="true"></span><span class="badges">${badges}</span></div>
+        <h3>${esc(e.title)}</h3>
+        <dl class="kv">
+          <dt>who</dt><dd>${esc(e.who)}</dd>
+          <dt>what</dt><dd>${esc(e.what)}</dd>
+          <dt>artifact</dt><dd>${esc(e.artifact)}</dd>
+          <dt>caveat</dt><dd class="cav">${esc(e.caveat)}</dd>
+          <dt>ladder</dt><dd class="flags" aria-label="James's ladder">${ladderFlags}</dd>
+          <dt>rating</dt><dd>${esc(lad.why)}</dd>
+          <dt>cuts</dt><dd class="flags" aria-label="Other cuts">${cutFlags}</dd>
+          <dt>source</dt><dd><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(host(e.url))}</a> <span class="score">P${e.P} H:${esc(e.H)} W${e.W} C${e.C} → index ${fmt(e.idx)}</span></dd>
+        </dl>
+        <span class="sr out-note"></span>`;
+      CARD[e.id] = a;
+      sec.appendChild(a);
+    });
+    wrap.appendChild(sec);
+  });
+  const ns = ITEMS.find(e => e.id === 'P8');
+  $('#ns-what').textContent = ns.what;
+  $('#ns-caveat').textContent = ns.caveat;
+  $('#sources').innerHTML = ITEMS.map(e => `<li><span class="sid">[${esc(e.id)}]</span><span>${esc(e.title)} · <a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(host(e.url))}</a></span></li>`).join('');
+}
+
+// ---------- Tungsten cube ----------
+// The cube is shaded as metal on an off-screen canvas (rotated corners, faces sorted back to front,
+// a key light, a sky/ground reflection, specular, bevel highlights on the edges, a contact shadow and an
+// engraved W), then sampled down to a character grid and drawn as ASCII in the page's own ink.
+// Heat (0–1) lights only the edges and a halo, so tightening the filter visibly cools it.
+const cube = (() => {
+  const cv = $('#cube'), ctx = cv.getContext('2d');
+  const off = document.createElement('canvas'), octx = off.getContext('2d');
+  const tiny = document.createElement('canvas'), tctx = tiny.getContext('2d', { willReadFrequently: true });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const RAMP = ' .,:;-=+*#%@';
+  const MONO = '"JetBrains Mono", ui-monospace, Menlo, monospace';
+  const V = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  const F = [[0,1,2,3],[5,4,7,6],[4,0,3,7],[1,5,6,2],[3,2,6,7],[4,5,1,0]];
+  const LT = norm([-0.5, -0.7, 0.65]);
+  const HOT = [255, 150, 48];
+  const W_GLYPH = [[-0.46, -0.3], [-0.27, 0.3], [-0.02, -0.12], [0.23, 0.3], [0.46, -0.3]];
+  let heat = 1, ay = 0.7, ax = -0.56, last = 0, lastDraw = 0, raf = 0, themeDark = false, INK = '#000', HOTC = '#f60';
+  function norm(v) { const l = Math.hypot(...v) || 1; return v.map(c => c / l); }
+  function rot(p) {
+    const [x, y, z] = p;
+    const cy = Math.cos(ay), sy = Math.sin(ay), cx = Math.cos(ax), sx = Math.sin(ax);
+    const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+    const y2 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
+    return [x1, y2, z2];
+  }
+  function paint(c2, size) {
+    const c = size / 2, s = size * 0.29, persp = 5, k1 = size / 340;
+    const dark = themeDark;
+    const base = dark ? [98, 104, 112] : [78, 84, 92];
+    const sky = dark ? [205, 212, 220] : [245, 248, 250];
+    const ground = dark ? [24, 27, 31] : [92, 100, 108];
+    if (heat > 0.02) {
+      const g = c2.createRadialGradient(c, c, s * 0.6, c, c, s * 2.2);
+      g.addColorStop(0, `rgba(${HOT},${0.32 * heat})`); g.addColorStop(1, `rgba(${HOT},0)`);
+      c2.fillStyle = g; c2.fillRect(0, 0, size, size);
+    }
+    const sh = c2.createRadialGradient(c, c + s * 1.55, 0, c, c + s * 1.55, s * 1.5);
+    sh.addColorStop(0, `rgba(0,0,0,${dark ? 0.5 : 0.3})`); sh.addColorStop(1, 'rgba(0,0,0,0)');
+    c2.save(); c2.translate(c, c + s * 1.55); c2.scale(1, 0.32); c2.translate(-c, -(c + s * 1.55));
+    c2.fillStyle = sh; c2.fillRect(0, 0, size, size); c2.restore();
+    const P = V.map(rot);
+    const proj = p => { const k = persp / (persp - p[2]); return [c + p[0] * s * k, c + p[1] * s * k]; };
+    const faces = F.map((idx, fi) => {
+      const pts = idx.map(i => P[i]);
+      const a = pts[0], b = pts[1], d = pts[3];
+      const e1 = [b[0]-a[0], b[1]-a[1], b[2]-a[2]], e2 = [d[0]-a[0], d[1]-a[1], d[2]-a[2]];
+      const n = norm([e2[1]*e1[2]-e2[2]*e1[1], e2[2]*e1[0]-e2[0]*e1[2], e2[0]*e1[1]-e2[1]*e1[0]]);
+      return { fi, pts, n, z: pts.reduce((t, p) => t + p[2], 0) / 4 };
+    }).filter(f => f.n[2] > 0).sort((p, q) => p.z - q.z);
+    faces.forEach(f => {
+      const n = f.n;
+      const diff = Math.max(0, n[0] * LT[0] + n[1] * LT[1] + n[2] * LT[2]);
+      const ry = 2 * n[2] * n[1];
+      const skyMix = Math.max(0, Math.min(1, 0.5 - ry * 0.5));
+      const R = [2 * diff * n[0] - LT[0], 2 * diff * n[1] - LT[1], 2 * diff * n[2] - LT[2]];
+      const spec = Math.pow(Math.max(0, R[2]), 26) * 0.8;
+      const fresnel = Math.pow(1 - n[2], 2) * 0.25;
+      const lit = 0.28 + 0.55 * diff + fresnel;
+      const col = k => base.map((cc, i) => {
+        const env = ground[i] + (sky[i] - ground[i]) * skyMix;
+        return Math.min(255, Math.round((cc * 0.55 + env * 0.45) * lit * k + 255 * spec));
+      });
+      const q = f.pts.map(proj);
+      const g = c2.createLinearGradient(q[0][0], q[0][1], q[2][0], q[2][1]);
+      g.addColorStop(0, `rgb(${col(1.12)})`); g.addColorStop(0.55, `rgb(${col(0.97)})`); g.addColorStop(1, `rgb(${col(0.86)})`);
+      c2.beginPath(); q.forEach((p, i) => i ? c2.lineTo(p[0], p[1]) : c2.moveTo(p[0], p[1])); c2.closePath();
+      c2.fillStyle = g; c2.fill();
+      if (f.fi === 1) {
+        const w = W_GLYPH.map(([u, v]) => proj(rot([u * 0.95, v * 0.95, 1.003])));
+        c2.lineCap = 'round'; c2.lineJoin = 'round';
+        c2.lineWidth = Math.max(2, size * 0.03);
+        c2.strokeStyle = `rgba(${dark ? '230,235,240' : '20,22,25'},${0.55 + 0.25 * diff})`;
+        c2.beginPath(); w.forEach((p, i) => i ? c2.lineTo(p[0], p[1]) : c2.moveTo(p[0], p[1])); c2.stroke();
+      }
+    });
+    const edges = new Map();
+    faces.forEach(f => f.pts.forEach((p, i) => {
+      const a = f.pts[i], b = f.pts[(i + 1) % 4];
+      const key = [a, b].map(v => v.map(x => x.toFixed(3)).join(',')).sort().join('|');
+      const e = edges.get(key) || { a, b, faces: [] }; e.faces.push(f); edges.set(key, e);
+    }));
+    c2.lineCap = 'round';
+    edges.forEach(e => {
+      const n = norm(e.faces.reduce((t, f) => t.map((x, i) => x + f.n[i]), [0, 0, 0]));
+      const k = Math.max(0, n[0] * LT[0] + n[1] * LT[1] + n[2] * LT[2]);
+      const pa = proj(e.a), pb = proj(e.b);
+      c2.lineWidth = 2.6 * k1;
+      c2.strokeStyle = `rgba(${sky},${0.2 + 0.55 * k})`;
+      c2.beginPath(); c2.moveTo(pa[0], pa[1]); c2.lineTo(pb[0], pb[1]); c2.stroke();
+      if (heat > 0.02) {
+        c2.lineWidth = 3.6 * k1;
+        c2.strokeStyle = `rgba(${HOT},${heat * (0.55 + 0.4 * k)})`;
+        c2.beginPath(); c2.moveTo(pa[0], pa[1]); c2.lineTo(pb[0], pb[1]); c2.stroke();
+      }
+    });
+  }
+  function draw() {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    const size = cv.clientWidth || 300;
+    if (cv.width !== Math.round(size * dpr)) { cv.width = cv.height = Math.round(size * dpr); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+    const rows = Math.max(24, Math.min(40, Math.round(size / 8)));
+    const cellH = size / rows, cellW = cellH * 0.6, cols = Math.floor(size / cellW);
+    const S = 256;
+    if (off.width !== S) { off.width = off.height = S; }
+    octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, S, S);
+    paint(octx, S);
+    tiny.width = cols; tiny.height = rows;
+    tctx.imageSmoothingEnabled = true; tctx.imageSmoothingQuality = 'high';
+    tctx.drawImage(off, 0, 0, cols, rows);
+    const px = tctx.getImageData(0, 0, cols, rows).data;
+    ctx.font = `700 ${(cellH * 0.95).toFixed(1)}px ${MONO}`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const ox = (size - cols * cellW) / 2;
+    // Stretch this frame's brightness range across the whole ramp, so each face gets its own texture.
+    // Percentiles over the face pixels only (not the hot edges), so a thin bright edge cannot flatten the faces.
+    const lums = [];
+    for (let i = 0; i < px.length; i += 4) {
+      if (px[i + 3] < 140 || (px[i] - px[i + 2]) > 56) continue;
+      lums.push((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255);
+    }
+    lums.sort((a, b) => a - b);
+    const lo = lums.length ? lums[Math.floor(lums.length * 0.06)] : 0;
+    const hi = lums.length ? lums[Math.floor(lums.length * 0.9)] : 1;
+    const span = Math.max(0.06, hi - lo);
+    for (let r = 0; r < rows; r++) {
+      for (let q = 0; q < cols; q++) {
+        const i = (r * cols + q) * 4, a = px[i + 3] / 255;
+        if (a < 0.05) continue;
+        const R = px[i], G = px[i + 1], B = px[i + 2];
+        const lum = (0.3 * R + 0.59 * G + 0.11 * B) / 255;
+        const warm = Math.max(0, (R - B) / 255);
+        const x = ox + q * cellW + cellW / 2, y = r * cellH + cellH / 2;
+        if (a < 0.55) {
+          if ((q + r) % 3 !== 0) continue;
+          ctx.globalAlpha = Math.min(1, 0.2 + a);
+          if (warm > 0.25) { ctx.fillStyle = HOTC; ctx.fillText('.', x, y); }
+          else if (!themeDark) { ctx.fillStyle = INK; ctx.fillText(',', x, y); }
+          continue;
+        }
+        const t = Math.max(0, Math.min(1, (lum - lo) / span));      // 0 darkest face, 1 brightest
+        const ink = Math.min(1, 0.12 + 0.88 * (themeDark ? t : 1 - t) + warm * 0.2);
+        const ch = RAMP[Math.max(1, Math.min(RAMP.length - 1, Math.round(ink * (RAMP.length - 1))))];
+        if (warm > 0.22) { ctx.globalAlpha = 1; ctx.fillStyle = HOTC; }
+        else { ctx.globalAlpha = 0.38 + 0.62 * ink; ctx.fillStyle = INK; }
+        ctx.fillText(ch, x, y);
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+  function frame(t) {
+    const dt = Math.min(80, t - last); last = t;
+    ay += dt * 0.00028; ax = -0.56 + Math.sin(t * 0.00019) * 0.07;
+    if (t - lastDraw > 66) { lastDraw = t; draw(); }
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    cancelAnimationFrame(raf);
+    if (reduce.matches || document.hidden) { draw(); return; }
+    last = performance.now(); raf = requestAnimationFrame(frame);
+  }
+  document.addEventListener('visibilitychange', start);
+  reduce.addEventListener('change', start);
+  addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  return {
+    setHeat(h) { heat = Math.max(0, Math.min(1, h)); draw(); },
+    setTheme(dark) { themeDark = dark; INK = cssVar('--ink'); HOTC = cssVar('--hot'); draw(); },
+    start
+  };
+})();
+
+// ---------- Chart, in characters ----------
+const MONTHS = [];
+for (let y = 2022, m = 1; y < 2026 || (y === 2026 && m <= 10); ) {
+  MONTHS.push(`${y}-${String(m).padStart(2, '0')}`);
+  m++; if (m > 12) { m = 1; y++; }
+}
+function series(list) {
+  const by = {};
+  MONTHS.forEach(d => by[d] = { d, idx: 0, items: [], g: null });
+  list.forEach(e => { const b = by[e.date]; if (b) { b.idx += e.idx; b.items.push(e); } });
+  return MONTHS.map(d => {
+    const b = by[d];
+    if (b.items.length) {
+      const s = {}; b.items.forEach(e => { const g = GROUP(e.domain); s[g] = (s[g] || 0) + e.idx; });
+      b.g = Object.entries(s).sort((a, c) => c[1] - a[1])[0][0];
+      b.items.sort((a, c) => c.idx - a.idx);
+    }
+    return b;
+  });
+}
+const FULL = series(ITEMS);
+const YMAX = Math.ceil(Math.max(...FULL.map(b => b.idx)) * 1.12 / 10) * 10;
+let SERIES = FULL, CALLOUTS = [], hoverCol = -1;
+const CH = { ROWS: 12, AX: 4 };
+
+function renderChart() {
+  const pre = $('#achart'), hostEl = pre.parentElement;
+  const COLS = MONTHS.length, ROWS = CH.ROWS, AX = CH.AX, STEP = YMAX / ROWS;
+  const avail = hostEl.clientWidth || 800;
+  const fs = Math.max(6, Math.min(21, avail / ((AX + COLS + 1) * 0.6)));
+  pre.style.fontSize = fs.toFixed(2) + 'px';
+  CH.charW = fs * 0.6;
+  const filtered = state.size > 0;
+  const hOf = v => v > 0 ? Math.max(1, Math.round(v / STEP)) : 0;
+  const calloutAt = {}; CALLOUTS.forEach(b => { calloutAt[MONTHS.indexOf(b.d)] = b.callout; });
+  const span = (cls, ch) => cls ? `<span class="${cls}">${ch}</span>` : ch;
+  const lines = [];
+  for (let r = ROWS + 1; r >= 1; r--) {
+    const val = Math.round(r * STEP), labelled = r <= ROWS && val % 20 === 0;
+    let row = span('ax', r > ROWS ? '    ' : labelled ? `${String(val).padStart(2)} ┤` : '   │');
+    for (let i = 0; i < COLS; i++) {
+      const h = hOf(SERIES[i].idx), hg = hOf(FULL[i].idx);
+      let ch = ' ', cls = '';
+      if (calloutAt[i] && r === Math.min(h + 1, ROWS + 1)) { ch = String(calloutAt[i]); cls = 'co'; }
+      else if (h && r === h) { ch = MK[SERIES[i].g]; cls = 'mk-' + SERIES[i].g; }
+      else if (h && r < h) { ch = '│'; cls = 't'; }
+      else if (filtered && hg && r === hg) { ch = '·'; cls = 'gh'; }
+      else if (filtered && hg && r < hg) { ch = ':'; cls = 'gh'; }
+      else if (labelled) { ch = '·'; cls = 'grid'; }
+      if (i === hoverCol) cls = (cls + ' hl').trim();
+      row += span(cls, ch);
+    }
+    lines.push(row);
+  }
+  let base = span('ax', ' 0 ┼');
+  for (let i = 0; i < COLS; i++) base += span('ax' + (i === hoverCol ? ' hl' : ''), MONTHS[i].endsWith('-01') ? '┴' : '─');
+  lines.push(base);
+  const yrs = Array(COLS).fill(' ');
+  MONTHS.forEach((d, i) => { if (d.endsWith('-01')) d.slice(0, 4).split('').forEach((c, j) => { if (i + j < COLS) yrs[i + j] = c; }); });
+  lines.push('    ' + span('yr', yrs.join('')));
+  pre.innerHTML = lines.join('\n');
+}
+function chartInfo(i) {
+  const el = $('#chart-info');
+  if (i < 0) {
+    el.innerHTML = '<span class="dim">hover or tap a column to read a month; click to jump to its items.</span>';
+    return;
+  }
+  const b = SERIES[i], f = FULL[i], removed = f.items.length - b.items.length;
+  let html = `<span class="when">${label(b.d)}</span> <span class="dim">· index ${fmt(b.idx)}</span>`;
+  if (!f.items.length) html += ' <span class="dim">· quiet month, nothing scored</span>';
+  if (b.items.length) html += '<br>' + b.items.map(e => `${MK[GROUP(e.domain)]} ${esc(e.id)} ${esc(SHORT[e.id] || e.title)} <span class="dim">${fmt(e.idx)}</span>`).join(' &nbsp; ');
+  if (removed) html += `<br><span class="dim">${removed} item${removed > 1 ? 's' : ''} this month removed by the filter (unfiltered ${fmt(f.idx)})</span>`;
+  el.innerHTML = html;
+}
+(() => {
+  const pre = $('#achart');
+  const colAt = evt => {
+    const r = pre.getBoundingClientRect();
+    const i = Math.floor((evt.clientX - r.left) / CH.charW) - CH.AX;
+    return i >= 0 && i < MONTHS.length ? i : -1;
+  };
+  const move = evt => { const i = colAt(evt); if (i !== hoverCol) { hoverCol = i; renderChart(); chartInfo(i); } };
+  pre.addEventListener('pointermove', move);
+  pre.addEventListener('pointerdown', move);
+  pre.addEventListener('pointerleave', () => { hoverCol = -1; renderChart(); chartInfo(-1); });
+  pre.addEventListener('click', evt => { const i = colAt(evt); if (i >= 0 && SERIES[i].items.length) highlightMonth(MONTHS[i]); });
+})();
+function renderCallouts() {
+  const ol = $('#callouts');
+  ol.innerHTML = '';
+  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">no month has a surviving item under this filter. the trace is flat.</li>'; return; }
+  CALLOUTS.forEach(b => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="cn">[${b.callout}]</span><span class="when">${label(b.d)}</span><span class="ct">${b.items.map(e => esc(e.title)).join(' · ')} <span class="dim">· ${fmt(b.idx)}</span></span>`;
+    li.addEventListener('click', () => highlightMonth(b.d));
+    ol.appendChild(li);
+  });
+}
+function highlightMonth(d) {
+  ITEMS.forEach(e => CARD[e.id].classList.toggle('hi', e.date === d && passes(e)));
+  const first = ITEMS.filter(e => e.date === d && passes(e)).map(e => CARD[e.id])[0];
+  if (first) first.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+}
+
+// ---------- Update ----------
+function setFilter(on) { state.clear(); on.forEach(k => state.add(k)); update(); }
+function update() {
+  const pass = ITEMS.filter(passes), N = ITEMS.length;
+  const name = sliceName();
+  $('#count').textContent = pass.length;
+  $('#count').classList.toggle('zero', pass.length === 0);
+  $('#count-of').textContent = `/${N}`;
+  $('#slice-name').textContent = name.toLowerCase();
+  $('#slice-def').textContent = sliceDef();
+  $('#bar-count').textContent = `${pass.length}/${N} pass`;
+  $('#live').textContent = `${name}: ${pass.length} of ${N} items survive.`;
+  document.querySelectorAll('.toggle').forEach(b => {
+    const on = state.has(b.dataset.k);
+    b.setAttribute('aria-pressed', on);
+    b.querySelector('.box-mark').textContent = on ? '[x]' : '[ ]';
+  });
+  document.querySelectorAll('.lrow').forEach(b => {
+    const on = sameSet(PRESETS.find(p => p.k === b.dataset.k).on);
+    b.setAttribute('aria-pressed', on);
+    b.querySelector('.lr-mark').textContent = on ? '(*)' : '( )';
+  });
+  CLAIMS.forEach(c => {
+    const total = ITEMS.filter(c.test).length, n = pass.filter(c.test).length;
+    $(`[data-claim="${c.k}"]`).textContent = n;
+    $(`[data-bar="${c.k}"]`).textContent = total ? bar(n, total) : '';
+  });
+  ITEMS.forEach(e => {
+    const ok = passes(e), card = CARD[e.id];
+    card.classList.toggle('out', !ok);
+    card.classList.remove('hi');
+    card.querySelector('.out-note').textContent = ok ? '' : 'Excluded by the current filter.';
+  });
+  GROUPS.forEach(G => {
+    const all = ITEMS.filter(G.test), n = all.filter(passes).length;
+    $(`[data-group="${G.k}"]`).textContent = `${n}/${all.length} pass`;
+  });
+  $('#statusbar').innerHTML = `<span>-- ${pass.length}/${N} pass · ${esc(name.toLowerCase())} · excluded items dimmed --</span><a href="#filters">[change]</a>`;
+
+  cube.setHeat(pass.length / N);
+  $('#cube-cap').innerHTML = pass.length === N
+    ? `current on: <b>${N}/${N}</b> pass. tighten the filter and watch the edges cool.`
+    : pass.length === 0
+      ? 'cold metal. <b>nothing</b> passes this filter.'
+      : `cooling: <b>${pass.length}/${N}</b> pass ${esc(name.toLowerCase())}.`;
+
+  SERIES = series(pass);
+  CALLOUTS = SERIES.filter(b => b.idx > 0).sort((a, c) => c.idx - a.idx).slice(0, 6).sort((a, c) => a.d.localeCompare(c.d));
+  CALLOUTS.forEach((b, i) => b.callout = i + 1);
+  $('#ghost-key').hidden = state.size === 0;
+  const peaks = CALLOUTS.map(b => `${label(b.d)} ${fmt(b.idx)}`).join(', ');
+  $('#chart-desc').textContent = pass.length ? `Monthly index for ${pass.length} items, January 2022 to October 2026. Peaks: ${peaks}.` : 'No items pass the filter; the trace is flat at zero.';
+  renderChart();
+  chartInfo(hoverCol);
+  renderCallouts();
+
+  const h = state.size ? '#f=' + TOGGLES.filter(t => state.has(t.k)).map(t => t.k).join(',') : ' ';
+  try { history.replaceState(null, '', h === ' ' ? location.pathname + location.search : h); } catch (_) {}
+}
+
+// ---------- Theme ----------
+const THEMES = ['auto', 'light', 'dark'];
+let theme = 'auto';
+const sysDark = matchMedia('(prefers-color-scheme: dark)');
+function isDark() { return theme === 'dark' || (theme === 'auto' && sysDark.matches); }
+function applyTheme() {
+  if (theme === 'auto') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', theme);
+  const b = $('#theme-btn');
+  b.textContent = `[theme: ${theme}]`;
+  b.setAttribute('aria-label', theme === 'auto' ? 'Colour theme: follow system' : `Colour theme: ${theme}`);
+  cube.setTheme(isDark());
+}
+try { const t = localStorage.getItem('physics-exhibit-theme'); if (THEMES.includes(t)) theme = t; } catch (_) {}
+$('#theme-btn').addEventListener('click', () => {
+  theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+  try { localStorage.setItem('physics-exhibit-theme', theme); } catch (_) {}
+  applyTheme();
+});
+sysDark.addEventListener('change', applyTheme);
+applyTheme();
+
+// ---------- Init ----------
+const m = /[#&]f=([a-z,]*)/.exec(location.hash);
+if (m) m[1].split(',').filter(k => TOGGLES.some(t => t.k === k)).forEach(k => state.add(k));
+buildClaims();
+buildControls();
+buildItems();
+update();
+cube.start();
+addEventListener('hashchange', () => {
+  const f = /[#&]f=([a-z,]*)/.exec(location.hash);
+  setFilter(f ? f[1].split(',').filter(k => TOGGLES.some(t => t.k === k)) : []);
+});
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(renderChart, 120); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderChart);
+</script>
+</body>
+</html>

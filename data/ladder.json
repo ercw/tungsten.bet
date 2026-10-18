@@ -1,0 +1,163 @@
+{
+  "Q1": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "A decoder is software run over recorded chip data. It bears on operating qubits, not on making them."
+  },
+  "Q2": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "Same as Q1: real-time decoding on TPUs, applied to recorded Willow data."
+  },
+  "Q3": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "The circuits ran on Willow, but the AI's output is a circuit: software. Nothing about the processor itself changed."
+  },
+  "Q4": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "Encodings evaluated by simulation. About qubits, but nothing built or run."
+  },
+  "Q5": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Experiment designs checked by simulated fidelity; photonic states, not qubit scaling. The model is task-trained, so 'autocorrect++' is a stretch here."
+  },
+  "Q6": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Complexity theory."
+  },
+  "Q7": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Quantum information theory, no hardware."
+  },
+  "X1": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "A standards consequence, not a physical one."
+  },
+  "M1": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "Compounds were synthesized from GNoME targets, so AI touched matter. Whether the predictions were necessary is the contested point: Cheetham & Seshadri found mostly compositional variants a conventional screen could reach."
+  },
+  "M2": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "A real electrolyte in a prototype cell. AI did the first screen of 32 million; HPC filtering and chemists did the rest, so necessity is arguable."
+  },
+  "M3": {
+    "matter": true,
+    "necessary": true,
+    "leap": "early sign",
+    "qubits": false,
+    "why": "A diffusion model designed the structure to a target property and it was made. One compound: a demonstration, not a leap."
+  },
+  "M4": {
+    "matter": true,
+    "necessary": true,
+    "leap": "early sign",
+    "qubits": false,
+    "why": "An AI-proposed circuit is in silicon. A circuit change in a TPU is an early sign, not a leap in physical engineering; the force-field and lithography figures are software speedups."
+  },
+  "M5": {
+    "matter": true,
+    "necessary": true,
+    "leap": "early sign",
+    "qubits": false,
+    "why": "The proposer chose every cycle's compositions and 2,942 catalysts were made and tested. The closest thing on this page to James's picture, and still a lab result with the company's own comparison."
+  },
+  "M6": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "An LLM wrote the recipes and three unreported compounds were made, so AI touched matter. Necessity is arguable: DFT chose the targets, humans ran every step and fed results back, and the paper claims fewer trials, not a route a chemist could not have found."
+  },
+  "P1": {
+    "matter": true,
+    "necessary": true,
+    "leap": "early sign",
+    "qubits": false,
+    "why": "A learned controller held real plasma in shapes the machine had not produced before. Control engineering, not a new material; James named engineering too."
+  },
+  "P2": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Forecasts, deployed and used, but prediction rather than physical engineering."
+  },
+  "P3": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "New physics about matter, confirmed by experiment. Knowledge, not engineering; James's bar was a leap in engineering."
+  },
+  "P4": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Numerical."
+  },
+  "P5": {
+    "matter": false,
+    "necessary": false,
+    "leap": "none",
+    "qubits": false,
+    "why": "Case studies; mixed novelty."
+  },
+  "P6": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Theory. This is the result James answered with 'I rest my case'."
+  },
+  "P7": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "A record computation in a toy model."
+  },
+  "P8": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Mathematics about an equation of physics; says nothing about real fluids."
+  },
+  "P9": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Mostly unreviewed theory."
+  }
+}

@@ -1,0 +1,26 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Built pages match the data
+        run: python3 -I build/assemble.py --check
+      - name: Static checks
+        run: python3 -I tests/check_static.py
+      - name: Dataset revision rules (pull requests)
+        if: github.event_name == 'pull_request'
+        run: |
+          git show "origin/${{ github.base_ref }}:data/items.json" > /tmp/base-items.json
+          python3 -I tests/check_revision.py /tmp/base-items.json data/items.json

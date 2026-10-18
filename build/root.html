@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>tungsten.bet</title>
+<meta name="description" content="Eric Wall bets a tungsten cube against people who are sure. The claim is public, the test is theirs, the deadline is fixed, and the loser pays in metal. The record, and a page for each open bet.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
+<style>
+/*STYLE*/
+</style>
+<style>
+/* front page only */
+.how { margin: 0; padding-left: 2.2ch; display: grid; gap: 10px; }
+.how li { padding-left: 4px; }
+.how li::marker { font-family: var(--mono); color: var(--dim); }
+.how q { font-style: italic; color: var(--ink-2); }
+.how .by { color: var(--dim); white-space: nowrap; }
+.record { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.45; }
+.record th, .record td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px dashed var(--rule); }
+.record th { font-weight: 400; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+.record td.when { white-space: nowrap; }
+.record td.claim { min-width: 22ch; }
+.record td.st { white-space: nowrap; font-weight: 700; }
+.record td.st.won::before { content: "● "; }
+.record td.st.open::before { content: "◐ "; }
+.record td.st.unrecorded::before { content: "○ "; }
+.record td.st.lost { color: var(--hot); }
+.record td.st.lost::before { content: "✕ "; }
+.record td.src a { margin-right: 4px; }
+.open-card { display: grid; gap: 8px; }
+.open-card .big-link { font-family: var(--pixel); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
+.hero .tile { margin: 0; }
+@media (max-width: 720px) {
+  .record thead { display: none; }
+  .record tr { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 10px 0; border-bottom: 1px dashed var(--rule); }
+  .record td { border: 0; padding: 0; }
+  .record td.when::before { content: "when: "; color: var(--dim); }
+  .record td.src::before { content: "sources: "; color: var(--dim); }
+}
+</style>
+</head>
+<body>
+<div class="sheet" id="top">
+
+  <header class="top">
+    <span class="site"><b>tungsten.bet</b>/</span>
+    <span><a class="dim" href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">[github]</a>&nbsp; <button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+  </header>
+
+  <section class="hero" aria-labelledby="title">
+    <figure class="cube-fig">
+<pre class="tile" aria-label="Tungsten, element 74">+-----------+
+| 74        |
+|           |
+|     W     |
+|           |
+| tungsten  |
+|  183.84   |
++-----------+
+ mp 3422 °C</pre>
+    </figure>
+    <div class="hero-text">
+      <p class="kicker">A bet, settled in tungsten</p>
+      <h1 id="title">tungsten.bet</h1>
+      <p class="lede">Eric Wall bets a tungsten cube against people who are sure. The claim is made in public, the test for changing their mind is their own, the deadline is fixed, and the loser pays in metal. This site keeps the record, and gives each open bet a page where the evidence is laid out against that test so the other side can score it.</p>
+      <p class="hero-meta">/*RECORD*/</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="what-h">
+    <h2 class="rule-h" id="what-h"><span>What this is</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">#origin</span><span class="box-t r">x.com · times UTC</span>
+      <ol class="log" aria-label="Where the cube bets began">
+        <li><a class="ts" href="https://x.com/adam3us/status/1456027531828674563" target="_blank" rel="noopener">2021-11-03 22:36</a><span class="nick j">&lt;adam3us&gt;</span><span class="msg">@ercwl no deal. i'll buy you the cube :)</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1456221544649211906" target="_blank" rel="noopener">2021-11-04 11:27</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Although I'm a spherist, I'm now coming around to tungsten cubes for one sole reason. I am going to *bet* my tungsten cube against your tungsten cubes. I am going to win those bets, and stack those cubes. I am going to build a pyramid of your failed bets vs. me, in tungsten.</span></li>
+      </ol>
+    </div>
+    <p>A tungsten cube is small and absurdly heavy, and it is not about the money. It is a thing the loser has to buy, have engraved and hand over, and that the winner keeps on the desk. The first one came from Adam Back, with his face on it. The plan, stated in 2023, is a stack of twenty.</p>
+  </section>
+
+  <section aria-labelledby="how-h">
+    <h2 class="rule-h" id="how-h"><span>How it works</span><span class="fill" aria-hidden="true"></span></h2>
+    <ol class="how">
+      <li>Someone states, in public, that something is obvious. <q>Would bet a lot of money that quantum computing is obvious bullshit.</q> <span class="by">— <a href="https://x.com/jamesob/status/1928857683571937656" target="_blank" rel="noopener">jamesob, 31 May 2025</a></span></li>
+      <li>Eric offers the bet: a tungsten cube and a deadline. The other side's own test for changing their mind becomes the terms. <q>Let's do a 3 year bet. Tungsten cube? I hold your morals to such a high standard, I don't think we need to specify further.</q> <span class="by">— <a href="https://x.com/ercwl/status/1928912066263269527" target="_blank" rel="noopener">ercwl, 31 May 2025</a></span></li>
+      <li>A handshake in the thread is the contract. <q>Done 🤝</q> <span class="by">— <a href="https://x.com/jamesob/status/1928913574241415202" target="_blank" rel="noopener">jamesob, 31 May 2025</a></span></li>
+      <li>The bet gets a page here: the evidence, laid on the ladder the other side named, with a source and a caveat on every item and the author's ratings marked as such. The page does not score the bet. The other side does.</li>
+      <li>On the date, the loser hands over a cube. The tradition is that it carries the loser's face. <q>Adam had to pay up a tungsten cube with his face engraved into the cube.</q> <span class="by">— <a href="https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/" target="_blank" rel="noopener">Cointelegraph Magazine, Jan 2023</a></span></li>
+      <li>Anyone can correct the record. The site is a <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">GitHub repository</a>; changes to an item, a rating or this table are taken by pull request when they cite a primary document.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="rec-h">
+    <h2 class="rule-h" id="rec-h"><span>The record</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">record.txt</span><span class="box-t r">no bet lost</span>
+      <table class="record">
+        <thead><tr><th>When</th><th>Against</th><th>The claim</th><th>Stake</th><th>Status</th><th>Sources</th></tr></thead>
+        <tbody>
+/*BETS*/
+        </tbody>
+      </table>
+    </div>
+    <p class="dim">Rows marked “settled, link wanted” were settled off this site and are listed from a published profile; the posts where the bet was made and paid are still to be linked. Send them as a pull request.</p>
+  </section>
+
+  <section aria-labelledby="open-h">
+    <h2 class="rule-h" id="open-h"><span>Open now</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl open-card">
+      <span class="box-t">#tungsten-bet</span><span class="box-t r">settles 2028-05-31</span>
+      <a class="big-link" href="/jamesob">tungsten.bet/jamesob →</a>
+      <p>James O'Beirne against Eric Wall: does AI become a necessary input to a single huge leap in metallurgy or other physical engineering by 31 May 2028? The page puts the AI results of 2022–2026 on James's own ladder, rung by rung: AI touched matter, AI was necessary, it was a huge leap, it bears on physical qubits.</p>
+    </div>
+  </section>
+
+  <footer aria-labelledby="foot-h">
+    <h2 class="rule-h" id="foot-h"><span>Sources &amp; notes</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="foot">
+      <div class="foot-notes">
+        <p>Quotes are verbatim from the linked posts. Where a row rests on a profile rather than the original posts, the row says so.</p>
+        <ol class="sources" aria-label="Sources">
+/*SOURCES*/
+        </ol>
+        <p><a href="#top">[ back to top ]</a> &nbsp; <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">[ source on github ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
+      </div>
+<pre class="tile" aria-label="Tungsten, element 74">+-----------+
+| 74        |
+|           |
+|     W     |
+|           |
+| tungsten  |
+|  183.84   |
++-----------+
+ mp 3422 °C</pre>
+    </div>
+  </footer>
+</div>
+<script>
+// Filter links shared before the James page moved (tungsten.bet/#f=...) still work: send them on.
+if (location.hash && location.hash.indexOf('#f=') === 0) location.replace('/jamesob' + location.hash);
+// Theme: auto → light → dark → auto, remembered per browser, same key as the James page.
+(function () {
+  var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
+  var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
+  var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
+  var apply = function (v) {
+    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
+    if (btn) { btn.textContent = '[theme: ' + v + ']'; btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v)); }
+  };
+  apply(get());
+  if (btn) btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
+})();
+</script>
+</body>
+</html>
