@@ -15,6 +15,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Eric's commits use his public address
+        run: |
+          ok='^(info@ericwall\.ninja|[0-9]+\+[A-Za-z0-9-]+@users\.noreply\.github\.com)$'
+          bad=$(git log --all --format='%h%x09%an%x09%ae%x09%cn%x09%ce' | OK="$ok" awk -F'\t' '($2 ~ /Eric Wall/ && $3 !~ ENVIRON["OK"]) || ($4 ~ /Eric Wall/ && $5 !~ ENVIRON["OK"]) { print $1 }')
+          if [ -n "$bad" ]; then echo "Commits by Eric Wall with an address other than info@ericwall.ninja: $bad"; exit 1; fi
       - name: Built pages match the data
         run: python3 -I build/assemble.py --check
       - name: Static checks
