@@ -38,6 +38,10 @@
 .open-card { display: grid; gap: 8px; }
 .open-card .big-link { font-family: var(--pixel); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
 .hero { grid-template-columns: auto minmax(0, 1fr); }
+/* Sources: the title on one line, the address under it (wrapping anywhere, so phones do not overflow) */
+.bet-sources { gap: 8px; }
+.bet-sources li { display: block; }
+.bet-sources li .dim { display: block; font-size: 12px; overflow-wrap: anywhere; }
 .pyramid { margin: 0; display: grid; gap: 14px; justify-items: center; --c: 124px; }
 .tiers { display: flex; flex-direction: column-reverse; align-items: center; gap: 4px; }
 .tier { display: flex; justify-content: center; gap: 6px; }
@@ -155,7 +159,7 @@
     <div class="foot">
       <div class="foot-notes">
         <p>Quotes are verbatim from the linked posts. The site is a <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">GitHub repository</a>. Corrections are accepted by pull request if they cite a primary source.</p>
-        <ol class="sources" aria-label="Sources">
+        <ol class="sources bet-sources" aria-label="Sources">
 /*SOURCES*/
         </ol>
         <p><a href="#top">[ back to top ]</a> &nbsp; <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">[ source on github ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
