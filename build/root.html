@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>tungsten.bet</title>
-<meta name="description" content="Eric Wall bets a tungsten cube against people who are sure. The claim is public, the test is theirs, the deadline is fixed, and the loser pays in metal. The record, and a page for each open bet.">
+<meta name="description" content="Eric Wall makes public bets for a 1.5-inch tungsten cube. If he loses once, the winner gets every cube. Five cubes won so far, by his own record.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
 <style>
 /*STYLE*/
@@ -20,7 +20,7 @@
 .record th, .record td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px dashed var(--rule); }
 .record th { font-weight: 400; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
 .record td.when { white-space: nowrap; }
-.record td.claim { min-width: 22ch; }
+.record td.bet { min-width: 22ch; }
 .record td.st { white-space: nowrap; font-weight: 700; }
 .record td.st.won::before { content: "● "; }
 .record td.st.open::before { content: "◐ "; }
@@ -28,6 +28,13 @@
 .record td.st.lost { color: var(--hot); }
 .record td.st.lost::before { content: "✕ "; }
 .record td.src a { margin-right: 4px; }
+.record td.n { font-family: var(--pixel); font-size: 22px; line-height: 1; white-space: nowrap; }
+.record q, .open-list q, .never q { font-style: italic; }
+.never { display: grid; gap: 10px; max-width: 80ch; }
+.open-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.open-list li { display: grid; grid-template-columns: 30ch minmax(0, 1fr); gap: 0 1.5ch; }
+.open-list .when { white-space: nowrap; }
+.open-list .src a { margin-right: 4px; }
 .open-card { display: grid; gap: 8px; }
 .open-card .big-link { font-family: var(--pixel); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
 .hero .tile { margin: 0; }
@@ -37,6 +44,8 @@
   .record td { border: 0; padding: 0; }
   .record td.when::before { content: "when: "; color: var(--dim); }
   .record td.src::before { content: "sources: "; color: var(--dim); }
+  .record td.n::before { content: "cube "; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+  .open-list li { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 </head>
@@ -58,60 +67,70 @@
 | tungsten  |
 |  183.84   |
 +-----------+
- mp 3422 °C</pre>
+ 1.5 inch</pre>
     </figure>
     <div class="hero-text">
-      <p class="kicker">A bet, settled in tungsten</p>
+      <p class="kicker">Eric Wall's tungsten cube bets</p>
       <h1 id="title">tungsten.bet</h1>
-      <p class="lede">Eric Wall bets a tungsten cube against people who are sure. The claim is made in public, the test for changing their mind is their own, the deadline is fixed, and the loser pays in metal. This site keeps the record, and gives each open bet a page where the evidence is laid out against that test so the other side can score it.</p>
+      <p class="lede">Eric Wall makes public bets for a 1.5-inch tungsten cube. If he loses once, the winner gets every cube in his collection and he stops betting.</p>
       <p class="hero-meta">/*RECORD*/</p>
     </div>
   </section>
 
+  <section aria-labelledby="how-h">
+    <h2 class="rule-h" id="how-h"><span>The rules, in his words</span><span class="fill" aria-hidden="true"></span></h2>
+    <ol class="how">
+      <li>Bets are made in public, and the stake is always one 1.5-inch cube. <q>The rule for these bets is that all bets must be entered publicly. The bet is always for a 1.5” tungsten cube.</q> <span class="by">(<a href="https://x.com/ercwl/status/1475761546286583813" target="_blank" rel="noopener">ercwl, 28 Dec 2021</a>)</span></li>
+      <li>The loser pays for the cube. To Brad Mills: <q>The total amount payable is $438 (994 404 sats) with import taxes and shipping, plus the engraving of your face next to @ck_SNARKs as promised.</q> <span class="by">(<a href="https://x.com/ercwl/status/1741969215785959696" target="_blank" rel="noopener">ercwl, 1 Jan 2024</a>)</span></li>
+      <li>One loss ends it. <q>If I lose once, I will give that person ALL MY CUBES and stop betting.</q> <span class="by">(<a href="https://x.com/ercwl/status/1662017303398031361" target="_blank" rel="noopener">ercwl, 26 May 2023</a>)</span></li>
+      <li>He only offers the bet when he is confident. <q>I only make these bets when I have very high conviction.</q> <span class="by">(<a href="https://x.com/ercwl/status/1662017727907745792" target="_blank" rel="noopener">ercwl, 26 May 2023</a>)</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="never-h">
+    <h2 class="rule-h" id="never-h"><span>Never lost</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="never">
+      <p><q>As long as my tungsten bet collection is growing, it means I have never lost a tungsten bet.</q> <span class="by">(<a href="https://x.com/ercwl/status/1662017303398031361" target="_blank" rel="noopener">ercwl, 26 May 2023</a>)</span></p>
+      <p>On 5 January 2025 he put the collection at five: <q>if you win you win all my cubes. they’re 5 now</q> <span class="by">(<a href="https://x.com/ercwl/status/1875700417012826264" target="_blank" rel="noopener">ercwl, 5 Jan 2025</a>)</span></p>
+      <p class="dim">A search of his posts on X found no lost bet, and no new cube announced after January 2025. The search was not a full read of his archive.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="rec-h">
+    <h2 class="rule-h" id="rec-h"><span>The collection</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">cubes.txt</span><span class="box-t r">as announced by Eric</span>
+      <table class="record">
+        <thead><tr><th>#</th><th>Announced</th><th>From</th><th>The bet, from his post</th><th>Sources</th></tr></thead>
+        <tbody>
+/*TROPHIES*/
+        </tbody>
+      </table>
+    </div>
+    <p class="dim">Each row quotes the post where Eric announced the cube. The cubes themselves were not inspected for this page.</p>
+  </section>
+
+  <section aria-labelledby="open-h">
+    <h2 class="rule-h" id="open-h"><span>Open</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl open-card">
+      <span class="box-t">#tungsten-bet</span><span class="box-t r">open until 2028</span>
+      <ol class="open-list">
+/*OPEN*/
+      </ol>
+      <a class="big-link" href="/jamesob">[ tungsten.bet/jamesob ]</a>
+      <p>James O'Beirne bet that quantum computing is obvious bullshit. Eric wins if James changes his mind by mid-2028. The page lists AI results from 2022–2026 against the test James gave: whether AI touched matter, whether it was necessary, whether the result was a huge leap, and whether it bears on physical qubits.</p>
+    </div>
+  </section>
+
   <section aria-labelledby="what-h">
-    <h2 class="rule-h" id="what-h"><span>What this is</span><span class="fill" aria-hidden="true"></span></h2>
+    <h2 class="rule-h" id="what-h"><span>Where it started</span><span class="fill" aria-hidden="true"></span></h2>
     <div class="box dbl">
       <span class="box-t">#origin</span><span class="box-t r">x.com · times UTC</span>
       <ol class="log" aria-label="Where the cube bets began">
         <li><a class="ts" href="https://x.com/adam3us/status/1456027531828674563" target="_blank" rel="noopener">2021-11-03 22:36</a><span class="nick j">&lt;adam3us&gt;</span><span class="msg">@ercwl no deal. i'll buy you the cube :)</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/1456221544649211906" target="_blank" rel="noopener">2021-11-04 11:27</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Although I'm a spherist, I'm now coming around to tungsten cubes for one sole reason. I am going to *bet* my tungsten cube against your tungsten cubes. I am going to win those bets, and stack those cubes. I am going to build a pyramid of your failed bets vs. me, in tungsten.</span></li>
+        <li><a class="ts" href="https://x.com/ercwl/status/1475761542922739713" target="_blank" rel="noopener">2021-12-28 09:32</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Unveiling my new Tungsten Cube Bet Collection. Here’s piece #1.</span></li>
       </ol>
-    </div>
-    <p>A tungsten cube is small and absurdly heavy, and it is not about the money. It is a thing the loser has to buy, have engraved and hand over, and that the winner keeps on the desk. The first one came from Adam Back, with his face on it. The plan, stated in 2023, is a stack of twenty.</p>
-  </section>
-
-  <section aria-labelledby="how-h">
-    <h2 class="rule-h" id="how-h"><span>How it works</span><span class="fill" aria-hidden="true"></span></h2>
-    <ol class="how">
-      <li>Someone states, in public, that something is obvious. <q>Would bet a lot of money that quantum computing is obvious bullshit.</q> <span class="by">— <a href="https://x.com/jamesob/status/1928857683571937656" target="_blank" rel="noopener">jamesob, 31 May 2025</a></span></li>
-      <li>Eric offers the bet: a tungsten cube and a deadline. The other side's own test for changing their mind becomes the terms. <q>Let's do a 3 year bet. Tungsten cube? I hold your morals to such a high standard, I don't think we need to specify further.</q> <span class="by">— <a href="https://x.com/ercwl/status/1928912066263269527" target="_blank" rel="noopener">ercwl, 31 May 2025</a></span></li>
-      <li>A handshake in the thread is the contract. <q>Done 🤝</q> <span class="by">— <a href="https://x.com/jamesob/status/1928913574241415202" target="_blank" rel="noopener">jamesob, 31 May 2025</a></span></li>
-      <li>The bet gets a page here: the evidence, laid on the ladder the other side named, with a source and a caveat on every item and the author's ratings marked as such. The page does not score the bet. The other side does.</li>
-      <li>On the date, the loser hands over a cube. The tradition is that it carries the loser's face. <q>Adam had to pay up a tungsten cube with his face engraved into the cube.</q> <span class="by">— <a href="https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/" target="_blank" rel="noopener">Cointelegraph Magazine, Jan 2023</a></span></li>
-      <li>Anyone can correct the record. The site is a <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">GitHub repository</a>; changes to an item, a rating or this table are taken by pull request when they cite a primary document.</li>
-    </ol>
-  </section>
-
-  <section aria-labelledby="rec-h">
-    <h2 class="rule-h" id="rec-h"><span>The record</span><span class="fill" aria-hidden="true"></span></h2>
-    <div class="box dbl">
-      <span class="box-t">record.txt</span><span class="box-t r">no bet lost</span>
-      <table class="record">
-        <thead><tr><th>When</th><th>Against</th><th>The claim</th><th>Stake</th><th>Status</th><th>Sources</th></tr></thead>
-        <tbody>
-/*BETS*/
-        </tbody>
-      </table>
-    </div>
-    <p class="dim">Rows marked “settled, link wanted” were settled off this site and are listed from a published profile; the posts where the bet was made and paid are still to be linked. Send them as a pull request.</p>
-  </section>
-
-  <section aria-labelledby="open-h">
-    <h2 class="rule-h" id="open-h"><span>Open now</span><span class="fill" aria-hidden="true"></span></h2>
-    <div class="box dbl open-card">
-      <span class="box-t">#tungsten-bet</span><span class="box-t r">settles 2028-05-31</span>
-      <a class="big-link" href="/jamesob">tungsten.bet/jamesob →</a>
-      <p>James O'Beirne against Eric Wall: does AI become a necessary input to a single huge leap in metallurgy or other physical engineering by 31 May 2028? The page puts the AI results of 2022–2026 on James's own ladder, rung by rung: AI touched matter, AI was necessary, it was a huge leap, it bears on physical qubits.</p>
     </div>
   </section>
 
@@ -119,7 +138,7 @@
     <h2 class="rule-h" id="foot-h"><span>Sources &amp; notes</span><span class="fill" aria-hidden="true"></span></h2>
     <div class="foot">
       <div class="foot-notes">
-        <p>Quotes are verbatim from the linked posts. Where a row rests on a profile rather than the original posts, the row says so.</p>
+        <p>Quotes are verbatim from the linked posts. The site is a <a href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">GitHub repository</a>. Corrections are accepted by pull request if they cite a primary source.</p>
         <ol class="sources" aria-label="Sources">
 /*SOURCES*/
         </ol>

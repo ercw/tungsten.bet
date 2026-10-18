@@ -12,7 +12,7 @@ Corrections are welcome as pull requests. Read [CONTRIBUTING.md](CONTRIBUTING.md
 ```
 data/items.json      the items on the James page (the source of truth; edit here)
 data/ladder.json     the author's four ladder ratings per item
-data/bets.json       the bet record on the front page
+data/bets.json       the cubes won and the open bets, on the front page
 build/template.html  the James page template; build/root.html the front page template
 build/assemble.py    builds deploy/ from data/ and build/
 deploy/              what Vercel serves: index.html, jamesob.html, vercel.json

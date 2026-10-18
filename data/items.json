@@ -264,7 +264,7 @@
   {
     "id": "M6",
     "date": "2026-08",
-    "title": "LLM recipe generator guides the first synthesis of three unreported oxy-selenides; humans ran the furnace",
+    "title": "LLM recipe generator guides the first synthesis of three unreported oxy-selenides, with people running the experiments",
     "domain": "materials",
     "tier": 1,
     "llm": true,

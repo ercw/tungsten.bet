@@ -1,73 +1,105 @@
 [
   {
     "id": "adam3us",
-    "opened": "2021-11",
-    "settled": "2021",
-    "counterparty": {"handle": "adam3us", "name": "Adam Back"},
-    "claim": "PlanB's stock-to-flow \"floor model\" would hold. Eric took the other side.",
-    "stake": "a tungsten cube",
     "status": "won",
-    "note": "Paid in a cube engraved with Adam's face, by Eric's account.",
+    "n": 1,
+    "announced": "2021-12-28",
+    "counterparty": {"handle": "adam3us", "name": "Adam Back"},
+    "claim": "This 1.5” cube comes from the bet I made with Adam Back (@adam3us) where he lost the bet on whether PlanB’s (@100trillionUSD) floor model would fail to meet its >$98K November target (it failed).",
+    "claim_url": "https://x.com/ercwl/status/1475761542922739713",
+    "stake": "a 1.5-inch tungsten cube",
     "sources": [
-      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"},
-      {"label": "The thread where the cube bets began, 3–4 Nov 2021", "url": "https://x.com/ercwl/status/1456221544649211906"}
-    ],
-    "wanted": "the x.com posts where the bet was made and where the cube changed hands"
+      {"label": "Cube #1 unveiled, 28 Dec 2021", "url": "https://x.com/ercwl/status/1475761542922739713"}
+    ]
   },
   {
     "id": "keroles",
-    "opened": "2022",
-    "settled": "2022-09",
-    "counterparty": {"handle": "ck_SNARKs", "name": "Christian Keroles, Bitcoin Magazine"},
-    "claim": "The Ethereum Merge would not happen in 2022. Eric said it would; it did, on 15 September 2022.",
-    "stake": "a tungsten cube",
     "status": "won",
+    "n": 2,
+    "announced": "2022-12-30",
+    "counterparty": {"handle": "ck_SNARKs", "name": "Christian Keroles"},
+    "claim": "2022 I won a tungsten cube from Christian Keroles (Managing Director at Bitcoin Magazine) over the Merge.",
+    "claim_url": "https://x.com/ercwl/status/1612393877519859712",
+    "stake": "a 1.5-inch tungsten cube",
     "sources": [
-      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"}
-    ],
-    "wanted": "the x.com posts for the bet and its settlement"
-  },
-  {
-    "id": "piper",
-    "opened": "2022-02",
-    "settled": "2023-02",
-    "counterparty": {"handle": "", "name": "Dixon Piper"},
-    "claim": "HEX, then at $0.18, would not make a new all-time high by February 2023.",
-    "stake": "money, later hedged",
-    "status": "unrecorded",
-    "note": "Cointelegraph reports Eric hedged the position and locked in a $16,000 profit. The settlement itself is not linked here yet.",
-    "sources": [
-      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"},
-      {"label": "BeInCrypto on the HEX position, 2022", "url": "https://beincrypto.com/richard-heart-antagonist-eric-wall-cashes-in-on-falling-hex-price/"}
-    ],
-    "wanted": "the x.com posts for the bet and how it was settled"
+      {"label": "“@ck_SNARKs lost a tungsten cube”, 30 Dec 2022", "url": "https://x.com/ercwl/status/1608770238077890562"},
+      {"label": "Recap of 2021 and 2022, 9 Jan 2023", "url": "https://x.com/ercwl/status/1612393877519859712"}
+    ]
   },
   {
     "id": "bitcoinerrrrr",
-    "opened": "2023",
+    "status": "won",
+    "n": 3,
+    "announced": "2023-05-26",
     "counterparty": {"handle": "bitcoinerrrrr", "name": ""},
-    "claim": "Staked-ETH withdrawals would go live in 2023. They did, with the Shapella upgrade on 12 April 2023.",
-    "stake": "a tungsten cube",
-    "status": "unrecorded",
-    "note": "Known here only from Eric's stated plan to win it; the bet and its settlement are not linked yet.",
+    "claim": "A new tungsten cube arrived today! This shoutout goes to @bitcoinerrrrr for betting me that ETH withdrawals wouldn’t launch this year.",
+    "claim_url": "https://x.com/ercwl/status/1662016860991135745",
+    "stake": "a 1.5-inch tungsten cube",
+    "note": "A recap Eric posted on 30 Dec 2023 says instead that @bitcoinerrrrr “bet me the Merge wasn’t going to happen this year”. The two posts disagree. This row follows the post from the day the cube arrived, which also matches his 9 Jan 2023 plan to win “against @bitcoinerrrrr over ETH withdrawals”.",
     "sources": [
-      {"label": "Cointelegraph Magazine profile of Eric Wall, 24 Jan 2023", "url": "https://cointelegraph.com/magazine/reformed-altcoin-slayer-eric-wall-shitposting-scaling-ethereum/"}
-    ],
-    "wanted": "the x.com posts for the bet and its settlement"
+      {"label": "Cube arrived, 26 May 2023", "url": "https://x.com/ercwl/status/1662016860991135745"},
+      {"label": "Plan for 2023, 9 Jan 2023", "url": "https://x.com/ercwl/status/1612393877519859712"},
+      {"label": "Recap of 2023, 30 Dec 2023", "url": "https://x.com/ercwl/status/1741111129059860728"}
+    ]
+  },
+  {
+    "id": "bradmills",
+    "status": "won",
+    "n": 4,
+    "announced": "2024-01-01",
+    "counterparty": {"handle": "bradmillscan", "name": "Brad Mills"},
+    "claim": "the other is from Brad Mills who bet ETH was going to $500.",
+    "claim_url": "https://x.com/ercwl/status/1741111129059860728",
+    "stake": "a 1.5-inch tungsten cube",
+    "sources": [
+      {"label": "Recap of 2023, 30 Dec 2023", "url": "https://x.com/ercwl/status/1741111129059860728"},
+      {"label": "Cube added, with a Lightning invoice, 1 Jan 2024", "url": "https://x.com/ercwl/status/1741967773960462483"},
+      {"label": "The bill, 1 Jan 2024", "url": "https://x.com/ercwl/status/1741969215785959696"}
+    ]
+  },
+  {
+    "id": "midas1crypto",
+    "status": "won",
+    "n": 5,
+    "announced": "2024-01-15",
+    "counterparty": {"handle": "Midas1crypto", "name": ""},
+    "claim": "Last year, @Midas1crypto bet me one 1.5” tungsten cube that WBTC would fail in 2023.",
+    "claim_url": "https://x.com/ercwl/status/1746902748912656848",
+    "stake": "a 1.5-inch tungsten cube",
+    "sources": [
+      {"label": "Cube added, 15 Jan 2024", "url": "https://x.com/ercwl/status/1746902748912656848"}
+    ]
   },
   {
     "id": "jamesob",
+    "status": "open",
     "opened": "2025-05-31",
     "settles": "2028-05-31",
     "counterparty": {"handle": "jamesob", "name": "James O'Beirne"},
-    "claim": "Quantum computing is \"obvious bullshit\". James's own test for changing his mind: a single huge leap in metallurgy or other physical engineering for which AI was a necessary input, within three years.",
-    "stake": "a tungsten cube",
-    "status": "open",
+    "claim": "if I see even a single huge leap in metallurgy or some other kind of physical engineering for which AI was a necessary input, I'll refresh my priors.",
+    "claim_url": "https://x.com/jamesob/status/1928911469342806444",
+    "stake": "a 1.5-inch tungsten cube",
     "page": "/jamesob",
-    "note": "Settles 31 May 2028 (5 July 2028 on the July wording). Not conceded as of 14 Feb 2026.",
+    "note": "James's test, 31 May 2025. Eric: “Let’s do a 3 year bet. Tungsten cube?” James: “Done”.",
     "sources": [
-      {"label": "The thread, 31 May 2025", "url": "https://x.com/jamesob/status/1928857683571937656"},
-      {"label": "\"Done 🤝\", 31 May 2025", "url": "https://x.com/jamesob/status/1928913574241415202"}
+      {"label": "James's test, 31 May 2025", "url": "https://x.com/jamesob/status/1928911469342806444"},
+      {"label": "“Done”, 31 May 2025", "url": "https://x.com/jamesob/status/1928913574241415202"}
+    ]
+  },
+  {
+    "id": "jamesob-2025-07",
+    "status": "open",
+    "opened": "2025-07-05",
+    "settles": "2028-07-05",
+    "counterparty": {"handle": "jamesob", "name": "James O'Beirne"},
+    "claim": "I bet that within 3 years, you’ll change your mind, and you now believe that quantum computing is not obvious bullshit.",
+    "claim_url": "https://x.com/ercwl/status/1941525148722659776",
+    "stake": "a 1.5-inch tungsten cube",
+    "page": "/jamesob",
+    "note": "Eric's simplification, 5 July 2025. James: “Yes, let's do it”.",
+    "sources": [
+      {"label": "Eric's simplification, 5 Jul 2025", "url": "https://x.com/ercwl/status/1941525148722659776"},
+      {"label": "“Yes, let's do it”, 5 Jul 2025", "url": "https://x.com/jamesob/status/1941570265416335402"}
     ]
   }
 ]

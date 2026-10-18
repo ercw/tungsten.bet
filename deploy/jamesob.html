@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Does This Update Your Priors?</title>
-<meta name="description" content="A tungsten-cube bet about AI and quantum computing, and the AI results of 2022–2026 laid on the ladder James set for changing his mind.">
+<meta name="description" content="James O'Beirne's tungsten cube bet on quantum computing, with AI results from 2022–2026 sorted against the test he gave for changing his mind.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
 <style>
 /* tungsten.bet, text mode. One monospace for everything you read, a pixel face for display.
@@ -168,7 +168,7 @@ h1 {
 .slice-def { color: var(--dim); margin: 6px 0 14px; }
 .ladder { display: grid; gap: 1px; margin: 4px 0 14px; }
 .lrow { display: grid; grid-template-columns: 4ch minmax(0, 1fr) auto 3ch; gap: 0 1.2ch; align-items: baseline; width: 100%; padding: 2px 0.6ch; }
-.lrow .lr-bar { white-space: pre; letter-spacing: 0; }
+.lrow .lr-bar { white-space: nowrap; }
 .lrow .lr-n { text-align: right; font-weight: 700; }
 .lrow .lr-note { color: var(--hot); }
 .lrow:hover .lr-note, .lrow[aria-pressed="true"] .lr-note { color: inherit; }
@@ -178,6 +178,16 @@ h1 {
 .cuts .lbl { color: var(--dim); }
 .cuts .row { display: flex; flex-wrap: wrap; gap: 2px 2.4ch; }
 .ladder-note { color: var(--dim); margin-top: 14px; max-width: 86ch; }
+.rungs-def { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 6px; max-width: 86ch; }
+.rungs-def li { padding-left: 2ch; text-indent: -2ch; }
+.rungs-def li::before { content: "> "; color: var(--dim); }
+.rungs-def b { font-weight: 700; }
+.rungs-def q { font-style: italic; color: var(--ink-2); }
+.eric-note { color: var(--dim); margin: 6px 0 12px; max-width: 86ch; }
+/* One block per item: real blocks with gaps, so the count can be read off the bar */
+.blocks { display: inline-flex; gap: 2px; vertical-align: -0.12em; }
+.blocks i { width: 0.6em; height: 0.95em; background: currentColor; opacity: 0.2; }
+.blocks i.on { opacity: 1; }
 
 /* The chart, in characters */
 .achart-wrap { position: relative; }
@@ -202,7 +212,7 @@ h1 {
 .callouts .when { color: var(--dim); }
 .method { color: var(--dim); margin-top: 16px; max-width: 86ch; font-size: 13.5px; }
 
-/* Items, as records */
+/* Items: one box per paper, its id and date set in the border */
 .items { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
 .statusbar {
   position: sticky; top: 0; z-index: 6; background: var(--ink); color: var(--paper);
@@ -214,19 +224,26 @@ h1 {
 .statusbar a:hover { background: var(--paper); color: var(--ink); }
 .group-h { scroll-margin-top: 40px; }
 .group-h .count { color: var(--dim); font-family: var(--mono); font-size: 15px; text-shadow: none; white-space: nowrap; }
-.group-desc { max-width: 76ch; margin: -6px 0 6px; color: var(--ink-2); }
-.rec { padding: 18px 0 8px; transition: opacity 0.2s ease; scroll-margin-top: 44px; }
+.group-desc { max-width: 76ch; margin: -6px 0 0; color: var(--ink-2); }
+.recs { display: grid; gap: 34px; margin-top: 26px; }
+.rec { position: relative; border: 1px solid var(--ink-2); padding: 22px 2ch 14px; transition: opacity 0.2s ease; scroll-margin-top: 48px; }
 .rec.out { opacity: 0.3; }
-.rec.hi { background: var(--wash); box-shadow: -1ch 0 0 var(--wash), 1ch 0 0 var(--wash); }
-.rec-h { display: flex; gap: 1ch; align-items: baseline; white-space: nowrap; }
-.rec-h .rid { background: var(--ink); color: var(--paper); padding: 0 0.6ch; font-weight: 700; }
-.rec-h .when { font-weight: 700; }
-.rec-h .dom { color: var(--dim); }
-.rec-h .g-q { color: var(--q); } .rec-h .g-m { color: var(--m); } .rec-h .g-p { color: var(--p); } .rec-h .g-x { color: var(--x); }
-.rec-h .badges { color: var(--ink-2); }
-.rec-h .badges .contested { color: var(--hot); }
-.rec h3 { font-size: 16.5px; font-weight: 700; line-height: 1.4; margin: 8px 0 8px; max-width: 76ch; text-wrap: pretty; }
-.kv { display: grid; grid-template-columns: 9ch minmax(0, 1fr); gap: 3px 1ch; margin: 0; }
+.rec.hi { background: var(--wash); }
+.rec > .box-t { font-weight: 700; }
+.rec > .box-t.r { font-weight: 400; color: var(--ink-2); }
+.rec .contested { color: var(--hot); }
+.rec-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 3ch; align-items: start; }
+.rec.has-art .rec-top { grid-template-columns: minmax(0, 1fr) auto; }
+.rec .dom { color: var(--dim); }
+.rec .badges-m { display: none; }
+.rec .g-q { color: var(--q); } .rec .g-m { color: var(--m); } .rec .g-p { color: var(--p); } .rec .g-x { color: var(--x); }
+.rec h3 { font-size: 16.5px; font-weight: 700; line-height: 1.4; margin: 2px 0 4px; max-width: 76ch; text-wrap: pretty; }
+.rec .who { color: var(--ink-2); font-size: 14px; }
+.rec .what { margin-top: 10px; max-width: 72ch; text-wrap: pretty; }
+.art { margin: 0; display: grid; gap: 6px; justify-items: center; }
+.art pre { margin: 0; font-family: var(--mono); font-size: 13px; line-height: 1.22; padding: 8px 1.2ch; border: 1px dashed var(--rule); color: var(--ink); text-shadow: var(--glow); white-space: pre; }
+.art figcaption { font-size: 12px; color: var(--dim); max-width: 32ch; text-align: center; line-height: 1.4; }
+.kv { display: grid; grid-template-columns: 9ch minmax(0, 1fr); gap: 3px 1ch; margin: 14px 0 0; border-top: 1px dashed var(--rule); padding-top: 10px; }
 .kv dt { color: var(--dim); }
 .kv dd { margin: 0; max-width: 76ch; text-wrap: pretty; }
 .kv dd.cav { color: var(--ink-2); font-style: italic; }
@@ -270,8 +287,11 @@ h1 {
   .cuts { grid-template-columns: minmax(0, 1fr); }
   .kv { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .kv dt { margin-top: 6px; }
-  .rec-h { flex-wrap: wrap; white-space: normal; }
-  .rec-h .fill { display: none; }
+  .rec { padding: 22px 1.4ch 12px; }
+  .rec > .box-t.r { display: none; }
+  .rec .badges-m { display: inline; }
+  .rec.has-art .rec-top { grid-template-columns: minmax(0, 1fr); }
+  .art pre { font-size: 12px; }
   .foot { grid-template-columns: minmax(0, 1fr); }
   .callouts li { grid-template-columns: 4ch minmax(0, 1fr); }
   .callouts .when { grid-column: 2; }
@@ -301,7 +321,7 @@ h1 {
     <div class="hero-text">
       <p class="kicker">AI in physics, materials and quantum engineering, <span style="white-space:nowrap">2022–2026</span></p>
       <h1 id="title">Does this update your priors?</h1>
-      <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit, and named his own test for changing his mind: a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page puts the AI results of 2022–2026 on that ladder, rung by rung, with the author's ratings marked as such. It cannot score the bet. Only James can.</p>
+      <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit. He said he would reconsider if he saw a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page sorts AI results from 2022–2026 by how far each one gets on that test. The ratings are Eric's. Eric wins the cube if James changes his mind.</p>
       <p class="hero-meta"><b id="meta-n">22</b> items &nbsp;·&nbsp; <b>4</b> rungs &nbsp;·&nbsp; <b id="meta-leaps">0</b> huge leaps so far</p>
     </div>
   </section>
@@ -320,30 +340,37 @@ h1 {
         <li><a class="ts" href="https://x.com/jamesob/status/1928914802358808714" target="_blank" rel="noopener">2025-05-31 20:41</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Eric's track record with tungsten does not bode well for me, but what is life without skin in the game?</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/1928915231344091358" target="_blank" rel="noopener">2025-05-31 20:43</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Oh, only one caveat. If you’ve already conceded quantum computing is <em>not</em> bullshit before AI-driven contributions tilt the scale, you still lose, and have to submit the cube at that point. I just don’t want to get into an endless argument about whether human/AI was key.</span></li>
         <li><a class="ts" href="https://x.com/jamesob/status/1928916502855475433" target="_blank" rel="noopener">2025-05-31 20:48</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Of course - bet is locked in as of now, so if tomorrow I change my mind, I can't renege.</span></li>
-        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>bet locked.</b> settles on whether James changes his mind; who gets the credit, human or AI, is deliberately not a term</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>bet locked</b>, with Eric's caveat that James still pays if he concedes for reasons other than AI</span></li>
         <li><a class="ts" href="https://x.com/jamesob/status/1928919019651797285" target="_blank" rel="noopener">2025-05-31 20:58</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Yes you're probably right, and I'll defer to Eric on terms here because I don't mind losing, but writing the tweet I sort of had in mind a situation like "we built x new skyscraper that either wasn't possible to build or we did it for half the cost etc. given AI's discovery of a new material" In other words, something that surfaces into the real world in a big way.</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/1929654247635013688" target="_blank" rel="noopener">2025-06-02 21:39</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Building a whole new skyscraper with AI-invented materials in 3 years, yeah, not betting my tungsten cube collection on that.</span></li>
         <li><a class="ts" href="https://x.com/jamesob/status/1929671232015736962" target="_blank" rel="noopener">2025-06-02 22:47</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">We could still try to put terms around "huge leap in physical engineering with AI as a necessary input" if you want! But I was definitely thinking of physical things that are along (or closely related to) the critical path of quantum, not e.g. some ACTG pattern hacking that results in some new pharma research paper.</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/1929673839555817811" target="_blank" rel="noopener">2025-06-02 22:57</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Hm, yeah, sounds like a longer convo. AI-driven discoveries inferring huge leaps in metallurgy/other kinds of physical engineering, I’d bet a cube on. Whether those leaps will be along the critical path of quantum within 3 yrs, I don’t rule out, but wouldn’t bet a cube on.</span></li>
-        <li class="sys"><span class="ts"></span><span class="msg">-!- <span class="hot"><b>not agreed.</b></span> the skyscraper and the critical path are James's picture; Eric declined to stake the cube on them</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <span class="hot"><b>not agreed:</b></span> Eric would not bet the cube on a skyscraper or on the quantum critical path within three years</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/1941525148722659776" target="_blank" rel="noopener">2025-07-05 15:50</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">Hey James, I’ve come up a way to simplify this bet. &gt; Would bet a lot of money that quantum computing is obvious bullshit. I bet that within 3 years, you’ll change your mind, and you now believe that quantum computing is not obvious bullshit. Works?</span></li>
         <li><a class="ts" href="https://x.com/jamesob/status/1941570265416335402" target="_blank" rel="noopener">2025-07-05 18:49</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">Yes, let's do it</span></li>
-        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>terms simplified.</b> the cube settles on James's belief about quantum computing</span></li>
+        <li class="sys"><span class="ts"></span><span class="msg">-!- <b>terms simplified:</b> Eric wins if James changes his mind about quantum computing within three years</span></li>
         <li><a class="ts" href="https://x.com/ercwl/status/2022526356530114961" target="_blank" rel="noopener">2026-02-14 04:20</a><span class="nick">&lt;ercwl&gt;</span><span class="msg">”…if I see even a single huge leap in metallurgy or some other kind of physical engineering for which AI was a necessary input, I'll refresh my priors. I very much doubt we'll see that come out of autocorrect++…” <span class="gap">[quoting a post on a GPT-5.2 result in quantum field theory, item P6 below]</span></span></li>
         <li><a class="ts" href="https://x.com/jamesob/status/2022527098670526479" target="_blank" rel="noopener">2026-02-14 04:23</a><span class="nick j">&lt;jamesob&gt;</span><span class="msg">&gt; string theory &gt; quantum field theory I rest my case!</span></li>
       </ol>
-      <p class="status"><b>status:</b> not conceded as of 2026-02-14. The cube settles on James's stated belief about quantum computing by <b>2028-05-31</b> (2028-07-05 on the July wording). This page cannot score that. It lays the evidence on the ladder he gave, so the argument is about items rather than vibes.</p>
+      <p class="status"><b>status:</b> James had not changed his mind as of 2026-02-14. The deadline is <b>2028-05-31</b>, or 2028-07-05 if counted from the July message.</p>
     </div>
   </section>
 
   <section aria-labelledby="claims-h">
-    <h2 class="rule-h" id="claims-h"><span>Where his sentences stand</span><span class="fill" aria-hidden="true"></span></h2>
-    <p class="sub">Three of James's own sentences from 31 May 2025. The verdicts are the author's reading; the counts follow the filter below.</p>
+    <h2 class="rule-h" id="claims-h"><span>Three of James's sentences</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">Written on 31 May 2025, each with Eric's verdict. The counts change with the filter below.</p>
     <div class="claims" id="claims"></div>
   </section>
 
   <section aria-labelledby="ladder-h" id="filters">
-    <h2 class="rule-h" id="ladder-h"><span>The ladder</span><span class="fill" aria-hidden="true"></span></h2>
+    <h2 class="rule-h" id="ladder-h"><span>James's test as a ladder</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">His test, split into steps. An item reaches a rung only if it also reached every rung below it. Pick a row to keep only the items that reach it; the others are dimmed in the list further down.</p>
+    <ol class="rungs-def">
+      <li><b>rung 1, AI touched matter.</b> AI was an input to something that was synthesized, fabricated or physically controlled. James expected these first: <q>I think we'll see early signs well ahead in more primitive forms of engineering</q>.</li>
+      <li><b>rung 2, AI was necessary.</b> The result could not have been reached the same way without the AI. James: <q>for which AI was a necessary input</q>.</li>
+      <li><b>rung 3, a huge leap.</b> James's bar: <q>a single huge leap in metallurgy or some other kind of physical engineering</q>.</li>
+      <li><b>qubits.</b> Separate from the rungs: does it bear on building many physical qubits? James: <q>buildable and operatable by human construction for some huge number of physical qbits</q>.</li>
+    </ol>
     <div class="box dbl">
       <span class="box-t">LADDER.EXE</span><span class="box-t r" id="bar-count">22/22 pass</span>
       <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">22</span><span class="of" id="count-of">/22</span></span><span id="slice-name">everything</span><span class="cursor"></span></p>
@@ -352,8 +379,9 @@ h1 {
       <div class="ladder" id="ladder" role="group" aria-label="Rungs and tests"></div>
       <div class="cuts">
         <span class="lbl" id="rungs-l">rungs</span><div class="row" id="toggles-ladder" role="group" aria-labelledby="rungs-l"></div>
-        <span class="lbl" id="cuts-l">cuts</span><div class="row" id="toggles-cuts" role="group" aria-labelledby="cuts-l"></div>
+        <span class="lbl" id="cuts-l">other</span><div class="row" id="toggles-cuts" role="group" aria-labelledby="cuts-l"></div>
       </div>
+      <p class="eric-note">"Eric's strict test" is Eric's own filter: LLM-driven and ran on real hardware. It is not part of the bet, and neither are the "other" filters.</p>
       <p class="ladder-note" id="funnel-note"></p>
     </div>
   </section>
@@ -367,7 +395,7 @@ h1 {
     </div>
     <p class="chart-info" id="chart-info" aria-live="polite"></p>
     <ol class="callouts" id="callouts"></ol>
-    <p class="method">Scored as on the math seismograph, index = 2.5 × P × H × W × C × (1 + log₁₀ n): P physicality 0–10, H horizon (now 1.0, years 0.7, decades 0.4, someday 0.15), W weight 1–4, C confidence 0–1, n = 1 for every item here. Only items passing the filter are plotted; quiet months sit at zero; the scale stays at the unfiltered maximum, so tightening the test flattens the trace instead of rescaling it.</p>
+    <p class="method">The index uses the formula from the earlier AI-math seismograph page: 2.5 × P × H × W × C × (1 + log₁₀ n), where P is physicality 0–10, H the horizon (now 1.0, years 0.7, decades 0.4, someday 0.15), W the weight 1–4, C confidence 0–1, and n = 1 for every item here. Only items that pass the filter are plotted, and months with none sit at zero. The y-axis keeps the same maximum whatever the filter.</p>
   </section>
 
   <div class="items" id="items">
@@ -386,8 +414,8 @@ h1 {
     <h2 class="rule-h" id="foot-h"><span>Sources &amp; notes</span><span class="fill" aria-hidden="true"></span></h2>
     <div class="foot">
       <div class="foot-notes">
-        <p>All ratings are judgment calls; change one in the data and everything recomputes. Dates are announcement month.</p>
-        <p>Items, ratings and caveats come from the research notes this page was built from and have not been re-verified here. The four ladder ratings on each item (touched matter, AI necessary, huge leap, bears on qubits) are the author's, kept apart from the source dataset. The old "LLM-driven + ran on hardware" filter is kept as Eric's strict test; it was never James's.</p>
+        <p>All ratings are judgment calls. Changing one in the data changes every count on the page. Dates are the month of announcement.</p>
+        <p>The items come from research notes. Eleven were corrected against primary sources on 18 October 2026 (AUDIT-2026-10-18.md in the repository); the rest have not been rechecked. The four ladder ratings on each item (touched matter, AI necessary, huge leap, bears on qubits) are Eric's. "Eric's strict test" (LLM-driven and ran on hardware) is Eric's own filter. James did not agree to it.</p>
         <ol class="sources" id="sources" aria-label="Sources"></ol>
         <p><a href="#top">[ back to top ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
       </div>
@@ -422,7 +450,7 @@ const ITEMS = [
 {"id":"M3","date":"2025-01","title":"MatterGen designs TaCr₂O₆; synthesized with bulk modulus within 20% of target","domain":"materials","tier":2,"llm":false,"physical":true,"quantum":false,"verification":"peer-reviewed","contested":true,"who":"Microsoft Research, SIAT Shenzhen · Nature","what":"A diffusion model generated a structure for a target bulk modulus of 200 GPa; the synthesized (disordered) compound's bulk modulus was estimated at up to 169 GPa, the maximum of four nanoindentation measurements (158 ± 11 GPa) of Young's modulus converted with a DFT-computed Poisson ratio of 0.30.","artifact":"Synthesized compound","caveat":"One demonstration compound. The 169 GPa is inferred, not measured directly: Young's modulus by nanoindentation, a DFT Poisson ratio, and the maximum of four readings taken because the powder sample is 'likely non-compact'. Juelsholt (Materials Horizons 13, 5672, 2026; ChemRxiv preprint June 2025) argues the disordered product is the known Ta1/2Cr1/2O2 phase, reported in 1971 (1972 in the preprint's abstract) and present in MatterGen's training data.","P":6,"H":"years","W":2,"C":1.0,"url":"https://www.nature.com/articles/s41586-025-08628-5"},
 {"id":"M4","date":"2026-05","title":"AlphaEvolve: a circuit design fabricated into a TPU; ~4× faster ML force fields at Schrödinger; multi-fold lithography speedups at Substrate","domain":"materials","tier":1,"llm":true,"physical":true,"quantum":false,"verification":"company-reported","who":"Google DeepMind · AlphaEvolve impact report, May 7 2026","what":"The Gemini-driven system is a standing tool in next-generation TPU design and one of its circuits is in silicon. Partners report ~4× speedups in training and inference of machine-learned force fields and multi-fold runtime gains in computational lithography.","artifact":"Silicon; faster simulation pipelines for chemistry and chip manufacturing","caveat":"Partner-reported figures; no new material or compound named","P":5,"H":"now","W":1.5,"C":0.6,"url":"https://deepmind.google/blog/alphaevolve-impact/"},
 {"id":"M5","date":"2026-09","title":"Lila Sciences' AI-run lab synthesizes 2,942 catalysts and finds palladium families for green-hydrogen electrolysis","domain":"materials","tier":1,"llm":true,"physical":true,"quantum":false,"verification":"preprint","who":"Lila Sciences · arXiv 2609.30133, Sept 24 2026","what":"An in-house proposer combining Bayesian methods with language models chose each cycle's compositions; automated PVD synthesis, screening and characterization. Six palladium-oxide families near the activity–stability frontier; InMnPdOₓ stayed below 0.5 V overpotential for over 1,000 hours in 1 M sulfuric acid.","artifact":"Synthesized and long-term-tested catalysts","caveat":"Company preprint; 'comparable to ruthenium' is their comparison, no benchmark numbers given; humans still moved samples. The preprint (arXiv 2609.30133) does give benchmark numbers, all against films made on the same platform: InMnPdOx held 0.45 V overpotential at 10 mA/cm², within 40 mV of their RuOx (0.41 V); PdOx passed 0.5 V at about 200 h and NiTaPdOx at about 470 h. It calls the platform human-supervised with over 90% automation; operators move sample fixtures and start instruments.","P":7,"H":"years","W":2,"C":0.8,"url":"https://arxiv.org/abs/2609.30133"},
-{"id":"M6","date":"2026-08","title":"LLM recipe generator guides the first synthesis of three unreported oxy-selenides; humans ran the furnace","domain":"materials","tier":1,"llm":true,"physical":true,"quantum":false,"verification":"peer-reviewed","who":"Jeon, Kim, … Li, Cho (Sungkyunkwan University, Ajou University, KICET, MIT) · Advanced Materials 38, e74502","what":"A retrieval-augmented language model built on recipes extracted from 4,407 papers proposed solid-state routes for DFT-screened solid-electrolyte candidates. Fed back XRD results, it brought LiCr(SeO₃)₂ to single phase at 400 °C, then LiAl(SeO₃)₂ and CsLiSeO₄ in three guided experiments each, and found a new route to the known LiGa(SeO₃)₂.","artifact":"Synthesized compounds (powders, phase-checked by XRD)","caveat":"Humans chose the targets by first-principles screening and did every synthesis step (mortar, tube furnace, XRD) themselves; the model's claimed contribution is fewer trial-and-error cycles. Three new compounds from one group, published 10 Aug 2026, no independent replication yet","P":6,"H":"years","W":1.5,"C":0.9,"url":"https://doi.org/10.1002/adma.74502"},
+{"id":"M6","date":"2026-08","title":"LLM recipe generator guides the first synthesis of three unreported oxy-selenides, with people running the experiments","domain":"materials","tier":1,"llm":true,"physical":true,"quantum":false,"verification":"peer-reviewed","who":"Jeon, Kim, … Li, Cho (Sungkyunkwan University, Ajou University, KICET, MIT) · Advanced Materials 38, e74502","what":"A retrieval-augmented language model built on recipes extracted from 4,407 papers proposed solid-state routes for DFT-screened solid-electrolyte candidates. Fed back XRD results, it brought LiCr(SeO₃)₂ to single phase at 400 °C, then LiAl(SeO₃)₂ and CsLiSeO₄ in three guided experiments each, and found a new route to the known LiGa(SeO₃)₂.","artifact":"Synthesized compounds (powders, phase-checked by XRD)","caveat":"Humans chose the targets by first-principles screening and did every synthesis step (mortar, tube furnace, XRD) themselves; the model's claimed contribution is fewer trial-and-error cycles. Three new compounds from one group, published 10 Aug 2026, no independent replication yet","P":6,"H":"years","W":1.5,"C":0.9,"url":"https://doi.org/10.1002/adma.74502"},
 {"id":"P1","date":"2022-02","title":"Reinforcement learning controls the plasma in a tokamak","domain":"plasma / fusion","tier":2,"llm":false,"physical":true,"quantum":false,"verification":"peer-reviewed","who":"Google DeepMind + EPFL Swiss Plasma Center · Nature","what":"A single RL controller shaped and held plasma configurations in the TCV tokamak, including shapes not previously produced there.","artifact":"Live control of a fusion experiment","caveat":"A control-engineering result, not new plasma physics","P":9,"H":"now","W":2,"C":1.0,"url":"https://deepmind.google/discover/blog/accelerating-fusion-science-through-learned-plasma-control/"},
 {"id":"P2","date":"2023-11","title":"GraphCast beats ECMWF's operational forecast on 90% of targets; GenCast beats the ensemble on 97%","domain":"atmospheric physics","tier":2,"llm":false,"physical":true,"quantum":false,"verification":"peer-reviewed","who":"Google DeepMind · Science (2023), Nature (2024)","what":"Learned weather models outperform the leading physics-based system at 10-day forecasts; ECMWF now runs its own learned model operationally.","artifact":"Operational forecasts used by weather services","caveat":"Prediction, not explanation; trained on physics-model reanalysis","P":8,"H":"now","W":2,"C":1.0,"url":"https://deepmind.google/discover/blog/graphcast-ai-model-for-faster-and-more-accurate-global-weather-forecasting/"},
 {"id":"P3","date":"2025-08","title":"Physics-tailored neural network reveals unexpected non-reciprocal forces in dusty plasma, confirmed by experiment","domain":"plasma / fusion","tier":2,"llm":false,"physical":true,"quantum":false,"verification":"peer-reviewed","who":"Emory University (Burton, Nemenman) · PNAS 122(31)","what":"A custom physics-structured network trained on 3D particle tracks described non-reciprocal interparticle forces with >99% accuracy and showed two textbook assumptions (charge–size relation, screening-length dependence) are wrong; follow-up experiments confirmed it.","artifact":"New experimentally confirmed physics","caveat":"Small system; custom architecture, not a general model","P":8,"H":"years","W":2,"C":1.0,"url":"https://www.sciencedaily.com/releases/2026/04/260422044635.htm"},
@@ -440,28 +468,28 @@ const ITEMS = [
 // leap:      "none", "early sign" or "leap", against James's bar of a huge leap in metallurgy or physical engineering.
 // qubits:    bears on building or operating many physical qubits.
 const LADDER = {
-  "Q1": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "A decoder is software run over recorded chip data. It bears on operating qubits, not on making them."},
-  "Q2": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "Same as Q1: real-time decoding on TPUs, applied to recorded Willow data."},
-  "Q3": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "The circuits ran on Willow, but the AI's output is a circuit: software. Nothing about the processor itself changed."},
-  "Q4": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "Encodings evaluated by simulation. About qubits, but nothing built or run."},
-  "Q5": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Experiment designs checked by simulated fidelity; photonic states, not qubit scaling. The model is task-trained, so 'autocorrect++' is a stretch here."},
+  "Q1": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "A decoder is software run over recorded chip data. It is relevant to operating qubits. Nothing physical was made."},
+  "Q2": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "As Q1: real-time decoding on TPUs, tested on recorded Willow data."},
+  "Q3": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "The circuits ran on Willow. The AI produced the circuit designs; the processor itself was not changed."},
+  "Q4": {"matter": false, "necessary": true, "leap": "none", "qubits": true, "why": "Encodings evaluated in simulation. Relevant to qubits, but nothing was built or run."},
+  "Q5": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Experiment designs checked by simulated fidelity, for photonic states. The model is a task-trained transformer, so calling it autocorrect++ is a stretch."},
   "Q6": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Complexity theory."},
-  "Q7": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Quantum information theory, no hardware."},
-  "X1": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "A standards consequence, not a physical one."},
-  "M1": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "Compounds were synthesized from GNoME targets, so AI touched matter. Whether the predictions were necessary is the contested point: Cheetham & Seshadri found mostly compositional variants a conventional screen could reach."},
-  "M2": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "A real electrolyte in a prototype cell. AI did the first screen of 32 million; HPC filtering and chemists did the rest, so necessity is arguable."},
-  "M3": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "A diffusion model designed the structure to a target property and it was made. One compound: a demonstration, not a leap."},
-  "M4": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "An AI-proposed circuit is in silicon. A circuit change in a TPU is an early sign, not a leap in physical engineering; the force-field and lithography figures are software speedups."},
-  "M5": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "The proposer chose every cycle's compositions and 2,942 catalysts were made and tested. The closest thing on this page to James's picture, and still a lab result with the company's own comparison."},
-  "M6": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "An LLM wrote the recipes and three unreported compounds were made, so AI touched matter. Necessity is arguable: DFT chose the targets, humans ran every step and fed results back, and the paper claims fewer trials, not a route a chemist could not have found."},
-  "P1": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "A learned controller held real plasma in shapes the machine had not produced before. Control engineering, not a new material; James named engineering too."},
-  "P2": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Forecasts, deployed and used, but prediction rather than physical engineering."},
-  "P3": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "New physics about matter, confirmed by experiment. Knowledge, not engineering; James's bar was a leap in engineering."},
+  "Q7": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Quantum information theory. No hardware."},
+  "X1": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "A change to a standards process. Nothing physical."},
+  "M1": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "Compounds were synthesized from GNoME targets. Whether AI was necessary is disputed: Cheetham & Seshadri found mostly compositional variants that a conventional screen could reach."},
+  "M2": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "A real electrolyte in a prototype cell. AI did the first screen of 32 million candidates and HPC filtering and chemists did the rest, so whether AI was necessary is arguable."},
+  "M3": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "A diffusion model designed the structure for a target property, and it was synthesized. It is one compound, so Eric rates it an early sign."},
+  "M4": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "A circuit proposed by AI is in a production TPU. Eric rates a circuit change as an early sign. The force-field and lithography gains are software speedups."},
+  "M5": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "The AI proposer chose each cycle's compositions, and 2,942 catalysts were made and tested. Of the items here it is the nearest to James's skyscraper example. It is a lab result, compared only against films made on the same platform."},
+  "M6": {"matter": true, "necessary": "arguable", "leap": "early sign", "qubits": false, "why": "An LLM wrote the synthesis recipes and three unreported compounds were made. Whether AI was necessary is arguable: DFT screening chose the targets, people ran every step and fed results back, and the paper's claim is that fewer trials were needed."},
+  "P1": {"matter": true, "necessary": true, "leap": "early sign", "qubits": false, "why": "A learned controller held real plasma in shapes this tokamak had not produced before. That is control engineering, which James's test covers along with materials."},
+  "P2": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Deployed and used forecasts. Eric does not count prediction as physical engineering."},
+  "P3": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "New physics about matter, confirmed by experiment. Eric counts it as knowledge; James's test asks for a leap in engineering."},
   "P4": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Numerical."},
-  "P5": {"matter": false, "necessary": false, "leap": "none", "qubits": false, "why": "Case studies; mixed novelty."},
-  "P6": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Theory. This is the result James answered with 'I rest my case'."},
+  "P5": {"matter": false, "necessary": false, "leap": "none", "qubits": false, "why": "Case studies of mixed novelty."},
+  "P6": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Theory. James answered this result with \"I rest my case!\""},
   "P7": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "A record computation in a toy model."},
-  "P8": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Mathematics about an equation of physics; says nothing about real fluids."},
+  "P8": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Mathematics about an equation of physics. It says nothing about real fluids."},
   "P9": {"matter": false, "necessary": true, "leap": "none", "qubits": false, "why": "Mostly unreviewed theory."}
 };
 const L = e => LADDER[e.id];
@@ -479,28 +507,28 @@ const SHORT = { Q1: 'AlphaQubit', Q2: 'AlphaQubit 2', Q3: 'AlphaEvolve on Willow
 
 // Groups follow James's own distinction (virtual vs physical). The dataset's `tier` field is kept but does not drive layout.
 const GROUPS = [
-  { k: 'matter', name: 'AI touched matter', desc: 'Something was synthesized, fabricated or physically controlled with AI as an input. These are the "early signs in more primitive forms of engineering" James said would come first.', test: e => L(e).matter },
-  { k: 'virtual', name: 'Real hardware, virtual contribution', desc: "The AI's output was software or a prediction: decoders over recorded chip data, circuits for a processor, forecasts, a fitted model of forces. Real machines and real data underneath; by James's own distinction the contribution is virtual.", test: e => e.physical && !L(e).matter },
-  { k: 'theory', name: 'Theory and simulation', desc: 'No physical artifact. Listed so nothing is hidden, and because this is the category James waved off in February 2026 ("string theory, quantum field theory. I rest my case"). More of it does not move the bet.', test: e => !e.physical }
+  { k: 'matter', name: 'Reached rung 1: AI touched matter', desc: 'AI was an input to something that was synthesized, fabricated or physically controlled. James said he expected "early signs well ahead in more primitive forms of engineering".', test: e => L(e).matter },
+  { k: 'virtual', name: 'Below rung 1: software on real hardware', desc: "These ran on real hardware or real data, but the AI's output was software or a prediction: decoders, circuit designs, forecasts, a fitted force model. James called AI results of this kind virtual.", test: e => e.physical && !L(e).matter },
+  { k: 'theory', name: 'Below rung 1: theory and simulation', desc: 'Results with no physical artifact. In February 2026 James answered one of them (P6) with "I rest my case!"', test: e => !e.physical }
 ];
 
 const TOGGLES = [
-  { k: 'matter', group: 'ladder', label: 'touched matter', short: 'touched matter', test: e => L(e).matter },
-  { k: 'necessary', group: 'ladder', label: 'AI necessary', short: 'AI necessary', test: e => L(e).necessary === true },
-  { k: 'leap', group: 'ladder', label: 'huge leap', short: 'huge leap', test: e => L(e).leap === 'leap' },
+  { k: 'matter', group: 'ladder', label: 'rung 1: touched matter', short: 'touched matter', test: e => L(e).matter },
+  { k: 'necessary', group: 'ladder', label: 'rung 2: AI necessary', short: 'AI necessary', test: e => L(e).necessary === true },
+  { k: 'leap', group: 'ladder', label: 'rung 3: huge leap', short: 'huge leap', test: e => L(e).leap === 'leap' },
   { k: 'qubits', group: 'ladder', label: 'bears on qubits', short: 'bears on qubits', test: e => L(e).qubits },
-  { k: 'llm', group: 'cuts', label: 'autocorrect++ (an LLM)', short: 'autocorrect++', test: e => e.llm },
-  { k: 'physical', group: 'cuts', label: 'ran on real hardware', short: 'real hardware', test: e => e.physical },
-  { k: 'peer', group: 'cuts', label: 'peer-reviewed (not a term)', short: 'peer-reviewed', test: e => e.verification === 'peer-reviewed' }
+  { k: 'llm', group: 'cuts', label: 'LLM-driven (autocorrect++)', short: 'LLM-driven', test: e => e.llm },
+  { k: 'physical', group: 'cuts', label: 'ran on real hardware', short: 'ran on hardware', test: e => e.physical },
+  { k: 'peer', group: 'cuts', label: 'peer-reviewed', short: 'peer-reviewed', test: e => e.verification === 'peer-reviewed' }
 ];
 // The ladder rows. `name` is used in the status line; `row` is the text on the row.
 const PRESETS = [
-  { k: 'all', name: 'Everything', row: 'everything', on: [] },
-  { k: 'signs', name: 'Early signs: AI touched matter', row: '1  AI touched matter', on: ['matter'] },
-  { k: 'necessary', name: '…and AI was a necessary input', row: '2  + AI was necessary', on: ['matter', 'necessary'] },
-  { k: 'leap', name: 'The bar: a huge leap', row: '3  + a huge leap', note: '<- his bar', on: ['matter', 'necessary', 'leap'] },
-  { k: 'bridge', name: 'The bridge: matter that reaches qubits', row: '   matter that reaches qubits', on: ['matter', 'qubits'], sep: true },
-  { k: 'eric', name: "Eric's strict test (LLM + hardware)", on: ['llm', 'physical'], row: "eric's strict test: LLM + hardware" }
+  { k: 'all', name: 'all items', row: 'all items', on: [] },
+  { k: 'signs', name: 'rung 1: AI touched matter', row: 'rung 1  AI touched matter', on: ['matter'] },
+  { k: 'necessary', name: 'rung 2: AI was necessary', row: 'rung 2  + AI was necessary', on: ['matter', 'necessary'] },
+  { k: 'leap', name: 'rung 3: a huge leap', row: 'rung 3  + a huge leap', note: "<- James's bar", on: ['matter', 'necessary', 'leap'] },
+  { k: 'bridge', name: 'rung 1 and bears on qubits', row: 'rung 1  + bears on qubits', on: ['matter', 'qubits'], sep: true },
+  { k: 'eric', name: "Eric's strict test (LLM-driven, ran on hardware)", on: ['llm', 'physical'], row: "Eric's strict test" }
 ];
 const FUNNEL = [
   { on: [] }, { on: ['matter'] }, { on: ['matter', 'necessary'] }, { on: ['matter', 'necessary', 'leap'] }
@@ -514,15 +542,15 @@ const CLAIMS = [
     note: () => {
       const m = ITEMS.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap').length;
       const signs = m.filter(e => L(e).leap === 'early sign').length;
-      return `${plural(m.length, 'item', 'items')} changed or controlled matter with AI as an input. ${leaps ? `The author rates ${plural(leaps, 'of them', 'of them')} a huge leap.` : signs === m.length ? 'All are what he called early signs in more primitive engineering; none is the huge leap he set as the bar.' : 'None is the huge leap he set as the bar.'}`;
+      return `${plural(m.length, 'item', 'items')} changed or controlled matter with AI as an input. ${leaps ? `Eric rates ${plural(leaps, 'of them', 'of them')} as a huge leap.` : signs === m.length ? 'Eric rates all of them as early signs and none as a huge leap.' : 'Eric rates none of them as a huge leap.'}`;
     },
     counts: 'touched matter', test: e => L(e).matter },
   { k: '2', url: 'https://x.com/jamesob/status/1928911469342806444', quote: "I very much doubt we'll see that come out of autocorrect++.", verdict: 'Holds', mark: '●',
     note: () => {
       const lm = ITEMS.filter(e => L(e).matter && e.llm);
       const leaps = lm.filter(e => L(e).leap === 'leap');
-      if (!lm.length) return 'No LLM-driven item touched matter. Everything that did came from specialized models, which is not what he doubted.';
-      return `${plural(lm.length, 'LLM-driven item', 'LLM-driven items')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `The author rates ${leaps.map(e => e.id).join(', ')} a huge leap, which is what he doubted.` : 'None is a huge leap, and a huge leap from autocorrect++ is what he doubted.'}`;
+      if (!lm.length) return 'No LLM-driven item touched matter. The items that did used specialized models.';
+      return `${plural(lm.length, 'LLM-driven item', 'LLM-driven items')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(e => e.id).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
     },
     counts: 'LLM-driven and touched matter', test: e => L(e).matter && e.llm },
   { k: '3', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.', verdict: 'Not yet', mark: '○',
@@ -530,7 +558,7 @@ const CLAIMS = [
       const b = ITEMS.filter(e => L(e).matter && L(e).qubits);
       return b.length
         ? `${plural(b.length, 'item', 'items')} touched matter and bear on qubits: ${b.map(e => SHORT[e.id] || e.id).join(', ')}.`
-        : 'Nothing here touches qubit materials, fabrication or cryogenics. The AI inside the quantum stack is decoders and circuits: software over real chips.';
+        : 'No item here involves qubit materials, fabrication or cryogenics. The quantum items are decoders and circuit designs, which are software.';
     },
     counts: 'touched matter and bear on qubits', test: e => L(e).matter && L(e).qubits }
 ];
@@ -542,7 +570,7 @@ const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct
 const label = d => MON[+d.slice(5) - 1] + ' ' + d.slice(0, 4);
 const fmt = x => x >= 10 ? Math.round(x) : (Math.round(x * 10) / 10);
 const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return 'source'; } };
-const bar = (n, total, w) => { const k = w ? Math.round(n / total * w) : n; return '█'.repeat(k) + '░'.repeat((w || total) - k); };
+const blocks = (n, total) => '<span class="blocks" aria-hidden="true">' + '<i class="on"></i>'.repeat(n) + '<i></i>'.repeat(Math.max(0, total - n)) + '</span>';
 const BADGE = { 'peer-reviewed': '●', 'preprint': '◐', 'company-reported': '□' };
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
@@ -575,7 +603,7 @@ function buildClaims() {
       <div>
         <p class="note">${esc(c.note())}</p>
         <p class="cnt"><span class="n" data-claim="${c.k}">${total}</span><span class="dim">/${total}</span> <span class="bar" data-bar="${c.k}" aria-hidden="true"></span> <span class="dim">${esc(c.counts)}, passing the filter</span></p>
-        <p class="reading">verdict: the author's reading, not computed</p>
+        <p class="reading">verdict: Eric's judgment</p>
       </div>
     </article>`;
   }).join('');
@@ -589,7 +617,7 @@ function buildControls() {
     const b = document.createElement('button');
     const n = countWith(p.on);
     b.type = 'button'; b.className = 'btn lrow'; b.dataset.k = p.k;
-    b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${bar(n, N)}</span><span class="lr-n">${n}</span>`;
+    b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${blocks(n, N)}</span><span class="lr-n">${n}</span>`;
     b.setAttribute('aria-label', `${p.name}: ${n} of ${N} items`);
     b.addEventListener('click', () => setFilter(p.on));
     lad.appendChild(b);
@@ -603,45 +631,53 @@ function buildControls() {
   });
   const m1 = ITEMS.filter(e => L(e).matter), m2 = m1.filter(e => L(e).necessary === true), m3 = m2.filter(e => L(e).leap === 'leap');
   const arguable = m1.filter(e => L(e).necessary === 'arguable').map(e => e.id);
-  $('#funnel-note').textContent = `One block per item. ${m1.length} touched matter (${m1.map(e => e.id).join(', ')}); ${m2.length} with AI as a clearly necessary input${arguable.length ? ` (${arguable.join(', ')} arguable)` : ''}; ${m3.length} that the author would call a huge leap. Pick a row to apply it, or set rungs and cuts yourself.`;
+  $('#funnel-note').textContent = `Each block is one item. ${m1.length} reach rung 1 (${m1.map(e => e.id).join(', ')}). ${m2.length} reach rung 2${arguable.length ? `; for ${arguable.join(', ')} the AI's necessity is arguable, so they stop at rung 1` : ''}. ${m3.length} reach rung 3. Ratings are Eric's.`;
 }
 const CARD = {};
 function buildItems() {
   const wrap = $('#items');
-  const flag = (ok, tag) => `<span class="${ok ? 'on' : 'off'}"><span aria-hidden="true">${ok ? '[x]' : '[ ]'}</span><span class="sr">${ok ? 'meets' : 'does not meet'}</span> ${esc(tag)}</span>`;
-  GROUPS.forEach((G, gi) => {
+  const flag = (ok, tag) => `<span class="${ok ? 'on' : 'off'}"><span aria-hidden="true">${ok ? '[x]' : '[ ]'}</span><span class="sr">${ok ? 'reaches' : 'does not reach'}</span> ${esc(tag)}</span>`;
+  GROUPS.forEach(G => {
     const sec = document.createElement('section');
     sec.id = 'group-' + G.k;
     sec.setAttribute('aria-labelledby', 'group-h-' + G.k);
     const all = ITEMS.filter(G.test);
-    sec.innerHTML = `<h2 class="rule-h group-h" id="group-h-${G.k}"><span>${gi + 1}/${GROUPS.length} ${esc(G.name)}</span><span class="fill" aria-hidden="true"></span><span class="count" data-group="${G.k}"></span></h2><p class="group-desc">${esc(G.desc)}</p>`;
+    sec.innerHTML = `<h2 class="rule-h group-h" id="group-h-${G.k}"><span>${esc(G.name)}</span><span class="fill" aria-hidden="true"></span><span class="count" data-group="${G.k}"></span></h2><p class="group-desc">${esc(G.desc)}</p><div class="recs"></div>`;
+    const list = sec.querySelector('.recs');
     all.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id)).forEach(e => {
       const a = document.createElement('article');
-      a.className = 'rec'; a.id = 'item-' + e.id; a.dataset.month = e.date;
+      const art = ART[e.id];
+      a.className = 'rec' + (art ? ' has-art' : ''); a.id = 'item-' + e.id; a.dataset.month = e.date;
       const g = GROUP(e.domain), lad = L(e);
       const badges = `[${BADGE[e.verification] || ''} ${esc(e.verification)}]${e.contested ? ' <span class="contested">[× contested]</span>' : ''}`;
-      const ladderFlags = [
-        flag(lad.matter, 'touched matter'),
-        flag(lad.necessary === true, lad.necessary === 'arguable' ? 'AI necessary (arguable)' : 'AI necessary'),
-        flag(lad.leap === 'leap', lad.leap === 'early sign' ? 'huge leap (early sign)' : 'huge leap'),
+      const rungs = [
+        flag(lad.matter, '1 touched matter'),
+        flag(lad.necessary === true, lad.necessary === 'arguable' ? '2 AI necessary (arguable)' : '2 AI necessary'),
+        flag(lad.leap === 'leap', lad.leap === 'early sign' ? '3 huge leap (early sign)' : '3 huge leap'),
         flag(lad.qubits, 'bears on qubits')
       ].join('');
-      const cutFlags = TOGGLES.filter(t => t.group === 'cuts').map(t => flag(t.test(e), t.short)).join('');
-      a.innerHTML = `<div class="rec-h"><span class="rid">${esc(e.id)}</span><span class="when">${label(e.date)}</span><span class="dom"><span class="g-${g}" aria-hidden="true">${MK[g]}</span> ${esc(e.domain)}</span><span class="fill dash" aria-hidden="true"></span><span class="badges">${badges}</span></div>
-        <h3>${esc(e.title)}</h3>
+      const other = TOGGLES.filter(t => t.group === 'cuts').map(t => flag(t.test(e), t.short)).join('');
+      a.innerHTML = `<span class="box-t">${esc(e.id)} · ${label(e.date)}</span><span class="box-t r">${badges}</span>
+        <div class="rec-top">
+          <div>
+            <p class="dom"><span class="g-${g}" aria-hidden="true">${MK[g]}</span> ${esc(e.domain)}<span class="badges-m"> · ${badges}</span></p>
+            <h3>${esc(e.title)}</h3>
+            <p class="who">${esc(e.who)}</p>
+            <p class="what">${esc(e.what)}</p>
+          </div>
+          ${art ? `<figure class="art" data-id="${esc(e.id)}" role="img" aria-label="${esc(art.alt)}"><pre aria-hidden="true"></pre><figcaption>${esc(art.cap)}</figcaption></figure>` : ''}
+        </div>
         <dl class="kv">
-          <dt>who</dt><dd>${esc(e.who)}</dd>
-          <dt>what</dt><dd>${esc(e.what)}</dd>
           <dt>artifact</dt><dd>${esc(e.artifact)}</dd>
           <dt>caveat</dt><dd class="cav">${esc(e.caveat)}</dd>
-          <dt>ladder</dt><dd class="flags" aria-label="James's ladder">${ladderFlags}</dd>
+          <dt>rungs</dt><dd class="flags" aria-label="Rungs of James's test">${rungs}</dd>
           <dt>rating</dt><dd>${esc(lad.why)}</dd>
-          <dt>cuts</dt><dd class="flags" aria-label="Other cuts">${cutFlags}</dd>
+          <dt>other</dt><dd class="flags" aria-label="Other filters">${other}</dd>
           <dt>source</dt><dd><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(host(e.url))}</a> <span class="score">P${e.P} H:${esc(e.H)} W${e.W} C${e.C} → index ${fmt(e.idx)}</span></dd>
         </dl>
         <span class="sr out-note"></span>`;
       CARD[e.id] = a;
-      sec.appendChild(a);
+      list.appendChild(a);
     });
     wrap.appendChild(sec);
   });
@@ -649,6 +685,133 @@ function buildItems() {
   $('#ns-what').textContent = ns.what;
   $('#ns-caveat').textContent = ns.caveat;
   $('#sources').innerHTML = ITEMS.map(e => `<li><span class="sid">[${esc(e.id)}]</span><span>${esc(e.title)} · <a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(host(e.url))}</a></span></li>`).join('');
+}
+
+// ---------- Small animations for the items that touched matter or ran on real hardware ----------
+// Each is a 28 × 7 character picture of what was done, drawn from the item's own text. They run at
+// about 7 frames a second, only while on screen, and hold still under reduced motion.
+const AW = 28, AH = 7;
+const blank = () => Array.from({ length: AH }, () => Array(AW).fill(' '));
+const put = (g, x, y, str) => { [...str].forEach((c, i) => { const xx = x + i; if (y >= 0 && y < AH && xx >= 0 && xx < AW) g[y][xx] = c; }); };
+const rows = g => g.map(r => r.join('').replace(/\s+$/, '')).join('\n');
+const hash = (a, b, c) => { const v = Math.sin(a * 12.9898 + b * 78.233 + c * 37.719) * 43758.5453; return v - Math.floor(v); };
+const ART = {
+  M6: { cap: 'An LLM writes a recipe, people run it, XRD goes back to the model', alt: 'A loop from LLM to recipe to furnace to XRD and back, with the furnace temperature dropping from 600 to 400 degrees until the compound comes out single-phase.',
+    f: t => { const g = blank(), st = Math.floor(t / 6) % 4, nm = ['LLM', 'recipe', 'furnace', 'XRD'];
+      const lab = i => i === st ? `[${nm[i]}]` : ` ${nm[i]} `;
+      put(g, 0, 0, `${lab(0)}→${lab(1)}→${lab(2)}`);
+      put(g, 0, 1, '  ↑                │');
+      put(g, 0, 2, `  └──${lab(3)}◂────────┘`);
+      const two = Math.floor(t / 24) % 2 === 1;
+      put(g, 0, 4, ` try ${two ? 2 : 1}: ${two ? 400 : 600} °C, 3 h`);
+      put(g, 0, 5, ` XRD ${two ? '▁▂▇▂▁▁▁▅▁▁▁' : '▁▃▇▃▁▂▅▂▁▄▁'} ${two ? 'single' : 'mixed'}`);
+      put(g, 0, 6, ' LiCr(SeO₃)₂');
+      return rows(g); } },
+  M5: { cap: 'Catalyst films tested one after another; bubbles are oxygen at the anode', alt: 'A row of thin-film catalyst samples, one highlighted at a time, with bubbles rising above it.',
+    f: t => { const g = blank(), n = 9, act = Math.floor(t / 8) % n;
+      for (let k = 0; k < 6; k++) { const x = 2 + ((k * 11 + 5) % 25), y = 2 - ((t + k * 2) % 3); put(g, x, y, k % 2 ? '°' : '·'); }
+      for (let k = 0; k < 3; k++) put(g, 2 + act * 3, 2 - ((t + k) % 3), 'o');
+      let row = ''; for (let i = 0; i < n; i++) row += i === act ? '[█]' : ['[▒]', '[░]', '[▓]'][(i * 5) % 3];
+      put(g, 1, 3, row); put(g, 0, 4, '═'.repeat(AW));
+      put(g, 1, 5, `film ${String(1 + (Math.floor(t / 8) * 331) % 2942).padStart(4)} of 2,942`);
+      put(g, 1, 6, 'InMnPdOx under 0.5 V');
+      return rows(g); } },
+  M4: { cap: 'A circuit block proposed by AlphaEvolve, in TPU silicon (company-reported)', alt: 'A chip outline with a signal pulse travelling across it through a block labelled AE.',
+    f: t => { const g = blank(), x = t % 30;
+      put(g, 3, 0, '┌──────────────────┐');
+      for (let y = 1; y <= 3; y++) { put(g, 0, y, '───┤'); put(g, 22, y, '├───'); put(g, 4, y, ' ▪▪▪ '); put(g, 17, y, ' ▪▪▪ '); }
+      put(g, 9, 1, '┌──────┐'); put(g, 9, 2, (x >= 9 && x <= 16) ? '│ ▓▓▓▓ │' : '│  AE  │'); put(g, 9, 3, '└──────┘');
+      put(g, 3, 4, '└──────────────────┘');
+      if (x < 26 && !(x >= 9 && x <= 16)) put(g, x, 2, '•');
+      put(g, 1, 5, 'TPU, next generation');
+      put(g, 1, 6, 'AE: the AlphaEvolve block');
+      return rows(g); } },
+  M3: { cap: 'A diffusion model turns noise into a structure for a target stiffness', alt: 'Random characters settling step by step into a lattice of tantalum, chromium and oxygen atoms.',
+    f: t => { const g = blank(), cyc = Math.floor(t / 34), ph = t % 34, k = Math.min(ph, 22) / 22, noise = '░▒▓·:+*';
+      const lat = ['Ta──O ──Cr──O ──Ta', '│   │   │   │   │ ', 'O ──Cr──O ──Ta──O ', '│   │   │   │   │ ', 'Cr──O ──Ta──O ──Cr'];
+      lat.forEach((line, y) => [...line].forEach((c, x) => {
+        const keep = hash(x, y, cyc) < k;
+        put(g, 5 + x, y, keep ? c : (hash(x, y, t) < 0.55 ? noise[Math.floor(hash(y, x, t) * noise.length)] : ' '));
+      }));
+      put(g, 1, 5, ph < 22 ? `denoising, step ${ph + 1}/22` : 'TaCr₂O₆, target 200 GPa');
+      put(g, 1, 6, 'made; novelty contested');
+      return rows(g); } },
+  M2: { cap: 'Screening 32 million candidates down to one electrolyte, tested in a cell', alt: 'A battery cell with sodium and lithium ions moving from one electrode to the other.',
+    f: t => { const g = blank();
+      put(g, 0, 0, '[-]│                    │[+]');
+      for (let y = 1; y <= 2; y++) { put(g, 3, y, '│'); put(g, 24, y, '│'); }
+      for (let k = 0; k < 5; k++) { const x = 4 + ((k * 5 + t) % 18), y = k % 3; put(g, x, y, k % 2 ? 'Li⁺' : 'Na⁺'); }
+      put(g, 0, 3, '   └────────────────────┘');
+      put(g, 1, 5, '32,000,000 → 18 → 1');
+      put(g, 1, 6, 'Na/Li solid electrolyte');
+      return rows(g); } },
+  M1: { cap: 'From millions of predicted crystals to the few a robot lab made', alt: 'A funnel narrowing from 2.2 million predicted structures to 36 compounds made.',
+    f: t => { const g = blank();
+      [['2,200,000 predicted', 8], ['  381,000 stable', 6], ['       57 targets', 4], ['       36 made', 2]].forEach(([txt, w], i) => {
+        put(g, 0, i, txt); put(g, 24 - w / 2, i, (i === 3 ? '▓' : '░').repeat(w)); });
+      put(g, 24, t % 4, '●');
+      put(g, 1, 5, 'A-Lab: 36 of 57 made');
+      put(g, 1, 6, '(corrected from 41 of 58)');
+      return rows(g); } },
+  P1: { cap: 'A learned controller holds the plasma in changing shapes', alt: 'The cross-section of a tokamak plasma changing shape between the magnetic coils.',
+    f: t => { const g = blank(), ph = t / 10, kap = 1.3 + 0.4 * Math.sin(ph), del = 0.4 * Math.sin(ph * 0.6 + 1);
+      for (let y = 0; y < 6; y++) for (let x = 3; x < 25; x++) {
+        const yy = (y - 2.5) / 2.6, xx = (x - 14) / 7.5, X = xx + del * (yy * yy - 0.3), r = X * X + (yy / (0.62 * kap)) ** 2;
+        if (r < 1) put(g, x, y, r > 0.72 ? '#' : r > 0.35 ? '▒' : '▓');
+      }
+      for (let y = 1; y <= 4; y++) { put(g, 1, y, '▐'); put(g, 26, y, '▌'); }
+      put(g, 1, 6, `TCV  κ ${kap.toFixed(2)}  δ ${del >= 0 ? '+' : ''}${del.toFixed(2)}`);
+      return rows(g); } },
+  Q3: { cap: 'AlphaEvolve-built circuits run on Willow; simulation error 10.4% to 0.82%', alt: 'Three qubit wires with gates scrolling past, and an error bar shrinking from 10.4 to 0.82 percent.',
+    f: t => { const g = blank(), W3 = ['─H──●──────Rz───●────H───●──Rz──────●──', '────X──●────────┼────────X──●───────┼──', '───────X───Rz───X───Rz──────X──Rz───X──'];
+      const off = t % W3[0].length, win = s => (s + s).slice(off, off + 23);
+      ['q0 ', 'q1 ', 'q2 '].forEach((q, i) => put(g, 1, i, q + win(W3[i])));
+      const ph = t % 70, err = 10.4 - (10.4 - 0.82) * Math.min(ph, 50) / 50, n = Math.max(1, Math.round(err / 10.4 * 16));
+      put(g, 1, 4, `err ${'█'.repeat(n)}${'░'.repeat(16 - n)}`);
+      put(g, 1, 5, `    ${err.toFixed(2)}% approx. error`);
+      put(g, 1, 6, 'on Willow, in gate budget');
+      return rows(g); } },
+  Q2: { cap: 'Decoding a stream of error-correction rounds as they arrive', alt: 'Rows of syndrome bits scrolling upward, each with the qubit the decoder would fix.',
+    f: t => { const g = blank(); put(g, 0, 0, ' round  syndrome     fix');
+      for (let i = 0; i < 5; i++) { const n = t + i; let bits = ''; for (let b = 0; b < 10; b++) bits += hash(n, b, 7) > 0.85 ? '1' : '0';
+        put(g, 0, i + 1, ` ${String(1000 + n).padStart(5)}  ${bits.slice(0, 5)} ${bits.slice(5)}  ${bits.includes('1') ? 'q' + (1 + Math.floor(hash(n, 9, 9) * 48)) : '–'}`); }
+      put(g, 0, 6, ' under 1 µs per cycle');
+      return rows(g); } },
+  Q1: { cap: 'Surface code: an error flips a qubit, checks light up, the decoder finds it', alt: 'A grid of qubits where one flips, the neighbouring checks light up, and the decoder marks the fix.',
+    f: t => { const g = blank(), cyc = Math.floor(t / 28), ph = t % 28;
+      for (const y of [0, 2, 4]) put(g, 2, y, '·───·───·───·───·');
+      for (const y of [1, 3]) put(g, 2, y, '│ □ │ □ │ □ │ □ │');
+      const r = [0, 2, 4][Math.floor(hash(cyc, 1, 2) * 3)], x = 2 + Math.floor(hash(cyc, 3, 4) * 5) * 4;
+      if (ph >= 6 && ph < 22) put(g, x, r, ph < 18 ? 'X' : '*');
+      if (ph >= 10 && ph < 22) [r - 1, r + 1].forEach(yy => { if (yy === 1 || yy === 3) [x - 2, x + 2].forEach(xx => { if (xx >= 4 && xx <= 16) put(g, xx, yy, '■'); }); });
+      put(g, 20, 1, 'recorded'); put(g, 20, 2, 'Sycamore'); put(g, 20, 3, 'data');
+      put(g, 1, 6, ph < 6 ? 'waiting' : ph < 10 ? 'error' : ph < 18 ? 'checks fire' : ph < 22 ? 'decoded: fix *' : 'waiting');
+      return rows(g); } },
+  P2: { cap: 'A learned model forecasting the weather ten days ahead', alt: 'A low-pressure system moving across a dotted map.',
+    f: t => { const g = blank(), cx = 3 + (Math.floor(t / 2) % 22);
+      for (let y = 0; y < 5; y++) for (let x = 0; x < AW; x++) if ((x * 7 + y * 13) % 11 === 0) put(g, x, y, '·');
+      put(g, 21, 2, 'H');
+      put(g, cx - 2, 1, '(   )'); put(g, cx - 3, 2, '(( L ))'); put(g, cx - 2, 3, '(   )');
+      put(g, 1, 6, `forecast day ${1 + Math.floor(t / 4) % 10} of 10`);
+      return rows(g); } },
+  P3: { cap: 'Dust grains in a plasma, tracked in 3D to learn the forces between them', alt: 'Two particles moving across with fading trails.',
+    f: t => { const g = blank(), x = 6 + (t % 40) / 2, y1 = 2 + Math.round(Math.sin(t / 5)), y2 = 2 + Math.round(Math.sin((t - 6) / 5));
+      for (let k = 1; k <= 3; k++) { put(g, Math.round(x) - k * 2, 2 + Math.round(Math.sin((t - k * 4) / 5)), '·'); }
+      put(g, Math.round(x), y1, 'O'); put(g, Math.round(x) - 5, y2, 'o');
+      put(g, 1, 5, 'forces not equal');
+      put(g, 1, 6, 'and opposite');
+      return rows(g); } }
+};
+function startArt() {
+  const figs = [...document.querySelectorAll('.art')];
+  const draw = (fig, t) => { fig.querySelector('pre').textContent = ART[fig.dataset.id].f(t); };
+  figs.forEach(f => draw(f, 26));
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const vis = new Set();
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? vis.add(e.target) : vis.delete(e.target)));
+  figs.forEach(f => io.observe(f));
+  let t = 26;
+  setInterval(() => { if (document.hidden || !vis.size) return; t++; vis.forEach(f => draw(f, t)); }, 140);
 }
 
 // ---------- Tungsten cube ----------
@@ -890,12 +1053,12 @@ function renderChart() {
 function chartInfo(i) {
   const el = $('#chart-info');
   if (i < 0) {
-    el.innerHTML = '<span class="dim">hover or tap a column to read a month; click to jump to its items.</span>';
+    el.innerHTML = '<span class="dim">Hover or tap a column to see that month. Click to jump to its items.</span>';
     return;
   }
   const b = SERIES[i], f = FULL[i], removed = f.items.length - b.items.length;
   let html = `<span class="when">${label(b.d)}</span> <span class="dim">· index ${fmt(b.idx)}</span>`;
-  if (!f.items.length) html += ' <span class="dim">· quiet month, nothing scored</span>';
+  if (!f.items.length) html += ' <span class="dim">· no items this month</span>';
   if (b.items.length) html += '<br>' + b.items.map(e => `${MK[GROUP(e.domain)]} ${esc(e.id)} ${esc(SHORT[e.id] || e.title)} <span class="dim">${fmt(e.idx)}</span>`).join(' &nbsp; ');
   if (removed) html += `<br><span class="dim">${removed} item${removed > 1 ? 's' : ''} this month removed by the filter (unfiltered ${fmt(f.idx)})</span>`;
   el.innerHTML = html;
@@ -916,7 +1079,7 @@ function chartInfo(i) {
 function renderCallouts() {
   const ol = $('#callouts');
   ol.innerHTML = '';
-  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">no month has a surviving item under this filter. the trace is flat.</li>'; return; }
+  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">No items pass this filter.</li>'; return; }
   CALLOUTS.forEach(b => {
     const li = document.createElement('li');
     li.innerHTML = `<span class="cn">[${b.callout}]</span><span class="when">${label(b.d)}</span><span class="ct">${b.items.map(e => esc(e.title)).join(' · ')} <span class="dim">· ${fmt(b.idx)}</span></span>`;
@@ -937,8 +1100,8 @@ function update() {
   const name = sliceName();
   $('#count').textContent = pass.length;
   $('#count').classList.toggle('zero', pass.length === 0);
-  $('#count-of').textContent = `/${N}`;
-  $('#slice-name').textContent = name.toLowerCase();
+  $('#count-of').textContent = `/${N} pass`;
+  $('#slice-name').textContent = name;
   $('#slice-def').textContent = sliceDef();
   $('#bar-count').textContent = `${pass.length}/${N} pass`;
   $('#live').textContent = `${name}: ${pass.length} of ${N} items survive.`;
@@ -955,7 +1118,7 @@ function update() {
   CLAIMS.forEach(c => {
     const total = ITEMS.filter(c.test).length, n = pass.filter(c.test).length;
     $(`[data-claim="${c.k}"]`).textContent = n;
-    $(`[data-bar="${c.k}"]`).textContent = total ? bar(n, total) : '';
+    $(`[data-bar="${c.k}"]`).innerHTML = total ? blocks(n, total) : '';
   });
   ITEMS.forEach(e => {
     const ok = passes(e), card = CARD[e.id];
@@ -967,14 +1130,14 @@ function update() {
     const all = ITEMS.filter(G.test), n = all.filter(passes).length;
     $(`[data-group="${G.k}"]`).textContent = `${n}/${all.length} pass`;
   });
-  $('#statusbar').innerHTML = `<span>-- ${pass.length}/${N} pass · ${esc(name.toLowerCase())} · excluded items dimmed --</span><a href="#filters">[change]</a>`;
+  $('#statusbar').innerHTML = `<span>-- ${pass.length}/${N} pass · ${esc(name)} · excluded items dimmed --</span><a href="#filters">[change]</a>`;
 
   cube.setHeat(pass.length / N);
   $('#cube-cap').innerHTML = pass.length === N
-    ? `current on: <b>${N}/${N}</b> pass. tighten the filter and watch the edges cool.`
+    ? `<b>${N}/${N}</b> pass. The edges glow in proportion to the number that pass.`
     : pass.length === 0
-      ? 'cold metal. <b>nothing</b> passes this filter.'
-      : `cooling: <b>${pass.length}/${N}</b> pass ${esc(name.toLowerCase())}.`;
+      ? `<b>0/${N}</b> pass. No glow.`
+      : `<b>${pass.length}/${N}</b> pass: ${esc(name)}.`;
 
   SERIES = series(pass);
   CALLOUTS = SERIES.filter(b => b.idx > 0).sort((a, c) => c.idx - a.idx).slice(0, 6).sort((a, c) => a.d.localeCompare(c.d));
@@ -1020,6 +1183,7 @@ buildControls();
 buildItems();
 update();
 cube.start();
+startArt();
 addEventListener('hashchange', () => {
   const f = /[#&]f=([a-z,]*)/.exec(location.hash);
   setFilter(f ? f[1].split(',').filter(k => TOGGLES.some(t => t.k === k)) : []);
