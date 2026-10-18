@@ -1,22 +1,13 @@
-# Secrets and environment files: never committed (an example file is fine)
+# Secrets and environment files
 .env
 .env.*
 !.env.example
 *.pem
 *.key
 
-# Private notes: never published
+# Local only
 private/
-
-# Vercel project link (local only)
 .vercel/
 deploy/.vercel/
-
-# session and intake files from the build process, not part of the site
-handoff-receipt.json
-START_PROMPT.txt
-intake-manifest.json
-ai-math-seismograph.html
-
 .DS_Store
 __pycache__/

@@ -21,8 +21,6 @@ build/cube.html      the cube page template; build/cube.js the ASCII cube every 
 build/assemble.py    builds deploy/ from data/ and build/
 deploy/              what Vercel serves: index.html, jamesob.html, the five cube pages, vercel.json
 tests/               check_static.py (data, built pages, page rules); check_revision.py (PR rules)
-AUDIT-2026-10-18.md  the source-by-source audit the current numbers rest on
-ACCEPTANCE.md        the build log; HANDOFF-physics-exhibit.md the original brief
 ```
 
 ## Build and check
@@ -31,8 +29,8 @@ ACCEPTANCE.md        the build log; HANDOFF-physics-exhibit.md the original brie
 python3 -I build/assemble.py && python3 -I tests/check_static.py
 ```
 
-Both pages are single self-contained HTML files: inline CSS and JS, no framework, no build step beyond the splice above. The only external requests are Google Fonts.
+Every page is a single self-contained HTML file: inline CSS and JS, no framework, no build step beyond the splice above. The only external requests are Google Fonts.
 
 ## Deploy
 
-`deploy/` is a Vercel project (`tungsten-bet`). From that folder, `vercel --prod` publishes it. Clean URLs are on, so `deploy/jamesob.html` is served at `/jamesob`.
+`deploy/` is a Vercel project. From that folder, `vercel --prod` publishes it. Clean URLs are on, so `deploy/jamesob.html` is served at `/jamesob`.
