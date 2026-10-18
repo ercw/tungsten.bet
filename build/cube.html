@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080604">
 <title>/*TITLE*/</title>
 <meta name="description" content="/*DESC*/">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
@@ -40,7 +42,7 @@
 
   <header class="top">
     <span class="site"><a href="/"><b>tungsten.bet</b></a>//*ROUTE*/</span>
-    <span><button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+    <a class="dim" href="/">[all cubes]</a>
   </header>
 
   <section class="hero" aria-labelledby="title">
@@ -101,22 +103,7 @@
 <script>
 /*CUBE*/
 Cubes.make(document.getElementById('cube'), { heat: 0.55, tilt: -0.46, scale: 0.31, halo: false, turn: /*TURN*/ });
-// Theme: auto → light → dark → auto, remembered per browser, same key as the other pages.
-(function () {
-  var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
-  var sysDark = matchMedia('(prefers-color-scheme: dark)');
-  var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
-  var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
-  var apply = function (v) {
-    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
-    btn.textContent = '[theme: ' + v + ']';
-    btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v));
-    Cubes.setTheme(v === 'dark' || (v === 'auto' && sysDark.matches));
-  };
-  apply(get());
-  btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
-  sysDark.addEventListener('change', function () { apply(get()); });
-})();
+Cubes.setTheme(true);
 Cubes.start();
 </script>
 </body>

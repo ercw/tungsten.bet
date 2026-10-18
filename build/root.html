@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080604">
 <title>tungsten.bet</title>
 <meta name="description" content="Eric Wall makes public bets for a 1.5-inch tungsten cube. If he loses once, the winner gets every cube. Five cubes won so far, by his own record.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
@@ -81,7 +83,7 @@
 
   <header class="top">
     <span class="site"><b>tungsten.bet</b>/</span>
-    <span><a class="dim" href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">[github]</a>&nbsp; <button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+    <a class="dim" href="https://github.com/ercw/tungsten.bet" target="_blank" rel="noopener">[github]</a>
   </header>
 
   <section class="hero" aria-labelledby="title">
@@ -186,21 +188,7 @@ document.querySelectorAll('.cubelet').forEach(function (cv, i) {
   var wip = !!cv.closest('.wip');
   Cubes.make(cv, { cell: 6.4, scale: 0.32, tilt: -0.46, turn: 0.4 + i * 1.37, speed: 0.75 + (i % 3) * 0.17, phase: i * 1.9, heat: wip ? 1 : 0.5, halo: false });
 });
-// Theme: auto → light → dark → auto, remembered per browser, same key as the James page.
-(function () {
-  var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
-  var sysDark = matchMedia('(prefers-color-scheme: dark)');
-  var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
-  var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
-  var apply = function (v) {
-    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
-    if (btn) { btn.textContent = '[theme: ' + v + ']'; btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v)); }
-    Cubes.setTheme(v === 'dark' || (v === 'auto' && sysDark.matches));
-  };
-  apply(get());
-  if (btn) btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
-  sysDark.addEventListener('change', function () { apply(get()); });
-})();
+Cubes.setTheme(true);
 Cubes.start();
 </script>
 </body>

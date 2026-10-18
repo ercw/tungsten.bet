@@ -89,6 +89,7 @@ check("deploy/<cube>.html pages are built from data/", not stale, str(stale))
 for name, html in [("jamesob", jamesob), ("front", front)] + [(p.stem, h) for p, h in cube_pages.items()]:
     check(f"{name}: no external <script src>", not re.search(r"<script[^>]+src=", html, re.I))
     check(f"{name}: only Google Fonts loaded externally", all("fonts.googleapis.com" in u for u in re.findall(r'<link[^>]+href="(https?://[^"]+)"', html)))
+    check(f"{name}: one palette (no light theme, no theme toggle)", "theme-btn" not in html and "prefers-color-scheme" not in html and "data-theme" not in html)
 check("jamesob: one hard-coded verdict word per side, none computed", len(re.findall(r"verdict: '[^']+'", jamesob)) == 2)
 check("jamesob: Eric's side is quoted from his own post", "ercwl/status/1928882831175876997" in jamesob and "AI cannot invent solutions/workarounds" in jamesob)
 james_bet = next(b for b in bets if b["id"] == "jamesob")

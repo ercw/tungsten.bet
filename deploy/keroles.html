@@ -3,54 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080604">
 <title>Cube #2: The Merge in 2022 · tungsten.bet</title>
 <meta name="description" content="In May 2022 Eric asked for a notable bitcoiner to bet him that the Merge, Ethereum&#x27;s switch to proof of stake, would not happen that year. Christian Keroles of Bitcoin Magazine took the bet. On 30 December 2022 Eric scored it: the Merge had happened, and Keroles had lost a cube.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
 <style>
 /* tungsten.bet, text mode. One monospace for everything you read, a pixel face for display.
-   Light theme: a dot-matrix printout on green-bar paper with tractor-feed holes.
-   Dark theme: an amber phosphor terminal. Same layout, same characters; only the machine changes.
-   Selection is reverse video. Boxes carry their titles in the border. */
+   One palette: an amber phosphor terminal. Selection is reverse video. Boxes carry their titles in the border. */
 :root {
-  --desk: #c7cbc2;
-  --paper: #fcfcf8;
-  --band: #e2eedb;
-  --ink: #1b1d1a;
-  --ink-2: #41463f;
-  --dim: #6f756c;
-  --rule: #9da397;
-  --wash: rgba(27, 29, 26, 0.08);
-  --hot: #c43d17;
-  --link: #0000ee;
-  --vlink: #551a8b;
-  --q: #1f5fbf; --m: #18784a; --p: #c2511b; --x: #41463f;
-  --glow: none;
-  --sheet-bg: repeating-linear-gradient(to bottom, var(--paper) 0 72px, var(--band) 72px 144px);
-  --sheet-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 14px 34px rgba(0, 0, 0, 0.18);
-  --sheet-radius: 0;
-  --holes: block;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
-  --betline: #1b1d1a;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --desk: #080604; --paper: #15100a; --band: #15100a;
-    --ink: #ffc677; --ink-2: #e4a95a; --dim: #9b7544; --rule: #5b4224;
-    --wash: rgba(255, 190, 100, 0.10); --hot: #ff6236;
-    --link: #ffe1a8; --vlink: #d8ad74;
-    --q: #ffdca0; --m: #ffc677; --p: #ff9b4c; --x: #c99856;
-    --glow: 0 0 7px rgba(255, 168, 60, 0.45);
-    --sheet-bg: repeating-linear-gradient(to bottom, rgba(255, 190, 100, 0.035) 0 1px, transparent 1px 3px), radial-gradient(ellipse at 50% 25%, #1e170d 0%, #120d07 70%);
-    --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
-    --sheet-radius: 18px;
-    --holes: none;
-    --betline: #ffffff;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --desk: #080604; --paper: #15100a; --band: #15100a;
+  --desk: #080604; --paper: #15100a;
   --ink: #ffc677; --ink-2: #e4a95a; --dim: #9b7544; --rule: #5b4224;
   --wash: rgba(255, 190, 100, 0.10); --hot: #ff6236;
   --link: #ffe1a8; --vlink: #d8ad74;
@@ -59,8 +21,9 @@
   --sheet-bg: repeating-linear-gradient(to bottom, rgba(255, 190, 100, 0.035) 0 1px, transparent 1px 3px), radial-gradient(ellipse at 50% 25%, #1e170d 0%, #120d07 70%);
   --sheet-shadow: 0 0 0 10px #1c1812, 0 0 0 11px #2d271e, 0 24px 70px rgba(0, 0, 0, 0.7), inset 0 0 140px rgba(0, 0, 0, 0.55);
   --sheet-radius: 18px;
-  --holes: none;
   --betline: #ffffff;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
   color-scheme: dark;
 }
 
@@ -82,19 +45,13 @@ button { font: inherit; color: inherit; }
 .hot { color: var(--hot); }
 p { margin: 0; }
 
-/* The sheet: paper with tractor feed, or a screen */
+/* The sheet: the screen */
 .sheet {
   position: relative; max-width: 1000px; margin: 0 auto;
   background: var(--sheet-bg); box-shadow: var(--sheet-shadow); border-radius: var(--sheet-radius);
   padding: 20px 68px 56px;
   display: grid; grid-template-columns: minmax(0, 1fr); gap: 46px;
 }
-.sheet::before, .sheet::after {
-  content: ""; display: var(--holes); position: absolute; top: 0; bottom: 0; width: 40px;
-  background: radial-gradient(circle, var(--desk) 0 5px, transparent 5.6px) center 12px / 40px 24px repeat-y;
-}
-.sheet::before { left: 0; border-right: 1px dashed var(--rule); }
-.sheet::after { right: 0; border-left: 1px dashed var(--rule); }
 
 /* Top line */
 .top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 2ch; flex-wrap: wrap; border-bottom: 1px solid var(--ink-2); padding-bottom: 6px; margin-bottom: -18px; }
@@ -261,7 +218,6 @@ h1 {
 @media (max-width: 720px) {
   body { padding: 0; font-size: 13.5px; }
   .sheet { padding: 14px 14px 40px; border-radius: 0; gap: 38px; }
-  .sheet::before, .sheet::after { display: none; }
   h1 { font-size: 50px; }
   .rule-h { font-size: 30px; }
   .rule-h .fill { display: none; }
@@ -327,7 +283,7 @@ h1 {
 
   <header class="top">
     <span class="site"><a href="/"><b>tungsten.bet</b></a>/keroles</span>
-    <span><button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+    <a class="dim" href="/">[all cubes]</a>
   </header>
 
   <section class="hero" aria-labelledby="title">
@@ -598,22 +554,7 @@ const Cubes = (() => {
   };
 })();
 Cubes.make(document.getElementById('cube'), { heat: 0.55, tilt: -0.46, scale: 0.31, halo: false, turn: 3.14 });
-// Theme: auto → light → dark → auto, remembered per browser, same key as the other pages.
-(function () {
-  var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
-  var sysDark = matchMedia('(prefers-color-scheme: dark)');
-  var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
-  var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
-  var apply = function (v) {
-    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
-    btn.textContent = '[theme: ' + v + ']';
-    btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v));
-    Cubes.setTheme(v === 'dark' || (v === 'auto' && sysDark.matches));
-  };
-  apply(get());
-  btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
-  sysDark.addEventListener('change', function () { apply(get()); });
-})();
+Cubes.setTheme(true);
 Cubes.start();
 </script>
 </body>
