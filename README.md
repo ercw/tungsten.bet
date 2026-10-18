@@ -21,6 +21,7 @@ build/cube.html      the cube page template; build/cube.js the ASCII cube every 
 build/assemble.py    builds deploy/ from data/ and build/
 deploy/              what Vercel serves: index.html, jamesob.html, the five cube pages, vercel.json
 tests/               check_static.py (data, built pages, page rules); check_revision.py (PR rules)
+SOURCES.md           the primary-source passages behind the corrections on the James page
 ```
 
 ## Build and check
