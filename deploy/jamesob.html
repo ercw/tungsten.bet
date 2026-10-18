@@ -315,14 +315,14 @@ h1 {
 
   <section class="hero" aria-labelledby="title">
     <figure class="cube-fig">
-      <canvas id="cube" width="300" height="300" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters. Its edges glow in proportion to how many items pass the current filter."></canvas>
+      <canvas id="cube" width="300" height="300" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters. Once you pick a filter below, its edges glow in proportion to how many results pass."></canvas>
       <figcaption class="cube-cap dim" id="cube-cap"></figcaption>
     </figure>
     <div class="hero-text">
       <p class="kicker">AI in physics, materials and quantum engineering, <span style="white-space:nowrap">2022–2026</span></p>
       <h1 id="title">Does this update your priors?</h1>
       <p class="lede">On 31 May 2025 James bet a tungsten cube that quantum computing is obvious bullshit. He said he would reconsider if he saw a single huge leap in metallurgy or other physical engineering for which AI was a necessary input. This page sorts AI results from 2022–2026 by how far each one gets on that test. The ratings are Eric's. Eric wins the cube if James changes his mind.</p>
-      <p class="hero-meta"><b id="meta-n">22</b> items &nbsp;·&nbsp; <b>4</b> rungs &nbsp;·&nbsp; <b id="meta-leaps">0</b> huge leaps so far</p>
+      <p class="hero-meta">Below: the bet as it was made, then <b id="meta-n">23</b> AI results from 2022–2026, each with its source and its caveat.</p>
     </div>
   </section>
 
@@ -364,7 +364,7 @@ h1 {
 
   <section aria-labelledby="ladder-h" id="filters">
     <h2 class="rule-h" id="ladder-h"><span>James's test as a ladder</span><span class="fill" aria-hidden="true"></span></h2>
-    <p class="sub">His test, split into steps. An item reaches a rung only if it also reached every rung below it. Pick a row to keep only the items that reach it; the others are dimmed in the list further down.</p>
+    <p class="sub">His test, split into steps. A result reaches a rung only if it also reached every rung below it. Pick a row to keep only the results that reach it; the others are dimmed in the list further down.</p>
     <ol class="rungs-def">
       <li><b>rung 1, AI touched matter.</b> AI was an input to something that was synthesized, fabricated or physically controlled. James expected these first: <q>I think we'll see early signs well ahead in more primitive forms of engineering</q>.</li>
       <li><b>rung 2, AI was necessary.</b> The result could not have been reached the same way without the AI. James: <q>for which AI was a necessary input</q>.</li>
@@ -372,8 +372,8 @@ h1 {
       <li><b>qubits.</b> Separate from the rungs: does it bear on building many physical qubits? James: <q>buildable and operatable by human construction for some huge number of physical qbits</q>.</li>
     </ol>
     <div class="box dbl">
-      <span class="box-t">LADDER.EXE</span><span class="box-t r" id="bar-count">22/22 pass</span>
-      <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">22</span><span class="of" id="count-of">/22</span></span><span id="slice-name">everything</span><span class="cursor"></span></p>
+      <span class="box-t">LADDER.EXE</span><span class="box-t r" id="bar-count">no filter</span>
+      <p class="prompt" aria-hidden="true"><span class="ps">&gt;</span><span><span id="count">23</span><span class="of" id="count-of"> results</span></span><span id="slice-name">no filter</span><span class="cursor"></span></p>
       <p class="slice-def" id="slice-def">no filter</p>
       <p class="sr" id="live" aria-live="polite"></p>
       <div class="ladder" id="ladder" role="group" aria-label="Rungs and tests"></div>
@@ -415,7 +415,7 @@ h1 {
     <div class="foot">
       <div class="foot-notes">
         <p>All ratings are judgment calls. Changing one in the data changes every count on the page. Dates are the month of announcement.</p>
-        <p>The items come from research notes. Eleven were corrected against primary sources on 18 October 2026 (AUDIT-2026-10-18.md in the repository); the rest have not been rechecked. The four ladder ratings on each item (touched matter, AI necessary, huge leap, bears on qubits) are Eric's. "Eric's strict test" (LLM-driven and ran on hardware) is Eric's own filter. James did not agree to it.</p>
+        <p>The results come from research notes. Eleven were corrected against primary sources on 18 October 2026 (AUDIT-2026-10-18.md in the repository); the rest have not been rechecked. The four ladder ratings on each result (touched matter, AI necessary, huge leap, bears on qubits) are Eric's. "Eric's strict test" (LLM-driven and ran on hardware) is Eric's own filter. James did not agree to it.</p>
         <ol class="sources" id="sources" aria-label="Sources"></ol>
         <p><a href="#top">[ back to top ]</a> &nbsp; <span class="dim">best viewed in any browser.</span></p>
       </div>
@@ -523,7 +523,7 @@ const TOGGLES = [
 ];
 // The ladder rows. `name` is used in the status line; `row` is the text on the row.
 const PRESETS = [
-  { k: 'all', name: 'all items', row: 'all items', on: [] },
+  { k: 'all', name: 'all results', row: 'all results', on: [] },
   { k: 'signs', name: 'rung 1: AI touched matter', row: 'rung 1  AI touched matter', on: ['matter'] },
   { k: 'necessary', name: 'rung 2: AI was necessary', row: 'rung 2  + AI was necessary', on: ['matter', 'necessary'] },
   { k: 'leap', name: 'rung 3: a huge leap', row: 'rung 3  + a huge leap', note: "<- James's bar", on: ['matter', 'necessary', 'leap'] },
@@ -542,23 +542,23 @@ const CLAIMS = [
     note: () => {
       const m = ITEMS.filter(e => L(e).matter), leaps = m.filter(e => L(e).leap === 'leap').length;
       const signs = m.filter(e => L(e).leap === 'early sign').length;
-      return `${plural(m.length, 'item', 'items')} changed or controlled matter with AI as an input. ${leaps ? `Eric rates ${plural(leaps, 'of them', 'of them')} as a huge leap.` : signs === m.length ? 'Eric rates all of them as early signs and none as a huge leap.' : 'Eric rates none of them as a huge leap.'}`;
+      return `${plural(m.length, 'result', 'results')} changed or controlled matter with AI as an input. ${leaps ? `Eric rates ${plural(leaps, 'of them', 'of them')} as a huge leap.` : signs === m.length ? 'Eric rates all of them as early signs and none as a huge leap.' : 'Eric rates none of them as a huge leap.'}`;
     },
     counts: 'touched matter', test: e => L(e).matter },
   { k: '2', url: 'https://x.com/jamesob/status/1928911469342806444', quote: "I very much doubt we'll see that come out of autocorrect++.", verdict: 'Holds', mark: '●',
     note: () => {
       const lm = ITEMS.filter(e => L(e).matter && e.llm);
       const leaps = lm.filter(e => L(e).leap === 'leap');
-      if (!lm.length) return 'No LLM-driven item touched matter. The items that did used specialized models.';
-      return `${plural(lm.length, 'LLM-driven item', 'LLM-driven items')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(e => e.id).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
+      if (!lm.length) return 'No LLM-driven result touched matter. The results that did used specialized models.';
+      return `${plural(lm.length, 'LLM-driven result', 'LLM-driven results')} touched matter: ${lm.map(e => `${SHORT[e.id] || e.id} (${e.verification})`).join(', ')}. ${leaps.length ? `Eric rates ${leaps.map(e => e.id).join(', ')} as a huge leap.` : 'Eric rates none of them as a huge leap.'}`;
     },
     counts: 'LLM-driven and touched matter', test: e => L(e).matter && e.llm },
   { k: '3', url: 'https://x.com/jamesob/status/1928911469342806444', quote: 'Then whatever discoveries are made must actually be buildable and operatable by human construction for some huge number of physical qbits.', verdict: 'Not yet', mark: '○',
     note: () => {
       const b = ITEMS.filter(e => L(e).matter && L(e).qubits);
       return b.length
-        ? `${plural(b.length, 'item', 'items')} touched matter and bear on qubits: ${b.map(e => SHORT[e.id] || e.id).join(', ')}.`
-        : 'No item here involves qubit materials, fabrication or cryogenics. The quantum items are decoders and circuit designs, which are software.';
+        ? `${plural(b.length, 'result', 'results')} touched matter and bear on qubits: ${b.map(e => SHORT[e.id] || e.id).join(', ')}.`
+        : 'No result here involves qubit materials, fabrication or cryogenics. The quantum results are decoders and circuit designs, which are software.';
     },
     counts: 'touched matter and bear on qubits', test: e => L(e).matter && L(e).qubits }
 ];
@@ -602,13 +602,12 @@ function buildClaims() {
       <div><blockquote>“${esc(c.quote)}” <a href="${esc(c.url)}" target="_blank" rel="noopener">[31 May 2025]</a></blockquote></div>
       <div>
         <p class="note">${esc(c.note())}</p>
-        <p class="cnt"><span class="n" data-claim="${c.k}">${total}</span><span class="dim">/${total}</span> <span class="bar" data-bar="${c.k}" aria-hidden="true"></span> <span class="dim">${esc(c.counts)}, passing the filter</span></p>
+        <p class="cnt"><span class="n" data-claim="${c.k}">${total}</span><span class="dim" data-claim-of="${c.k}"></span> <span class="bar" data-bar="${c.k}" aria-hidden="true"></span> <span class="dim" data-claim-txt="${c.k}">${esc(c.counts)}</span></p>
         <p class="reading">verdict: Eric's judgment</p>
       </div>
     </article>`;
   }).join('');
   $('#meta-n').textContent = ITEMS.length;
-  $('#meta-leaps').textContent = ITEMS.filter(e => L(e).leap === 'leap').length;
 }
 function buildControls() {
   const N = ITEMS.length, lad = $('#ladder');
@@ -618,7 +617,7 @@ function buildControls() {
     const n = countWith(p.on);
     b.type = 'button'; b.className = 'btn lrow'; b.dataset.k = p.k;
     b.innerHTML = `<span class="lr-mark" aria-hidden="true">( )</span><span class="lr-name">${esc(p.row)}${p.note ? ` <span class="lr-note">${esc(p.note)}</span>` : ''}</span><span class="lr-bar" aria-hidden="true">${blocks(n, N)}</span><span class="lr-n">${n}</span>`;
-    b.setAttribute('aria-label', `${p.name}: ${n} of ${N} items`);
+    b.setAttribute('aria-label', `${p.name}: ${n} of ${N} results`);
     b.addEventListener('click', () => setFilter(p.on));
     lad.appendChild(b);
   });
@@ -631,7 +630,7 @@ function buildControls() {
   });
   const m1 = ITEMS.filter(e => L(e).matter), m2 = m1.filter(e => L(e).necessary === true), m3 = m2.filter(e => L(e).leap === 'leap');
   const arguable = m1.filter(e => L(e).necessary === 'arguable').map(e => e.id);
-  $('#funnel-note').textContent = `Each block is one item. ${m1.length} reach rung 1 (${m1.map(e => e.id).join(', ')}). ${m2.length} reach rung 2${arguable.length ? `; for ${arguable.join(', ')} the AI's necessity is arguable, so they stop at rung 1` : ''}. ${m3.length} reach rung 3. Ratings are Eric's.`;
+  $('#funnel-note').textContent = `Each block is one result. ${m1.length} reach rung 1 (${m1.map(e => e.id).join(', ')}). ${m2.length} reach rung 2${arguable.length ? `; for ${arguable.join(', ')} the AI's necessity is arguable, so they stop at rung 1` : ''}. ${m3.length} reach rung 3. Ratings are Eric's.`;
 }
 const CARD = {};
 function buildItems() {
@@ -1053,14 +1052,14 @@ function renderChart() {
 function chartInfo(i) {
   const el = $('#chart-info');
   if (i < 0) {
-    el.innerHTML = '<span class="dim">Hover or tap a column to see that month. Click to jump to its items.</span>';
+    el.innerHTML = '<span class="dim">Hover or tap a column to see that month. Click to jump to its results.</span>';
     return;
   }
   const b = SERIES[i], f = FULL[i], removed = f.items.length - b.items.length;
   let html = `<span class="when">${label(b.d)}</span> <span class="dim">· index ${fmt(b.idx)}</span>`;
   if (!f.items.length) html += ' <span class="dim">· no items this month</span>';
   if (b.items.length) html += '<br>' + b.items.map(e => `${MK[GROUP(e.domain)]} ${esc(e.id)} ${esc(SHORT[e.id] || e.title)} <span class="dim">${fmt(e.idx)}</span>`).join(' &nbsp; ');
-  if (removed) html += `<br><span class="dim">${removed} item${removed > 1 ? 's' : ''} this month removed by the filter (unfiltered ${fmt(f.idx)})</span>`;
+  if (removed) html += `<br><span class="dim">${removed} result${removed > 1 ? 's' : ''} this month removed by the filter (unfiltered ${fmt(f.idx)})</span>`;
   el.innerHTML = html;
 }
 (() => {
@@ -1079,7 +1078,7 @@ function chartInfo(i) {
 function renderCallouts() {
   const ol = $('#callouts');
   ol.innerHTML = '';
-  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">No items pass this filter.</li>'; return; }
+  if (!CALLOUTS.length) { ol.innerHTML = '<li class="empty">No results pass this filter.</li>'; return; }
   CALLOUTS.forEach(b => {
     const li = document.createElement('li');
     li.innerHTML = `<span class="cn">[${b.callout}]</span><span class="when">${label(b.d)}</span><span class="ct">${b.items.map(e => esc(e.title)).join(' · ')} <span class="dim">· ${fmt(b.idx)}</span></span>`;
@@ -1098,27 +1097,31 @@ function setFilter(on) { state.clear(); on.forEach(k => state.add(k)); update();
 function update() {
   const pass = ITEMS.filter(passes), N = ITEMS.length;
   const name = sliceName();
-  $('#count').textContent = pass.length;
-  $('#count').classList.toggle('zero', pass.length === 0);
-  $('#count-of').textContent = `/${N} pass`;
-  $('#slice-name').textContent = name;
-  $('#slice-def').textContent = sliceDef();
-  $('#bar-count').textContent = `${pass.length}/${N} pass`;
-  $('#live').textContent = `${name}: ${pass.length} of ${N} items survive.`;
+  const on = state.size > 0;
+  $('#count').textContent = on ? pass.length : N;
+  $('#count').classList.toggle('zero', on && pass.length === 0);
+  $('#count-of').textContent = on ? `/${N} pass` : ' results';
+  $('#slice-name').textContent = on ? name : 'no filter';
+  $('#slice-def').textContent = on ? sliceDef() : 'Pick a row below to filter by rung.';
+  $('#bar-count').textContent = on ? `${pass.length}/${N} pass` : 'no filter';
+  $('#live').textContent = on ? `${name}: ${pass.length} of ${N} results pass.` : `No filter: all ${N} results shown.`;
   document.querySelectorAll('.toggle').forEach(b => {
-    const on = state.has(b.dataset.k);
-    b.setAttribute('aria-pressed', on);
-    b.querySelector('.box-mark').textContent = on ? '[x]' : '[ ]';
+    const t = state.has(b.dataset.k);
+    b.setAttribute('aria-pressed', t);
+    b.querySelector('.box-mark').textContent = t ? '[x]' : '[ ]';
   });
   document.querySelectorAll('.lrow').forEach(b => {
-    const on = sameSet(PRESETS.find(p => p.k === b.dataset.k).on);
-    b.setAttribute('aria-pressed', on);
-    b.querySelector('.lr-mark').textContent = on ? '(*)' : '( )';
+    const t = sameSet(PRESETS.find(p => p.k === b.dataset.k).on);
+    b.setAttribute('aria-pressed', t);
+    b.querySelector('.lr-mark').textContent = t ? '(*)' : '( )';
   });
   CLAIMS.forEach(c => {
     const total = ITEMS.filter(c.test).length, n = pass.filter(c.test).length;
-    $(`[data-claim="${c.k}"]`).textContent = n;
-    $(`[data-bar="${c.k}"]`).innerHTML = total ? blocks(n, total) : '';
+    const f = on && total > 0;
+    $(`[data-claim="${c.k}"]`).textContent = f ? n : total;
+    $(`[data-claim-of="${c.k}"]`).textContent = f ? `/${total}` : '';
+    $(`[data-claim-txt="${c.k}"]`).textContent = f ? `${c.counts}, passing your filter` : c.counts;
+    $(`[data-bar="${c.k}"]`).innerHTML = f ? blocks(n, total) : '';
   });
   ITEMS.forEach(e => {
     const ok = passes(e), card = CARD[e.id];
@@ -1128,23 +1131,25 @@ function update() {
   });
   GROUPS.forEach(G => {
     const all = ITEMS.filter(G.test), n = all.filter(passes).length;
-    $(`[data-group="${G.k}"]`).textContent = `${n}/${all.length} pass`;
+    $(`[data-group="${G.k}"]`).textContent = on ? `${n} of ${all.length} pass` : `${all.length} results`;
   });
-  $('#statusbar').innerHTML = `<span>-- ${pass.length}/${N} pass · ${esc(name)} · excluded items dimmed --</span><a href="#filters">[change]</a>`;
+  $('#statusbar').innerHTML = on
+    ? `<span>-- ${pass.length} of ${N} pass: ${esc(name)} · the rest are dimmed --</span><a href="#filters">[change]</a>`
+    : `<span>-- all ${N} results shown --</span><a href="#filters">[filter by rung]</a>`;
 
-  cube.setHeat(pass.length / N);
-  $('#cube-cap').innerHTML = pass.length === N
-    ? `<b>${N}/${N}</b> pass. The edges glow in proportion to the number that pass.`
+  cube.setHeat(on ? pass.length / N : 1);
+  $('#cube-cap').innerHTML = !on
+    ? 'The stake: a tungsten cube.'
     : pass.length === 0
-      ? `<b>0/${N}</b> pass. No glow.`
-      : `<b>${pass.length}/${N}</b> pass: ${esc(name)}.`;
+      ? 'No results pass this filter, so the edges do not glow.'
+      : `<b>${pass.length} of ${N}</b> results pass your filter. The glow on the edges follows that number.`;
 
   SERIES = series(pass);
   CALLOUTS = SERIES.filter(b => b.idx > 0).sort((a, c) => c.idx - a.idx).slice(0, 6).sort((a, c) => a.d.localeCompare(c.d));
   CALLOUTS.forEach((b, i) => b.callout = i + 1);
   $('#ghost-key').hidden = state.size === 0;
   const peaks = CALLOUTS.map(b => `${label(b.d)} ${fmt(b.idx)}`).join(', ');
-  $('#chart-desc').textContent = pass.length ? `Monthly index for ${pass.length} items, January 2022 to October 2026. Peaks: ${peaks}.` : 'No items pass the filter; the trace is flat at zero.';
+  $('#chart-desc').textContent = pass.length ? `Monthly index for ${pass.length} results, January 2022 to October 2026. Peaks: ${peaks}.` : 'No results pass the filter, so every month is at zero.';
   renderChart();
   chartInfo(hoverCol);
   renderCallouts();
