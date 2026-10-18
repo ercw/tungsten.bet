@@ -10,7 +10,9 @@ The data is the source of truth:
 The templates hold everything else:
     build/template.html   the James page; /*ITEMS*/ and /*LADDER*/ are replaced by the data blocks
     build/root.html       the front page; /*STYLE*/ takes the James page's stylesheet so the two stay
-                          in one visual system, /*TROPHIES*/ the cubes won, /*OPEN*/ the open bets, /*RECORD*/ the tally
+                          in one visual system, /*SHELF*/ the pyramid of cubes, /*TROPHIES*/ the cubes won,
+                          /*OPEN*/ the open bets, /*RECORD*/ the tally
+    build/cube.js         the ASCII cube renderer, pasted into both pages where /*CUBE*/ stands
 """
 import html as H
 import json, pathlib, re, sys
@@ -34,10 +36,16 @@ def ladder_block(ladder):
     return "{\n" + ",\n".join(f"  {json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}" for k, v in ladder.items()) + "\n}"
 
 
+def cube_js():
+    return (BUILD / "cube.js").read_text(encoding="utf-8").rstrip("\n")
+
+
 def build_exhibit(items, ladder):
     tpl = (BUILD / "template.html").read_text(encoding="utf-8")
-    assert tpl.count("/*ITEMS*/") == 1 and tpl.count("/*LADDER*/") == 1, "template placeholders missing"
-    return tpl.replace("/*ITEMS*/", items_block(items), 1).replace("/*LADDER*/", ladder_block(ladder), 1)
+    for ph in ("/*ITEMS*/", "/*LADDER*/", "/*CUBE*/"):
+        assert tpl.count(ph) == 1, f"template placeholder {ph} missing"
+    return (tpl.replace("/*ITEMS*/", items_block(items), 1).replace("/*LADDER*/", ladder_block(ladder), 1)
+            .replace("/*CUBE*/", cube_js(), 1))
 
 
 STATUS = {"won": ("WON", "won"), "lost": ("LOST", "lost"), "open": ("OPEN", "open")}
@@ -83,6 +91,34 @@ def open_row(b):
             f'<span>{who(b)}: {quote(b)}{note} <span class="src">{sources(b)}</span></span></li>')
 
 
+def slot(n, b):
+    """One cube in the pyramid: a won cube links to its row below, an open bet to its page."""
+    handle = H.escape(b["counterparty"]["handle"])
+    if b["status"] == "open":
+        href, cls, when = H.escape(b["page"]), "slot wip", "in progress"
+    else:
+        href, cls, when = f'#bet-{H.escape(b["id"])}', "slot", day(b["announced"]).split(" ", 1)[1]
+    return (f'<a class="{cls}" href="{href}"><canvas class="cubelet" aria-hidden="true"></canvas>'
+            f'<span class="cap"><b>#{n}</b> @{handle}<br><span class="dim">{when}</span></span></a>')
+
+
+def shelf(bets):
+    """The won cubes, oldest at the base, stacked as a pyramid; the open bets sit on top, still in progress.
+    Tiers are emitted bottom first (CSS reverses them), so the reading order runs #1, #2, #3 ..."""
+    won = sorted((b for b in bets if b["status"] == "won"), key=lambda b: b["n"])
+    cubes = won + [b for b in bets if b["status"] == "open"]
+    base = 1
+    while base * (base + 1) // 2 < len(cubes):
+        base += 1
+    tiers, i = [], 0
+    for width in range(base, 0, -1):
+        row = cubes[i:i + width]
+        if row:
+            tiers.append('<div class="tier">' + "".join(slot(i + j + 1, b) for j, b in enumerate(row)) + "</div>")
+        i += width
+    return f'<div class="tiers" style="--base:{base}">' + "\n".join(tiers) + "</div>"
+
+
 def record(bets):
     return {k: sum(1 for b in bets if b["status"] == k) for k in STATUS}
 
@@ -90,7 +126,7 @@ def record(bets):
 def build_root(bets):
     tpl = (BUILD / "root.html").read_text(encoding="utf-8")
     style = re.search(r"<style>\n(.*?)\n</style>", (BUILD / "template.html").read_text(encoding="utf-8"), re.S).group(1)
-    for ph in ("/*STYLE*/", "/*TROPHIES*/", "/*OPEN*/", "/*RECORD*/", "/*SOURCES*/"):
+    for ph in ("/*STYLE*/", "/*SHELF*/", "/*TROPHIES*/", "/*OPEN*/", "/*RECORD*/", "/*SOURCES*/", "/*CUBE*/"):
         assert tpl.count(ph) == 1, f"root placeholder {ph} missing"
     n = record(bets)
     tally = (f'<b>{n["won"]}</b> cubes won &nbsp;·&nbsp; <b class="{"hot" if n["lost"] else ""}">{n["lost"]}</b> lost'
@@ -106,7 +142,8 @@ def build_root(bets):
                 seen.add(s["url"])
                 srcs.append(f'<li><a href="{H.escape(s["url"])}" target="_blank" rel="noopener">{H.escape(s["label"])}</a> <span class="dim">{H.escape(s["url"])}</span></li>')
     return (tpl.replace("/*STYLE*/", style, 1).replace("/*TROPHIES*/", trophies, 1).replace("/*OPEN*/", opened, 1)
-            .replace("/*RECORD*/", tally, 1).replace("/*SOURCES*/", "\n".join(srcs), 1))
+            .replace("/*RECORD*/", tally, 1).replace("/*SOURCES*/", "\n".join(srcs), 1)
+            .replace("/*SHELF*/", shelf(bets), 1).replace("/*CUBE*/", cube_js(), 1))
 
 
 def main(argv):

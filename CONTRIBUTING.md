@@ -35,7 +35,7 @@ Then add the item's row to `data/ladder.json` (`matter`, `necessary` true/false/
 
 ## Correcting the bet record
 
-`data/bets.json` holds the front page's record: the cubes Eric has announced winning (`won`, numbered in the order he announced them) and the bets still open (`open`, each with the page that covers it). Every row quotes Eric's own post (`claim`, `claim_url`). Where two of his posts disagree about a bet, the row follows the post from the day the cube arrived and the `note` quotes the other one; do not merge them into one sentence. A lost bet goes in as `lost`, and the front page's "Never lost" section then has to change.
+`data/bets.json` holds the front page's record: the cubes Eric has announced winning (`won`, numbered in the order he announced them) and the bets still open (`open`, each with the page that covers it). Every row quotes Eric's own post (`claim`, `claim_url`). Each won row follows the post from the day the cube arrived. A lost bet goes in as `lost`, and the front page's "Never lost" section then has to change.
 
 ## Build and check
 

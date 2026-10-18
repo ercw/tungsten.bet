@@ -35,11 +35,9 @@
     "claim": "A new tungsten cube arrived today! This shoutout goes to @bitcoinerrrrr for betting me that ETH withdrawals wouldn’t launch this year.",
     "claim_url": "https://x.com/ercwl/status/1662016860991135745",
     "stake": "a 1.5-inch tungsten cube",
-    "note": "A recap Eric posted on 30 Dec 2023 says instead that @bitcoinerrrrr “bet me the Merge wasn’t going to happen this year”. The two posts disagree. This row follows the post from the day the cube arrived, which also matches his 9 Jan 2023 plan to win “against @bitcoinerrrrr over ETH withdrawals”.",
     "sources": [
       {"label": "Cube arrived, 26 May 2023", "url": "https://x.com/ercwl/status/1662016860991135745"},
-      {"label": "Plan for 2023, 9 Jan 2023", "url": "https://x.com/ercwl/status/1612393877519859712"},
-      {"label": "Recap of 2023, 30 Dec 2023", "url": "https://x.com/ercwl/status/1741111129059860728"}
+      {"label": "Plan for 2023, 9 Jan 2023", "url": "https://x.com/ercwl/status/1612393877519859712"}
     ]
   },
   {
@@ -80,24 +78,10 @@
     "claim_url": "https://x.com/jamesob/status/1928911469342806444",
     "stake": "a 1.5-inch tungsten cube",
     "page": "/jamesob",
-    "note": "James's test, 31 May 2025. Eric: “Let’s do a 3 year bet. Tungsten cube?” James: “Done”.",
+    "note": "James's test, 31 May 2025. Eric: “Let’s do a 3 year bet. Tungsten cube?” James: “Done”. Simplified on 5 July 2025. Eric: “I bet that within 3 years, you’ll change your mind, and you now believe that quantum computing is not obvious bullshit.” James: “Yes, let's do it”. Counted from July, it settles 5 Jul 2028.",
     "sources": [
       {"label": "James's test, 31 May 2025", "url": "https://x.com/jamesob/status/1928911469342806444"},
-      {"label": "“Done”, 31 May 2025", "url": "https://x.com/jamesob/status/1928913574241415202"}
-    ]
-  },
-  {
-    "id": "jamesob-2025-07",
-    "status": "open",
-    "opened": "2025-07-05",
-    "settles": "2028-07-05",
-    "counterparty": {"handle": "jamesob", "name": "James O'Beirne"},
-    "claim": "I bet that within 3 years, you’ll change your mind, and you now believe that quantum computing is not obvious bullshit.",
-    "claim_url": "https://x.com/ercwl/status/1941525148722659776",
-    "stake": "a 1.5-inch tungsten cube",
-    "page": "/jamesob",
-    "note": "Eric's simplification, 5 July 2025. James: “Yes, let's do it”.",
-    "sources": [
+      {"label": "“Done”, 31 May 2025", "url": "https://x.com/jamesob/status/1928913574241415202"},
       {"label": "Eric's simplification, 5 Jul 2025", "url": "https://x.com/ercwl/status/1941525148722659776"},
       {"label": "“Yes, let's do it”, 5 Jul 2025", "url": "https://x.com/jamesob/status/1941570265416335402"}
     ]

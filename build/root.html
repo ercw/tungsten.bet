@@ -37,7 +37,30 @@
 .open-list .src a { margin-right: 4px; }
 .open-card { display: grid; gap: 8px; }
 .open-card .big-link { font-family: var(--pixel); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
-.hero .tile { margin: 0; }
+.hero { grid-template-columns: auto minmax(0, 1fr); }
+.pyramid { margin: 0; display: grid; gap: 14px; justify-items: center; --c: 124px; }
+.tiers { display: flex; flex-direction: column-reverse; align-items: center; gap: 4px; }
+.tier { display: flex; justify-content: center; gap: 6px; }
+.slot { width: var(--c); display: grid; justify-items: center; color: inherit; text-decoration: none; }
+.slot:hover { background: none; color: inherit; }
+.slot:hover .cap b { background: var(--link); color: var(--paper); }
+.cubelet { width: var(--c); height: var(--c); display: block; }
+.slot .cap { font-size: 11px; line-height: 1.3; text-align: center; margin-top: -2px; white-space: nowrap; }
+.slot .cap b { padding: 0 0.3ch; }
+.slot.wip .cubelet { filter: blur(1.6px); opacity: 0.85; }
+.slot.wip .cap .dim::after { content: "_"; animation: blink 1.1s steps(1) infinite; }
+.pyramid figcaption { font-size: 12px; line-height: 1.45; text-align: center; max-width: 44ch; }
+.pyramid figcaption q { font-style: italic; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .pyramid { justify-self: center; }
+}
+@media (max-width: 720px) {
+  .pyramid { --c: min(118px, calc((100vw - 44px) / 3)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slot.wip .cap .dim::after { animation: none; }
+}
 @media (max-width: 720px) {
   .record thead { display: none; }
   .record tr { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 10px 0; border-bottom: 1px dashed var(--rule); }
@@ -58,16 +81,9 @@
   </header>
 
   <section class="hero" aria-labelledby="title">
-    <figure class="cube-fig">
-<pre class="tile" aria-label="Tungsten, element 74">+-----------+
-| 74        |
-|           |
-|     W     |
-|           |
-| tungsten  |
-|  183.84   |
-+-----------+
- 1.5 inch</pre>
+    <figure class="pyramid" aria-label="The cubes won so far, stacked as a pyramid, with the open bet on top">
+/*SHELF*/
+      <figcaption class="dim"><q>I am going to build a pyramid of your failed bets vs. me, in tungsten.</q> (<a href="https://x.com/ercwl/status/1456221544649211906" target="_blank" rel="noopener">ercwl, 4 Nov 2021</a>)</figcaption>
     </figure>
     <div class="hero-text">
       <p class="kicker">Eric Wall's tungsten cube bets</p>
@@ -159,18 +175,29 @@
 <script>
 // Filter links shared before the James page moved (tungsten.bet/#f=...) still work: send them on.
 if (location.hash && location.hash.indexOf('#f=') === 0) location.replace('/jamesob' + location.hash);
+/*CUBE*/
+// The pyramid: each cube turns at its own pace. Won cubes keep a faint glow on their edges;
+// the open bet on top runs hot and stays blurred until it settles.
+document.querySelectorAll('.cubelet').forEach(function (cv, i) {
+  var wip = !!cv.closest('.wip');
+  Cubes.make(cv, { cell: 6.4, scale: 0.32, tilt: -0.46, turn: 0.4 + i * 1.37, speed: 0.75 + (i % 3) * 0.17, phase: i * 1.9, heat: wip ? 1 : 0.5, halo: false });
+});
 // Theme: auto → light → dark → auto, remembered per browser, same key as the James page.
 (function () {
   var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
+  var sysDark = matchMedia('(prefers-color-scheme: dark)');
   var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
   var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
   var apply = function (v) {
     if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
     if (btn) { btn.textContent = '[theme: ' + v + ']'; btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v)); }
+    Cubes.setTheme(v === 'dark' || (v === 'auto' && sysDark.matches));
   };
   apply(get());
   if (btn) btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
+  sysDark.addEventListener('change', function () { apply(get()); });
 })();
+Cubes.start();
 </script>
 </body>
 </html>
