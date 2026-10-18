@@ -1,0 +1,150 @@
+[
+  {
+    "bet": "adam3us",
+    "route": "adam",
+    "title": "PlanB's November target",
+    "lede": "On 1 November 2021 PlanB posted a target of more than $98K for Bitcoin in November. Two days later Eric bet a cube that it would fail, and Adam Back took the bet 18 minutes later. Eric unveiled the cube on 28 December as piece #1 of his collection.",
+    "terms": [
+      {"k": "target", "pre": "PlanB: ", "quote": "Next targets: Nov>$98K, Dec>$135K", "post": "1454962054297788417"},
+      {"k": "Eric", "quote": "I’m willing to bet a 1.5” tungsten cube this Nov prediction fails. Any takers?", "post": "1456017800879906819"},
+      {"k": "Adam", "quote": "i'll take a tungsten cube. sounds like fun.", "post": "1456022366144901123"},
+      {"k": "rule", "pre": "The November target only. Not the December target of more than $135K, and not PlanB's model as a whole."},
+      {"k": "outcome", "pre": "Eric, 28 Dec 2021: ", "quote": "he lost the bet on whether PlanB’s (@100trillionUSD) floor model would fail to meet its >$98K November target (it failed).", "post": "1475761542922739713"},
+      {"k": "Adam, after", "quote": "i had no opinions on the floor model. fwiw", "post": "1475773633389809672", "after": " He took the bet, not a side on the model."}
+    ],
+    "log": [
+      {"post": "1454962054297788417"},
+      {"post": "1456017800879906819"},
+      {"post": "1456022366144901123"},
+      {"sys": "bet on", "detail": "Eric says PlanB's November target fails; Adam takes the other side"},
+      {"post": "1468222066365194242"},
+      {"post": "1475761542922739713"},
+      {"post": "1475773633389809672"},
+      {"sys": "cube #1", "detail": "the first cube in the collection"}
+    ],
+    "caveats": [
+      {"text": "Bitcoin's November 2021 price was not checked against a market source for this page. Both sides treated the target as missed."}
+    ]
+  },
+  {
+    "bet": "keroles",
+    "route": "keroles",
+    "title": "The Merge in 2022",
+    "lede": "In May 2022 Eric asked for a notable bitcoiner to bet him that the Merge, Ethereum's switch to proof of stake, would not happen that year. Christian Keroles of Bitcoin Magazine took the bet. On 30 December 2022 Eric scored it: the Merge had happened, and Keroles had lost a cube.",
+    "terms": [
+      {"k": "Eric", "quote": "Can I get a notable bitcoiner to bet me a 1.5” tungsten cube (~$400) that the Merge (Ethereum successfully switching to PoS) won’t happen this year?", "post": "1526704743007064064"},
+      {"k": "Keroles", "quote": "I’ll bet you.", "post": "1527142772813156352"},
+      {"k": "the bet", "pre": "Eric's announcement: ", "quote": "Bet is on whether Ethereum will successfully migrate to PoS or not in 2022. I am taking the ”pro” side, @ck_SNARKs is taking the ”con”.", "post": "1527337283849838606"},
+      {"k": "success", "pre": "Eric had already said what a successful Merge looks like, in a prediction on 29 Dec 2021: ", "quote": "Yes, the Merge will happen and it will be successful. There may be some resistance from PoW miners, but any remaining PoW-chainsplit of Ethereum will swiftly fall into irrelevance. No catastrophic attacks on ETH2 PoS occur.", "post": "1476075137032151041", "after": " The bet post did not repeat these conditions."},
+      {"k": "outcome", "pre": "Eric, 30 Dec 2022: ", "quote": "The fact that the Merge happened without any bugs, emergency fixes or need to restart despite so many different clients interacting with each other is one of the bright spots of the year. ETHPoW became a thing but did become irrelevant. @ck_SNARKs lost a tungsten cube", "post": "1608770238077890562"}
+    ],
+    "log": [
+      {"post": "1476075137032151041"},
+      {"post": "1526704743007064064"},
+      {"post": "1527142772813156352"},
+      {"post": "1527145106402586624"},
+      {"post": "1527337283849838606"},
+      {"post": "1527446323711987713"},
+      {"sys": "bet on", "detail": "Eric says the Merge happens in 2022; Keroles says it does not"},
+      {"post": "1608770238077890562"},
+      {"post": "1612393877519859712", "excerpt": "[…] 2022 I won a tungsten cube from Christian Keroles (Managing Director at Bitcoin Magazine) over the Merge. […]"},
+      {"sys": "cube #2", "detail": "scored by Eric on 30 Dec 2022"}
+    ],
+    "caveats": [
+      {"text": "No post from Keroles conceding the bet was found. The outcome on this page is Eric's scoring."},
+      {"text": "The date the Merge went live is not in these posts. The bet was on 2022 as a whole."}
+    ]
+  },
+  {
+    "bet": "bitcoinerrrrr",
+    "route": "bitcoinerrrrr",
+    "title": "ETH withdrawals in 2023",
+    "lede": "In September 2022 Eric offered a cube on Ethereum enabling withdrawals in 2023. @bitcoinerrrrr took the other side in November. By March 2023 he wrote that he knew he had lost, and the cube arrived on 26 May 2023.",
+    "terms": [
+      {"k": "Eric", "quote": "Tungsten bet offer: ETH withdrawals will be enabled in 2023 / Me: Yes, it will happen / You: No, it won’t happen", "post": "1572366382678872072"},
+      {"k": "@bitcoinerrrrr", "quote": "Hey stop taking candy from babies. How about your other bet, still taking people on that? I'll take that", "post": "1597430074034511874"},
+      {"k": "rule", "pre": "Withdrawals enabled in 2023, or not. Nothing about amounts, or when in the year."},
+      {"k": "@bitcoinerrrrr, after", "quote": "after I entered the bet I started following tweets from @TimBeiko and immediately knew I pretty much lost the bet", "post": "1636591917122351106"},
+      {"k": "outcome", "pre": "Eric, 26 May 2023: ", "quote": "A new tungsten cube arrived today! This shoutout goes to @bitcoinerrrrr for betting me that ETH withdrawals wouldn’t launch this year.", "post": "1662016860991135745"}
+    ],
+    "log": [
+      {"post": "1572366382678872072"},
+      {"post": "1597430074034511874"},
+      {"sys": "bet on", "detail": "Eric says withdrawals are enabled in 2023; @bitcoinerrrrr says they are not"},
+      {"post": "1612393877519859712", "excerpt": "[…] 2023 I plan to win against @bitcoinerrrrr over ETH withdrawals."},
+      {"post": "1636591917122351106"},
+      {"post": "1660665017912500224", "note": "Eric listing who bet what; the tags run Adam, ck, Brad, bitcoinerrrrr"},
+      {"post": "1662016860991135745"},
+      {"sys": "cube #3", "detail": "arrived 26 May 2023"}
+    ],
+    "caveats": [
+      {"text": "When withdrawals went live, and how much was withdrawn, were not checked against chain data for this page."},
+      {"text": "Eric's 30 Dec 2023 recap says @bitcoinerrrrr bet him the Merge would not happen. That was a slip: his 9 Jan 2023 plan, his 22 May 2023 list and the arrival post all say withdrawals. The Merge cube is Christian Keroles's.", "href": "/keroles", "label": "/keroles"}
+    ]
+  },
+  {
+    "bet": "bradmills",
+    "route": "brad",
+    "title": "ETH to $500",
+    "lede": "In November 2022 Brad Mills said 2023 would be “absolute capitulation” for DeFi, and put a cube on ETH falling to $500. In January 2023 Eric softened the terms by adding a second phase. Brad lost the first phase at the end of 2023 and paid for the cube. The second phase ran to about June 2024.",
+    "terms": [
+      {"k": "Brad", "quote": "ETH to $500 or I owe Eric a tungsten cube. If he's wrong he owes me one.", "post": "1594808677168455697"},
+      {"k": "Eric", "quote": "you’re still going to have to buy me a tungsten cube at the end of next year", "post": "1594112324721430530"},
+      {"k": "softened", "pre": "Eric, 25 Jan 2023: ", "quote": "Here’s a compromise I’ll offer: If ETH does not drop below $500 in this year, you send me the cube. If it drops below $500 after that but before June 2024, I’ll send you the cube back.", "post": "1618312297595957249"},
+      {"k": "phase 1", "pre": "Brad, 2 Jan 2024: ", "quote": "Today I lost phase 1 of my bet with @ercwl. I was calling ETH to $500 and it only dropped to like $890.", "post": "1742013784967823533"},
+      {"k": "phase 2", "pre": "Brad, same post: ", "quote": "Phase 2 of our bet expires ~June 2024. If ETH hasn't dropped by $500 by then, Eric keeps the cube. If it has, he sends it back to me.", "post": "1742013784967823533"}
+    ],
+    "log": [
+      {"post": "1594060210817142787", "excerpt": "Dear DeFi/ETH shills, your time is over. 2023 = nothing but absolute capitulation as the market figures out DeFi was 1 part ponzi, 1 part pump & dump, propped up by insolvent actors VCs like 3AC, Alameda, Celsius, a16z, paradigm, Jump, Multicoin etc. […]", "note": "a chart link follows"},
+      {"post": "1594112324721430530"},
+      {"post": "1594808677168455697"},
+      {"sys": "bet on", "detail": "Brad says ETH falls to $500 in 2023; Eric says it does not"},
+      {"post": "1618312297595957249"},
+      {"sys": "terms softened", "detail": "phase 1 to the end of 2023, phase 2 to June 2024"},
+      {"post": "1662026495932485632"},
+      {"post": "1736065494350713140"},
+      {"post": "1737846235607011831"},
+      {"post": "1741967773960462483"},
+      {"post": "1741969215785959696"},
+      {"post": "1742013784967823533", "excerpt": "Today I lost phase 1 of my bet with @ercwl. I was calling ETH to $500 and it only dropped to like $890. Phase 2 of our bet expires ~June 2024. If ETH hasn't dropped by $500 by then, Eric keeps the cube. If it has, he sends it back to me. I'm a little bit relieved he already had the cube made up and it only cost me 1 million sats. […]", "note": "the rest is about a 4-inch, gold-edged cube he had commissioned to pay with and did not order"},
+      {"sys": "cube #4", "detail": "phase 1 paid; phase 2 ran to about June 2024"}
+    ],
+    "caveats": [
+      {"text": "$890 and $900 are Brad's figures for how low ETH went in 2023. They were not checked against a price source here."},
+      {"text": "No post was found saying the cube went back to Brad, or confirming in June 2024 that Eric kept it, and the ETH price up to June 2024 was not checked here. On 5 Jan 2025 Eric put his collection at five.", "href": "https://x.com/ercwl/status/1875700417012826264", "label": "[x.com]"},
+      {"text": "The stake Eric invoiced was the 1.5-inch cube. The 4-inch cube in Brad's 2 Jan post was never the stake."}
+    ]
+  },
+  {
+    "bet": "midas1crypto",
+    "route": "midas",
+    "title": "WBTC in 2023",
+    "lede": "In November 2022 Eric bet his whole collection that WBTC and WETH would not fail in 2023, against one cube from anyone who took the bet. @Midas1crypto took WBTC only. He paid on 31 December 2023, and Eric added the cube on 15 January 2024.",
+    "terms": [
+      {"k": "Eric", "quote": "betting my entire tungsten cube collection that WBTC and WETH won’t fail / shoot your shot. / bet settles end of 2023 and you only pay one tungsten cube if you lose", "post": "1597395282240868352"},
+      {"k": "Midas", "quote": "Cute..\"and weth\".. just do wbtc and I'm in", "post": "1597465263632678913"},
+      {"k": "stakes", "pre": "Uneven: Eric's whole collection against one cube from Midas."},
+      {"k": "rule", "pre": "WBTC alone, by the end of 2023. WETH was dropped when Midas took the bet. Neither side put a number on “fail”: no size of depeg, no custody halt, no length of time."},
+      {"k": "outcome", "pre": "Eric, 2 Jan 2024: ", "quote": "Even if your bet that WBTC would fail in 2023 did not hold up, your honor remains intact.", "post": "1742254164837834809"}
+    ],
+    "log": [
+      {"post": "1597395282240868352"},
+      {"post": "1597465263632678913"},
+      {"post": "1597465883433369600"},
+      {"post": "1597467347488759815"},
+      {"sys": "bet on", "detail": "Eric says WBTC does not fail in 2023; Midas says it does"},
+      {"post": "1737635788085731619"},
+      {"post": "1741474083680801237"},
+      {"post": "1742254164837834809"},
+      {"post": "1742254675955720498"},
+      {"post": "1746902748912656848"},
+      {"post": "1746903365403971600"},
+      {"sys": "cube #5", "detail": "paid 31 Dec 2023, added 15 Jan 2024"}
+    ],
+    "caveats": [
+      {"text": "“Fail” has no definition in the public posts. Both sides treated WBTC still running at the end of 2023 as Eric's win."},
+      {"text": "The transaction id in Midas's payment post was not checked on-chain here."},
+      {"text": "Eric posted a screenshot of the bet on 2 Jan 2024. The image was not read for this page."}
+    ]
+  }
+]

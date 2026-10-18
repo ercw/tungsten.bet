@@ -2,6 +2,7 @@
   {
     "id": "adam3us",
     "status": "won",
+    "page": "/adam",
     "n": 1,
     "announced": "2021-12-28",
     "counterparty": {"handle": "adam3us", "name": "Adam Back"},
@@ -15,6 +16,7 @@
   {
     "id": "keroles",
     "status": "won",
+    "page": "/keroles",
     "n": 2,
     "announced": "2022-12-30",
     "counterparty": {"handle": "ck_SNARKs", "name": "Christian Keroles"},
@@ -29,6 +31,7 @@
   {
     "id": "bitcoinerrrrr",
     "status": "won",
+    "page": "/bitcoinerrrrr",
     "n": 3,
     "announced": "2023-05-26",
     "counterparty": {"handle": "bitcoinerrrrr", "name": ""},
@@ -43,6 +46,7 @@
   {
     "id": "bradmills",
     "status": "won",
+    "page": "/brad",
     "n": 4,
     "announced": "2024-01-01",
     "counterparty": {"handle": "bradmillscan", "name": "Brad Mills"},
@@ -58,6 +62,7 @@
   {
     "id": "midas1crypto",
     "status": "won",
+    "page": "/midas",
     "n": 5,
     "announced": "2024-01-15",
     "counterparty": {"handle": "Midas1crypto", "name": ""},

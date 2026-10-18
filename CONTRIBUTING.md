@@ -37,6 +37,8 @@ Then add the item's row to `data/ladder.json` (`matter`, `necessary` true/false/
 
 `data/bets.json` holds the front page's record: the cubes Eric has announced winning (`won`, numbered in the order he announced them) and the bets still open (`open`, each with the page that covers it). Every row quotes Eric's own post (`claim`, `claim_url`). Each won row follows the post from the day the cube arrived. A lost bet goes in as `lost`, and the front page's "Never lost" section then has to change.
 
+`data/cubes.json` holds one page per won cube. Every quote on those pages points at a post in `data/posts.json`, which keeps the post's text as fetched from x.com (the @-names at the start of a reply removed, nothing else changed). `tests/check_static.py` fails if a quote or excerpt is not word for word in its post, so to quote a new post, fetch it and add it to `posts.json` first. `[…]` in an excerpt marks a cut. What a page could not check goes in its `caveats`, not in the lede.
+
 ## Build and check
 
 ```bash

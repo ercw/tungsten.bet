@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>/*TITLE*/</title>
+<meta name="description" content="/*DESC*/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
+<style>
+/*STYLE*/
+</style>
+<style>
+/* cube pages only */
+.terms { grid-template-columns: 14ch minmax(0, 1fr); }
+.terms q { font-style: italic; }
+.terms .x { font-size: 12px; }
+.log.wide li { grid-template-columns: 17ch 16ch minmax(0, 1fr); }
+.log.wide li.sys { grid-template-columns: 34ch minmax(0, 1fr); }
+.log.wide .msg { white-space: pre-line; }
+.caveats { margin: 0; padding-left: 2.2ch; display: grid; gap: 8px; max-width: 80ch; color: var(--ink-2); }
+.caveats li::marker { content: "! "; color: var(--hot); }
+.cube-nav { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cube-nav li { display: grid; grid-template-columns: 5ch minmax(0, 1fr); gap: 0 1ch; }
+.cube-nav .n { color: var(--dim); }
+.cube-nav [aria-current] { font-weight: 700; }
+.cube-nav .here { color: var(--dim); }
+.rules { display: grid; gap: 6px; max-width: 80ch; color: var(--ink-2); }
+.rules q { font-style: italic; }
+#cube { width: 260px; height: 260px; }
+@media (max-width: 720px) {
+  .terms { grid-template-columns: minmax(0, 1fr); }
+  .log.wide li, .log.wide li.sys { grid-template-columns: minmax(0, 1fr); }
+  .log.wide li.sys .msg { grid-column: 1; }
+  #cube { width: 220px; height: 220px; }
+}
+</style>
+</head>
+<body>
+<div class="sheet" id="top">
+
+  <header class="top">
+    <span class="site"><a href="/"><b>tungsten.bet</b></a>//*ROUTE*/</span>
+    <span><button class="btn" id="theme-btn" type="button" aria-label="Colour theme: follow system">[theme: auto]</button></span>
+  </header>
+
+  <section class="hero" aria-labelledby="title">
+    <figure class="cube-fig">
+      <canvas id="cube" width="260" height="260" role="img" aria-label="A slowly turning tungsten cube drawn in ASCII characters."></canvas>
+      <figcaption class="cube-cap dim">/*CAP*/</figcaption>
+    </figure>
+    <div class="hero-text">
+      <p class="kicker">/*KICKER*/</p>
+      <h1 id="title">/*H1*/</h1>
+      <p class="lede">/*LEDE*/</p>
+      <p class="hero-meta">/*META*/</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="terms-h">
+    <h2 class="rule-h" id="terms-h"><span>The bet</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">terms.txt</span><span class="box-t r">from x.com</span>
+      <dl class="kv terms">
+/*TERMS*/
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="log-h">
+    <h2 class="rule-h" id="log-h"><span>The thread</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">#tungsten-bet</span><span class="box-t r">x.com · times UTC</span>
+      <ol class="log wide">
+/*LOG*/
+      </ol>
+    </div>
+    <p class="dim">Posts are quoted as they read on x.com, without the @-names at the start of replies. [&hellip;] marks a cut.</p>
+  </section>
+
+  <section aria-labelledby="cav-h">
+    <h2 class="rule-h" id="cav-h"><span>Not checked here</span><span class="fill" aria-hidden="true"></span></h2>
+    <ul class="caveats">
+/*CAVEATS*/
+    </ul>
+  </section>
+
+  <footer aria-labelledby="foot-h">
+    <h2 class="rule-h" id="foot-h"><span>The collection</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="foot-notes">
+      <ol class="cube-nav" aria-label="Every cube">
+/*NAV*/
+      </ol>
+      <div class="rules">
+        <p>Every bet is made in public, for one 1.5-inch tungsten cube. <q>If I lose once, I will give that person ALL MY CUBES and stop betting.</q> <span class="dim">(<a href="https://x.com/ercwl/status/1662017303398031361" target="_blank" rel="noopener">ercwl, 26 May 2023</a>)</span></p>
+        <p><a href="/">[ tungsten.bet ]</a> &nbsp; <a href="#top">[ back to top ]</a></p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+/*CUBE*/
+Cubes.make(document.getElementById('cube'), { heat: 0.55, tilt: -0.46, scale: 0.31, halo: false, turn: /*TURN*/ });
+// Theme: auto → light → dark → auto, remembered per browser, same key as the other pages.
+(function () {
+  var KEY = 'physics-exhibit-theme', root = document.documentElement, btn = document.getElementById('theme-btn');
+  var sysDark = matchMedia('(prefers-color-scheme: dark)');
+  var get = function () { try { return localStorage.getItem(KEY) || 'auto'; } catch (e) { return 'auto'; } };
+  var set = function (v) { try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {} };
+  var apply = function (v) {
+    if (v === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
+    btn.textContent = '[theme: ' + v + ']';
+    btn.setAttribute('aria-label', 'Colour theme: ' + (v === 'auto' ? 'follow system' : v));
+    Cubes.setTheme(v === 'dark' || (v === 'auto' && sysDark.matches));
+  };
+  apply(get());
+  btn.addEventListener('click', function () { var v = get(); v = v === 'auto' ? 'light' : v === 'light' ? 'dark' : 'auto'; set(v); apply(v); });
+  sysDark.addEventListener('change', function () { apply(get()); });
+})();
+Cubes.start();
+</script>
+</body>
+</html>

@@ -51,8 +51,29 @@ check("bets.json parses", True, f"{len(bets)} bets")
 check("bet ids unique", len({b["id"] for b in bets}) == len(bets))
 check("bet status valid", all(b["status"] in assemble.STATUS for b in bets), str([b["id"] for b in bets if b["status"] not in assemble.STATUS]))
 check("every bet has a claim, a stake and at least one source url", all(b["claim"].strip() and b["stake"].strip() and b.get("sources") and all(re.match(r"https?://", s["url"]) for s in b["sources"]) for b in bets))
-check("every open bet names a page", all(b.get("page") for b in bets if b["status"] == "open"))
+check("every bet names a page", all(b.get("page") for b in bets), str([b["id"] for b in bets if not b.get("page")]))
 check("no bet lost (the front page says so; change the box title if this ever fails)", not any(b["status"] == "lost" for b in bets))
+
+# ---- cube pages and the posts they quote ----
+cubes, posts = assemble.load_cubes()
+norm = lambda t: re.sub(r"\s+", " ", t.replace(" / ", " ").replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')).strip().lower()
+won = [b for b in bets if b["status"] == "won"]
+check("posts.json: every post has user, time, url and text", all(set(v) == {"user", "at", "url", "text"} and v["text"].strip() and v["url"].endswith(k) for k, v in posts.items()))
+check("cubes.json: one page per won cube, none for open bets", sorted(c["bet"] for c in cubes) == sorted(b["id"] for b in won), str(sorted(c["bet"] for c in cubes)))
+check("cubes.json: each route matches the bet's page", all(next(b for b in bets if b["id"] == c["bet"])["page"] == "/" + c["route"] for c in cubes))
+missing = [f'{c["route"]}:{x["post"]}' for c in cubes for x in c["terms"] + c["log"] if x.get("post") and x["post"] not in posts]
+check("cube pages quote only archived posts", not missing, str(missing))
+bad = []
+for c in cubes:
+    for x in c["terms"]:
+        if x.get("quote") and x.get("post") in posts and norm(x["quote"]) not in norm(posts[x["post"]]["text"]):
+            bad.append(f'{c["route"]} term {x["k"]}')
+    for x in c["log"]:
+        for frag in (x.get("excerpt") or "").split("[…]"):
+            if frag.strip() and x.get("post") in posts and norm(frag) not in norm(posts[x["post"]]["text"]):
+                bad.append(f'{c["route"]} log {x["post"]}')
+check("every quote on a cube page is word for word in its post", not bad, str(bad))
+check("no cube page says @bitcoinerrrrr lost the Merge cube", "bitcoinerrrrr" not in [c["bet"] for c in cubes if "Merge" in c["title"]])
 
 # ---- built pages are what the data builds ----
 jamesob = (ROOT / "deploy" / "jamesob.html").read_text(encoding="utf-8")
@@ -60,9 +81,12 @@ front = (ROOT / "deploy" / "index.html").read_text(encoding="utf-8")
 check("deploy/jamesob.html is built from data/", jamesob == assemble.build_exhibit(items, ladder), "run python3 -I build/assemble.py")
 check("deploy/index.html is built from data/", front == assemble.build_root(bets), "run python3 -I build/assemble.py")
 check("no stray index.html at the repository root", not (ROOT / "index.html").exists(), "the site lives in deploy/")
+cube_pages = assemble.build_cube_pages(bets, cubes, posts)
+stale = [p.name for p, html in cube_pages.items() if not p.exists() or p.read_text(encoding="utf-8") != html]
+check("deploy/<cube>.html pages are built from data/", not stale, str(stale))
 
 # ---- page constraints (both pages) ----
-for name, html in (("jamesob", jamesob), ("front", front)):
+for name, html in [("jamesob", jamesob), ("front", front)] + [(p.stem, h) for p, h in cube_pages.items()]:
     check(f"{name}: no external <script src>", not re.search(r"<script[^>]+src=", html, re.I))
     check(f"{name}: only Google Fonts loaded externally", all("fonts.googleapis.com" in u for u in re.findall(r'<link[^>]+href="(https?://[^"]+)"', html)))
 check("jamesob: one hard-coded verdict word per side, none computed", len(re.findall(r"verdict: '[^']+'", jamesob)) == 2)
@@ -75,6 +99,8 @@ check("jamesob: bet record links all four stages", all(u in jamesob for u in [
 check("jamesob: address line points at /jamesob and links home", 'href="/"' in jamesob and "</a>/jamesob" in jamesob)
 check("front: links to /jamesob", 'href="/jamesob"' in front)
 check("front: every bet row rendered", all(f'id="bet-{b["id"]}"' in front for b in bets))
+check("front: links to every cube page", all(f'href="{b["page"]}"' in front for b in won))
+check("cube pages: each links home and to the open bet", all('href="/"' in h and 'href="/jamesob"' in h for h in cube_pages.values()))
 vercel = json.loads((ROOT / "deploy" / "vercel.json").read_text())
 check("vercel.json: cleanUrls on, no trailing slash", vercel.get("cleanUrls") is True and vercel.get("trailingSlash") is False)
 
