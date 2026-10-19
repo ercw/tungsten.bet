@@ -69,7 +69,22 @@
     "paid": "partial",
     "paid_note": "$400 of the $60,000 across both of her bets, in monthly installments starting 7 August 2025. Then she blocked Eric.",
     "paid_amount": 400,
-    "paid_post": "2090641304564674660"
+    "paid_post": "2090641304564674660",
+    "avatar": "avatar-hviidhex.jpg",
+    "exhibits": [
+      {
+        "file": "first-100-dai.jpg",
+        "post": "1953841425419804978",
+        "alt": "A wallet notification: You received 100 DAI from 0x82…7323 to ercwl.eth",
+        "cap": "The first $100, as Eric posted it on 8 August 2025."
+      },
+      {
+        "file": "blocked.jpg",
+        "post": "2090641304564674660",
+        "alt": "An X screen saying @HviidHEX has blocked you, above her post about taking a long break from crypto",
+        "cap": "Eric, 21 August 2026: “after paying only $400 of the $60,000 that was owed, Lady @HviidHEX has blocked me.”"
+      }
+    ]
   },
   {
     "id": "hviid-inc",
@@ -110,8 +125,23 @@
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "note": "The undergarments clause is in a screenshot of the original exchange, posted the same day by @JayPlush369, who called them “sparkly HEX encrusted panties”.",
     "paid": "partial",
-    "paid_note": "Part of the $400 she paid across both bets, before she blocked Eric. The undergarments were not delivered.",
-    "paid_amount": 0
+    "paid_note": "Part of the $400 she paid across both bets, before she blocked Eric.",
+    "paid_amount": 0,
+    "avatar": "avatar-hviidhex.jpg",
+    "exhibits": [
+      {
+        "file": "inc-win-over-eric.jpg",
+        "post": "1768054286938714504",
+        "alt": "Hviid's INC chart marked $27 I WIN HERE and TO WIN OVER ERIC, with the bet thread pasted on the right",
+        "cap": "Hviid's own chart, 13 March 2024: “$27 I WIN HERE”, “TO WIN OVER ERIC”. The thread with the undergarments clause is pasted in on the right."
+      },
+      {
+        "file": "undergarments-thread.jpg",
+        "post": "1768019205616546208",
+        "alt": "Screenshot of the exchange: Hviid offers $10k for 10x in INC, Eric asks for the HEX-encrusted undergarments, Hviid says but fine",
+        "cap": "The exchange, as @JayPlush369 screenshotted it the same day."
+      }
+    ]
   },
   {
     "id": "katie",
@@ -151,7 +181,8 @@
     "check": "PLS never traded above $0.000262. On 7 April 2025 it was $0.0000215.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "note": "No payment post was found, and nothing from her after the deadline. Eric's post of 8 August 2025 counted Hviid's first $100 against “@HviidHEX/@KatieePCrypto” and their combined $110,000.",
-    "paid": null
+    "paid": null,
+    "avatar": "avatar-katieepcrypto.jpg"
   },
   {
     "id": "ivan",
@@ -179,7 +210,8 @@
     "check": "On 29 November 2024 PLS was $0.000077. It never traded above $0.000262.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "note": "No reply from Eric to “Deal ?” was found, and no escrow transaction. Eric listed “$2k by @IvanMandip” among his expected winnings in December 2024.",
-    "paid": null
+    "paid": null,
+    "avatar": "avatar-ivanmandip.jpg"
   },
   {
     "id": "ponw",
@@ -207,7 +239,15 @@
     "check": "PLS never traded above $0.000262. On 13 May 2025, two years after launch, it was $0.0000408.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "note": "The posts where the bet was made are deleted, along with the @PoNWToken account, and the Internet Archive has no copy. No payment was found.",
-    "paid": null
+    "paid": null,
+    "exhibits": [
+      {
+        "file": "ponw-sheet.jpg",
+        "post": "1747362092095545568",
+        "alt": "Eric's bet sheet with the PoNW row highlighted in yellow",
+        "cap": "Posted by @PoNWPulseChain on 16 January 2024, with “Account deleted, but friendship still confirmed”: Eric's bet sheet, their row highlighted."
+      }
+    ]
   },
   {
     "id": "hunt",
@@ -246,6 +286,15 @@
     "paid": true,
     "paid_amount": 9999,
     "paid_note": "9,999 USDT, released from escrow by @ValidatorEth on 9 April 2025, two days after the deadline.",
-    "paid_post": "1910099958943875073"
+    "paid_post": "1910099958943875073",
+    "avatar": "avatar-realimmortal333.jpg",
+    "exhibits": [
+      {
+        "file": "hunt-9999-usdt.jpg",
+        "post": "1910099958943875073",
+        "alt": "A wallet notification: You received 9999 USDT from validator.eth to ercwl.eth",
+        "cap": "Eric, 9 April 2025: “pleasure doing business with you”."
+      }
+    ]
   }
 ]

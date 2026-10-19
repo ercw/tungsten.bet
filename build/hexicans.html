@@ -57,6 +57,18 @@
 .hbet .note { color: var(--dim); font-size: 13px; margin-top: 8px; }
 .extra { background: var(--hex-grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
 .bets { display: grid; gap: 26px; }
+.who-row { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; }
+.who-row h3 { margin: 0; }
+.av { position: relative; flex: none; width: 100px; height: 100px; display: block; outline-offset: 3px; }
+.av canvas { width: 100px; height: 100px; display: block; }
+.av img { position: absolute; inset: 0; width: 100px; height: 100px; object-fit: cover; opacity: 0; transition: opacity .2s; border: 1px solid var(--rule); }
+.av:hover img, .av:focus img, .av:focus-within img { opacity: 1; }
+.ex { margin: 14px 0 0; display: grid; gap: 6px; justify-items: start; }
+.ex a { display: block; background: none; }
+.ex img { display: block; max-width: 100%; height: auto; border: 1px solid var(--rule); }
+.ex figcaption { font-size: 12px; line-height: 1.45; color: var(--dim); max-width: 70ch; }
+.score-ex { margin-top: 18px; }
+.score-ex img { max-width: min(420px, 100%); }
 .hx-notes { display: grid; gap: 8px; max-width: 80ch; color: var(--ink-2); padding-left: 2.2ch; margin: 0; }
 .hx-notes li::marker { content: "! "; color: var(--hot); }
 @media (max-width: 720px) {
@@ -149,7 +161,7 @@
   function sample(L) {
     // Each character cell is sampled at 4x4: the average colour fills it, and the whitest sub-pixel keeps
     // thin white strokes (PulseChain's pulse line, HEX's inner hexagons) from blurring away.
-    var size = L.cv.clientWidth || 190, rows = Math.max(20, Math.round(size / 6)), cols = Math.round(rows / 0.6), S = 4;
+    var size = L.cv.clientWidth || 190, rows = L.mode === 'photo' ? Math.max(14, Math.round(size / 5.2)) : Math.max(20, Math.round(size / 6)), cols = Math.round(rows / 0.6), S = 4;
     var t = document.createElement('canvas'); t.width = cols * S; t.height = rows * S;
     var tc = t.getContext('2d', { willReadFrequently: true });
     tc.imageSmoothingQuality = 'high'; tc.drawImage(L.img, 0, 0, cols * S, rows * S);
@@ -166,7 +178,7 @@
     }
     // The white strokes in both logos are cut-outs, not paint: a see-through cell inside the logo's outline
     // on its row is part of a stroke, and is drawn bright. Both outlines are hexagons, so a row span is enough.
-    for (var rr = 0; rr < rows; rr++) {
+    for (var rr = 0; rr < rows && L.mode !== 'photo'; rr++) {
       var lo = -1, hi = -1, sr = 0, sg = 0, sb = 0, n = 0;
       for (var qq = 0; qq < cols; qq++) {
         var e = L.cells[rr * cols + qq];
@@ -192,7 +204,7 @@
       if (cell.a < 0.3 && !cell.hole) continue;
       var lift = 0, x = q / L.cols;
       if (L.mode === 'hex') lift = Math.max(0, 1 - Math.abs((x + r / L.rows) / 2 - sweep) * 9);
-      var line = cell.hole || cell.w > 0.62, glyph, col;
+      var line = L.mode !== 'photo' && (cell.hole || cell.w > 0.62), glyph, col;
       if (cell.hole) { cell.r = cell.tr; cell.g = cell.tg; cell.b = cell.tb; cell.a = 1; }
       if (line) {
         if (L.mode === 'pulse') lift = Math.exp(-Math.pow(x - pulse, 2) / 0.004);
@@ -201,7 +213,8 @@
         col = [cell.r + (255 - cell.r) * m, cell.g + (255 - cell.g) * m, cell.b + (255 - cell.b) * m];
       } else {
         var lum = (0.3 * cell.r + 0.59 * cell.g + 0.11 * cell.b) / 255;
-        glyph = RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.round((0.12 + 0.35 * lum + 0.55 * lift) * (RAMP.length - 1))))];
+        glyph = L.mode === 'photo' ? RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.round((0.15 + 0.85 * lum) * (RAMP.length - 1))))]
+              : RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.round((0.12 + 0.35 * lum + 0.55 * lift) * (RAMP.length - 1))))];
         var k = 1.05 + 0.6 * lift;
         col = [cell.r * k + 60 * lift, cell.g * k + 60 * lift, cell.b * k + 60 * lift];
       }
@@ -211,7 +224,7 @@
     }
     c.globalAlpha = 1;
   }
-  document.querySelectorAll('canvas.alogo').forEach(setup);
+  document.querySelectorAll('canvas.alogo, canvas.avc').forEach(setup);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { logos.forEach(function (L) { draw(L, 0); }); });
   addEventListener('resize', function () { logos.forEach(function (L) { draw(L, 0); }); });
   if (reduce) return;

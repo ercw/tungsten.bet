@@ -364,6 +364,10 @@ def build_hexicans(posts):
         arch = f' <a class="x" href="{H.escape(p["archive"])}" target="_blank" rel="noopener">[archive]</a>' if p.get("archive") else ""
         return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">@{H.escape(p["user"])}, {hx_day(p["at"][:10])}</span> '
                 f'<a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a>{arch}')
+    def exhibit(e, cls=""):
+        p = posts[e["post"]]
+        return (f'<figure class="ex {cls}"><a href="{H.escape(p["url"])}" target="_blank" rel="noopener"><img src="/img/hexicans/{H.escape(e["file"])}" '
+                f'alt="{H.escape(e["alt"])}" loading="lazy"></a><figcaption>{H.escape(e["cap"])} <a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a></figcaption></figure>')
     arts = []
     for i, b in enumerate(bets, 1):
         who = f'{H.escape(b["who"]["name"])} <a href="https://x.com/{H.escape(b["who"]["handle"])}" target="_blank" rel="noopener">@{H.escape(b["who"]["handle"])}</a>'
@@ -373,9 +377,16 @@ def build_hexicans(posts):
         if b.get("paid_note"): paid += f' <span class="dim">{H.escape(b["paid_note"])}</span>'
         if b.get("paid_post"): paid += f' <a class="x" href="{H.escape(posts[b["paid_post"]]["url"])}" target="_blank" rel="noopener">[x.com]</a>'
         note = f'\n        <p class="note">{H.escape(b["note"])}</p>' if b.get("note") else ""
+        if b.get("avatar"):
+            av = f"/img/hexicans/{b['avatar']}"
+            who_row = (f'<div class="who-row"><span class="av" tabindex="0" aria-label="{H.escape(b["who"]["name"])}\'s profile picture">'
+                       f'<canvas class="avc" data-src="{av}" data-mode="photo" aria-hidden="true"></canvas><img src="{av}" alt="" loading="lazy"></span><h3>{who}</h3></div>')
+        else:
+            who_row = f'<h3>{who}</h3>'
+        exs = "".join(exhibit(e) for e in b.get("exhibits", []))
         arts.append(f"""      <article class="box hbet {b["camp"]}" id="bet-{H.escape(b["id"])}">
         <span class="box-t">#{i} · <span class="tag">{"HEX" if b["camp"] == "hex" else "PulseChain"}</span></span><span class="box-t r">{stake}</span>
-        <h3>{who}</h3>
+        {who_row}
         <dl class="kv">
           <dt>the bet</dt><dd>{H.escape(b["bet"])}</dd>
           <dt>their words</dt><dd>{"<br>".join(quote(t) for t in b["terms"])}</dd>
@@ -383,12 +394,15 @@ def build_hexicans(posts):
           <dt>what happened</dt><dd>{H.escape(b["check"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
           <dt>Eric's sheet</dt><dd><q>{H.escape(b["sheet"])}</q> {sheet_out}</dd>
           <dt>paid</dt><dd>{paid}</dd>
-        </dl>{note}
+        </dl>{exs}{note}
       </article>""")
     lede = (f"Between 2022 and 2024, seven HEX and PulseChain holders bet Eric ${total:,} that their coins would set new highs or go up "
             "tenfold. None came close, so by their own terms Eric won all seven. That leaves the question in the title.")
     fill = {
-        "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede), "/*SCORE*/": score,
+        "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede),
+        "/*SCORE*/": score + "\n      " + exhibit({"file": "debt-square.jpg", "post": "1953841425419804978",
+                                                  "alt": "A large purple square with a tiny yellow square in its corner",
+                                                  "cap": "Eric, 8 August 2025, after Hviid's first $100: “The yellow square in the right diagram represents debt paid so far visually.”"}, "score-ex"),
         "/*CHART*/": chart, "/*CHARTALT*/": H.escape(chart_alt), "/*CHARTKEY*/": H.escape(key), "/*BETS*/": "\n".join(arts),
         "/*HEXLOGO*/": data_uri(BUILD / "assets" / "hex.png"), "/*PLSLOGO*/": data_uri(BUILD / "assets" / "pulsechain.png"),
     }

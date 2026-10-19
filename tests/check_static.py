@@ -84,6 +84,9 @@ check("hexicans: every quote is word for word in its post (or its screenshot)", 
 check("hexicans: money received adds up from the bets", sum(b.get("paid_amount") or 0 for b in hx) == 10399, str(sum(b.get("paid_amount") or 0 for b in hx)))
 check("hexicans: stakes add up to the sheet's $152,000", sum(b["stake"] for b in hx) == 152000, str(sum(b["stake"] for b in hx)))
 check("hexicans: the panties stay in", any(b.get("stake_extra") == "her panties" for b in hx))
+hx_imgs = [b["avatar"] for b in hx if b.get("avatar")] + [e["file"] for b in hx for e in b.get("exhibits", [])] + ["debt-square.jpg"]
+check("hexicans: every image it shows is in deploy/img/hexicans", all((ROOT / "deploy" / "img" / "hexicans" / f).is_file() for f in hx_imgs), str([f for f in hx_imgs if not (ROOT / "deploy" / "img" / "hexicans" / f).is_file()]))
+check("hexicans: every exhibit points at an archived post", all(e["post"] in posts for b in hx for e in b.get("exhibits", [])))
 check("pls_daily.json: no day at or above $0.001 (every PLS bet's line)", all(v < 0.001 for _, v in pls["prices"]), str(max(pls["prices"], key=lambda x: x[1])))
 
 # ---- built pages are what the data builds ----
