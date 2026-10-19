@@ -22,9 +22,6 @@
       {"post": "1475761542922739713"},
       {"post": "1475773633389809672"},
       {"sys": "cube #1", "detail": "the first cube in the collection"}
-    ],
-    "caveats": [
-      {"text": "Bitcoin's November 2021 price was not checked against a market source for this page. Both sides treated the target as missed."}
     ]
   },
   {
@@ -50,10 +47,6 @@
       {"post": "1608770238077890562"},
       {"post": "1612393877519859712", "excerpt": "[…] 2022 I won a tungsten cube from Christian Keroles (Managing Director at Bitcoin Magazine) over the Merge. […]"},
       {"sys": "cube #2", "detail": "scored by Eric on 30 Dec 2022"}
-    ],
-    "caveats": [
-      {"text": "No post from Keroles conceding the bet was found. The outcome on this page is Eric's scoring."},
-      {"text": "The date the Merge went live is not in these posts. The bet was on 2022 as a whole."}
     ]
   },
   {
@@ -77,10 +70,6 @@
       {"post": "1660665017912500224", "note": "Eric listing who bet what; the tags run Adam, ck, Brad, bitcoinerrrrr"},
       {"post": "1662016860991135745"},
       {"sys": "cube #3", "detail": "arrived 26 May 2023"}
-    ],
-    "caveats": [
-      {"text": "When withdrawals went live, and how much was withdrawn, were not checked against chain data for this page."},
-      {"text": "Eric's 30 Dec 2023 recap says @bitcoinerrrrr bet him the Merge would not happen. That was a slip: his 9 Jan 2023 plan, his 22 May 2023 list and the arrival post all say withdrawals. The Merge cube is Christian Keroles's.", "href": "/keroles", "label": "/keroles"}
     ]
   },
   {
@@ -114,11 +103,6 @@
       {"post": "1741969215785959696"},
       {"post": "1742013784967823533", "excerpt": "Today I lost phase 1 of my bet with @ercwl. I was calling ETH to $500 and it only dropped to like $890. Phase 2 of our bet expires ~June 2024. If ETH hasn't dropped by $500 by then, Eric keeps the cube. If it has, he sends it back to me. I'm a little bit relieved he already had the cube made up and it only cost me 1 million sats. […]", "note": "the rest is about a 4-inch, gold-edged cube he had commissioned to pay with and did not order"},
       {"sys": "cube #4", "detail": "phase 1 paid; phase 2 ran to about June 2024"}
-    ],
-    "caveats": [
-      {"text": "$890 and $900 are Brad's figures for how low ETH went in 2023. They were not checked against a price source here."},
-      {"text": "No post was found saying the cube went back to Brad, or confirming in June 2024 that Eric kept it, and the ETH price up to June 2024 was not checked here. On 5 Jan 2025 Eric put his collection at five.", "href": "https://x.com/ercwl/status/1875700417012826264", "label": "[x.com]"},
-      {"text": "The stake Eric invoiced was the 1.5-inch cube. The 4-inch cube in Brad's 2 Jan post was never the stake."}
     ]
   },
   {
@@ -146,11 +130,6 @@
       {"post": "1746902748912656848"},
       {"post": "1746903365403971600"},
       {"sys": "cube #5", "detail": "paid 31 Dec 2023, added 15 Jan 2024"}
-    ],
-    "caveats": [
-      {"text": "“Fail” has no definition in the public posts. Both sides treated WBTC still running at the end of 2023 as Eric's win."},
-      {"text": "The transaction id in Midas's payment post was not checked on-chain here."},
-      {"text": "Eric posted a screenshot of the bet on 2 Jan 2024. The image was not read for this page."}
     ]
   }
 ]

@@ -7,7 +7,7 @@ The data is the source of truth:
     data/items.json   the 23 AI results on the James page (edit these, then rebuild)
     data/ladder.json  the author's four ladder ratings per item
     data/bets.json    Eric's tungsten bets: the cubes he has announced winning, and the open ones
-    data/cubes.json   one page per won cube: the terms, the thread and what was not checked
+    data/cubes.json   one page per won cube: the terms and the thread
     data/posts.json   the text of every post those pages quote, as fetched from x.com
     data/hexicans.json  the money bets with HEX and PulseChain holders (tungsten.bet/hexicans)
     data/pls_daily.json PLS daily prices from PulseX, launch to the last deadline
@@ -190,11 +190,6 @@ def log_row(e, posts):
             f'<span class="{nick}">&lt;{H.escape(p["user"])}&gt;</span><span class="msg">{msg}</span></li>')
 
 
-def caveat_row(c):
-    link = f' <a href="{H.escape(c["href"])}"{" target=\"_blank\" rel=\"noopener\"" if c["href"].startswith("http") else ""}>{H.escape(c["label"])}</a>' if c.get("href") else ""
-    return f'      <li>{H.escape(c["text"])}{link}</li>'
-
-
 def build_cube_pages(bets, cubes, posts):
     """One page per won cube, at tungsten.bet/<route>."""
     tpl = (BUILD / "cube.html").read_text(encoding="utf-8")
@@ -226,7 +221,6 @@ def build_cube_pages(bets, cubes, posts):
             "/*META*/": f'Won from {who(b)}. Announced {day(b["announced"])}.',
             "/*TERMS*/": "\n".join(term_row(t, posts) for t in c["terms"]),
             "/*LOG*/": "\n".join(log_row(e, posts) for e in c["log"]),
-            "/*CAVEATS*/": "\n".join(caveat_row(x) for x in c["caveats"]),
             "/*NAV*/": "\n".join(nav),
             "/*TURN*/": f'{0.4 + b["n"] * 1.37:.2f}',
             "/*STYLE*/": stylesheet(),
