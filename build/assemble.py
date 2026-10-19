@@ -323,7 +323,7 @@ def hx_day(d):
 def build_hexicans(posts):
     bets, pls = load_hexicans()
     tpl = (BUILD / "hexicans.html").read_text(encoding="utf-8")
-    bets = sorted(bets, key=lambda b: (b["entered"], -b["stake"]))
+    bets = sorted(bets, key=lambda b: (not b.get("featured"), b["entered"], -b["stake"]))
     total = sum(b["stake"] for b in bets)
     n_bets = sum(len(b["sheet"]) for b in bets)
     chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' * len(b["sheet"]) for b in bets)
@@ -341,7 +341,7 @@ def build_hexicans(posts):
         <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties, delivered</span></dd>
         <dt>won by Eric</dt><dd><span class="big">{n_bets} of {n_bets}</span></dd>
         <dt>paid</dt><dd>{answer}</dd>
-        <dt>Eric, December 2024</dt><dd><q>{H.escape(tally["text"].split(chr(10))[2])}</q> <a class="x" href="{H.escape(tally["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
+        <dt>Eric, December 2024</dt><dd><q>{" / ".join(H.escape(x.strip()) for x in tally["text"].split(chr(10))[2:] if x.strip())}</q> <a class="x" href="{H.escape(tally["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
       </dl>"""
     deadlines = sorted({b["deadline"] for b in bets if b["camp"] == "pls"})
     chart, top = pls_chart(pls["prices"], deadlines)
@@ -379,7 +379,7 @@ def build_hexicans(posts):
         {who_row}
         <dl class="kv">
           <dt>the bet</dt><dd>{"<br>".join(H.escape(x) for x in b["bet"])}</dd>
-          <dt>their words</dt><dd class="words">{"<br>".join(quote(t) for t in b["terms"])}</dd>
+          <dt>their words</dt><dd class="words">{"<br>".join(quote(t) for t in sorted(b["terms"], key=lambda t: posts[t["post"]]["at"]))}</dd>
           <dt>what happened</dt><dd>{H.escape(b["result"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
           <dt>paid</dt><dd>{paid}</dd>
         </dl>{exs}
@@ -389,9 +389,7 @@ def build_hexicans(posts):
             "would set new highs or go up tenfold. None came close, so by their own terms Eric won every one. That leaves the question in the title.")
     fill = {
         "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede),
-        "/*SCORE*/": score + "\n      " + exhibit({"file": "debt-square.jpg", "post": "1953841425419804978",
-                                                  "alt": "A large purple square with a tiny yellow square in its corner",
-                                                  "cap": "Eric, 8 August 2025, after Hviid's first $100: “The yellow square in the right diagram represents debt paid so far visually.”"}, "score-ex"),
+        "/*SCORE*/": score,
         "/*CHART*/": chart, "/*CHARTALT*/": H.escape(chart_alt), "/*CHARTKEY*/": H.escape(key), "/*BETS*/": "\n".join(arts),
         "/*HEXLOGO*/": data_uri(BUILD / "assets" / "hex.png"), "/*PLSLOGO*/": data_uri(BUILD / "assets" / "pulsechain.png"),
     }

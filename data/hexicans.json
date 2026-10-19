@@ -13,7 +13,7 @@
     ],
     "sheet_outcome": "Win by Eric",
     "bet": [
-      "HEX on PulseChain beats HEX's all-time high of about $0.56 within a year. Piper put up $20,000 against Eric's $40,000."
+      "HEX on PulseChain beats HEX's all-time high of about $0.56 within a year. Piper paid Eric $20,000 up front; if HEX won, Eric would send back $40,000."
     ],
     "entered": "2022-02-20",
     "deadline": "2023-02-20",
@@ -29,8 +29,10 @@
     ],
     "result": "PulseChain didn't launch until May 2023, three months after the deadline. HEX itself got no higher than $0.201 that year.",
     "check_url": "https://coinmarketcap.com/currencies/hex/historical-data/",
-    "paid": null,
-    "exhibits": []
+    "paid": true,
+    "exhibits": [],
+    "paid_amount": 20000,
+    "paid_note": "His $20,000, up front, when the bet was made."
   },
   {
     "id": "hviid",
@@ -62,8 +64,12 @@
         "quote": "Lol deal. I know you’re a man of your words so easy money"
       },
       {
+        "post": "1644359968357773314",
+        "quote": "0.0001 is the fair and average value"
+      },
+      {
         "post": "1768019205616546208",
-        "quote": "What about $10k for 10x in INC from $2.68?",
+        "quote": "It’s okay to be afraid when a girl from out of no where comes and dethrones you / What about $10k for 10x in INC from $2.68?",
         "image": true,
         "by": "HviidHEX"
       },
@@ -80,8 +86,28 @@
         "by": "HviidHEX"
       },
       {
+        "post": "1768019205616546208",
+        "quote": "if he wins he also gets ownership of all her sparkly HEX encrusted panties / we've finally hit rock bottom 😂"
+      },
+      {
+        "post": "1768054286938714504",
+        "quote": "So, @ercwl accepted my $10k $INC bet earlier today"
+      },
+      {
         "post": "1953456153146400772",
         "quote": "Now you have your $100 Erica"
+      },
+      {
+        "post": "1953466859548004535",
+        "quote": "I’ll buy the debt from you for 10k"
+      },
+      {
+        "post": "1953561787896586738",
+        "quote": "I’ll offer you the panties for $10k how about that"
+      },
+      {
+        "post": "1953841425419804978",
+        "quote": "The payment was $100 (of their total $110,000 debt) / It is the total they can currently afford (0.09%)"
       },
       {
         "post": "1987215836055048429",
@@ -115,6 +141,12 @@
         "cap": "The first $100, as Eric posted it on 8 August 2025."
       },
       {
+        "file": "debt-square.jpg",
+        "post": "1953841425419804978",
+        "alt": "A large purple square with a tiny yellow square in its corner",
+        "cap": "Eric, 8 August 2025: “The yellow square in the right diagram represents debt paid so far visually.” The yellow square is in the top left corner."
+      },
+      {
         "file": "undergarments-ups-box.jpg",
         "post": "1953561787896586738",
         "alt": "A UPS Express box on a table, with a white cat leaning into the frame",
@@ -126,7 +158,8 @@
         "alt": "An X screen saying @HviidHEX has blocked you, above her post about taking a long break from crypto",
         "cap": "Eric, 21 August 2026: “after paying only $400 of the $60,000 that was owed, Lady @HviidHEX has blocked me.”"
       }
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "katie",
@@ -159,19 +192,40 @@
         "quote": "🤝 screen shots hold accountability."
       },
       {
+        "post": "1753360031544914302",
+        "quote": "If PLS 10Xs from 0.0001 in the next 14 Months Eric Wall will owe me $50K, if it doesn't, I will owe Eric $50K."
+      },
+      {
+        "post": "1797956546854535182",
+        "quote": "My bet remains with Eric Wall regardless of if I’m in socials or not. I am a woman of my word."
+      },
+      {
         "post": "1843610497410838590",
         "quote": "I look forward to Eric Wall paying me my $50k."
       },
       {
+        "post": "1877886831255257490",
+        "quote": "Yes I have 50k, yes he has 10k lol."
+      },
+      {
+        "post": "1888098700838453307",
+        "quote": "Lmao, I have your 50k Eric."
+      },
+      {
         "post": "1892122360175788374",
         "quote": "I do think I'll be losing my bet to Eric Wall in a few months though lol and paying him 50k."
+      },
+      {
+        "post": "1949635364060065858",
+        "quote": "abandon his account when I win just like Katie P"
       }
     ],
     "result": "PLS peaked at $0.000262 in its first week and was $0.0000215 on 7 April 2025.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "paid": null,
     "avatar": "avatar-katieepcrypto.jpg",
-    "exhibits": []
+    "exhibits": [],
+    "featured": true
   },
   {
     "id": "ivan",
@@ -274,6 +328,10 @@
       {
         "post": "1909145309680116016",
         "quote": "Please send 10,000 USDT from @HuntDWorld to ercwl.eth"
+      },
+      {
+        "post": "1909145309680116016",
+        "quote": "Instead he is down -77%, and -98% (50x+) away from his target."
       },
       {
         "post": "1910099958943875073",
