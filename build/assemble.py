@@ -344,7 +344,7 @@ def build_hexicans(posts):
                   f'<span class="dim">${sum(b["stake"] for b in paid_yes):,} of ${total:,} paid.</span>')
     score = f"""      <dl class="score">
         <dt>bets taken</dt><dd><span class="big">{len(bets)}</span> <span class="chips" aria-hidden="true">{chips}</span> <span class="dim">{sum(b["camp"] == "hex" for b in bets)} on HEX, {sum(b["camp"] == "pls" for b in bets)} on PulseChain</span></dd>
-        <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties</span></dd>
+        <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties, delivered</span></dd>
         <dt>won by Eric, by the terms</dt><dd><span class="big">{len(bets)} of {len(bets)}</span></dd>
         <dt>paid</dt><dd>{answer}</dd>
         <dt>Eric, December 2024</dt><dd><q>{H.escape(posts["1872772808927002626"]["text"].split(chr(10))[2])}</q> <a class="x" href="{H.escape(posts["1872772808927002626"]["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>

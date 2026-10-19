@@ -119,13 +119,21 @@
       {
         "post": "1768054286938714504",
         "quote": "So, @ercwl accepted my $10k $INC bet earlier today"
+      },
+      {
+        "post": "1953466859548004535",
+        "quote": "I’ll buy the debt from you for 10k"
+      },
+      {
+        "post": "1953561787896586738",
+        "quote": "I’ll offer you the panties for $10k how about that"
       }
     ],
     "check": "INC's highest daily price between the bet and the deadline was $9.46, on the day the bet was made. On 7 April 2025 it was $1.11.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "note": "The undergarments clause is in a screenshot of the original exchange, posted the same day by @JayPlush369, who called them “sparkly HEX encrusted panties”.",
     "paid": "partial",
-    "paid_note": "Part of the $400 she paid across both bets, before she blocked Eric.",
+    "paid_note": "Part of the $400 she paid across both bets, before she blocked Eric. The undergarments were delivered.",
     "paid_amount": 0,
     "avatar": "avatar-hviidhex.jpg",
     "exhibits": [
@@ -140,6 +148,12 @@
         "post": "1768019205616546208",
         "alt": "Screenshot of the exchange: Hviid offers $10k for 10x in INC, Eric asks for the HEX-encrusted undergarments, Hviid says but fine",
         "cap": "The exchange, as @JayPlush369 screenshotted it the same day."
+      },
+      {
+        "file": "undergarments-ups-box.jpg",
+        "post": "1953561787896586738",
+        "alt": "A UPS Express box on a table, with a white cat leaning into the frame",
+        "cap": "The UPS box the undergarments came in, from Eric's offer to @cobie on 7 August 2025. The same post has her photo of them, worn; it is linked here, not shown."
       }
     ]
   },
