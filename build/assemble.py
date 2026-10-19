@@ -9,6 +9,8 @@ The data is the source of truth:
     data/bets.json    Eric's tungsten bets: the cubes he has announced winning, and the open ones
     data/cubes.json   one page per won cube: the terms, the thread and what was not checked
     data/posts.json   the text of every post those pages quote, as fetched from x.com
+    data/hexicans.json  the money bets with HEX and PulseChain holders (tungsten.bet/hexicans)
+    data/pls_daily.json PLS daily prices from PulseX, launch to the last deadline
 The templates hold everything else:
     build/template.html   the James page; /*ITEMS*/ and /*LADDER*/ are replaced by the data blocks
     build/root.html       the front page; /*STYLE*/ takes the James page's stylesheet so the two stay
@@ -16,6 +18,7 @@ The templates hold everything else:
                           /*OPEN*/ the open bets, /*RECORD*/ the tally
     build/cube.html       one cube page (tungsten.bet/adam and the others), filled from cubes.json and posts.json
     build/cube.js         the ASCII cube renderer, pasted into every page where /*CUBE*/ stands
+    build/hexicans.html   the money-bets page; build/assets/ holds the HEX and PulseChain logos it draws as ASCII
 """
 import html as H
 import json, pathlib, re, sys
@@ -237,11 +240,171 @@ def build_cube_pages(bets, cubes, posts):
     return pages
 
 
+MON_LONG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+def load_hexicans():
+    bets = json.loads((DATA / "hexicans.json").read_text(encoding="utf-8"))
+    pls = json.loads((DATA / "pls_daily.json").read_text(encoding="utf-8"))
+    return bets, pls
+
+
+def data_uri(path):
+    import base64
+    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode()
+
+
+PLS_STOPS = [(0, 212, 255), (59, 91, 255), (138, 0, 255), (230, 0, 230), (255, 42, 85)]
+
+
+def grad(stops, f):
+    f = max(0.0, min(1.0, f)) * (len(stops) - 1)
+    i = min(int(f), len(stops) - 2)
+    a, b, t = stops[i], stops[i + 1], f - i
+    return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * t) for k in range(3))
+
+
+def pls_chart(prices, deadlines):
+    """PLS daily price on a log scale against the $0.001 line, as coloured characters."""
+    import math
+    W, H = 60, 13
+    lo, hi = math.log10(1e-5), math.log10(2e-3)
+    step = (hi - lo) / (H - 1)
+    rowof = lambda v: max(0, min(H - 1, round((math.log10(max(v, 1e-9)) - lo) / step)))
+    per = len(prices) / W
+    cols = []
+    for c in range(W):
+        chunk = prices[int(c * per):int((c + 1) * per)] or prices[-1:]
+        cols.append((chunk[0][0], chunk[-1][0], max(v for _, v in chunk)))
+    r_line, r_sac = rowof(1e-3), rowof(1e-4)
+    sp = lambda cls, t: f'<span class="{cls}">{t}</span>'
+    out = []
+    for r in range(H - 1, -1, -1):
+        label = {r_line: "$0.001 ", r_sac: "0.0001 ", 0: "0.00001"}.get(r, "       ")
+        row = sp("ax", label + ("┤" if r in (r_line, r_sac, 0) else "│"))
+        for c, (_, _, v) in enumerate(cols):
+            h, col = rowof(v), grad(PLS_STOPS, c / (W - 1))
+            if r == h:
+                row += f'<span style="color:{col}">█</span>'
+            elif r < h:
+                row += f'<span style="color:{col};opacity:.4">▒</span>'
+            elif r == r_line:
+                row += sp("line", "━")
+            elif r == r_sac:
+                row += sp("sac", "┄")
+            else:
+                row += " "
+        if r == r_line:
+            row += sp("line", " 10×")
+        out.append(row)
+    out.append(sp("ax", "       └" + "─" * W))
+    marks = [" "] * W
+    for d in deadlines:
+        for c, (a, b, _) in enumerate(cols):
+            if a <= d <= b or (c == W - 1 and d > b):
+                marks[c] = sp("dl", "▲"); break
+    out.append("        " + "".join(marks))
+    yrs = [" "] * W
+    for c, (a, _, _) in enumerate(cols):
+        if c == 0 or a[5:7] == "01" and cols[c - 1][0][:4] != a[:4]:
+            lab = a[:7] if c == 0 else a[:4]
+            for j, ch in enumerate(lab):
+                if c + j < W: yrs[c + j] = ch
+    out.append("        " + sp("ax", "".join(yrs)))
+    top = max(prices, key=lambda x: x[1])
+    return "\n".join(out), top
+
+
+def hx_day(d):
+    y, m, dd = d.split("-")
+    return f"{int(dd)} {MON[int(m) - 1]} {y}"
+
+
+def build_hexicans(posts):
+    bets, pls = load_hexicans()
+    tpl = (BUILD / "hexicans.html").read_text(encoding="utf-8")
+    bets = sorted(bets, key=lambda b: (b["entered"], -b["stake"]))
+    total = sum(b["stake"] for b in bets)
+    paid_yes = [b for b in bets if b["paid"] is True]
+    paid_no = [b for b in bets if b["paid"] is False]
+    unknown = [b for b in bets if b["paid"] is None]
+    partial = [b for b in bets if b["paid"] == "partial"]
+    chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' for b in bets)
+    if unknown:
+        got = sum(b.get("paid_amount") or 0 for b in bets)
+        nothing = sum(1 for b in unknown if not b.get("paid_amount"))
+        def who_paid(b):
+            how = "paid in full" if b["paid"] is True else "paid ${:,} and stopped".format(b["paid_amount"])
+            return H.escape(b["who"]["name"]) + " " + how
+        answer = (f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,} received so far. '
+                  + "; ".join(who_paid(b) for b in bets if b.get("paid_amount"))
+                  + f'. No payment found from the other {nothing}.</span>')
+    else:
+        answer = (f'<span class="answer">{len(paid_yes)} of {len(bets)}</span> '
+                  f'<span class="dim">${sum(b["stake"] for b in paid_yes):,} of ${total:,} paid.</span>')
+    score = f"""      <dl class="score">
+        <dt>bets taken</dt><dd><span class="big">{len(bets)}</span> <span class="chips" aria-hidden="true">{chips}</span> <span class="dim">{sum(b["camp"] == "hex" for b in bets)} on HEX, {sum(b["camp"] == "pls" for b in bets)} on PulseChain</span></dd>
+        <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties</span></dd>
+        <dt>won by Eric, by the terms</dt><dd><span class="big">{len(bets)} of {len(bets)}</span></dd>
+        <dt>paid</dt><dd>{answer}</dd>
+        <dt>Eric, December 2024</dt><dd><q>{H.escape(posts["1872772808927002626"]["text"].split(chr(10))[2])}</q> <a class="x" href="{H.escape(posts["1872772808927002626"]["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
+      </dl>"""
+    deadlines = sorted({b["deadline"] for b in bets if b["camp"] == "pls"})
+    chart, top = pls_chart(pls["prices"], deadlines)
+    chart_alt = (f"PLS daily price from {hx_day(pls['prices'][0][0])} to {hx_day(pls['prices'][-1][0])} on a log scale. "
+                 f"Its highest was ${top[1]:.6f} on {hx_day(top[0])}, its first week. It never reached the $0.001 line.")
+    key = ("█ PLS, the highest daily price in each column of about twelve days. ━ $0.001, ten times the sacrifice price. "
+           "┄ $0.0001, the sacrifice price. ▲ deadlines: " + ", ".join(hx_day(d) for d in deadlines) + ". "
+           f"Highest daily price ever: ${top[1]:.6f}, on {hx_day(top[0])}.")
+    def quote(t):
+        p = posts[t["post"]]
+        if t.get("image"):
+            return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">in a screenshot posted by @{H.escape(p["user"])}, {hx_day(p["at"][:10])}</span> '
+                    f'<a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a>')
+        arch = f' <a class="x" href="{H.escape(p["archive"])}" target="_blank" rel="noopener">[archive]</a>' if p.get("archive") else ""
+        return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">@{H.escape(p["user"])}, {hx_day(p["at"][:10])}</span> '
+                f'<a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a>{arch}')
+    arts = []
+    for i, b in enumerate(bets, 1):
+        who = f'{H.escape(b["who"]["name"])} <a href="https://x.com/{H.escape(b["who"]["handle"])}" target="_blank" rel="noopener">@{H.escape(b["who"]["handle"])}</a>'
+        stake = f'${b["stake"]:,}' + (f' + <span class="extra">{H.escape(b["stake_extra"])}</span>' if b.get("stake_extra") else "") + (f' <span class="dim">vs Eric\'s ${b["eric_stake"]:,}</span>' if b.get("eric_stake") else "")
+        sheet_out = f'<b>{H.escape(b["sheet_outcome"])}</b>' if b["sheet_outcome"] else '<span class="dim">no outcome entered</span>'
+        paid = {True: '<span class="paid yes">PAID</span>', False: '<span class="paid no">NOT PAID</span>', "partial": '<span class="paid no">PARTLY</span>', None: '<span class="paid unknown">?</span>'}[b["paid"]]
+        if b.get("paid_note"): paid += f' <span class="dim">{H.escape(b["paid_note"])}</span>'
+        if b.get("paid_post"): paid += f' <a class="x" href="{H.escape(posts[b["paid_post"]]["url"])}" target="_blank" rel="noopener">[x.com]</a>'
+        note = f'\n        <p class="note">{H.escape(b["note"])}</p>' if b.get("note") else ""
+        arts.append(f"""      <article class="box hbet {b["camp"]}" id="bet-{H.escape(b["id"])}">
+        <span class="box-t">#{i} · <span class="tag">{"HEX" if b["camp"] == "hex" else "PulseChain"}</span></span><span class="box-t r">{stake}</span>
+        <h3>{who}</h3>
+        <dl class="kv">
+          <dt>the bet</dt><dd>{H.escape(b["bet"])}</dd>
+          <dt>their words</dt><dd>{"<br>".join(quote(t) for t in b["terms"])}</dd>
+          <dt>window</dt><dd>{hx_day(b["entered"])} to {hx_day(b["deadline"])}</dd>
+          <dt>what happened</dt><dd>{H.escape(b["check"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
+          <dt>Eric's sheet</dt><dd><q>{H.escape(b["sheet"])}</q> {sheet_out}</dd>
+          <dt>paid</dt><dd>{paid}</dd>
+        </dl>{note}
+      </article>""")
+    lede = (f"Between 2022 and 2024, seven HEX and PulseChain holders bet Eric ${total:,} that their coins would set new highs or go up "
+            "tenfold. None came close, so by their own terms Eric won all seven. That leaves the question in the title.")
+    fill = {
+        "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede), "/*SCORE*/": score,
+        "/*CHART*/": chart, "/*CHARTALT*/": H.escape(chart_alt), "/*CHARTKEY*/": H.escape(key), "/*BETS*/": "\n".join(arts),
+        "/*HEXLOGO*/": data_uri(BUILD / "assets" / "hex.png"), "/*PLSLOGO*/": data_uri(BUILD / "assets" / "pulsechain.png"),
+    }
+    html = tpl
+    for ph, v in fill.items():
+        assert html.count(ph) >= 1, f"hexicans placeholder {ph} missing"
+        html = html.replace(ph, v)
+    return html
+
+
 def main(argv):
     items, ladder, bets = load()
     cubes, posts = load_cubes()
     out = {DEPLOY / "jamesob.html": build_exhibit(items, ladder), DEPLOY / "index.html": build_root(bets)}
     out.update(build_cube_pages(bets, cubes, posts))
+    out[DEPLOY / "hexicans.html"] = build_hexicans(posts)
     if "--check" in argv:
         stale = [p.name for p, s in out.items() if not p.exists() or p.read_text(encoding="utf-8") != s]
         if stale:

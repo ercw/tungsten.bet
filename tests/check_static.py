@@ -58,7 +58,7 @@ check("no bet lost (the front page says so; change the box title if this ever fa
 cubes, posts = assemble.load_cubes()
 norm = lambda t: re.sub(r"\s+", " ", t.replace(" / ", " ").replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')).strip().lower()
 won = [b for b in bets if b["status"] == "won"]
-check("posts.json: every post has user, time, url and text", all(set(v) == {"user", "at", "url", "text"} and v["text"].strip() and v["url"].endswith(k) for k, v in posts.items()))
+check("posts.json: every post has user, time, url and text", all({"user", "at", "url", "text"} <= set(v) <= {"user", "at", "url", "text", "archive", "image_text"} and v["text"].strip() and v["url"].endswith(k) for k, v in posts.items()))
 check("cubes.json: one page per won cube, none for open bets", sorted(c["bet"] for c in cubes) == sorted(b["id"] for b in won), str(sorted(c["bet"] for c in cubes)))
 check("cubes.json: each route matches the bet's page", all(next(b for b in bets if b["id"] == c["bet"])["page"] == "/" + c["route"] for c in cubes))
 missing = [f'{c["route"]}:{x["post"]}' for c in cubes for x in c["terms"] + c["log"] if x.get("post") and x["post"] not in posts]
@@ -75,6 +75,17 @@ for c in cubes:
 check("every quote on a cube page is word for word in its post", not bad, str(bad))
 check("no cube page says @bitcoinerrrrr lost the Merge cube", "bitcoinerrrrr" not in [c["bet"] for c in cubes if "Merge" in c["title"]])
 
+# ---- hexicans: the money bets ----
+hx, pls = assemble.load_hexicans()
+check("hexicans.json: ids unique, camp hex or pls, paid true/false/null", len({b["id"] for b in hx}) == len(hx) and all(b["camp"] in ("hex", "pls") and b["paid"] in (True, False, None, "partial") for b in hx))
+src = lambda t: norm(posts[t["post"]].get("image_text", "") if t.get("image") else posts[t["post"]]["text"])
+check("hexicans: every quote is word for word in its post (or its screenshot)", all(t["post"] in posts and norm(t["quote"]) in src(t) for b in hx for t in b["terms"]),
+      str([(b["id"], t["quote"][:30]) for b in hx for t in b["terms"] if t["post"] not in posts or norm(t["quote"]) not in src(t)]))
+check("hexicans: money received adds up from the bets", sum(b.get("paid_amount") or 0 for b in hx) == 10399, str(sum(b.get("paid_amount") or 0 for b in hx)))
+check("hexicans: stakes add up to the sheet's $152,000", sum(b["stake"] for b in hx) == 152000, str(sum(b["stake"] for b in hx)))
+check("hexicans: the panties stay in", any(b.get("stake_extra") == "her panties" for b in hx))
+check("pls_daily.json: no day at or above $0.001 (every PLS bet's line)", all(v < 0.001 for _, v in pls["prices"]), str(max(pls["prices"], key=lambda x: x[1])))
+
 # ---- built pages are what the data builds ----
 jamesob = (ROOT / "deploy" / "jamesob.html").read_text(encoding="utf-8")
 front = (ROOT / "deploy" / "index.html").read_text(encoding="utf-8")
@@ -84,9 +95,11 @@ check("no stray index.html at the repository root", not (ROOT / "index.html").ex
 cube_pages = assemble.build_cube_pages(bets, cubes, posts)
 stale = [p.name for p, html in cube_pages.items() if not p.exists() or p.read_text(encoding="utf-8") != html]
 check("deploy/<cube>.html pages are built from data/", not stale, str(stale))
+hexicans_html = assemble.build_hexicans(posts)
+check("deploy/hexicans.html is built from data/", (ROOT / "deploy" / "hexicans.html").read_text(encoding="utf-8") == hexicans_html)
 
 # ---- page constraints (both pages) ----
-for name, html in [("jamesob", jamesob), ("front", front)] + [(p.stem, h) for p, h in cube_pages.items()]:
+for name, html in [("jamesob", jamesob), ("front", front), ("hexicans", hexicans_html)] + [(p.stem, h) for p, h in cube_pages.items()]:
     check(f"{name}: no external <script src>", not re.search(r"<script[^>]+src=", html, re.I))
     check(f"{name}: only Google Fonts loaded externally", all("fonts.googleapis.com" in u for u in re.findall(r'<link[^>]+href="(https?://[^"]+)"', html)))
     check(f"{name}: one palette (no light theme, no theme toggle)", "theme-btn" not in html and "prefers-color-scheme" not in html and "data-theme" not in html)
@@ -101,6 +114,7 @@ check("jamesob: address line points at /jamesob and links home", 'href="/"' in j
 check("front: links to /jamesob", 'href="/jamesob"' in front)
 check("front: every bet row rendered", all(f'id="bet-{b["id"]}"' in front for b in bets))
 check("front: links to every cube page", all(f'href="{b["page"]}"' in front for b in won))
+check("front: [hexicans] in the top bar, before [github]", 0 <= front.find('href="/hexicans">[hexicans]') < front.find('[github]'))
 check("cube pages: each links home and to the open bet", all('href="/"' in h and 'href="/jamesob"' in h for h in cube_pages.values()))
 vercel = json.loads((ROOT / "deploy" / "vercel.json").read_text())
 check("vercel.json: cleanUrls on, no trailing slash", vercel.get("cleanUrls") is True and vercel.get("trailingSlash") is False)

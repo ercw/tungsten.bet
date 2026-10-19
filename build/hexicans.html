@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080604">
+<title>Did the Hexican bitches ever pay you? · tungsten.bet</title>
+<meta name="description" content="/*DESC*/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
+<style>
+/*STYLE*/
+</style>
+<style>
+/* hexicans: the site's terminal, lit by HEX and PulseChain */
+:root {
+  --hx1: #ffe500; --hx2: #ff8a00; --hx3: #ff2e4d; --hx4: #ec008c;
+  --pl1: #00d4ff; --pl2: #3b5bff; --pl3: #8a00ff; --pl4: #e600e6; --pl5: #ff2a55;
+  --hex-grad: linear-gradient(90deg, var(--hx1), var(--hx2), var(--hx3), var(--hx4));
+  --pls-grad: linear-gradient(90deg, var(--pl1), var(--pl2), var(--pl3), var(--pl4), var(--pl5));
+  --both-grad: linear-gradient(90deg, var(--hx1), var(--hx2), var(--hx3), var(--hx4), var(--pl4), var(--pl3), var(--pl2), var(--pl1));
+}
+.hx-hero { display: grid; gap: 18px; justify-items: start; }
+.logos { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.alogo { width: 230px; height: 230px; display: block; }
+.vs { font-family: var(--pixel); font-size: 34px; color: var(--dim); }
+.hx-hero h1 {
+  background: var(--both-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 0 8px rgba(236, 0, 140, 0.35)); max-width: 16ch;
+}
+.hx-hero .kicker b { font-weight: 400; background: var(--both-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.score { display: grid; grid-template-columns: 20ch minmax(0, 1fr); gap: 6px 2ch; align-items: baseline; }
+.score dt { color: var(--dim); }
+.score dd { margin: 0; }
+.score .big { font-family: var(--pixel); font-size: 34px; line-height: 1; }
+.score .answer { font-family: var(--pixel); font-size: 44px; line-height: 1; color: var(--hot); text-shadow: var(--glow); }
+.chips { letter-spacing: 1px; }
+.chips .h { color: var(--hx3); } .chips .p { color: var(--pl3); }
+.pchart { margin: 0; font-family: var(--mono); white-space: pre; line-height: 1.12; overflow: hidden;
+  font-size: min(13px, calc((100vw - 44px) / 44.4)); color: var(--dim); }
+.pchart .ax { color: var(--rule); }
+.pchart .line { color: #fff; font-weight: 700; text-shadow: 0 0 6px rgba(255, 255, 255, 0.5); }
+.pchart .sac { color: var(--dim); }
+.pchart .dl { color: var(--hot); font-weight: 700; }
+.pchart-key { font-size: 12px; color: var(--dim); max-width: 80ch; }
+.hbet { border-image: var(--pls-grad) 1; }
+.hbet.hex { border-image: var(--hex-grad) 1; }
+.hbet .box-t.camp { background: var(--paper); }
+.hbet .tag { font-weight: 700; background: var(--pls-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hbet.hex .tag { background: var(--hex-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hbet h3 { margin: 0 0 10px; font-family: var(--pixel); font-weight: 400; font-size: 26px; line-height: 1.05; }
+.hbet .kv { grid-template-columns: 12ch minmax(0, 1fr); }
+.hbet q { font-style: italic; }
+.hbet .x { font-size: 12px; }
+.hbet .paid { font-family: var(--pixel); font-size: 30px; line-height: 1; }
+.hbet .paid.no { color: var(--hot); } .hbet .paid.yes { color: #7dff9a; } .hbet .paid.unknown { color: var(--dim); }
+.hbet .note { color: var(--dim); font-size: 13px; margin-top: 8px; }
+.extra { background: var(--hex-grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+.bets { display: grid; gap: 26px; }
+.hx-notes { display: grid; gap: 8px; max-width: 80ch; color: var(--ink-2); padding-left: 2.2ch; margin: 0; }
+.hx-notes li::marker { content: "! "; color: var(--hot); }
+@media (max-width: 720px) {
+  .logos { gap: 4px; }
+  .alogo { width: min(160px, calc((100vw - 76px) / 2)); height: min(160px, calc((100vw - 76px) / 2)); }
+  .vs { font-size: 22px; }
+  .score { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .score dd { margin-bottom: 8px; }
+  .hbet .kv { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="sheet" id="top">
+
+  <header class="top">
+    <span class="site"><a href="/"><b>tungsten.bet</b></a>/hexicans</span>
+    <a class="dim" href="/">[all cubes]</a>
+  </header>
+
+  <section class="hx-hero" aria-labelledby="title">
+    <div class="logos" aria-hidden="true">
+      <canvas class="alogo" data-src="/*HEXLOGO*/" data-mode="hex"></canvas>
+      <span class="vs">vs</span>
+      <canvas class="alogo" data-src="/*PLSLOGO*/" data-mode="pulse"></canvas>
+    </div>
+    <p class="kicker">Bets for money, not cubes, with <b>HEX and PulseChain holders</b></p>
+    <h1 id="title">Did the Hexican bitches ever pay you?</h1>
+    <p class="lede">/*LEDE*/</p>
+  </section>
+
+  <section aria-labelledby="score-h">
+    <h2 class="rule-h" id="score-h"><span>The scoreboard</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl">
+      <span class="box-t">scoreboard.txt</span><span class="box-t r">from Eric's bet sheet</span>
+/*SCORE*/
+    </div>
+  </section>
+
+  <section aria-labelledby="line-h">
+    <h2 class="rule-h" id="line-h"><span>The line</span><span class="fill" aria-hidden="true"></span></h2>
+    <p class="sub">Six of the seven bets needed PLS at $0.001, ten times its sacrifice price, and most needed it to stay there for a day. This is PLS on PulseX every day from launch to the last deadline, on a log scale.</p>
+    <div class="box dbl">
+      <span class="box-t">pls.log</span><span class="box-t r">PulseX, on-chain, USD</span>
+<pre class="pchart" role="img" aria-label="/*CHARTALT*/">/*CHART*/</pre>
+    </div>
+    <p class="pchart-key">/*CHARTKEY*/</p>
+  </section>
+
+  <section aria-labelledby="bets-h">
+    <h2 class="rule-h" id="bets-h"><span>The bets</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="bets">
+/*BETS*/
+    </div>
+  </section>
+
+  <section aria-labelledby="nc-h">
+    <h2 class="rule-h" id="nc-h"><span>Not checked here</span><span class="fill" aria-hidden="true"></span></h2>
+    <ul class="hx-notes">
+      <li>Whether each person paid is Eric's answer, not a transaction anyone here has checked.</li>
+      <li>"Sacrifice price" is taken as $0.0001 per PLS, the figure Hviid gave when her bet was made.</li>
+      <li>PLS and INC prices are daily prices from PulseX, PulseChain's main exchange, read from its public subgraph. CoinGecko lists a PLS high of $0.0022 on 26 December 2024; that figure is wrong: PulseX had PLS at $0.0000576 that day.</li>
+      <li>HEX prices are CoinMarketCap's daily history.</li>
+    </ul>
+    <p class="dim" style="margin-top:14px">Eric has lost one money bet, and it is on the front page: <a href="/#fn-lost">$1,000 to Robert Leshner</a>.</p>
+  </section>
+
+  <footer>
+    <p><a href="/">[ tungsten.bet ]</a> &nbsp; <a href="#top">[ back to top ]</a></p>
+  </footer>
+</div>
+
+<script>
+// The two logos, drawn as ASCII in their own colours. Each cell takes the logo's colour at that point;
+// a light sweeps across HEX, and the white line in the PulseChain logo beats. Still under reduced motion.
+(function () {
+  var RAMP = ' .:-=+*#%@';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MONO = '"JetBrains Mono", ui-monospace, Menlo, monospace';
+  var logos = [];
+  function setup(cv) {
+    var img = new Image();
+    img.onload = function () {
+      var L = { cv: cv, ctx: cv.getContext('2d'), img: img, mode: cv.dataset.mode, seen: true };
+      sample(L); logos.push(L); draw(L, 0);
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { L.seen = e.isIntersecting; }); }).observe(cv);
+    };
+    img.src = cv.dataset.src;
+  }
+  function sample(L) {
+    // Each character cell is sampled at 4x4: the average colour fills it, and the whitest sub-pixel keeps
+    // thin white strokes (PulseChain's pulse line, HEX's inner hexagons) from blurring away.
+    var size = L.cv.clientWidth || 190, rows = Math.max(20, Math.round(size / 6)), cols = Math.round(rows / 0.6), S = 4;
+    var t = document.createElement('canvas'); t.width = cols * S; t.height = rows * S;
+    var tc = t.getContext('2d', { willReadFrequently: true });
+    tc.imageSmoothingQuality = 'high'; tc.drawImage(L.img, 0, 0, cols * S, rows * S);
+    var d = tc.getImageData(0, 0, cols * S, rows * S).data, W = cols * S;
+    L.cells = [];
+    for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++) {
+      var R = 0, G = 0, B = 0, A = 0, white = 0;
+      for (var y = 0; y < S; y++) for (var x = 0; x < S; x++) {
+        var i = ((r * S + y) * W + q * S + x) * 4, a = d[i + 3] / 255;
+        R += d[i] * a; G += d[i + 1] * a; B += d[i + 2] * a; A += a;
+        white = Math.max(white, Math.min(d[i], d[i + 1], d[i + 2]) / 255 * a);
+      }
+      L.cells.push(A > 0 ? { r: R / A, g: G / A, b: B / A, a: A / (S * S), w: white } : { a: 0 });
+    }
+    // The white strokes in both logos are cut-outs, not paint: a see-through cell inside the logo's outline
+    // on its row is part of a stroke, and is drawn bright. Both outlines are hexagons, so a row span is enough.
+    for (var rr = 0; rr < rows; rr++) {
+      var lo = -1, hi = -1, sr = 0, sg = 0, sb = 0, n = 0;
+      for (var qq = 0; qq < cols; qq++) {
+        var e = L.cells[rr * cols + qq];
+        if (e.a >= 0.5) { if (lo < 0) lo = qq; hi = qq; sr += e.r; sg += e.g; sb += e.b; n++; }
+      }
+      for (qq = lo + 1; qq < hi; qq++) {
+        var h = L.cells[rr * cols + qq];
+        if (h.a < 0.55) { h.hole = true; h.tr = sr / n; h.tg = sg / n; h.tb = sb / n; }
+      }
+    }
+    L.rows = rows; L.cols = cols; L.size = size;
+  }
+  function draw(L, t) {
+    var dpr = Math.min(2, devicePixelRatio || 1), size = L.cv.clientWidth || 190;
+    if (size !== L.size) sample(L);
+    if (L.cv.width !== Math.round(size * dpr)) { L.cv.width = L.cv.height = Math.round(size * dpr); }
+    var c = L.ctx; c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, size, size);
+    var ch = size / L.rows, cw = size / L.cols;
+    c.font = '700 ' + (ch * 0.98).toFixed(1) + 'px ' + MONO; c.textAlign = 'center'; c.textBaseline = 'middle';
+    var sweep = ((t / 2600) % 1.6) - 0.3, pulse = ((t / 1700) % 1.3) - 0.15;
+    for (var r = 0; r < L.rows; r++) for (var q = 0; q < L.cols; q++) {
+      var cell = L.cells[r * L.cols + q];
+      if (cell.a < 0.3 && !cell.hole) continue;
+      var lift = 0, x = q / L.cols;
+      if (L.mode === 'hex') lift = Math.max(0, 1 - Math.abs((x + r / L.rows) / 2 - sweep) * 9);
+      var line = cell.hole || cell.w > 0.62, glyph, col;
+      if (cell.hole) { cell.r = cell.tr; cell.g = cell.tg; cell.b = cell.tb; cell.a = 1; }
+      if (line) {
+        if (L.mode === 'pulse') lift = Math.exp(-Math.pow(x - pulse, 2) / 0.004);
+        glyph = lift > 0.5 ? '@' : '#';
+        var m = 0.55 + 0.45 * lift;
+        col = [cell.r + (255 - cell.r) * m, cell.g + (255 - cell.g) * m, cell.b + (255 - cell.b) * m];
+      } else {
+        var lum = (0.3 * cell.r + 0.59 * cell.g + 0.11 * cell.b) / 255;
+        glyph = RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.round((0.12 + 0.35 * lum + 0.55 * lift) * (RAMP.length - 1))))];
+        var k = 1.05 + 0.6 * lift;
+        col = [cell.r * k + 60 * lift, cell.g * k + 60 * lift, cell.b * k + 60 * lift];
+      }
+      c.globalAlpha = Math.min(1, cell.a + 0.1);
+      c.fillStyle = 'rgb(' + col.map(function (v) { return Math.max(0, Math.min(255, Math.round(v))); }).join(',') + ')';
+      c.fillText(glyph, q * cw + cw / 2, r * ch + ch / 2);
+    }
+    c.globalAlpha = 1;
+  }
+  document.querySelectorAll('canvas.alogo').forEach(setup);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { logos.forEach(function (L) { draw(L, 0); }); });
+  addEventListener('resize', function () { logos.forEach(function (L) { draw(L, 0); }); });
+  if (reduce) return;
+  var last = 0;
+  (function frame(t) {
+    if (!document.hidden && t - last > 80) { last = t; logos.forEach(function (L) { if (L.seen) draw(L, t); }); }
+    requestAnimationFrame(frame);
+  })(0);
+})();
+</script>
+</body>
+</html>
