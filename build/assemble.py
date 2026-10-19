@@ -325,58 +325,48 @@ def build_hexicans(posts):
     tpl = (BUILD / "hexicans.html").read_text(encoding="utf-8")
     bets = sorted(bets, key=lambda b: (b["entered"], -b["stake"]))
     total = sum(b["stake"] for b in bets)
-    paid_yes = [b for b in bets if b["paid"] is True]
-    paid_no = [b for b in bets if b["paid"] is False]
-    unknown = [b for b in bets if b["paid"] is None]
-    partial = [b for b in bets if b["paid"] == "partial"]
-    chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' for b in bets)
-    if unknown:
-        got = sum(b.get("paid_amount") or 0 for b in bets)
-        nothing = sum(1 for b in unknown if not b.get("paid_amount"))
-        def who_paid(b):
-            how = "paid in full" if b["paid"] is True else "paid ${:,} and stopped".format(b["paid_amount"])
-            return H.escape(b["who"]["name"]) + " " + how
-        answer = (f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,} received so far. '
-                  + "; ".join(who_paid(b) for b in bets if b.get("paid_amount"))
-                  + f'. No payment found from the other {nothing}.</span>')
-    else:
-        answer = (f'<span class="answer">{len(paid_yes)} of {len(bets)}</span> '
-                  f'<span class="dim">${sum(b["stake"] for b in paid_yes):,} of ${total:,} paid.</span>')
+    n_bets = sum(len(b["sheet"]) for b in bets)
+    chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' * len(b["sheet"]) for b in bets)
+    got = sum(b.get("paid_amount") or 0 for b in bets)
+    def who_paid(b):
+        return H.escape(b["who"]["name"]) + (" paid in full" if b["paid"] is True else " paid ${:,} and stopped".format(b["paid_amount"]))
+    rest = sum(1 for b in bets if b["paid"] is None)
+    answer = (f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,}. '
+              + "; ".join(who_paid(b) for b in bets if b.get("paid_amount"))
+              + (f'. Nothing from the other {rest}.' if rest else ".") + '</span>')
+    on_hex = sum(len(b["sheet"]) for b in bets if b["camp"] == "hex")
+    tally = posts["1872772808927002626"]
     score = f"""      <dl class="score">
-        <dt>bets taken</dt><dd><span class="big">{len(bets)}</span> <span class="chips" aria-hidden="true">{chips}</span> <span class="dim">{sum(b["camp"] == "hex" for b in bets)} on HEX, {sum(b["camp"] == "pls" for b in bets)} on PulseChain</span></dd>
+        <dt>bets</dt><dd><span class="big">{n_bets}</span> <span class="chips" aria-hidden="true">{chips}</span> <span class="dim">{on_hex} on HEX, {n_bets - on_hex} on PulseChain</span></dd>
         <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties, delivered</span></dd>
-        <dt>won by Eric, by the terms</dt><dd><span class="big">{len(bets)} of {len(bets)}</span></dd>
+        <dt>won by Eric</dt><dd><span class="big">{n_bets} of {n_bets}</span></dd>
         <dt>paid</dt><dd>{answer}</dd>
-        <dt>Eric, December 2024</dt><dd><q>{H.escape(posts["1872772808927002626"]["text"].split(chr(10))[2])}</q> <a class="x" href="{H.escape(posts["1872772808927002626"]["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
+        <dt>Eric, December 2024</dt><dd><q>{H.escape(tally["text"].split(chr(10))[2])}</q> <a class="x" href="{H.escape(tally["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
       </dl>"""
     deadlines = sorted({b["deadline"] for b in bets if b["camp"] == "pls"})
     chart, top = pls_chart(pls["prices"], deadlines)
     chart_alt = (f"PLS daily price from {hx_day(pls['prices'][0][0])} to {hx_day(pls['prices'][-1][0])} on a log scale. "
                  f"Its highest was ${top[1]:.6f} on {hx_day(top[0])}, its first week. It never reached the $0.001 line.")
-    key = ("█ PLS, the highest daily price in each column of about twelve days. ━ $0.001, ten times the sacrifice price. "
-           "┄ $0.0001, the sacrifice price. ▲ deadlines: " + ", ".join(hx_day(d) for d in deadlines) + ". "
-           f"Highest daily price ever: ${top[1]:.6f}, on {hx_day(top[0])}.")
+    key = ("━ $0.001, ten times the sacrifice price. ┄ $0.0001, the sacrifice price. ▲ deadlines: "
+           + ", ".join(hx_day(d) for d in deadlines) + f". Highest ever: ${top[1]:.6f}, on {hx_day(top[0])}.")
     def quote(t):
         p = posts[t["post"]]
-        if t.get("image"):
-            return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">in a screenshot posted by @{H.escape(p["user"])}, {hx_day(p["at"][:10])}</span> '
-                    f'<a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a>')
-        arch = f' <a class="x" href="{H.escape(p["archive"])}" target="_blank" rel="noopener">[archive]</a>' if p.get("archive") else ""
-        return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">@{H.escape(p["user"])}, {hx_day(p["at"][:10])}</span> '
-                f'<a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a>{arch}')
+        url = p.get("archive") or p["url"]
+        return (f'<q>{H.escape(t["quote"])}</q> <span class="dim">@{H.escape(t.get("by", p["user"]))}, '
+                f'{hx_day(p["at"][:10])}</span> <a class="x" href="{H.escape(url)}" target="_blank" rel="noopener">[x]</a>')
     def exhibit(e, cls=""):
         p = posts[e["post"]]
         return (f'<figure class="ex {cls}"><a href="{H.escape(p["url"])}" target="_blank" rel="noopener"><img src="/img/hexicans/{H.escape(e["file"])}" '
-                f'alt="{H.escape(e["alt"])}" loading="lazy"></a><figcaption>{H.escape(e["cap"])} <a class="x" href="{H.escape(p["url"])}" target="_blank" rel="noopener">[x.com]</a></figcaption></figure>')
+                f'alt="{H.escape(e["alt"])}" loading="lazy"></a><figcaption>{H.escape(e["cap"])}</figcaption></figure>')
     arts = []
     for i, b in enumerate(bets, 1):
         who = f'{H.escape(b["who"]["name"])} <a href="https://x.com/{H.escape(b["who"]["handle"])}" target="_blank" rel="noopener">@{H.escape(b["who"]["handle"])}</a>'
-        stake = f'${b["stake"]:,}' + (f' + <span class="extra">{H.escape(b["stake_extra"])}</span>' if b.get("stake_extra") else "") + (f' <span class="dim">vs Eric\'s ${b["eric_stake"]:,}</span>' if b.get("eric_stake") else "")
-        sheet_out = f'<b>{H.escape(b["sheet_outcome"])}</b>' if b["sheet_outcome"] else '<span class="dim">no outcome entered</span>'
+        stake = f'${b["stake"]:,}' + (f' + <span class="extra">{H.escape(b["stake_extra"])}</span>' if b.get("stake_extra") else "")
         paid = {True: '<span class="paid yes">PAID</span>', False: '<span class="paid no">NOT PAID</span>', "partial": '<span class="paid no">PARTLY</span>', None: '<span class="paid unknown">?</span>'}[b["paid"]]
-        if b.get("paid_note"): paid += f' <span class="dim">{H.escape(b["paid_note"])}</span>'
-        if b.get("paid_post"): paid += f' <a class="x" href="{H.escape(posts[b["paid_post"]]["url"])}" target="_blank" rel="noopener">[x.com]</a>'
-        note = f'\n        <p class="note">{H.escape(b["note"])}</p>' if b.get("note") else ""
+        if b.get("paid_note"):
+            paid += f' <span class="dim">{H.escape(b["paid_note"])}</span>'
+        if b.get("paid_post"):
+            paid += f' <a class="x" href="{H.escape(posts[b["paid_post"]]["url"])}" target="_blank" rel="noopener">[x]</a>'
         if b.get("avatar"):
             av = f"/img/hexicans/{b['avatar']}"
             who_row = (f'<div class="who-row"><span class="av" tabindex="0" aria-label="{H.escape(b["who"]["name"])}\'s profile picture">'
@@ -388,16 +378,15 @@ def build_hexicans(posts):
         <span class="box-t">#{i} · <span class="tag">{"HEX" if b["camp"] == "hex" else "PulseChain"}</span></span><span class="box-t r">{stake}</span>
         {who_row}
         <dl class="kv">
-          <dt>the bet</dt><dd>{H.escape(b["bet"])}</dd>
-          <dt>their words</dt><dd>{"<br>".join(quote(t) for t in b["terms"])}</dd>
-          <dt>window</dt><dd>{hx_day(b["entered"])} to {hx_day(b["deadline"])}</dd>
-          <dt>what happened</dt><dd>{H.escape(b["check"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
-          <dt>Eric's sheet</dt><dd><q>{H.escape(b["sheet"])}</q> {sheet_out}</dd>
+          <dt>the bet</dt><dd>{"<br>".join(H.escape(x) for x in b["bet"])}</dd>
+          <dt>their words</dt><dd class="words">{"<br>".join(quote(t) for t in b["terms"])}</dd>
+          <dt>what happened</dt><dd>{H.escape(b["result"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
           <dt>paid</dt><dd>{paid}</dd>
-        </dl>{exs}{note}
+        </dl>{exs}
       </article>""")
-    lede = (f"Between 2022 and 2024, seven HEX and PulseChain holders bet Eric ${total:,} that their coins would set new highs or go up "
-            "tenfold. None came close, so by their own terms Eric won all seven. That leaves the question in the title.")
+    people = len(bets)
+    lede = (f"Between 2022 and 2024, {people} HEX and PulseChain holders made {n_bets} bets with Eric, ${total:,} in all, that their coins "
+            "would set new highs or go up tenfold. None came close, so by their own terms Eric won every one. That leaves the question in the title.")
     fill = {
         "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede),
         "/*SCORE*/": score + "\n      " + exhibit({"file": "debt-square.jpg", "post": "1953841425419804978",
