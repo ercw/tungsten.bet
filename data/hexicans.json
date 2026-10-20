@@ -34,30 +34,12 @@
     "result": "PulseChain didn't launch until May 2023, three months after the deadline. HEX itself got no higher than $0.201 that year.",
     "check_url": "https://coinmarketcap.com/currencies/hex/historical-data/",
     "paid": true,
-    "exhibits": [
-      {
-        "file": "",
-        "post": "0",
-        "alt": "",
-        "cap": ""
-      },
-      {
-        "file": "",
-        "post": "0",
-        "alt": "",
-        "cap": ""
-      }
-    ],
     "paid_amount": 20000,
     "paid_note": "His $20,000, in escrow with Eric from the day the bet was made.",
     "after": [
       {
         "post": "1572685189230522369",
         "quote": "$20,000, just ask @DixonPiper69"
-      },
-      {
-        "post": "0",
-        "quote": ""
       },
       {
         "post": "0",
