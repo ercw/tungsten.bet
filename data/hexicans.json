@@ -25,14 +25,45 @@
       {
         "post": "1495119177731952651",
         "quote": "Ok, bet is void with any irregular price wicks in the first couple months."
+      },
+      {
+        "post": "1495206630836916232",
+        "quote": "@DixonPiper69 has put the funds in escrow with me. Low risk of dispute."
       }
     ],
     "result": "PulseChain didn't launch until May 2023, three months after the deadline. HEX itself got no higher than $0.201 that year.",
     "check_url": "https://coinmarketcap.com/currencies/hex/historical-data/",
     "paid": true,
-    "exhibits": [],
+    "exhibits": [
+      {
+        "file": "",
+        "post": "0",
+        "alt": "",
+        "cap": ""
+      },
+      {
+        "file": "",
+        "post": "0",
+        "alt": "",
+        "cap": ""
+      }
+    ],
     "paid_amount": 20000,
-    "paid_note": "His $20,000, up front, when the bet was made."
+    "paid_note": "His $20,000, in escrow with Eric from the day the bet was made.",
+    "after": [
+      {
+        "post": "1572685189230522369",
+        "quote": "$20,000, just ask @DixonPiper69"
+      },
+      {
+        "post": "0",
+        "quote": ""
+      },
+      {
+        "post": "0",
+        "quote": ""
+      }
+    ]
   },
   {
     "id": "hviid",
@@ -92,26 +123,6 @@
       {
         "post": "1768054286938714504",
         "quote": "So, @ercwl accepted my $10k $INC bet earlier today"
-      },
-      {
-        "post": "1953456153146400772",
-        "quote": "Now you have your $100 Erica"
-      },
-      {
-        "post": "1953466859548004535",
-        "quote": "I’ll buy the debt from you for 10k"
-      },
-      {
-        "post": "1953561787896586738",
-        "quote": "I’ll offer you the panties for $10k how about that"
-      },
-      {
-        "post": "1953841425419804978",
-        "quote": "The payment was $100 (of their total $110,000 debt) / It is the total they can currently afford (0.09%)"
-      },
-      {
-        "post": "1987215836055048429",
-        "quote": "I will always choose my family’s and my own health above a bet I made over X"
       }
     ],
     "result": "PLS peaked at $0.000262 in its first week and was $0.0000215 on 7 April 2025. INC was $9.46 the day that bet was made and $1.11 on 7 April 2025.",
@@ -135,16 +146,22 @@
         "cap": "The exchange, as @JayPlush369 screenshotted it the same day."
       },
       {
-        "file": "first-100-dai.jpg",
-        "post": "1953841425419804978",
-        "alt": "A wallet notification: You received 100 DAI from 0x82…7323 to ercwl.eth",
-        "cap": "The first $100, as Eric posted it on 8 August 2025."
+        "file": "hviid-installments.jpg",
+        "post": "1974133639337418759",
+        "alt": "Four wallet notifications of about 100 DAI each, dated 7 August, 2 September, 2 October and 2 December 2025",
+        "cap": "The four payments, as Eric posted them: $400.30 in all."
       },
       {
-        "file": "debt-square.jpg",
-        "post": "1953841425419804978",
-        "alt": "A large purple square with a tiny yellow square in its corner",
-        "cap": "Eric, 8 August 2025: “The yellow square in the right diagram represents debt paid so far visually.” The yellow square is in the top left corner."
+        "file": "debt-grid-300.jpg",
+        "post": "1974133639337418759",
+        "alt": "A large purple rectangle with a small yellow block in its top left corner",
+        "cap": "Eric, 3 October 2025: “Updated the grid visual”. The yellow corner is what she had paid: $300 of $60,000."
+      },
+      {
+        "file": "wheres-my-100.jpg",
+        "post": "1987197810270171499",
+        "alt": "A painting of a man pointing at his open palm",
+        "cap": "Eric, 8 November 2025: “You didn’t pay this month. Where’s my $100?”"
       },
       {
         "file": "undergarments-ups-box.jpg",
@@ -159,7 +176,49 @@
         "cap": "Eric, 21 August 2026: “after paying only $400 of the $60,000 that was owed, Lady @HviidHEX has blocked me.”"
       }
     ],
-    "featured": true
+    "featured": true,
+    "after": [
+      {
+        "post": "1953456153146400772",
+        "quote": "Now you have your $100 Erica"
+      },
+      {
+        "post": "1953466859548004535",
+        "quote": "I’ll buy the debt from you for 10k"
+      },
+      {
+        "post": "1953561787896586738",
+        "quote": "I’ll offer you the panties for $10k how about that"
+      },
+      {
+        "post": "1953841425419804978",
+        "quote": "The payment was $100 (of their total $110,000 debt) / It is the total they can currently afford (0.09%)"
+      },
+      {
+        "post": "1987215836055048429",
+        "quote": "I will always choose my family’s and my own health above a bet I made over X"
+      },
+      {
+        "post": "1962783005300384062",
+        "quote": "A long-term savings account for Hviid (since she puts in everything else into HEX)?"
+      },
+      {
+        "post": "1974133639337418759",
+        "quote": "You have now paid $300 of $60,000 / 49 years 9 months to go"
+      },
+      {
+        "post": "1987197810270171499",
+        "quote": "You didn’t pay this month. Where’s my $100?"
+      },
+      {
+        "post": "1995930467594576134",
+        "quote": "Thank you for fulfilling your monthly debt payment this month, Lady Hviid!"
+      },
+      {
+        "post": "2032863407834120596",
+        "quote": "I’m missing your monthly $100 payments for January, February and March"
+      }
+    ]
   },
   {
     "id": "katie",
@@ -214,18 +273,37 @@
       {
         "post": "1892122360175788374",
         "quote": "I do think I'll be losing my bet to Eric Wall in a few months though lol and paying him 50k."
+      }
+    ],
+    "result": "PLS peaked at $0.000262 in its first week and was $0.0000215 on 7 April 2025.",
+    "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
+    "paid": false,
+    "avatar": "avatar-katieepcrypto.jpg",
+    "exhibits": [],
+    "featured": true,
+    "after": [
+      {
+        "post": "1909185103676490021",
+        "quote": "Today I lost my bet with @ercwl. / I’ll need a few weeks to move money around for obvious security reasons."
+      },
+      {
+        "post": "1917936161810530335",
+        "quote": "Unrelated but how many weeks are a ”few”? Asking for a friend"
+      },
+      {
+        "post": "1922324903912456312",
+        "quote": "…Katie?"
+      },
+      {
+        "post": "1932563874886398465",
+        "quote": "Katie and Hviid didn’t pay, fund is broke"
       },
       {
         "post": "1949635364060065858",
         "quote": "abandon his account when I win just like Katie P"
       }
     ],
-    "result": "PLS peaked at $0.000262 in its first week and was $0.0000215 on 7 April 2025.",
-    "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
-    "paid": null,
-    "avatar": "avatar-katieepcrypto.jpg",
-    "exhibits": [],
-    "featured": true
+    "paid_note": "Conceded on 7 April 2025 and asked for a few weeks."
   },
   {
     "id": "ivan",
@@ -252,13 +330,28 @@
       {
         "post": "1663646123188264961",
         "quote": "Send $2k to @ValidatorEth and link tx when done. Or propose your own oracle"
+      },
+      {
+        "post": "1734634633868849570",
+        "quote": "And 11 months till You owe me 2k Eric."
       }
     ],
     "result": "PLS was $0.000077 on 29 November 2024.",
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
-    "paid": null,
+    "paid": false,
     "avatar": "avatar-ivanmandip.jpg",
-    "exhibits": []
+    "exhibits": [],
+    "after": [
+      {
+        "post": "1862712470252466594",
+        "quote": "It’s been 11 months and it turns out you were the one who lost. I accept the $2k USDT you mentioned at my public ENS address ercwl.eth."
+      },
+      {
+        "post": "1888194151201550626",
+        "quote": "@IvanMandip did not pay, his last tweet was 10 days before his bet was due and he has not returned to X since."
+      }
+    ],
+    "paid_note": "His last post was ten days before the deadline."
   },
   {
     "id": "ponw",
@@ -312,9 +405,9 @@
     ],
     "sheet_outcome": "",
     "bet": [
-      "PLS hits $0.001 by 7 April 2025 and holds it for 24 hours."
+      "PLS hits $0.001 by 7 April 2025 and holds it for 24 hours. HuntDWorld put 10,000 USDT in escrow with @ValidatorEth; Eric's side was $10,000 of PLS, bought the day the bet was agreed."
     ],
-    "entered": "2024-09-16",
+    "entered": "2024-11-30",
     "deadline": "2025-04-07",
     "terms": [
       {
@@ -326,16 +419,24 @@
         "quote": "If I lose, I’ll transfer $10k USD to Eric"
       },
       {
-        "post": "1909145309680116016",
-        "quote": "Please send 10,000 USDT from @HuntDWorld to ercwl.eth"
+        "post": "1836785909305323587",
+        "quote": "Are you afraid or ignoring the $PLS challenge?"
       },
       {
-        "post": "1909145309680116016",
-        "quote": "Instead he is down -77%, and -98% (50x+) away from his target."
+        "post": "1839362325922648135",
+        "quote": "I bought 200M+ $pls since @ercwl not accepting the challenge"
       },
       {
-        "post": "1910099958943875073",
-        "quote": "pleasure doing business with you"
+        "post": "1862717948374237360",
+        "quote": "Three months since my challenge & $PLS price has doubled!"
+      },
+      {
+        "post": "1862709144106467825",
+        "quote": "you’re free to escrow with @ValidatorEth and I’ll match it"
+      },
+      {
+        "post": "1862739220743233752",
+        "quote": "received 10,000 USDT"
       }
     ],
     "result": "PLS was $0.0000215 on 7 April 2025.",
@@ -347,10 +448,30 @@
     "avatar": "avatar-realimmortal333.jpg",
     "exhibits": [
       {
+        "file": "hunt-challenge-bag.jpg",
+        "post": "1836785909305323587",
+        "alt": "A swap screen: 244,738,130.20 WPLS for 10,000 USD",
+        "cap": "HuntDWorld, 19 September 2024: the bag he wanted Eric to buy."
+      },
+      {
         "file": "hunt-9999-usdt.jpg",
         "post": "1910099958943875073",
         "alt": "A wallet notification: You received 9999 USDT from validator.eth to ercwl.eth",
         "cap": "Eric, 9 April 2025: “pleasure doing business with you”."
+      }
+    ],
+    "after": [
+      {
+        "post": "1909145309680116016",
+        "quote": "Please send 10,000 USDT from @HuntDWorld to ercwl.eth"
+      },
+      {
+        "post": "1909145309680116016",
+        "quote": "Instead he is down -77%, and -98% (50x+) away from his target."
+      },
+      {
+        "post": "1910099958943875073",
+        "quote": "pleasure doing business with you"
       }
     ]
   }

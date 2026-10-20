@@ -324,10 +324,13 @@ def build_hexicans(posts):
     got = sum(b.get("paid_amount") or 0 for b in bets)
     def who_paid(b):
         return H.escape(b["who"]["name"]) + (" paid in full" if b["paid"] is True else " paid ${:,} and stopped".format(b["paid_amount"]))
-    rest = sum(1 for b in bets if b["paid"] is None)
-    answer = (f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,}. '
-              + "; ".join(who_paid(b) for b in bets if b.get("paid_amount"))
-              + (f'. Nothing from the other {rest}.' if rest else ".") + '</span>')
+    names = lambda xs: " and ".join(", ".join(xs[:-1]) and [", ".join(xs[:-1]), xs[-1]] or xs)
+    full = [H.escape(b["who"]["name"]) for b in bets if b["paid"] is True]
+    part = [f'{H.escape(b["who"]["name"])} paid ${b["paid_amount"]:,} and stopped' for b in bets if b["paid"] == "partial"]
+    nope = [H.escape(b["who"]["name"]) for b in bets if b["paid"] is False]
+    unk = [H.escape(b["who"]["name"]) for b in bets if b["paid"] is None]
+    parts = ([f"{names(full)} paid in full"] if full else []) + part + ([f"{names(nope)} didn't pay"] if nope else []) + ([f"nothing from {names(unk)}"] if unk else [])
+    answer = f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,}. ' + "; ".join(parts).capitalize()[0:1] + "; ".join(parts)[1:] + '.</span>'
     on_hex = sum(len(b["sheet"]) for b in bets if b["camp"] == "hex")
     tally = posts["1872772808927002626"]
     score = f"""      <dl class="score">
@@ -368,13 +371,15 @@ def build_hexicans(posts):
         else:
             who_row = f'<h3>{who}</h3>'
         exs = "".join(exhibit(e) for e in b.get("exhibits", []))
+        after = sorted(b.get("after", []), key=lambda t: posts[t["post"]]["at"])
+        after_row = (f'\n          <dt>paying up</dt><dd class="words">{"<br>".join(quote(t) for t in after)}</dd>' if after else "")
         arts.append(f"""      <article class="box hbet {b["camp"]}" id="bet-{H.escape(b["id"])}">
         <span class="box-t">#{i} · <span class="tag">{"HEX" if b["camp"] == "hex" else "PulseChain"}</span></span><span class="box-t r">{stake}</span>
         {who_row}
         <dl class="kv">
           <dt>the bet</dt><dd>{"<br>".join(H.escape(x) for x in b["bet"])}</dd>
           <dt>their words</dt><dd class="words">{"<br>".join(quote(t) for t in sorted(b["terms"], key=lambda t: posts[t["post"]]["at"]))}</dd>
-          <dt>what happened</dt><dd>{H.escape(b["result"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>
+          <dt>what happened</dt><dd>{H.escape(b["result"])} <a class="x" href="{H.escape(b["check_url"])}" target="_blank" rel="noopener">[prices]</a></dd>{after_row}
           <dt>paid</dt><dd>{paid}</dd>
         </dl>{exs}
       </article>""")

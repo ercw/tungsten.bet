@@ -79,8 +79,8 @@ check("no cube page says @bitcoinerrrrr lost the Merge cube", "bitcoinerrrrr" no
 hx, pls = assemble.load_hexicans()
 check("hexicans.json: ids unique, camp hex or pls, paid true/false/null", len({b["id"] for b in hx}) == len(hx) and all(b["camp"] in ("hex", "pls") and b["paid"] in (True, False, None, "partial") for b in hx))
 src = lambda t: norm(posts[t["post"]].get("image_text", "") if t.get("image") else posts[t["post"]]["text"])
-check("hexicans: every quote is word for word in its post (or its screenshot)", all(t["post"] in posts and norm(t["quote"]) in src(t) for b in hx for t in b["terms"]),
-      str([(b["id"], t["quote"][:30]) for b in hx for t in b["terms"] if t["post"] not in posts or norm(t["quote"]) not in src(t)]))
+check("hexicans: every quote is word for word in its post (or its screenshot)", all(t["post"] in posts and norm(t["quote"]) in src(t) for b in hx for t in b["terms"] + b.get("after", [])),
+      str([(b["id"], t["quote"][:30]) for b in hx for t in b["terms"] + b.get("after", []) if t["post"] not in posts or norm(t["quote"]) not in src(t)]))
 check("hexicans: money received adds up from the bets", sum(b.get("paid_amount") or 0 for b in hx) == 30399, str(sum(b.get("paid_amount") or 0 for b in hx)))
 check("hexicans: stakes add up to the sheet's $152,000", sum(b["stake"] for b in hx) == 152000, str(sum(b["stake"] for b in hx)))
 check("hexicans: the panties stay in", any(b.get("stake_extra") == "her panties" for b in hx))
