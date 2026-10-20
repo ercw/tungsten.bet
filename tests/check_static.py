@@ -82,10 +82,10 @@ src = lambda t: norm(posts[t["post"]].get("image_text", "") if t.get("image") el
 check("hexicans: every quote is word for word in its post (or its screenshot)", all(t["post"] in posts and norm(t["quote"]) in src(t) for b in hx for t in b["terms"] + b.get("after", [])),
       str([(b["id"], t["quote"][:30]) for b in hx for t in b["terms"] + b.get("after", []) if t["post"] not in posts or norm(t["quote"]) not in src(t)]))
 check("hexicans: money received adds up from the bets", sum(b.get("paid_amount") or 0 for b in hx) == 30399, str(sum(b.get("paid_amount") or 0 for b in hx)))
-check("hexicans: stakes add up to the sheet's $152,000", sum(b["stake"] for b in hx) == 152000, str(sum(b["stake"] for b in hx)))
+check("hexicans: stakes add up to the sheet's $152,000 plus DcentraliseMe's $50,000", sum(b["stake"] for b in hx) == 202000, str(sum(b["stake"] for b in hx)))
 check("hexicans: the panties stay in", any(b.get("stake_extra") == "her panties" for b in hx))
 check("hexicans: Hviid and Katie first", [b["id"] for b in sorted(hx, key=lambda b: (not b.get("featured"), b["entered"]))][:2] == ["hviid", "katie"])
-check("hexicans: seven bets in all, Hviid's two in one box", sum(len(b["sheet"]) for b in hx) == 7 and len(next(b for b in hx if b["id"] == "hviid")["sheet"]) == 2)
+check("hexicans: eight bets in all, Hviid's two in one box", sum(len(b["bet"]) for b in hx) == 8 and len(next(b for b in hx if b["id"] == "hviid")["bet"]) == 2)
 check("hexicans: screenshot quotes say who said them", all(t.get("by") for b in hx for t in b["terms"] if t.get("image")))
 hx_imgs = [b["avatar"] for b in hx if b.get("avatar")] + [e["file"] for b in hx for e in b.get("exhibits", [])]
 check("hexicans: every image it shows is in deploy/img/hexicans", all((ROOT / "deploy" / "img" / "hexicans" / f).is_file() for f in hx_imgs), str([f for f in hx_imgs if not (ROOT / "deploy" / "img" / "hexicans" / f).is_file()]))

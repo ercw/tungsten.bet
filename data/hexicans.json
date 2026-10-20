@@ -367,6 +367,12 @@
         "post": "1747362092095545568",
         "alt": "Eric's bet sheet with the PoNW row highlighted in yellow",
         "cap": "Posted by @PoNWPulseChain on 16 January 2024, with “Account deleted, but friendship still confirmed”: Eric's bet sheet, their row highlighted."
+      },
+      {
+        "file": "ruin-them-poll.jpg",
+        "post": "1805153881665511703",
+        "alt": "Eric's poll: I have $110k in bets against individual hexicans. Should I let them off the hook? No, financially ruin them 60%",
+        "cap": "Eric's reply to @PoNWPulseChain, 24 June 2024: his poll on letting the hexicans off the hook. “No, financially ruin them”: 60%."
       }
     ]
   },
@@ -450,6 +456,95 @@
       {
         "post": "1910099958943875073",
         "quote": "pleasure doing business with you"
+      }
+    ]
+  },
+  {
+    "id": "dcentraliseme",
+    "camp": "pls",
+    "asset": "pDAI",
+    "who": {
+      "name": "DcentraliseMe",
+      "handle": "DcentraliseMe"
+    },
+    "stake": 50000,
+    "sheet": [],
+    "sheet_outcome": "",
+    "bet": [
+      "pDAI pegs to $1 in 2025 and holds it for 48 hours. If it doesn't, DcentraliseMe pays 25 million pDAI, about $50,000 at the time. If it does, Eric writes off his debts from Pulsicans and posts a video regretting it and calling Richard the king of crypto."
+    ],
+    "entered": "2025-11-27",
+    "deadline": "2025-12-31",
+    "terms": [
+      {
+        "post": "1994024258888978875",
+        "quote": "i am still taking payments"
+      },
+      {
+        "post": "1994028079606345743",
+        "quote": "I bet you pDAI will peg to $1 this calendar year…"
+      },
+      {
+        "post": "1994029108196528502",
+        "quote": "are you betting me pdai or dollars"
+      },
+      {
+        "post": "1994029969324835325",
+        "quote": "If you win - I pay you 25m pDAI (~$50k at today’s price) / If I win - you write off all debts from pulsicans and post a short video expressing regret for not listening to DecentraliseMe and calling Richard the king of crypto"
+      },
+      {
+        "post": "1994032463518015511",
+        "quote": "Pegged for a microsecond? Pegged at decent pDAI volume? Also, escrow funds, or I trust you? Seems like an awfully lopsided bet for you."
+      },
+      {
+        "post": "1994036413818359826",
+        "quote": "We could say it had to remain at $1 for 48 hours so we’re not waiting around forever. / No escrow, I’d like that pDAI liquid for the peg."
+      },
+      {
+        "post": "1994074134452609239",
+        "quote": "i’m not sure i understand your game here you weird juggaloo cult mfer, but ok whatever, you have a deal / see you when you delete your account"
+      },
+      {
+        "post": "1994077170789154946",
+        "quote": "now @DcentraliseMe will add another $25m lost, so they’ll owe me $25,110,000 collectively, and i’ll have a whopping total of 600 bucks"
+      }
+    ],
+    "result": "pDAI was $0.0019 when the bet was made and $0.0014 on 31 December 2025, about one seven-hundred-and-fortieth of the peg.",
+    "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
+    "after": [
+      {
+        "post": "2006746486944485806",
+        "quote": "The mistake I made in the bet was framing it around a date."
+      },
+      {
+        "post": "2006759461613088795",
+        "quote": "Ok I’ll accept if you change your pfp to this until your thesis is tested"
+      },
+      {
+        "post": "2006852153944465838",
+        "quote": "OK - the bet is still on, now framed so the thesis will actually be tested."
+      },
+      {
+        "post": "2006836287496753518",
+        "quote": "just put on the pfp or pay up, i’ll read your perverted peg fantasies then"
+      },
+      {
+        "post": "2019736470396027152",
+        "quote": "so when are you paying up fatboy?"
+      },
+      {
+        "post": "2047324385199997272",
+        "quote": "when are you going to pay me exactly? …Are you trying to curse the chain? / PAY UP"
+      }
+    ],
+    "paid": false,
+    "paid_note": "On 1 January 2026 he moved the goalposts from the end of 2025 to a Railgun route going live. Eric was still asking in April.",
+    "exhibits": [
+      {
+        "file": "dcentraliseme-pfp.jpg",
+        "post": "2006759461613088795",
+        "alt": "A photo of a belly hanging over the waistband of black trousers",
+        "cap": "The profile picture Eric said DcentraliseMe could wear instead of paying, until pDAI pegs. 1 January 2026."
       }
     ]
   }

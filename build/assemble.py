@@ -319,8 +319,8 @@ def build_hexicans(posts):
     tpl = (BUILD / "hexicans.html").read_text(encoding="utf-8")
     bets = sorted(bets, key=lambda b: (not b.get("featured"), b["entered"], -b["stake"]))
     total = sum(b["stake"] for b in bets)
-    n_bets = sum(len(b["sheet"]) for b in bets)
-    chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' * len(b["sheet"]) for b in bets)
+    n_bets = sum(len(b["bet"]) for b in bets)
+    chips = "".join(f'<span class="{"h" if b["camp"] == "hex" else "p"}">■</span>' * len(b["bet"]) for b in bets)
     got = sum(b.get("paid_amount") or 0 for b in bets)
     def who_paid(b):
         return H.escape(b["who"]["name"]) + (" paid in full" if b["paid"] is True else " paid ${:,} and stopped".format(b["paid_amount"]))
@@ -331,16 +331,18 @@ def build_hexicans(posts):
     unk = [H.escape(b["who"]["name"]) for b in bets if b["paid"] is None]
     parts = ([f"{names(full)} paid in full"] if full else []) + part + ([f"{names(nope)} didn't pay"] if nope else []) + ([f"nothing from {names(unk)}"] if unk else [])
     answer = f'<span class="answer">${got:,}</span> <span class="dim">of ${total:,}. ' + "; ".join(parts).capitalize()[0:1] + "; ".join(parts)[1:] + '.</span>'
-    on_hex = sum(len(b["sheet"]) for b in bets if b["camp"] == "hex")
+    on_hex = sum(len(b["bet"]) for b in bets if b["camp"] == "hex")
     tally = posts["1872772808927002626"]
+    tally2 = posts["2002853720808468733"]
     score = f"""      <dl class="score">
         <dt>bets</dt><dd><span class="big">{n_bets}</span> <span class="chips" aria-hidden="true">{chips}</span> <span class="dim">{on_hex} on HEX, {n_bets - on_hex} on PulseChain</span></dd>
         <dt>staked against Eric</dt><dd><span class="big">${total:,}</span> <span class="dim">plus one pair of panties, delivered</span></dd>
         <dt>won by Eric</dt><dd><span class="big">{n_bets} of {n_bets}</span></dd>
         <dt>paid</dt><dd>{answer}</dd>
-        <dt>Eric, December 2024</dt><dd><q>{" / ".join(H.escape(x.strip()) for x in tally["text"].split(chr(10))[2:] if x.strip())}</q> <a class="x" href="{H.escape(tally["url"])}" target="_blank" rel="noopener">[x.com]</a></dd>
+        <dt>Eric, December 2024</dt><dd><q>{" / ".join(H.escape(x.strip()) for x in tally["text"].split(chr(10))[2:] if x.strip())}</q> <a class="x" href="{H.escape(tally["url"])}" target="_blank" rel="noopener">[x]</a></dd>
+        <dt>Eric, December 2025</dt><dd><q>{" / ".join(H.escape(x.strip()) for x in tally2["text"].split(chr(10)) if x.strip())}</q> <a class="x" href="{H.escape(tally2["url"])}" target="_blank" rel="noopener">[x]</a></dd>
       </dl>"""
-    deadlines = sorted({b["deadline"] for b in bets if b["camp"] == "pls"})
+    deadlines = sorted({b["deadline"] for b in bets if b["camp"] == "pls" and b.get("asset", "PLS") == "PLS"})
     chart, top = pls_chart(pls["prices"], deadlines)
     chart_alt = (f"PLS daily price from {hx_day(pls['prices'][0][0])} to {hx_day(pls['prices'][-1][0])} on a log scale. "
                  f"Its highest was ${top[1]:.6f} on {hx_day(top[0])}, its first week. It never reached the $0.001 line.")
@@ -384,8 +386,10 @@ def build_hexicans(posts):
         </dl>{exs}
       </article>""")
     people = len(bets)
-    lede = (f"Between 2022 and 2024, {people} HEX and PulseChain holders made {n_bets} bets with Eric, ${total:,} in all, that their coins "
-            "would set new highs or go up tenfold. None came close, so by their own terms Eric won every one. That leaves the question in the title.")
+    word = lambda n: ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][n] if n <= 10 else str(n)
+    lede = (f"Between 2022 and 2025, {word(people)} HEX and PulseChain holders made {word(n_bets)} bets with Eric, ${total:,} in all, that their coins "
+            "would set new highs, go up tenfold or, in pDAI's case, reach a dollar. None came close, so by their own terms Eric won every one. "
+            "That leaves the question in the title.")
     fill = {
         "/*STYLE*/": stylesheet(), "/*DESC*/": H.escape(lede), "/*LEDE*/": H.escape(lede),
         "/*SCORE*/": score,
