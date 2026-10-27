@@ -48,6 +48,13 @@
     "qubits": false,
     "why": "Quantum information theory. No hardware."
   },
+  "Q8": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "Circuit designs checked by classical simulation and Lean proofs; nothing ran on hardware. Relevant to running algorithms on qubits, but nothing was built."
+  },
   "X1": {
     "matter": false,
     "necessary": true,
@@ -159,5 +166,12 @@
     "leap": "none",
     "qubits": false,
     "why": "Mostly unreviewed theory."
+  },
+  "P10": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Mathematical physics, and the proof is not public."
   }
 }

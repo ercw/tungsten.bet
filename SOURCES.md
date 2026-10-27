@@ -140,3 +140,51 @@ Verdicts: **VERIFIED**, **PARTLY VERIFIED** (which part, and why the rest is not
 | M6 | new item | Adv. Mater. 38 e74502 |
 
 Not changed anywhere: `domain`, `tier`, `llm`, `physical`, `quantum`, `artifact`, `P`, `H`, `W`, `C` of the 22 original items; no caveat text removed (the test now enforces this). `data/ladder.json` gained an M6 row; no existing row changed.
+
+---
+
+# Checks of 27 October 2026
+
+Three changes to the James page were checked on 27 October 2026, the same way as above. The session that wrote them could open `anthropic.com` and `github.com` (pages and raw files) but not `arxiv.org`, `openai.com`, `deepmind.google`, `quantinuum.com` or `claymath.org`; what each check could and could not see is stated under it.
+
+## 13. Q8, a new item: Anthropic, "Designing more efficient quantum circuits with Claude", 16 October 2026
+
+**VERIFIED** against the post; the paper it links (arXiv 2610.22367) **COULD NOT OPEN**, so the item's figures are the post's.
+
+- https://www.anthropic.com/research/designing-efficient-quantum-circuits (Oct 16, 2026; Science): "Claude found designs that improve on the best published circuits, in some cases by an order of magnitude or more." "Across eight computational primitives", spanning chemistry, optimization, quantum simulation, number theory and numerical computing. "Claude Mythos 5 could successfully work in a closed loop" … "with no human input between rounds"; the score is "the number of qubits used, multiplied by the number of gates". Point addition: "Compared with the smallest previous design, one circuit in the family uses 12% more qubits but 17x fewer gates." and "After working for 53 hours with minimal human input". DQI decoder: "reduced the number of gates in the decoder by a factor of 12" and "ran 403 million sample decodings to measure how often these exceptions actually occurred". Storage: "would take 665 qubits" against "sets aside room for just one saved value, or 19 qubits" and "About one run in 10,000 needs more than that and fails". Lean: "it prompted Claude to write Lean proofs to verify its divsteps design". Limits: "Circuit design is only one part of building a useful quantum computer." and "useful quantum computing could arrive sooner". The post does not say any circuit ran on quantum hardware. Named: Andi Gu (lead, Anthropic STEM Fellows Program), Alek Kemeny (Anthropic), Susanne Yelin (Harvard), Mikhail Lukin (Harvard, QuEra). "Read the full paper on arXiv": https://arxiv.org/abs/2610.22367.
+- The FeMoco figures on the page (about 50 trillion Toffoli gates in 2017 down to about 340 million) are the field's published estimates, cited for context, not Claude's result; they are left out of the item.
+
+**On the page:** added as item Q8 (tier 3, llm true, physical false, quantum true, preprint, 2026-10, P 6, H years, W 1.5, C 0.8); LADDER row matter false, necessary true, leap none, qubits true.
+
+## 14. P9 (372 families). The repository's 26 October update: 721 manuscripts in 373 families, two additions with Lean
+
+**VERIFIED** (raw `README.md`, `history.md` and `CONTENTS.md` of github.com/openai/math, main branch, fetched 27 October 2026).
+
+- README: "The current catalogue contains 721 manuscripts organized into 373 families." and "The repository has ~42% top-line results formalized."
+- history.md, "October 26, 2026": "We have added two new manuscripts with accompanying Lean formalizations: *Local smoothing for the Euclidean wave equation.* The proof uses an auxiliary partial differential equation to establish Sogge's local smoothing for waves in every spatial dimension at least two. It also yields the Kakeya maximal and dimension conjectures and Stein's spherical restriction estimates throughout the interior of the conjectured range. We are releasing the model output directly, as we did in our October 6 release. *The Exponential Time Hypothesis is False.* The paper gives a deterministic algorithm that exactly counts satisfying assignments of fixed-width CNF formulas in subexponential time and polynomial space. The case of 3-SAT refutes the Exponential Time Hypothesis. An independent working group of computer scientists led by Russell Impagliazzo, Ramamohan Paturi, and Ryan Williams will examine and explain the proof. At the group's request, we are making the materials public immediately so others can examine them as well." The same entry adds a Lean formalization for "The rational Hodge conjecture for CM abelian varieties".
+- CONTENTS.md: family 079 "Local smoothing for the Euclidean wave equation" (manuscript dated October 25, 2026, with Lean) and family 378 "Disproof of the Exponential Time Hypothesis" (with Lean).
+- Neither file mentions the physics result announced the same day (check 15).
+
+**On the page:** `what` and caveat appended; title, labels and ratings unchanged.
+
+## 15. P10, a new item: OpenAI's physics claim of 26 October 2026
+
+**COULD NOT OPEN.** `openai.com` was refused from the session that wrote this entry, so the post itself was not read. The item rests on the search engine's rendering of the post, which two separate queries returned in the same words, and on coverage; it is labelled company-reported and rated C 0.3. Before this entry is deployed, open https://openai.com/index/building-scientific-understanding-with-academic-communities/ and confirm the three points below, then record what the post says here.
+
+- As returned by the search engine (its rendering of the post, not necessarily verbatim): the announcement gives a mathematically rigorous existence proof of certain interacting quantum field theories containing gauge fields and fermions in four dimensions, including Quantum Chromodynamics (QCD) and a unified completion of the Standard Model, and builds on Balaban's approach in constructive quantum field theory; a group led by David Gross, with Michael Douglas, Arthur Jaffe, Igor Klebanov and Nikita Nekrasov, will shepherd the effort and initially hold the AI artifacts while preparing its own writeup. To confirm against the post: (1) the exact wording of the claim; (2) the review group's members and that the artifacts are held; (3) whether the post names the model or gives dates.
+- Coverage (leads, not sources): The Asia Business Daily, 27 Oct 2026, says the model produced the Yang–Mills proof on 9 September and a QCD-related proof on 18 September and that the Yang–Mills formalisation was completed on 16 October; OfficeChai says the pure Yang–Mills result does not address the mass gap. The dates and the mass-gap point are in the caveat as "coverage says".
+- The repository's 26 October entry (check 14) does not mention the physics result; nothing about it is public.
+
+**On the page:** added as item P10 (tier 3, llm true, physical false, quantum false, company-reported, 2026-10, P 2, H someday, W 2, C 0.3); LADDER row matter false, necessary true, leap none, qubits false.
+
+---
+
+## What changed in `data/items.json` on 27 October 2026
+
+| Item | Fields changed | Source |
+|---|---|---|
+| Q8 | new item | anthropic.com post of 16 Oct 2026 (paper arXiv 2610.22367, not opened) |
+| P9 | what, caveat (appended) | github.com/openai/math README, history.md, CONTENTS.md |
+| P10 | new item | openai.com post of 26 Oct 2026 (not opened; see check 15) |
+
+No caveat text removed; no label, flag or rating of an existing item changed. `data/ladder.json` gained Q8 and P10 rows; no existing row changed.
