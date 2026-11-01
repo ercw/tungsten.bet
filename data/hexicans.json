@@ -263,7 +263,32 @@
     "check_url": "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
     "paid": false,
     "avatar": "avatar-katieepcrypto.jpg",
-    "exhibits": [],
+    "exhibits": [
+      {
+        "file": "katie-14000x.jpg",
+        "post": "1863700377050198486",
+        "alt": "Katie's post of 26 January 2023: PulseChain, 14,000X, Richard was right about HEX, will you be here to find out if he is right about PLS, over a video of Richard Heart",
+        "cap": "Katie, 26 January 2023: “Will you be here to find out if he is right about $PLS?” Eric posted it on 2 December 2024: “Still a better call than this”."
+      },
+      {
+        "file": "katie-another-40k.jpg",
+        "post": "1904859412252012764",
+        "alt": "Katie: I have another $40k DAI ready to deploy on PulseChain, what should I buy? Eric: Is this your last $40k? Sorry this is important to me. Katie: Should I bridge over another $50k?",
+        "cap": "7 September 2024. Eric posted it on 26 March 2025, twelve days before the deadline: “Please don’t be insolvent”."
+      },
+      {
+        "file": "katie-told-you-so.jpg",
+        "post": "1902940431295361375",
+        "alt": "Katie's post in capitals, cursing Atropa, pDAI and the people who promoted it, ending GET THE FUCK OFF PULSECHAIN and I TOLD YOU SO, above a falling chart",
+        "cap": "Katie, March 2025, weeks before the deadline, as Eric screenshotted it on 21 March: “GET THE FUCK OFF PULSECHAIN.”"
+      },
+      {
+        "file": "katie-lost-chart.jpg",
+        "post": "1912147821572030688",
+        "alt": "Weekly chart of PLS on PulseX falling from 2023 to 2025, with an arrow at the low and Katie's post: Today I lost my bet with @ercwl",
+        "cap": "PLS with her post pinned to the low, as @sept_x charted it on 15 April 2025."
+      }
+    ],
     "featured": true,
     "after": [
       {
