@@ -39,6 +39,7 @@
 .open-list .src a { margin-right: 4px; }
 .open-card { display: grid; gap: 8px; }
 .open-card .big-link { font-family: var(--pixel); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
+#pod-player iframe { display: block; width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border: 0; }
 .hero { grid-template-columns: auto minmax(0, 1fr); }
 /* Sources: the title on one line, the address under it (wrapping anywhere, so phones do not overflow) */
 .bet-sources { gap: 8px; }
@@ -142,6 +143,16 @@
     </div>
   </section>
 
+  <section aria-labelledby="pod-h">
+    <h2 class="rule-h" id="pod-h"><span>On The Bitcoin Cash Podcast</span><span class="fill" aria-hidden="true"></span></h2>
+    <div class="box dbl open-card">
+      <span class="box-t">episode 107</span><span class="box-t r">12 Feb 2024</span>
+      <div id="pod-player"><a class="big-link" id="pod-play" href="https://www.youtube.com/watch?v=rBRGPqmmMFo&amp;t=843s" target="_blank" rel="noopener">[ play 14:03–21:24 ]</a></div>
+      <p>Jeremy, the host, explains the cube bets to his co-host Jett: how Eric picks his opponents, what the loser pays, and why the winner would get every cube. He imagines Eric looking at the collection, thinking <q>yeah, I just destroyed this complete idiot</q>. Jett's review: <q>you just end up with a bunch of these heavy fucking cubes</q>.</p>
+      <p class="dim">Eric's own six-minute cut (<a href="https://x.com/ercwl/status/1928973399348400515" target="_blank" rel="noopener">ercwl, 1 Jun 2025</a>). <a href="https://www.youtube.com/watch?v=rBRGPqmmMFo" target="_blank" rel="noopener">[full episode]</a> <a href="https://rss.com/podcasts/bitcoincashpodcast/1342275" target="_blank" rel="noopener">[audio]</a></p>
+    </div>
+  </section>
+
   <section aria-labelledby="what-h">
     <h2 class="rule-h" id="what-h"><span>Where it started</span><span class="fill" aria-hidden="true"></span></h2>
     <div class="box dbl">
@@ -181,6 +192,16 @@
 // Filter links shared before the James page moved (tungsten.bet/#f=...) still work: send them on.
 if (location.hash && location.hash.indexOf('#f=') === 0) location.replace('/jamesob' + location.hash);
 /*CUBE*/
+// The podcast segment: the link goes to YouTube; with scripts on, it plays here and stops where the segment ends.
+document.getElementById('pod-play').addEventListener('click', function (e) {
+  e.preventDefault();
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/rBRGPqmmMFo?start=843&end=1284&autoplay=1&rel=0';
+  f.title = 'The Bitcoin Cash Podcast #107, 14:03 to 21:24';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture';
+  f.allowFullscreen = true;
+  document.getElementById('pod-player').replaceChildren(f);
+});
 // The pyramid: each cube turns at its own pace. Won cubes keep a faint glow on their edges;
 // the open bet on top runs hot and stays blurred until it settles.
 document.querySelectorAll('.cubelet').forEach(function (cv, i) {
