@@ -55,6 +55,20 @@
     "qubits": true,
     "why": "Circuit designs checked by classical simulation and Lean proofs; nothing ran on hardware. Relevant to running algorithms on qubits, but nothing was built."
   },
+  "Q9": {
+    "matter": false,
+    "necessary": false,
+    "leap": "none",
+    "qubits": true,
+    "why": "Decoders run over data recorded on a real trapped-ion processor. The neural decoders matched the conventional ones and the record figures are the conventional decoder's, so AI was not necessary. Nothing physical was made."
+  },
+  "Q10": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": true,
+    "why": "Quantum programs verified by formal proof; nothing ran on hardware. As Q8, relevant to running algorithms on qubits, but nothing was built."
+  },
   "X1": {
     "matter": false,
     "necessary": true,
@@ -103,6 +117,27 @@
     "leap": "early sign",
     "qubits": false,
     "why": "An LLM wrote the synthesis recipes and three unreported compounds were made. Whether AI was necessary is arguable: DFT screening chose the targets, people ran every step and fed results back, and the paper's claim is that fewer trials were needed."
+  },
+  "M7": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "An agent built on language models picked the targets, and four new superconducting alloys were made and measured. That is metallurgy, the field James named. Whether AI was necessary is arguable: the paper says the agent was guided by human expertise and its judgments were checked by hand. The transition temperatures are a few kelvin, so Eric rates it an early sign."
+  },
+  "M8": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "A machine-learning screen predicted one new superconductor, which was made and confirmed; the authors added the second after the screen had passed over it. Whether AI was necessary is arguable, and both transitions are below 1 K."
+  },
+  "M9": {
+    "matter": true,
+    "necessary": false,
+    "leap": "early sign",
+    "qubits": false,
+    "why": "Boards were manufactured from a language model's files and worked. Engineers design such boards routinely, so AI was not necessary. Eric rates it an early sign because the model did the whole design; the devices themselves are ordinary."
   },
   "P1": {
     "matter": true,
@@ -172,6 +207,13 @@
     "necessary": true,
     "leap": "none",
     "qubits": false,
-    "why": "Mathematical physics, and the proof is not public."
+    "why": "Mathematical physics. The Lean proof is public and a review group judges that it constructs the theory, but it bears on no experiment."
+  },
+  "P11": {
+    "matter": true,
+    "necessary": "arguable",
+    "leap": "early sign",
+    "qubits": false,
+    "why": "Learned controllers drove a real tokamak's heating systems, as in P1. Whether AI was necessary is arguable: the paper describes the control framework and does not show that conventional controllers could not do the same."
   }
 }

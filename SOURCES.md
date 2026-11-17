@@ -188,3 +188,107 @@ Three changes to the James page were checked on 27 October 2026, the same way as
 | P10 | new item | openai.com post of 26 Oct 2026 (not opened; see check 15) |
 
 No caveat text removed; no label, flag or rating of an existing item changed. `data/ladder.json` gained Q8 and P10 rows; no existing row changed.
+
+---
+
+# Checks of 17 November 2026
+
+Eight changes to the James page were checked on 17 November 2026, the same way as above. Open from the session that wrote them: `arxiv.org` (abstract records and full-text HTML), `api.crossref.org`, `github.com` raw files, `anthropic.com`, `nvidianews.nvidia.com`, `quantinuum.com`, `claymath.org`. Refused to automated clients (HTTP 403): `openai.com`, `journals.aps.org`, `pppl.gov`, `science.org`; for those, what was and was not seen is stated under each check. Quotations from arXiv are from the full-text HTML of the version named.
+
+## 16. P10 (OpenAI, Yang–Mills). The Lean proof of the pure Yang–Mills part is public and assessed; the assessment's own limits
+
+**VERIFIED** against the reviewing group's repository. OpenAI's post of 26 October still **COULD NOT OPEN** (403), so check 15's three points about that post stand unconfirmed; this check replaces the post as the item's source.
+
+- https://github.com/yang-mills-group/YM, README: "The first package concerns **OpenAI's submission of 28 October 2026**. The assessment is dated **10 November 2026**. In our opinion, this submission proves that a relativistic quantum field theory satisfying the Wightman axioms can be constructed as a scaling limit of four-dimensional Wilson lattice gauge theory for any simple compact gauge group. It does not prove that the infinite-volume limit is unique or that there is a mass gap." Its table of submissions lists "OpenAI, 4 November 2026 | work in progress" and "Alpöge and Sussman, 15 November 2026 | work in progress". On other theories: "Proposals concerning QCD or chiral SU(5) should identify that category so they can be considered for the corresponding results repository."
+- `docs/assessment-1.pdf` in that repository ("Validation of the OpenAI Yang–Mills construction. Based on Lean code submitted October 28, 2026 … Yang–Mills group Nov 10, 2026 release"): "OpenAI's construction does not certify the full Jaffe–Witten problem: no mass gap is claimed. Uniqueness across volume subsequences and agreement of the component theories are also unresolved." "Validation. A clean rebuild, axiom audit, and Comparator check passed. Our additional Lean checks establish that the submitted construction satisfies the independently formulated requirements described below, using the submission's proved results." "Sources and attribution. This assessment uses the Lean sources submitted by OpenAI on Oct 28, 2026 and available in the repository yang-mills-group/OpenAI-YM-20261028. It does not draw on the separate informal proof manuscript. We used OpenAI's Astra to assist with the digestion of the supplied Lean code. We do not claim to fully understand the proof yet." "Our group's only connection to OpenAI (besides accepting their submissions) is the use of their Astra model to help with analysis. Our group has no present connection to the Clay Mathematics Institute." Acknowledgements: "This document was prepared by Michael R. Douglas, Arthur Jaffe, Ron Nissim and Fred Rajasekaran, with contributions from other group members and consultants, and approved by the entire group."
+- https://github.com/yang-mills-group/OpenAI-YM-20261028, README: "A positive mass gap, general exclusion of continuous-mass generalized free fields and all-orders MS-bar matching are outside its scope."
+- Not in these documents: the name David Gross (the group's leadership is from OpenAI's announcement as returned by search, and from coverage), any statement about QCD's proof, and the length or release status of the written manuscript (coverage says 1,147 pages, unreleased).
+- https://www.claymath.org/ (front page, 17 Nov 2026): the latest news item is still "11 September 2026 Navier-Stokes Announcement"; nothing on Yang–Mills.
+
+**On the page:** title, `who`, `what` and `url` rewritten to the assessment; `verification` company-reported → preprint (public Lean sources in a repository, as Q7 and P9); C 0.3 → 0.8 (an outside group's assessment, with its stated limits); W 2 → 3 (the assessment judges that it constructs a four-dimensional Wightman theory, short of the Clay problem); caveat appended, the 27 October wording kept. LADDER `why` updated; ratings unchanged.
+
+## 17. Q8 (Claude circuits). The paper behind the post
+
+**VERIFIED.** The paper could not be opened on 27 October; it could on 17 November.
+
+- arXiv 2610.22367 v1, "Discovering state-of-the-art quantum circuits with large language models", Andi Gu, Alek H. Kemeny, Susanne F. Yelin, Mikhail D. Lukin, submitted 15 Oct 2026, 46 pages. Abstract: "we introduce an evolutionary framework in which large language models (LLMs) propose circuit designs and an independent evaluator verifies and scores them … In seven of the eight tasks, the discovered circuits significantly reduce both Toffoli and qubit counts relative to the state of the art. In the eighth, the search discovers a new reversible architecture for prime-field modular inversion." Body: "We search over these circuit-generating programs with OpenEvolve [33], using Claude Mythos 5 [28] to propose architectures and program rewrites. Each of the eight searches uses a fixed, hand-written task specification"; "In the worst case, 35 stack entries (665 qubits) would be needed. Under the DQI input distribution, a second stack entry is required with probability 1.0×10−4, so the discovered circuit allocates only one stack entry (19 qubits instead of 665) and permits failure on these rare inputs."
+- A text search of the paper did not find the post's "17x fewer gates" or "factor of 12" in those words; they remain the post's figures.
+
+**On the page:** caveat appended; nothing else changed.
+
+## 18. Q9, a new item: neural decoders on Quantinuum's Helios colour-code data
+
+**VERIFIED.**
+
+- arXiv 2610.24077 v1, "Quantum error correction well below the color code threshold", Ali Lavasani and 22 others, submitted 16 Oct 2026. Abstract: "we demonstrate below-threshold operation of triangular color codes with distances d=3,5, and 7 on Quantinuum's Helios trapped-ion quantum processor … we achieve logical error rates as low as 5(+4/−2)×10−6, and demonstrate error suppression by over an order of magnitude, Λ=12(+3/−2) … We compare logical performance for existing near-optimal algorithmic decoders, and both convolutional neural network and transformer-based neural network decoders capable of real-time decoding an order of magnitude faster than the syndrome extraction rate." Body: "we train two complementary neural-network decoders, a convolutional neural network (CNN) and a round-token transformer (RTT) on emulator data and apply them to the hardware data for memory experiments without further fine-tuning"; "The algorithmic decoders are technically indistinguishable within 1-σ error bars, and the two neural-network decoders achieve comparable logical performance to algorithmic decoders … suppression factors of Λ_Tesseract=12, Λ_Frontier=11, Λ_CNN=7 and Λ_RTT=8"; "While Tesseract achives near optimal performance, it is generally not fast enough to be used in real time"; "while all decoding in this work has been done offline, the syndromes have been fed to the streaming decoders one round at a time"; per-round GPU times "0.26, 0.36, 0.52 ms for the CNN and … 0.22, 0.25, 0.35 ms for the RTT"; "there could still be error channels on the device that are not captured by the emulation."
+- https://www.quantinuum.com/blog/quantinuum-closes-in-on-one-million-error-free-operations (October 19, 2026): "we ran for 580,000 shots (29k shots, each one having 20 rounds, and observed 3 failures)".
+
+**On the page:** added as item Q9 (tier 2, llm false, physical true, quantum true, preprint, 2026-10, P 8, H years, W 1.5, C 0.8); LADDER row matter false, necessary false, leap none, qubits true.
+
+## 19. Q10, a new item: Google's formally verified quantum programs
+
+**VERIFIED.**
+
+- arXiv 2611.09822 v3, "Discovering formally verified quantum programs with AI", 25 authors (Shirobokov, Jaderberg, … Babbush, Chaudhuri, Kohli; affiliations Google DeepMind and Google Quantum AI), submitted 6 Nov 2026, v3 16 Nov 2026. Abstract: "we build a quantum program library in the Lean theorem prover in which Gemini 4 agents synthesize novel programs against formal problem specifications and verify their correctness and cost … Our results improve on prior baselines for parallel search (up to 2.57x), quantum arithmetic (290x), and simulations relevant to fusion, photochemistry and drug-metabolism by 12x, 8x and 2.5x respectively … lets researchers design algorithms that today's classical and quantum computers cannot test". Body: "a 290× spacetime reduction for fixed-point arcsin, and 11.8×, 8.22× and 2.49× reductions on simulations relevant to fusion, photochemistry and drug metabolism"; "369,800 (100 qubits, 3,698 T gates), 290× below the baseline"; "reducing resource costs by 290× for arcsin (combining classical and formal search)"; "Researchers and domain experts choose the problems and carefully prepare faithful formal specifications."
+
+**On the page:** added as item Q10 (tier 3, llm true, physical false, quantum true, preprint, 2026-11, P 6, H years, W 1.5, C 0.8); LADDER row matter false, necessary true, leap none, qubits true.
+
+## 20. M7, a new item: ElementsClaw, four superconductors
+
+**VERIFIED** against the preprint. The search engine reports an ICML 2026 acceptance; the arXiv record carries no such note and `icml.cc` was not opened, so the label is preprint.
+
+- arXiv 2604.23758, "Agentic Fusion of Large Atomic and Language Models to Accelerate Superconductor Discovery", Mingze Li, Yu Rong and 17 others (Gaoling School of Artificial Intelligence, Renmin University of China; DAMO Academy, Alibaba Group; Hupan Lab; others), v1 26 Apr 2026, v3 4 May 2026. Abstract: "ElementsClaw, an agentic framework for materials discovery that orchestrates a suite of Large Atomic Model (LAM) tools finetuned from our proposed 1-billion-parameter model Elements for numerical computation, while leveraging Large Language Models (LLMs) for semantic reasoning … rediscovers 66 experimentally verified superconductors that are absent from the standard SuperCon3D database. Scaling to 2.4 million equilibrium crystals, ElementsClaw identifies 68,000 high-confidence candidates in just 28 GPU hours … Guided by the agent's reasoning, we experimentally synthesize and verify four novel superconductors: the motif-guided Zr3ScRe8 (Tc = 6.5 K), the de novo generated HfZrRe4 (Tc = 5.9 K), the structurally reinterpreted Zr4VRe7 (Tc = 3.5 K), and the database-latent Hf21Re25 (Tc = 2.5 K)."
+- Body: "Guided by human expertise, the agent first curates labeled superconducting instances via Elements-T screening and GPT-5-driven literature synthesis"; "After manual verification, the candidates are classified into 158 literature-verified superconductors, 385 verified non-superconductors and 981 unve[rified]"; "we execute the GPT-5.4 extraction pipeline over three independent times … we employ Opus-4.6 for a secondary review"; "we select Hf21Re25 as a representative database-latent validation case. Arc-melting synthesis followed by PXRD refinement confirms the target phase … Electrical transport measurements reveal a superconducting transition with Tc onset = 3.0 K and Tc zero = 2.0 K"; "ElementsClaw identifies Zr4VRe7, previously reported in the GNoME … dataset … with an orthorhombic structure, but predicted instead a lower-energy hexagonal configuration … Magnetic measurements reveal bulk superconductivity, with an onset Tc of 3.5 K"; "Zr3ScRe8 is selected as the primary experimental target … Transport measurements revealed Tc onset = 6.8 K and Tc zero = 6.0 K, while magnetic susceptibility showed a bulk superconducting transition near 6.5 K".
+
+**On the page:** added as item M7 (tier 1, llm true, physical true, quantum false, preprint, 2026-04, P 6, H years, W 2, C 0.7); LADDER row matter true, necessary "arguable", leap "early sign", qubits false.
+
+## 21. M8, a new item: kagome superconductors, Physical Review Research
+
+**VERIFIED** bibliographically and against the preprint's text; the APS page **COULD NOT OPEN** (403).
+
+- Crossref record for 10.1103/lpqj-7hyg: "Machine-learning-guided discovery of kagome superconductors YRu3B2 and LuRu3B2", *Physical Review Research* 8(2), 023308, published 17 June 2026, CC BY 4.0; authors Albu Mustaf, Sajilesh K. P., Mishra, Deng, Jiang, Hiorth, Lamponen, Gutierrez-Amigo, Törmä, Marques, Bernevig, Morosan; `has-preprint` arXiv 2512.16945. Deposited abstract: "We report the experimental discovery of bulk superconductivity in two kagome lattice compounds, YRu3B2 and LuRu3B2, which were predicted through machine-learning-accelerated high-throughput screening combined with first-principles calculations … Tc = 0.81 K for YRu3B2 and Tc = 0.95 K for LuRu3B2".
+- arXiv 2512.16945 (full text): "we performed an ML-accelerated high-throughput screening of the entire 1:3:2 kagome family and identified several stable materials predicted to exhibit superconductivity. Here, we report the first successful experimental confirmation of bulk superconductivity in one of these predicted systems: YRu3B2. Furthermore, we report a second isostructural, new superconductor, LuRu3B2. The Lu compound was initially overlooked in our high-throughput predictions [14] because its calculated phonon spectrum exhibits weakly imaginary modes"; "The elements were arc-melted on a water-cooled copper hearth in an argon atmosphere"; "confirmed through magnetization, specific heat, and resistivity measurements with superconducting volume fractions close to 100%."
+
+**On the page:** added as item M8 (tier 2, llm false, physical true, quantum false, peer-reviewed, 2026-06, P 6, H years, W 1.5, C 0.9, as M6); LADDER row matter true, necessary "arguable", leap "early sign", qubits false.
+
+## 22. M9, a new item: Anthropic, "Testing Claude on real-world electronics design", 9 November 2026
+
+**VERIFIED** against the post; each passage below was matched word for word in the page text.
+
+- https://www.anthropic.com/research/claude-electronics-design (Published Nov 9, 2026; Science): "asking Claude Fable 5.2 to design three electronic devices: a speakerphone, a voice-assistant hub, and a handheld virtual pet"; "directed human engineers to build prototypes that worked without any fixes to their circuitry"; "Diode assembled the circuit boards and ran the firmware, under Claude's direction. The final result was a prototype of a speakerphone that still works after weeks of use."; "Claude ran these checks itself"; "Diode manufactured all three boards directly from Claude's design files, without any back-and-forth over adjustments."; "All three of these devices are still prototypes: they haven't been through electrical validation, antenna tuning, thermal testing, or certification, and they weren't designed for mass production. Since Claude wasn't connected to test equipment or to the machines that make and assemble circuit boards, engineers at Diode had to physically build and test the prototypes."; footnotes: "Anthropic has a commercial relationship with Diode." and "Overall, their prompting was minimal and limited to short directives (e.g., "clean up the schematic" and "continue")."
+- The post links no paper or data release. It cites an OpenAI post on designing a handheld device (openai.com/index/accelerating-engineering-for-the-physical-world/), which could not be opened and is not on the page.
+
+**On the page:** added as item M9 (domain electronics, tier 1, llm true, physical true, quantum false, company-reported, 2026-11, P 7, H now, W 1.5, C 0.6, as M4); LADDER row matter true, necessary false, leap "early sign", qubits false. The chart plots electronics with the materials and chips marker.
+
+## 23. P11, a new item: machine-learning control on DIII-D, Nuclear Fusion
+
+**VERIFIED** bibliographically and against the preprint's text. The quotations are from arXiv v1; the journal version was not compared line by line.
+
+- Crossref record for 10.1088/1741-4326/ae7f9d: "Enabling integrated AI control on DIII-D: a control system design with state-of-the-art experiments", *Nuclear Fusion* 66(7), 076050, published online 2 July 2026, CC BY 4.0; authors Rothstein, Farre-Kaga, Butt, Shousha, Erickson, Wakatsuki, Steiner, Kim, Jalalvand, Kolemen (Princeton University, Princeton Plasma Physics Laboratory, National Institutes for Quantum and Radiological Science and Technology). Abstract: "We present the design and application of a general algorithm for Prediction And Control using MAchiNe learning (PACMAN) in DIII-D … We also describe several successful ML control experiments in DIII-D using this algorithm, including a reinforcement learning controller targeting advanced non-inductive plasmas, a wide-pedestal quiescent H-mode ELM predictor, an Alfvén Eigenmode controller, a Model Predictive Control plasma profile controller and a state-machine TM predictor-controller."
+- arXiv 2511.08818 v1 (11 Nov 2025), section III.1: "an RL based βN and internal transport barrier (ITB) controller which demonstrates 'full ML control' where the outputs of an ML algorithm fully decide actuator commands, subject to hard coded machine safety actuator limits … a similar RL controller was trained offline using the RAPTOR code as a simulator environment … this RL controller needed PACMAN to run at 50 ms cycle time and this was achieved"; Figure 5: "DIII-D shot 204975 where the RL ITB controller was used to control βN and ITBs"; "The model block outputs request for P_NBI,on-axis, P_NBI,off-axis, and P_ECH."
+
+**On the page:** added as item P11 (tier 2, llm false, physical true, quantum false, peer-reviewed, 2026-07, P 9, H now, W 1.5, C 0.9); LADDER row matter true, necessary "arguable", leap "early sign", qubits false.
+
+---
+
+## Looked at on 17 November 2026 and left off the page
+
+- **NVIDIA, IBM and Fermilab, 16 November 2026.** https://nvidianews.nvidia.com/news/nvidia-announces-collaboration-with-ibm-and-fermi-national-accelerator-laboratory-to-launch-quantum-classical-codesign-platform-plus-error-correction-breakthrough-to-advance-practical-quantum-computing : "NVIDIA today announced plans for new collaborations with IBM and the U.S. Department of Energy's Fermi National Accelerator Laboratory"; Fermilab's Anna Grassellino: "This proposed platform would combine NVIDIA's computing capabilities with IBM's quantum technologies and Fermilab's scientific expertise"; on the decoder: "A classical algorithm called a decoder interprets measurement data to identify likely errors" and "NVIDIA's new TCBP-JOBS decoding algorithm accelerates the computationally intensive parts of quantum error-correction research by up to 13,000x". The paper, arXiv 2611.21321 (Howe, Maurya, Olle, Basov, Li, Lietz, Young, Svore, 16 Nov 2026): belief propagation with an ordered-statistics beam search on GPUs; its learned part is "A multilayer perceptron with two hidden layers of 16 units … the entire model has only 529 weights"; the 13,000× is "against unsparsified long-beam Tesseract … on the bivariate-bicycle codes", with "Serial speedups over Tesseract's sparsified presets range from 10× to 7,400×", and "rare-event splitting on the gross code shows that Tesseract is more accurate" at lower error rates; the tests are simulated circuits. Left out because the platform is a plan and the decoder is a conventional algorithm on GPUs that its authors do not present as an AI result.
+- **In biology, which James set aside on 2 June 2025:** Anthropic's vault-particle structure (4 Nov) and DeepMind's AlphaGenome 2 (11 Nov, per coverage).
+- **Simulation or theory only, preprints of the window:** an LLM agent that designs ion-implantation recipes against a simulator (arXiv 2611.03795); the Exponential Time Hypothesis refutations, which are computer science (OpenAI's is in the repository of item P9).
+- **Company announcements with no paper found:** Quantum X Labs' decoder on IBM processors (9 Nov), SuperMatics, a University of Nottingham self-driving laboratory (14 Nov, per coverage).
+
+## What changed in `data/items.json` on 17 November 2026
+
+| Item | Fields changed | Source |
+|---|---|---|
+| P10 | title, who, what, verification → preprint, W 2 → 3, C 0.3 → 0.8, url, caveat (appended) | github.com/yang-mills-group/YM README and docs/assessment-1.pdf; OpenAI-YM-20261028 README |
+| Q8 | caveat (appended) | arXiv 2610.22367 |
+| Q9 | new item | arXiv 2610.24077; quantinuum.com post of 19 Oct 2026 |
+| Q10 | new item | arXiv 2611.09822 |
+| M7 | new item | arXiv 2604.23758 |
+| M8 | new item | Crossref 10.1103/lpqj-7hyg; arXiv 2512.16945 |
+| M9 | new item | anthropic.com post of 9 Nov 2026 |
+| P11 | new item | Crossref 10.1088/1741-4326/ae7f9d; arXiv 2511.08818 |
+
+No caveat text removed. No label, flag or rating of any item on `main` changed; the P10 changes are to an item added on 27 October. `data/ladder.json` gained rows for Q9, Q10, M7, M8, M9 and P11, and the `why` of P10 was reworded; no rating of an existing row changed. The ratings of the new rows are proposals in the author's voice, for the author to confirm.
