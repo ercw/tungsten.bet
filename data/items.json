@@ -220,6 +220,26 @@
     "url": "https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/2r2u6SbHun4/m/0_I2KOZ_CQAJ"
   },
   {
+    "id": "X2",
+    "date": "2026-11",
+    "title": "Riemann Hypothesis: a Lean proof by Levent Alpöge working with Claude, certified correct by the Lean and Mathlib communities",
+    "domain": "mathematics",
+    "tier": 3,
+    "llm": true,
+    "physical": false,
+    "quantum": false,
+    "verification": "preprint",
+    "who": "Levent Alpöge (Anthropic, per coverage) with Claude · note and Lean library at alpo.ge, 20 Nov 2026; joint statement of the Lean and Mathlib communities, 21 Nov 2026",
+    "what": "A four-page note says 'I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis', released only as a Lean library of about 17 million lines. The author writes that he guided the approach and that 'Claude far outpaced me near the finish line'. The next day the Lean and Mathlib communities, endorsed by the Lean FRO and the Mathlib Initiative, wrote 'We hereby certify that both the statement and the proof of the Riemann Hypothesis are correct': the theorem proved is exactly Mathlib's statement, and the exported proof passed Lean's kernel and several independent checkers.",
+    "artifact": "None",
+    "caveat": "Not physics or engineering; included for its weight, as a Millennium Prize problem. A formal proof only: the note says 'I decided to only present Lean', there is no written proof for people to read, and nothing has been refereed. The author writes that he is 'presenting the world with a complete argument before having mastered a massive neighbourhood around its mathematics'. The certification speaks of the Riemann Hypothesis as stated in Mathlib; it does not mention the generalized hypothesis for Dirichlet L-functions, which the note also claims and the library also states. The Clay Mathematics Institute had posted nothing about it as of 23 Nov 2026. The author is an Anthropic employee according to coverage, Anthropic makes Claude, and the note does not say which Claude model was used.",
+    "P": 1,
+    "H": "someday",
+    "W": 4,
+    "C": 0.9,
+    "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+  },
+  {
     "id": "M1",
     "date": "2023-11",
     "title": "GNoME predicts 2.2 million crystals; 736 match later experimental entries; A-Lab synthesizes 36 of 57 targets (corrected from 41 of 58)",

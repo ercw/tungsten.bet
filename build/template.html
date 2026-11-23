@@ -258,7 +258,7 @@ h1 {
 
   <header class="top">
     <span class="site"><a href="/"><b>tungsten.bet</b></a>/jamesob</span>
-    <span class="dim">last modified 17-Nov-2026</span>
+    <span class="dim">last modified 23-Nov-2026</span>
   </header>
 
   <section class="hero" aria-labelledby="title">
@@ -323,7 +323,7 @@ h1 {
 
   <section aria-labelledby="ct1">
     <h2 class="rule-h" id="ct1"><span>Physical-relevance index, by month</span><span class="fill" aria-hidden="true"></span></h2>
-    <div class="legend" aria-hidden="true"><span class="k-q">● quantum</span><span class="k-m">■ materials &amp; chips</span><span class="k-p">◆ physics</span><span class="k-x">▲ cryptography</span><span id="ghost-key" hidden>: unfiltered</span></div>
+    <div class="legend" aria-hidden="true"><span class="k-q">● quantum</span><span class="k-m">■ materials &amp; chips</span><span class="k-p">◆ physics</span><span class="k-x">▲ cryptography &amp; mathematics</span><span id="ghost-key" hidden>: unfiltered</span></div>
     <div class="achart-wrap">
       <pre class="achart" id="achart" aria-hidden="true"></pre>
       <p class="sr" id="chart-desc"></p>
@@ -387,10 +387,10 @@ function scoreOf(e) { return 2.5 * e.P * HZ[e.H] * e.W * e.C * (1 + Math.log10(e
 ITEMS.forEach(e => { e.idx = scoreOf(e); });
 
 // Marker groups by domain
-const GROUP = d => d === 'quantum' ? 'q' : (d === 'materials' || d === 'electronics') ? 'm' : d === 'cryptography' ? 'x' : 'p';
+const GROUP = d => d === 'quantum' ? 'q' : (d === 'materials' || d === 'electronics') ? 'm' : (d === 'cryptography' || d === 'mathematics') ? 'x' : 'p';
 const MK = { q: '●', m: '■', p: '◆', x: '▲' };
 // Short labels (presentation only; not part of the dataset)
-const SHORT = { Q1: 'AlphaQubit', Q2: 'AlphaQubit 2', Q3: 'AlphaEvolve on Willow', Q4: 'qBraid encodings', Q5: 'Optics blueprints', Q6: 'QMA bound', Q7: 'Astra games', Q8: 'Claude circuits', Q9: 'Helios neural decoders', Q10: 'Gemini quantum programs', X1: 'HAWK withdrawn', M1: 'GNoME', M2: 'Na–Li electrolyte', M3: 'MatterGen', M4: 'AlphaEvolve TPU circuit', M5: "Lila's catalysts", M6: 'LLM synthesis planning', M7: 'ElementsClaw', M8: 'Kagome superconductors', M9: 'Claude electronics', P1: 'Tokamak control', P2: 'GraphCast', P3: 'Dusty plasma', P4: 'Fluid singularities', P5: 'GPT-5 science', P6: 'Gluon amplitude', P7: 'Nine-loop amplitude', P8: 'Navier–Stokes', P9: '372-family release', P10: 'Yang–Mills existence', P11: 'DIII-D AI control' };
+const SHORT = { Q1: 'AlphaQubit', Q2: 'AlphaQubit 2', Q3: 'AlphaEvolve on Willow', Q4: 'qBraid encodings', Q5: 'Optics blueprints', Q6: 'QMA bound', Q7: 'Astra games', Q8: 'Claude circuits', Q9: 'Helios neural decoders', Q10: 'Gemini quantum programs', X1: 'HAWK withdrawn', X2: 'Riemann Hypothesis', M1: 'GNoME', M2: 'Na–Li electrolyte', M3: 'MatterGen', M4: 'AlphaEvolve TPU circuit', M5: "Lila's catalysts", M6: 'LLM synthesis planning', M7: 'ElementsClaw', M8: 'Kagome superconductors', M9: 'Claude electronics', P1: 'Tokamak control', P2: 'GraphCast', P3: 'Dusty plasma', P4: 'Fluid singularities', P5: 'GPT-5 science', P6: 'Gluon amplitude', P7: 'Nine-loop amplitude', P8: 'Navier–Stokes', P9: '372-family release', P10: 'Yang–Mills existence', P11: 'DIII-D AI control' };
 
 // James posted his test on 31 May 2025. Results dated May 2025 or earlier came before it.
 const BET = '2025-05';

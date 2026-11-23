@@ -76,6 +76,13 @@
     "qubits": false,
     "why": "A change to a standards process. Nothing physical."
   },
+  "X2": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Pure mathematics. Nothing was made or controlled, so it reaches none of James's steps, whatever its weight as mathematics. James answered a smaller theory result with \"I rest my case!\""
+  },
   "M1": {
     "matter": true,
     "necessary": "arguable",
