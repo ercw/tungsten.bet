@@ -35,4 +35,4 @@ Every page is a single self-contained HTML file: inline CSS and JS, no framework
 
 ## Deploy
 
-`deploy/` is a Vercel project. From that folder, `vercel --prod` publishes it. Clean URLs are on, so `deploy/jamesob.html` is served at `/jamesob`.
+`deploy/` is what Vercel serves. With the Vercel project connected to this repository, a push to `main` publishes it; the `vercel.json` at the root points a deploy of the whole repository at `deploy/`, so the project's root directory can be either. From the `deploy/` folder, `vercel --prod` still publishes by hand, but publish only what has been pushed: a deploy from `main` replaces the live site with what GitHub holds. Clean URLs are on, so `deploy/jamesob.html` is served at `/jamesob`.
