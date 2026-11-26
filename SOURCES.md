@@ -407,3 +407,13 @@ Research for 17 to 26 November 2026: three items added and four updated. Open fr
 | X2 | who, caveat (appended) | alpo.ge; claymath.org |
 
 No caveat text removed; no label, flag or rating of an existing item changed. `data/ladder.json` gained rows for P12, P13 and P14, proposed for the author to confirm. None of the three reaches step 1 of James's test.
+
+## 31. P15, a new item, added later on 26 November 2026: a proposed quantization of gravity
+
+**VERIFIED** against the preprint.
+
+- arXiv 2611.34924 v1, "An algebraic quantization of gravity from the null cone", Venkatesa Chandrasekaran (Leinweber Institute for Theoretical Physics, Stanford University), submitted 25 Nov 2026, "54 pages + appendices, 34 figures". Abstract: "We propose a background independent quantization of vacuum general relativity on four dimensional Lorentzian spacetimes … As a check, we compute the amplitude for graviton pair creation and annihilation on a null cone nonperturbatively in G_N and find a finite closed form expression, even though expanding first in G_N yields a logarithmic divergence. We next use diffeomorphism invariance of the path integral to show that a macroscopic causal diamond with a given maximum size has a finite dimensional Hilbert space. From the Lorentzian trace we obtain the Bekenstein Hawking entropy for marginally trapped surfaces and calculate its logarithmic correction for large Schwarzschild black holes, recovering at one loop the coefficient Sen obtained through Euclidean methods. We end by deriving the semiclassical Einstein equations to one loop as the low energy limit of this theory."
+- Acknowledgements: "I also thank Sam Altman, Sebastien Bubeck, and my OpenAI colleagues for encouragement throughout the project. Several of the calculations and proofs in this paper were developed through detailed, back and forth collaboration with GPT-6 Astra over the course of many months, amounting to ∼ 400M total tokens spent; I thank OpenAI for providing this compute."
+- The abstract does not mention AI. A text search of the paper found no other statement about the model, no formal verification, and no proposed experimental test.
+
+**On the page:** added as item P15 (tier 3, llm true, physical false, quantum false, preprint, 2026-11, P 3, H someday, W 3, C 0.5); LADDER row matter false, necessary "arguable", leap none, qubits false, proposed for the author to confirm.

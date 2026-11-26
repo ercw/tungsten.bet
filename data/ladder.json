@@ -243,5 +243,12 @@
     "leap": "none",
     "qubits": false,
     "why": "As P8 and P13, mathematics about an equation of physics. The computation the proof rests on is not public yet."
+  },
+  "P15": {
+    "matter": false,
+    "necessary": "arguable",
+    "leap": "none",
+    "qubits": false,
+    "why": "A theory proposal by a physicist who credits the model with several calculations and proofs. Nothing was made, and the paper does not say the work needed the model."
   }
 }

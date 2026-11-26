@@ -701,5 +701,25 @@
     "W": 4,
     "C": 0.4,
     "url": "https://github.com/tristanbuckmaster/navier-stokes"
+  },
+  {
+    "id": "P15",
+    "date": "2026-11",
+    "title": "A proposed quantization of four-dimensional gravity, with 'several of the calculations and proofs' developed with GPT-6 Astra",
+    "domain": "theoretical physics",
+    "tier": 3,
+    "llm": true,
+    "physical": false,
+    "quantum": false,
+    "verification": "preprint",
+    "who": "Venkatesa Chandrasekaran (Stanford) · arXiv 2611.34924, 25 Nov 2026",
+    "what": "The paper proposes a background-independent quantization of vacuum general relativity in four dimensions, built on intersecting null cones. As checks it reports a finite closed form for graviton pair creation and annihilation where the expansion in Newton's constant diverges, a finite-dimensional Hilbert space for a causal diamond, the Bekenstein–Hawking entropy with the one-loop logarithmic correction Sen obtained by Euclidean methods, and the semiclassical Einstein equations to one loop. The acknowledgements say 'Several of the calculations and proofs in this paper were developed through detailed, back and forth collaboration with GPT-6 Astra over the course of many months', at about 400 million tokens.",
+    "artifact": "None",
+    "caveat": "A single-author preprint, posted one day before this entry and not refereed; its abstract begins 'We propose'. It is theory and states no experimental test: its main checks recover results that were already known. The model's part is described only in the acknowledgements, and the paper does not say which calculations or proofs it concerns or how they were checked. The author thanks 'my OpenAI colleagues', and OpenAI provided the compute. It treats vacuum general relativity, that is, gravity without matter.",
+    "P": 3,
+    "H": "someday",
+    "W": 3,
+    "C": 0.5,
+    "url": "https://arxiv.org/abs/2611.34924"
   }
 ]
