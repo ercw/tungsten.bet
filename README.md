@@ -19,6 +19,7 @@ data/posts.json      the text of every post the cube pages quote, as fetched fro
 build/template.html  the James page template; build/root.html the front page template
 build/cube.html      the cube page template; build/cube.js the ASCII cube every page draws
 build/assemble.py    builds deploy/ from data/ and build/
+build/published/     a page published by hand ahead of its data; shipped as it is until that data changes
 deploy/              what Vercel serves: index.html, jamesob.html, the five cube pages, vercel.json
 tests/               check_static.py (data, built pages, page rules); check_revision.py (PR rules)
 SOURCES.md           the primary-source passages behind the corrections on the James page

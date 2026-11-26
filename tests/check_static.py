@@ -103,6 +103,9 @@ stale = [p.name for p, html in cube_pages.items() if not p.exists() or p.read_te
 check("deploy/<cube>.html pages are built from data/", not stale, str(stale))
 hexicans_html = assemble.build_hexicans(posts)
 check("deploy/hexicans.html is built from data/", (ROOT / "deploy" / "hexicans.html").read_text(encoding="utf-8") == hexicans_html)
+shown = sorted(set(re.findall(r'(?:src|href)="/(img/[^"]+)"', hexicans_html)))
+check("hexicans: every picture the shipped page shows is in deploy/", all((ROOT / "deploy" / f).is_file() for f in shown), str([f for f in shown if not (ROOT / "deploy" / f).is_file()]))
+check("hexicans: a page published ahead of data/ ships only while its data is unchanged", assemble.published_ahead("hexicans") in (None, hexicans_html))
 
 # ---- page constraints (both pages) ----
 for name, html in [("jamesob", jamesob), ("front", front), ("hexicans", hexicans_html)] + [(p.stem, h) for p, h in cube_pages.items()]:

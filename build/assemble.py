@@ -19,7 +19,10 @@ The templates hold everything else:
     build/cube.html       one cube page (tungsten.bet/adam and the others), filled from cubes.json and posts.json
     build/cube.js         the ASCII cube renderer, pasted into every page where /*CUBE*/ stands
     build/hexicans.html   the money-bets page; build/assets/ holds the HEX and PulseChain logos it draws as ASCII
+    build/published/      a page published by hand ahead of its data, shipped as it is until the data changes
+                          (see published_ahead)
 """
+import hashlib
 import html as H
 import json, pathlib, re, sys
 
@@ -314,7 +317,26 @@ def hx_day(d):
     return f"{int(dd)} {MON[int(m) - 1]} {y}"
 
 
+def published_ahead(name):
+    """A page that was published by hand ahead of its data, or None.
+
+    build/published/<name>.html is the page as the live site served it, and build/published/<name>.json
+    lists the data files it was ahead of, with the sha256 each had then. While those files are unchanged
+    the build ships the published page as it is, so a deploy from this repository takes nothing down.
+    As soon as one of them changes, the data is the source of truth again and this returns None."""
+    meta, page = BUILD / "published" / f"{name}.json", BUILD / "published" / f"{name}.html"
+    if not (meta.exists() and page.exists()):
+        return None
+    ahead_of = json.loads(meta.read_text(encoding="utf-8"))["ahead_of"]
+    if all(hashlib.sha256((ROOT / f).read_bytes()).hexdigest() == h for f, h in ahead_of.items()):
+        return page.read_text(encoding="utf-8")
+    return None
+
+
 def build_hexicans(posts):
+    ahead = published_ahead("hexicans")
+    if ahead is not None:
+        return ahead
     bets, pls = load_hexicans()
     tpl = (BUILD / "hexicans.html").read_text(encoding="utf-8")
     bets = sorted(bets, key=lambda b: (not b.get("featured"), b["entered"], -b["stake"]))

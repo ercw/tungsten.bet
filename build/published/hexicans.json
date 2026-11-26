@@ -1,0 +1,9 @@
+{
+  "page": "hexicans.html",
+  "from": "https://tungsten.bet/hexicans",
+  "fetched": "2026-11-26",
+  "ahead_of": {
+    "data/hexicans.json": "e703bcc8a89822d86dcabbec9ec08cbdcb970e8bae279c3805d2f6d19def34f9"
+  },
+  "note": "The live page was published by hand from a working copy whose data was never pushed: it has a box for Gib, two more exhibits in Katie's box and three pictures that data/hexicans.json does not hold. The build ships this copy unchanged while data/hexicans.json is still that version. Change the data and the build goes back to building the page from it; delete both files then."
+}
