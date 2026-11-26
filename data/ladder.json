@@ -222,5 +222,26 @@
     "leap": "early sign",
     "qubits": false,
     "why": "Learned controllers drove a real tokamak's heating systems, as in P1. Whether AI was necessary is arguable: the paper describes the control framework and does not show that conventional controllers could not do the same."
+  },
+  "P12": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Theory about simplified model universes. The post itself says neither result describes our universe or has practical applications."
+  },
+  "P13": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "Mathematics about an equation of physics, as P8. It says nothing about a real fluid."
+  },
+  "P14": {
+    "matter": false,
+    "necessary": true,
+    "leap": "none",
+    "qubits": false,
+    "why": "As P8 and P13, mathematics about an equation of physics. The computation the proof rests on is not public yet."
   }
 }

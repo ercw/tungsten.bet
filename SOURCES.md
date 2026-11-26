@@ -315,3 +315,95 @@ One item was added on 23 November 2026, at the author's request, although it is 
 ## Looked at since 17 November 2026 and left off the page
 
 - **OpenAI, "Advancing chip design with our models".** https://openai.com/index/advancing-chip-design-with-our-models/ could not be opened (`openai.com` refuses automated clients). Coverage describes model-assisted design of arithmetic circuits in the Jalapeño inference chip built with Broadcom. It would sit beside M4 if the post confirms model-designed circuits in fabricated silicon; no primary source was read, so nothing was added.
+
+---
+
+# Checks of 26 November 2026
+
+Research for 17 to 26 November 2026: three items added and four updated. Open from the session that wrote them: `anthropic.com`, `arxiv.org` (records and full-text HTML), `github.com` raw files, `alpo.ge`, `claymath.org`. Still refused to automated clients: `openai.com`. Not opened: `hexagonmath.org`.
+
+## 25. P12, a new item: Anthropic, "Claude solves two open problems in the physics of black holes", 17 November 2026
+
+**VERIFIED** against the post. The two preprints it links (hexagonmath.org/2611.00175v1 and /2611.00174v1) were not opened.
+
+- https://www.anthropic.com/research/claude-black-hole-physics (Published Nov 17, 2026; Science): "In the first, it completed a calculation that physicists set up more than 20 years ago, but which had never been solved. Claude's result showed that a sudden transition associated with the formation of black holes persists even where spacetime no longer has a definite shape. In the second, Claude found the exact limit of the simplest version of a technique used to test candidate theories of quantum gravity." "In 2003, a group of physicists set out the calculation that would settle the question, but it was extremely complex and was never completed … It showed that the phase transition is abrupt." "Neither result describes our own universe directly, and neither has practical applications".
+- On method: "an Anthropic researcher, Hongbin Chen, was testing Claude's capabilities as a side project … Claude came back hours later with 22 candidates, and Hongbin set up separate agents to work on each one … The agents ran in the background, with no special setup, for about six weeks." "Weeks after one of the agents reached a solution, a physicist, who had independently used Claude to tackle the same problem, shared his result … The two solutions used different methods, so they were a useful check on each other." On the bootstrap result: "One half of the final proof, showing that the ceiling can't be lowered, follows the strategy of the OpenAI proof. In September, the results were formally verified in Lean, a computerized proof checker. Claude then wrote the paper with minimal guidance, and a physicist checked every main result."
+- Conclusion: "Neither result settles the question of quantum gravity, or even comes close to doing so".
+
+**On the page:** added as item P12 (tier 3, llm true, physical false, quantum false, preprint, 2026-11, P 3, H someday, W 2, C 0.8); LADDER row matter false, necessary true, leap none, qubits false.
+
+## 26. P13, a new item: blow-up for the unforced three-dimensional Euler equations
+
+**VERIFIED.**
+
+- arXiv 2611.26772 v1, "Finite-Time Singularity Formation for the Three-Dimensional Euler Equations", Levent Alpöge, Tristan Buckmaster, Matei P. Coiculescu, submitted 19 Nov 2026; comments: "55 pages, 3 figures, LLM-assisted and Lean formalized". Abstract: "We construct smooth periodic initial data for the three-dimensional incompressible Euler equations whose solution blows up in finite time. The velocity remains bounded, while the vorticity magnitude at the origin tends to infinity."
+- Section 1.7: "AI statement. We used Claude and Codex throughout this work. The first proof without force was written by Anthropic models from the drafts on the Euler equations with forcing and on the hypodissipative Navier–Stokes equations described in Subsection 1.6 … We then rewrote it with Claude and Codex under our direction … In the course of this we replaced parts of the argument by ideas of our own, which the models implemented."
+- Section 1.6: "Before OpenAI released its paper on the unforced Euler equations, the first and second authors had completed a second proof of blow-up for the Euler equations with smooth forcing … this unreleased proof uses the same Craik–Criminale amplification mechanism as OpenAI's paper".
+- https://github.com/mcoiculescu/EulerBlowupPublic, README: "a Lean 4 formalization by the authors of the arXiv version of the manuscript, in one-to-one correspondence with its proof … These theorems depend only on the axioms `propext`, `Classical.choice` and `Quot.sound`, and the sources contain no `sorry`." Exceptions: "Corollary 8.3 cites the periodic Beale–Kato–Majda criterion, which is not formalized."
+- Not opened: OpenAI's paper on the unforced Euler equations.
+
+**On the page:** added as item P13 (domain fluids, tier 3, llm true, physical false, quantum false, preprint, 2026-11, P 7, H decades, W 3, C 0.8); LADDER row matter false, necessary true, leap none, qubits false.
+
+## 27. P14, a new item, and P8: a claimed blow-up for the Navier–Stokes equations without force
+
+**VERIFIED** that the claim is made and what is and is not released; the proof itself cannot be checked yet.
+
+- https://github.com/tristanbuckmaster/navier-stokes, `paper/finite-time-blow-up-navier-stokes.pdf` ("Finite-time blow-up for the Navier–Stokes equations", Levent Alpöge and Tristan Buckmaster; README: "79 pages, version of 20 November 2026"). Abstract: "We prove that there exist smooth, compactly supported, divergence-free initial data on R3, and smooth divergence-free initial data on the torus T3, for which the solutions of the three-dimensional Navier–Stokes equations without force blow up in finite time. This disproves the statements (A) and (B) of the Millennium Prize problem as formulated by Fefferman, and hence proves the statements (C) and (D) … The discretely self-similar solution is obtained from a certificate: an approximate solution that satisfies explicit inequalities. The certificate will be released soon; its hash is 3f7a335b84b6c7631742cacc5343dfcd11cf72f5221ff79b2b9268790b4b22c5." Section 1.6: "AI statement. We used Anthropic models (Claude) throughout this work, and no others."
+- The repository's README: "The formalization contains no data. The certificate whose hash the paper gives is not in this repository; the paper says that it will be released. That the certificate satisfies the conditions of Appendix B is verified by a rigorous computation, involving interval arithmetic (128 bits of precision, with the Arb library through FLINT), which is not part of the formalization and is not in this repository either." "The source of the paper is not in this repository." "The patched package was not rebuilt when this repository was assembled."
+- An arXiv search by author for 17 to 26 November returned the Euler paper only; the Navier–Stokes paper is not on arXiv.
+- https://www.claymath.org/ (front page, 26 Nov 2026): the latest news item is still "11 September 2026 Navier-Stokes Announcement".
+
+**On the page:** added as item P14 (domain fluids, tier 3, llm true, physical false, quantum false, preprint, 2026-11, P 7, H decades, W 4, C 0.4); LADDER row matter false, necessary true, leap none, qubits false. P8's caveat appended: its first words, "Unforced case still open", are kept and corrected.
+
+## 28. P10 (Yang–Mills). The group's summary of OpenAI's second submission
+
+**VERIFIED.**
+
+- https://github.com/yang-mills-group/YM, README ("Updated 25 November 2026"): the first package is now described as "OpenAI's submission of 27 October 2026", with "Submission dates record when the group received the materials; the October archive retains its original filename date." The table lists "OpenAI, 4 November 2026 | November summary, 25 November 2026 | Verification records and AI-generated initial draft reports" and "Alpöge and Sussman, 15 November 2026 | work in progress".
+- https://github.com/yang-mills-group/submissions, `docs/assessments/november-4-assessment.pdf` ("OpenAI Yang–Mills: November assessment … 25 November 2026"): "This supplements our October assessment. OpenAI's November submission strengthens the checks that the construction has the intended Yang–Mills fields and short-distance behavior. Its principal addition is matching to a specified perturbative reference at every finite order. Agreement of that reference with conventional Yang–Mills perturbation theory remains under review; human review so far is limited." "Both combined targets passed Comparator with standard Lean axioms only. Neither release establishes a mass gap or a unique infinite-volume limit." "It does not assert convergence of the series." "Supporting initial draft reports (AI-generated)".
+
+**On the page:** `what` and `who` updated (submission date, the second submission); caveat appended. No label or rating changed.
+
+## 29. P9 (OpenAI's catalogue). The additions of 23 and 24 November
+
+**VERIFIED** (raw `README.md` and `history.md` of github.com/openai/math, fetched 26 November 2026).
+
+- README: "The current catalogue contains 730 manuscripts organized into 375 families."
+- history.md, "November 23, 2026": "*VP and VNP are different*. This result was obtained on November 6, 2026." "November 24, 2026": "We have added nine manuscripts across two result families, with Lean formalizations of selected results from each manuscript." Family 379, "Euclidean tensor geometry and its applications to complexity and combinatorics", seven manuscripts, among them "The matrix multiplication exponent is nine fourths", "Circuit lower bounds for Hamiltonian cycle and the permanent" and "An exponential bound for sunflowers". Family 380: "*Strongly polynomial linear programming* gives a deterministic strongly polynomial algorithm for linear programming, answering Smale's ninth problem." and "*Superpolynomial graph diameter of simple polytopes* disproves the polynomial Hirsch conjecture for bounded simple rational polytopes."
+- These are complexity theory and combinatorics. They are noted on P9 because that item is the catalogue; none is a physics result.
+
+**On the page:** `what` and caveat appended. No label or rating changed.
+
+## 30. X2 (Riemann Hypothesis). Status on 26 November, and the author's employer
+
+**VERIFIED.**
+
+- https://alpo.ge/remark.pdf fetched again on 26 Nov 2026: same SHA-256 as on 23 Nov (`3fc97784…`), so the note is unchanged. The index page lists no written proof.
+- https://alpo.ge/ : the heading reads "Levent Alpöge (pt&rl, anthropic, pbc / junior fellow, harvard sof …)", with "anthropic, pbc" linked to anthropic.com. This replaces "according to coverage" for his employer.
+- https://www.claymath.org/ : nothing newer than 11 September 2026.
+- From coverage only: a human-written proof by another author, posted the same day, which Scientific American says has not been verified by anyone; not on the page.
+
+**On the page:** `who` no longer says "per coverage"; caveat appended.
+
+## Looked at for 17 to 26 November 2026 and left off the page
+
+- **OpenAI, "Advancing chip design with OpenAI models" (18 Nov, per coverage).** Still could not be opened; coverage says it reports model-made improvements in the Jalapeño chip and in AMD designs. It would be the strongest candidate of the period for step 1 of James's test, and it stays off until the post or a paper behind it has been read.
+- **OpenAI, "Searching for distant planets with Astra" (24 Nov).** Not opened; coverage says amateurs flagged planet candidates in NASA data and that none is confirmed.
+- **OpenAI, protein design with GPT-6 (24 Nov).** Biology.
+- **Architect Labs, the Frostbite CPU (18 Nov).** A company post, not opened; coverage says agents designed a processor down to layout and that nothing has been fabricated.
+- **arXiv, 17 to 26 Nov, no item made or measured anything new:** a layout benchmark for two-dimensional quantum devices (2611.30043), an agent on a mass-spectrometry instrument in an organic-dye campaign (2611.25043), a neural decoder for transversal gates in simulation (2611.31607), agent-built bases for Feynman integrals (2611.26688).
+- **Not results:** a US Department of Energy award to Harvard and QuEra for AI-designed error correction; the launches of GPT-6.2 Astra and Gemini 4 Neon; DeepMind's post on quantum algorithms, which is the work of item Q10.
+
+## What changed in `data/items.json` on 26 November 2026
+
+| Item | Fields changed | Source |
+|---|---|---|
+| P12 | new item | anthropic.com post of 17 Nov 2026 |
+| P13 | new item | arXiv 2611.26772; github.com/mcoiculescu/EulerBlowupPublic README |
+| P14 | new item | github.com/tristanbuckmaster/navier-stokes, paper of 20 Nov 2026 and README |
+| P8 | caveat (appended) | as P14; claymath.org |
+| P9 | what, caveat (appended) | github.com/openai/math README and history.md |
+| P10 | what, who, caveat (appended) | github.com/yang-mills-group/YM README; november-4-assessment.pdf |
+| X2 | who, caveat (appended) | alpo.ge; claymath.org |
+
+No caveat text removed; no label, flag or rating of an existing item changed. `data/ladder.json` gained rows for P12, P13 and P14, proposed for the author to confirm. None of the three reaches step 1 of James's test.
